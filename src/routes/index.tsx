@@ -1,24 +1,332 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState, type FormEvent } from "react";
+import {
+  ArrowDownRight,
+  ArrowRight,
+  BarChart3,
+  Check,
+  ChevronDown,
+  CircleGauge,
+  Cog,
+  Factory,
+  Fuel,
+  Gauge,
+  Leaf,
+  Menu,
+  Network,
+  Phone,
+  ShieldCheck,
+  Sparkles,
+  X,
+  Zap,
+} from "lucide-react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import { Button } from "@/components/ui/button";
+
+import logoImage from "@/assets/img-002.jpg";
+import founderImage from "@/assets/img-006.jpg";
+import schematicImage from "@/assets/img-039.jpg";
+import systemImage from "@/assets/img-043.jpg";
+import lpgKitImage from "@/assets/img-084.jpg";
+import pngKitImage from "@/assets/img-085.jpg";
+import componentImage from "@/assets/img-086.jpg";
+import energyMeterImage from "@/assets/img-087.jpg";
+import tataImage from "@/assets/img-089.jpg";
+import koelImage from "@/assets/img-092.jpg";
+import birlaImageOne from "@/assets/img-095.jpg";
+import birlaImageTwo from "@/assets/img-096.jpg";
+import engineImage from "@/assets/img-098.jpg";
+import engineDetailImage from "@/assets/img-099.jpg";
+import generatorImage from "@/assets/img-103.jpg";
+import controlPanelImage from "@/assets/img-117.jpg";
+import economicsImage from "@/assets/img-150.jpg";
+import environmentImage from "@/assets/img-152.jpg";
+import marineImage from "@/assets/img-158.jpg";
+import borewellImage from "@/assets/img-160.jpg";
+import compressorImage from "@/assets/img-161.jpg";
+import compressorNightImage from "@/assets/img-162.jpg";
+import gasSystemImage from "@/assets/img-169.jpg";
+import marineDetailImage from "@/assets/img-180.jpg";
+import marineDetailImageTwo from "@/assets/img-181.jpg";
+import marineEngineImage from "@/assets/img-185.jpg";
+import marineEngineImageTwo from "@/assets/img-186.jpg";
+
 export const Route = createFileRoute("/")({
-  component: Index,
+  component: OmSolutionsHome,
+  head: () => ({
+    meta: [
+      { title: "OM Solutions | Dual Fuel Kits & Alternate Fuel Solutions" },
+      {
+        name: "description",
+        content:
+          "OM Solutions provides dual-fuel and alternate-fuel solutions for diesel engines, generators, marine applications, trucks, buses, tractors, earth movers and industrial applications.",
+      },
+      { property: "og:title", content: "OM Solutions | Dual Fuel Kits & Alternate Fuel Solutions" },
+      {
+        property: "og:description",
+        content: "Smarter power, lower fuel cost and cleaner performance through dual-fuel conversion solutions.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+const navItems = [
+  ["About", "about"],
+  ["Solutions", "solutions"],
+  ["Dual Fuel Kit", "kit"],
+  ["Benefits", "benefits"],
+  ["Applications", "applications"],
+  ["Installations", "installations"],
+  ["Case Studies", "case-studies"],
+  ["Gallery", "gallery"],
+  ["Contact", "contact"],
+] as const;
+
+const solutions = [
+  { title: "Marine Outboard Engines", text: "Petrol operation to LPG bi-fuel operation.", icon: Fuel },
+  { title: "Marine Inboard Engines", text: "Diesel operation to LPG dual-fuel operation.", icon: Network },
+  { title: "Trucks & Buses", text: "Diesel to CNG mono-fuel operation.", icon: Factory },
+  { title: "Trucks & Buses", text: "Diesel to CNG dual-fuel operation.", icon: Gauge },
+  { title: "Generator Sets", text: "Diesel to CNG / LPG based dual-fuel operation.", icon: Zap },
+  { title: "Tractors & Earth Movers", text: "Diesel to CNG / LPG based dual-fuel operation.", icon: Cog },
+  { title: "Producer Gas & Syngas", text: "Biogas, MSW / wood based producer gas and syngas power plants & thermal applications.", icon: Leaf },
+  { title: "Liquid Fuels", text: "Biodiesel, ethanol, methanol, DME and other liquid fuels.", icon: CircleGauge },
+];
+
+const benefits = [
+  "Reduces particulate emissions",
+  "Supports Pollution Control Board particulate-matter reduction requirements",
+  "Enables gaseous fuel use up to 70% in diesel engines",
+  "Saves fuel and operating cost",
+  "Same power level as the base diesel engine",
+  "No need to replace the existing diesel genset",
+  "Higher thermal efficiency",
+  "Lesser diesel engine maintenance",
+  "No major modifications to the base diesel engine",
+  "Flexibility between dual-fuel and 100% diesel mode",
+  "Improved engine life",
+  "Quick and easy installation",
+];
+
+const comparisonRows = [
+  ["Capital Investment", "Very High Capital Investment", "Very High Capital Investment", "Medium to High Capital Investment", "Very Low Capital Investment"],
+  ["Fuel Flexibility", "No fuel flexibility", "No fuel flexibility", "No fuel flexibility", "Fuel flexibility (Diesel / Dual Fuel)"],
+  ["Existing Genset Modification", "Needs replacement", "Needs replacement", "No replacement · Exhaust modification", "No replacement · Gas Air Mixer added in intake"],
+  ["Technology Limitations", "Sensitive technology", "Sensitive technology", "Higher engine back pressure · PM disposal", "Effective between 30 to 80% load · Min 30% diesel required"],
+  ["Operating Cost", "Low fuel cost", "Higher fuel cost", "Higher fuel cost", "Lower fuel cost · Very low maintenance cost"],
+  ["Service Skillset", "Very high skillset", "Very high skillset", "No special skillset required", "No special skillset required"],
+];
+
+const componentGallery = [
+  ["LPG dual-fuel kit", lpgKitImage],
+  ["PNG dual-fuel kit", pngKitImage],
+  ["Gas control components", componentImage],
+  ["Energy meter", energyMeterImage],
+  ["Control panel", controlPanelImage],
+  ["Gas system assembly", gasSystemImage],
+  ["Gas pressure and valve set", marineEngineImage],
+  ["Engine sensing hardware", engineDetailImage],
+] as const;
+
+const galleryItems = [
+  ["TATA 125 kVA · LPG installation", tataImage, "Installations"],
+  ["KOEL 320 kVA · PNG installation", koelImage, "Installations"],
+  ["Birla Tisya · Bengaluru", birlaImageOne, "Birla Tisya"],
+  ["Birla Tisya · generator detail", birlaImageTwo, "Birla Tisya"],
+  ["Birla Tisya · engine components", engineImage, "Birla Tisya"],
+  ["MaxGen Energy · gas system", gasSystemImage, "MaxGen Energy"],
+  ["Borewell application", borewellImage, "Applications"],
+  ["Air compressor application", compressorImage, "Applications"],
+  ["Marine propulsion", marineImage, "Applications"],
+  ["Marine propulsion · field detail", marineDetailImage, "Applications"],
+  ["Marine engine installation", marineEngineImage, "Applications"],
+  ["Dual-fuel control panel", controlPanelImage, "Products"],
+] as const;
+
+function SectionLabel({ index, children, dark = false }: { index: string; children: string; dark?: boolean }) {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className={`flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] ${dark ? "text-signal" : "text-primary"}`}>
+      <span>{index}</span>
+      <span className={dark ? "text-background/55" : "text-muted-foreground"}>{children}</span>
+    </div>
+  );
+}
+
+function ImageButton({ src, alt, caption, onClick, className = "" }: { src: string; alt: string; caption?: string; onClick: () => void; className?: string }) {
+  return (
+    <button type="button" onClick={onClick} className={`group relative block w-full overflow-hidden text-left ${className}`} aria-label={`Open ${alt}`}>
+      <img src={src} alt={alt} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+      {caption ? <span className="absolute inset-x-0 bottom-0 bg-panel/80 px-4 py-3 font-mono text-[10px] uppercase tracking-[0.12em] text-background opacity-0 transition-opacity duration-300 group-hover:opacity-100">{caption}</span> : null}
+    </button>
+  );
+}
+
+function OmSolutionsHome() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
+  const [formSent, setFormSent] = useState(false);
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedImage(null);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  const openImage = (src: string, alt: string) => setSelectedImage({ src, alt });
+  const closeMenu = () => setMenuOpen(false);
+  const submitForm = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setFormSent(true);
+  };
+
+  return (
+    <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
+      <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-xl">
+        <div className="mx-auto flex h-[72px] max-w-[1440px] items-center justify-between gap-5 px-5 lg:px-10">
+          <a href="#home" className="flex shrink-0 items-center gap-3" onClick={closeMenu}>
+            <img src={logoImage} alt="OM Solutions" className="h-10 w-12 object-contain" />
+            <span className="hidden leading-none sm:block">
+              <span className="block text-[15px] font-extrabold tracking-tight">OM SOLUTIONS</span>
+              <span className="mt-1 block font-mono text-[9px] uppercase tracking-[0.22em] text-muted-foreground">Dual Fuel Systems</span>
+            </span>
+          </a>
+          <nav className="hidden items-center gap-4 text-[12px] font-medium text-foreground/75 2xl:flex">
+            {navItems.map(([label, id]) => <a key={id} href={`#${id}`} className="transition-colors hover:text-foreground">{label}</a>)}
+          </nav>
+          <div className="flex items-center gap-2">
+            <Button asChild className="hidden h-10 rounded-[7px] bg-primary px-4 text-xs font-semibold text-primary-foreground shadow-none hover:bg-primary/90 sm:inline-flex">
+              <a href="#contact">Request a Consultation</a>
+            </Button>
+            <Button type="button" variant="outline" size="icon" className="h-10 w-10 rounded-[7px] border-border 2xl:hidden" aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"} onClick={() => setMenuOpen((open) => !open)}>
+              {menuOpen ? <X /> : <Menu />}
+            </Button>
+          </div>
+        </div>
+        {menuOpen ? (
+          <nav className="border-t border-border bg-background px-5 py-4 shadow-lg 2xl:hidden">
+            <div className="mx-auto flex max-w-[1440px] flex-col gap-1">
+              {navItems.map(([label, id]) => <a key={id} href={`#${id}`} onClick={closeMenu} className="border-b border-border py-3 text-sm font-medium">{label}</a>)}
+              <a href="#contact" onClick={closeMenu} className="mt-3 inline-flex items-center justify-center rounded-[7px] bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground">Request a Consultation <ArrowRight className="ml-2 size-4" /></a>
+            </div>
+          </nav>
+        ) : null}
+      </header>
+
+      <main>
+        <section id="home" className="relative isolate min-h-[690px] overflow-hidden bg-panel">
+          <img src={birlaImageOne} alt="Industrial generator installation with dual-fuel system" className="absolute inset-0 h-full w-full object-cover opacity-55" />
+          <div className="absolute inset-0 bg-panel/75" />
+          <div className="relative mx-auto flex min-h-[690px] max-w-[1440px] items-center px-5 py-20 lg:px-10">
+            <div className="max-w-3xl rise-in">
+              <SectionLabel index="OM / 01" dark>Alternate fuel engineering · Established 2021</SectionLabel>
+              <h1 className="mt-6 max-w-3xl text-balance text-5xl font-extrabold leading-[0.98] tracking-tight text-background sm:text-6xl lg:text-8xl">Power More.<br />Spend Less.<br /><span className="text-signal">Burn Cleaner.</span></h1>
+              <p className="mt-7 max-w-2xl text-pretty text-base leading-relaxed text-background/78 lg:text-lg">OM Solutions provides dual-fuel conversion solutions that help diesel engines operate with gaseous fuels while reducing fuel costs and particulate emissions.</p>
+              <div className="mt-9 flex flex-wrap gap-3">
+                <Button asChild className="h-12 rounded-[7px] bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-none hover:bg-primary/90"><a href="#kit">Explore Dual Fuel Solutions <ArrowRight className="size-4" /></a></Button>
+                <Button asChild variant="outline" className="h-12 rounded-[7px] border-background/30 bg-background/5 px-5 text-sm font-semibold text-background shadow-none hover:bg-background/10 hover:text-background"><a href="#contact">Contact Us</a></Button>
+              </div>
+              <div className="mt-14 grid max-w-2xl grid-cols-2 gap-px overflow-hidden rounded-[10px] border border-background/15 bg-background/15 sm:grid-cols-3">
+                <div className="bg-panel/55 p-5"><p className="font-mono text-3xl text-background">2021</p><p className="mt-1 text-xs text-background/55">Established</p></div>
+                <div className="bg-panel/55 p-5"><p className="font-mono text-3xl text-signal">14+</p><p className="mt-1 text-xs text-background/55">Years alternate-fuel experience</p></div>
+                <div className="col-span-2 bg-panel/55 p-5 sm:col-span-1"><p className="font-mono text-3xl text-background">8</p><p className="mt-1 text-xs text-background/55">Solution paths</p></div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute bottom-7 right-5 hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-background/45 lg:flex lg:right-10"><span className="h-px w-10 bg-signal" /> Field-ready conversion systems</div>
+        </section>
+
+        <section id="about" className="border-b border-border">
+          <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10 lg:py-28">
+            <div>
+              <SectionLabel index="OM / 02">About OM Solutions</SectionLabel>
+              <h2 className="mt-5 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight lg:text-6xl">Alternate-fuel thinking for working engines.</h2>
+              <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">OM Solutions was established in 2021 by <strong className="text-foreground">Prasad Parulekar (IIT Bombay)</strong>, with 14+ years of experience at Cummins India Ltd on alternate-fuel engines.</p>
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">The company delivers alternate-fuel and dual-fuel solutions across engine and industrial applications — from generator sets and commercial vehicles to marine propulsion, tractors, earth movers, producer gas and liquid fuels.</p>
+              <div className="mt-8 flex flex-wrap gap-2">
+                <span className="rounded-[6px] border border-border bg-secondary px-3 py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">IIT Bombay founder</span>
+                <span className="rounded-[6px] border border-border bg-secondary px-3 py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">Cummins India experience</span>
+              </div>
+            </div>
+            <div className="grid grid-cols-[1fr_0.8fr] gap-3">
+              <button type="button" className="row-span-2 overflow-hidden rounded-[10px] bg-secondary text-left" onClick={() => openImage(founderImage, "Prasad Parulekar, OM Solutions founder")}><img src={founderImage} alt="Prasad Parulekar" className="h-full min-h-[330px] w-full object-cover transition-transform duration-500 hover:scale-[1.03]" /></button>
+              <div className="rounded-[10px] bg-panel p-5 text-background"><p className="font-mono text-4xl text-signal">2021</p><p className="mt-2 text-sm text-background/60">Company established</p></div>
+              <div className="rounded-[10px] bg-primary p-5 text-primary-foreground"><p className="font-mono text-4xl">14+</p><p className="mt-2 text-sm text-primary-foreground/75">Years on alternate-fuel engines</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="solutions" className="bg-secondary/40">
+          <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
+            <div className="flex flex-wrap items-end justify-between gap-6"><div><SectionLabel index="OM / 03">Solutions</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">One engineering discipline.<br />Multiple applications.</h2></div><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Solutions listed in the company profile, mapped to the engine and fuel context where they apply.</p></div>
+            <div className="mt-12 grid gap-px overflow-hidden rounded-[12px] border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+              {solutions.map(({ title, text, icon: Icon }, index) => <article key={`${title}-${index}`} className="group bg-background p-6 transition-colors hover:bg-panel hover:text-background"><div className="flex items-start justify-between"><span className="grid size-11 place-items-center rounded-[7px] bg-primary-soft text-primary transition-colors group-hover:bg-signal group-hover:text-panel"><Icon className="size-5" /></span><span className="font-mono text-[10px] text-muted-foreground group-hover:text-background/45">0{index + 1}</span></div><h3 className="mt-8 text-lg font-bold tracking-tight">{title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground group-hover:text-background/65">{text}</p></article>)}
+            </div>
+          </div>
+        </section>
+
+        <section id="kit" className="bg-panel text-background">
+          <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
+            <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+              <div><SectionLabel index="OM / 04" dark>Primary product</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">OM Solutions<br />Dual Fuel Kit</h2><p className="mt-6 max-w-xl text-base leading-relaxed text-background/72">A dual-fuel system allows a diesel engine to use diesel together with an alternate gaseous fuel, reducing diesel consumption while maintaining engine operation.</p><div className="mt-8 grid grid-cols-2 gap-3"><div className="glass-panel rounded-[9px] p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-signal">Fuel mode</p><p className="mt-2 font-mono text-lg">Dual / Diesel</p></div><div className="glass-panel rounded-[9px] p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-signal">Gas usage</p><p className="mt-2 font-mono text-lg">up to 70%</p></div><div className="glass-panel rounded-[9px] p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-signal">Control</p><p className="mt-2 font-mono text-lg">Sensors + valves</p></div><div className="glass-panel rounded-[9px] p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-signal">Existing genset</p><p className="mt-2 font-mono text-lg">No replacement</p></div></div></div>
+              <div className="glass-panel rounded-[12px] p-4 sm:p-6"><div className="flex items-center justify-between"><p className="font-mono text-xs uppercase tracking-[0.18em] text-background/65">System schematic</p><span className="flex items-center gap-2 font-mono text-[10px] text-signal"><span className="size-2 rounded-full bg-signal" /> System view</span></div><button type="button" className="mt-5 block w-full overflow-hidden rounded-[8px] bg-background/5" onClick={() => openImage(schematicImage, "OM Solutions dual-fuel kit schematic")}><img src={schematicImage} alt="Dual fuel kit schematic" className="aspect-[1.75/1] w-full object-contain transition-transform duration-500 hover:scale-[1.02]" /></button><div className="mt-5 grid grid-cols-2 gap-x-5 gap-y-2 font-mono text-[10px] text-background/65 sm:grid-cols-3"><span>· Air Filter</span><span>· Gas Air Mixer</span><span>· Gas Filter</span><span>· Pressure Regulator</span><span>· Gas Flow Control</span><span>· Knock Sensor</span><span>· EGT Sensor</span><span>· Control Panel</span><span>· Energy Meter</span></div></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="technology" className="border-b border-border">
+          <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><div className="grid gap-12 lg:grid-cols-2 lg:items-end"><div><SectionLabel index="OM / 05">Technology</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Dual Fuel &amp; RECD Technology</h2></div><p className="max-w-xl text-base leading-relaxed text-muted-foreground">Two different approaches to particulate reduction, shown clearly for technical and operational decision-makers.</p></div><div className="mt-12 grid gap-5 lg:grid-cols-2"><article className="overflow-hidden rounded-[12px] border border-border bg-secondary"><img src={systemImage} alt="Dual fuel system diagram" loading="lazy" className="h-64 w-full object-contain bg-background p-5" /><div className="p-6"><div className="flex items-center gap-3"><span className="grid size-9 place-items-center rounded-[6px] bg-primary text-primary-foreground"><Fuel className="size-4" /></span><h3 className="text-xl font-bold">Dual Fuel</h3></div><p className="mt-4 text-sm leading-relaxed text-muted-foreground">Controlled injection of gaseous or liquid fuel into a diesel engine’s air flow to replace diesel, using a controller with sensors, valves and actuators to stop or reduce gas quantity.</p><p className="mt-4 border-l-2 border-signal pl-4 text-sm font-medium">Dual-fuel kits help reduce particulate generation during combustion.</p></div></article><article className="overflow-hidden rounded-[12px] border border-border bg-secondary"><img src={systemImage} alt="Emission control device diagram" loading="lazy" className="h-64 w-full object-contain bg-background p-5 opacity-80" /><div className="p-6"><div className="flex items-center gap-3"><span className="grid size-9 place-items-center rounded-[6px] bg-danger text-destructive-foreground"><ShieldCheck className="size-4" /></span><h3 className="text-xl font-bold">RECD</h3></div><p className="mt-4 text-sm leading-relaxed text-muted-foreground">A particulate trap or mechanism added in the diesel engine exhaust with controller, sensors and arrangements to clean filters periodically.</p><p className="mt-4 border-l-2 border-danger pl-4 text-sm font-medium">RECD traps particulates emitted from diesel engine exhaust.</p></div></article></div></div>
+        </section>
+
+        <section id="benefits" className="bg-secondary/40">
+          <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><div className="flex flex-wrap items-end justify-between gap-6"><div><SectionLabel index="OM / 06">Why dual fuel</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Benefits, measured.</h2></div><p className="max-w-md text-sm leading-relaxed text-muted-foreground">The 70% figure is the maximum gaseous fuel use stated in the profile and depends on engine, application, load and fuel conditions.</p></div><div className="mt-12 grid gap-px overflow-hidden rounded-[12px] border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">{benefits.map((benefit, index) => <div key={benefit} className={`flex gap-4 bg-background p-5 ${index < 4 ? "lg:p-7" : ""}`}><span className={`mt-0.5 grid size-6 shrink-0 place-items-center rounded-full ${index < 4 ? "bg-signal text-panel" : "bg-primary-soft text-primary"}`}><Check className="size-3.5" /></span><div><p className="text-sm font-semibold leading-snug">{benefit}</p>{index === 2 ? <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.1em] text-muted-foreground">Maximum stated figure</p> : null}</div></div>)}</div></div>
+        </section>
+
+        <section id="process" className="border-b border-border">
+          <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 07">The path to dual fuel</SectionLabel><h2 className="mt-5 max-w-3xl text-4xl font-extrabold tracking-tight lg:text-6xl">From assessment to operation.</h2><div className="mt-12 grid gap-4 md:grid-cols-4">{[["01", "Assess Engine & Application"], ["02", "Install Dual Fuel System"], ["03", "Configure Sensors & Controls"], ["04", "Operate in Dual Fuel / Diesel Mode"]].map(([number, title], index) => <div key={number} className="relative border-t-2 border-primary pt-5"><span className="font-mono text-4xl text-primary">{number}</span><h3 className="mt-6 max-w-[180px] text-lg font-bold leading-snug">{title}</h3>{index < 3 ? <ArrowRight className="absolute right-1 top-7 hidden size-5 text-muted-foreground md:block" /> : null}</div>)}</div></div>
+        </section>
+
+        <section id="considerations" className="bg-panel text-background">
+          <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 lg:grid-cols-[0.8fr_1.2fr] lg:px-10 lg:py-28"><div><SectionLabel index="OM / 08" dark>Important considerations</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Good engineering includes the boundaries.</h2><p className="mt-6 max-w-md text-sm leading-relaxed text-background/65">Diesel replacement varies with the engine and operating context. These conditions belong in every technical conversation.</p></div><div className="grid gap-px overflow-hidden rounded-[12px] border border-background/15 bg-background/15 sm:grid-cols-2">{["Dual-fuel mode requires alternate-fuel / gas availability", "Appropriate load definition is important", "Diesel replacement is sensitive to weather conditions", "Appropriate sensing is needed for engine health monitoring", "Diesel replacement depends on fuel quality", "Diesel replacement is effective between 30% to 80% load", "Diesel replacement depends on engine application and load cycle"].map((item, index) => <div key={item} className={`bg-panel-soft p-5 ${index === 6 ? "sm:col-span-2" : ""}`}><span className="font-mono text-[10px] text-signal">0{index + 1}</span><p className="mt-3 text-sm leading-relaxed text-background/80">{item}</p></div>)}</div></div>
+        </section>
+
+        <section id="comparison" className="border-b border-border">
+          <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 09">Technology comparison</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-6"><h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Four paths to the same load.</h2><p className="max-w-sm text-sm leading-relaxed text-muted-foreground">Comparison reproduced from the company profile. Scroll horizontally on smaller screens.</p></div><div className="mt-12 overflow-x-auto rounded-[12px] border border-border"><table className="w-full min-w-[980px] border-collapse text-left text-sm"><thead><tr className="bg-panel text-background"><th className="w-[18%] px-5 py-4 font-mono text-[10px] uppercase tracking-[0.12em] text-background/65">Category</th><th className="px-5 py-4 font-semibold">New Gas Genset CPCB-IV+</th><th className="px-5 py-4 font-semibold">New Diesel Genset CPCB-IV+</th><th className="px-5 py-4 font-semibold">Retrofit Emission Control Device</th><th className="bg-primary px-5 py-4 font-semibold text-primary-foreground">Dual Fuel Kit</th></tr></thead><tbody>{comparisonRows.map((row) => <tr key={row[0]} className="border-t border-border"><th className="px-5 py-5 font-semibold">{row[0]}</th><td className="px-5 py-5 text-muted-foreground">{row[1]}</td><td className="px-5 py-5 text-muted-foreground">{row[2]}</td><td className="px-5 py-5 text-muted-foreground">{row[3]}</td><td className="bg-primary-soft px-5 py-5 font-semibold text-primary">{row[4]}</td></tr>)}</tbody></table></div></div>
+        </section>
+
+        <section id="components" className="bg-secondary/40">
+          <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><div className="flex flex-wrap items-end justify-between gap-5"><div><SectionLabel index="OM / 10">Product gallery</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Dual Fuel Kit Components</h2></div><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Control, sensing and gas-handling hardware shown in the supplied product photographs.</p></div><div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4">{componentGallery.map(([label, image]) => <div key={label} className="group overflow-hidden rounded-[9px] border border-border bg-background"><button type="button" className="block aspect-square w-full overflow-hidden" onClick={() => openImage(image, label)}><img src={image} alt={label} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]" /></button><p className="p-4 text-sm font-semibold">{label}</p></div>)}</div></div>
+        </section>
+
+        <section id="installations" className="border-b border-border">
+          <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 11">Installations</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-6"><h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Real deployments.</h2><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Field results are presented as project-specific examples, not universal guarantees.</p></div><div className="mt-12 grid gap-5 lg:grid-cols-2"><article className="overflow-hidden rounded-[12px] border border-border bg-secondary"><ImageButton src={tataImage} alt="TATA 125 kVA CPCB-II diesel and LPG installation" caption="TATA 125 kVA · CPCB-II · LPG" onClick={() => openImage(tataImage, "TATA 125 kVA CPCB-II LPG installation")} className="aspect-[1.45/1]" /><div className="p-6"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Project 01 · LPG</p><h3 className="mt-3 text-2xl font-bold">TATA 125 kVA (CPCB-II)</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">TATA 6 cylinder turbocharged with EGR · CPCB-II compliant genset · LPG based installation.</p><div className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-[7px] border border-border bg-border"><div className="bg-background p-4"><p className="font-mono text-2xl text-signal">45%</p><p className="mt-1 text-xs text-muted-foreground">Diesel replacement</p></div><div className="bg-background p-4"><p className="font-mono text-2xl">75–80%</p><p className="mt-1 text-xs text-muted-foreground">Operating load</p></div></div></div></article><article className="overflow-hidden rounded-[12px] border border-border bg-secondary"><ImageButton src={koelImage} alt="KOEL 320 kVA CPCB-II diesel and PNG installation" caption="KOEL 320 kVA · CPCB-II · PNG" onClick={() => openImage(koelImage, "KOEL 320 kVA CPCB-II PNG installation")} className="aspect-[1.45/1]" /><div className="p-6"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Project 02 · PNG 300 mbar</p><h3 className="mt-3 text-2xl font-bold">KOEL 320 kVA (CPCB-II)</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">KOEL Vee8 cylinder turbocharged · CPCB-II compliant genset · low-pressure PNG based installation.</p><div className="mt-6 grid grid-cols-3 gap-px overflow-hidden rounded-[7px] border border-border bg-border"><div className="bg-background p-4"><p className="font-mono text-2xl text-signal">65%</p><p className="mt-1 text-xs text-muted-foreground">Diesel replacement</p></div><div className="bg-background p-4"><p className="font-mono text-2xl">₹982</p><p className="mt-1 text-xs text-muted-foreground">Saving / hour</p></div><div className="bg-background p-4"><p className="font-mono text-2xl">34%</p><p className="mt-1 text-xs text-muted-foreground">Fuel cost saving</p></div></div><p className="mt-5 font-mono text-[10px] leading-relaxed text-muted-foreground">Akwel Automotive Pune India Pvt. Ltd., Kharabwadi, Chakan · Installed 10/06/2025 · Tested 25 Sep 2025</p></div></article></div></div>
+        </section>
+
+        <section id="case-studies" className="bg-panel text-background">
+          <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 12" dark>Case studies</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-6"><h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Installations in context.</h2><p className="max-w-md text-sm leading-relaxed text-background/65">Two additional project records from the company profile, shown with their equipment and fuel context.</p></div><div className="mt-12 grid gap-5 lg:grid-cols-2"><article className="glass-panel overflow-hidden rounded-[12px]"><div className="grid grid-cols-2 gap-1"><ImageButton src={birlaImageOne} alt="Birla Tisya Bengaluru generator installation" onClick={() => openImage(birlaImageOne, "Birla Tisya Bengaluru generator installation")} className="aspect-square" /><ImageButton src={birlaImageTwo} alt="Birla Tisya Bengaluru outdoor generator" onClick={() => openImage(birlaImageTwo, "Birla Tisya Bengaluru outdoor generator")} className="aspect-square" /></div><div className="p-6"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-signal">May 2026 · Bengaluru</p><h3 className="mt-3 text-2xl font-bold">Birla Tisya, Bengaluru</h3><div className="mt-4 space-y-2 text-sm text-background/72"><p>Force MTU 1010 kVA × 2</p><p>Greaves 200 kVA × 1</p><p>Piped Natural Gas with minimum 1 bar pressure</p></div></div></article><article className="glass-panel overflow-hidden rounded-[12px]"><ImageButton src={gasSystemImage} alt="MaxGen Energy gas system components" onClick={() => openImage(gasSystemImage, "MaxGen Energy gas system components")} className="aspect-[1.7/1]" /><div className="p-6"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-signal">Equipment record</p><h3 className="mt-3 text-2xl font-bold">MaxGen Energy for Nevatia Steel and Alloys PL</h3><div className="mt-5 flex flex-wrap gap-2">{["Dual Fuel Controller", "Air Gas Mixer", "Gas Leak Detector", "Knock Sensor", "Pre-Turbo Exhaust Temperature Sensor", "Mechanical Gas Shut Off Valve", "Slam Shut Off Valve", "Electronic Gas Shut Off Valve", "Electronic Gas Flow Control Valve", "Gas Pressure Regulator", "Gas Pressure Switch"].map((tag) => <span key={tag} className="rounded-[5px] border border-background/15 px-3 py-2 font-mono text-[10px] text-background/68">{tag}</span>)}</div></div></article></div></div>
+        </section>
+
+        <section id="economics" className="relative overflow-hidden border-b border-border"><img src={economicsImage} alt="Operating economics case study" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-15" /><div className="absolute inset-0 bg-panel/95" /><div className="relative mx-auto max-w-[1440px] px-5 py-20 text-background lg:px-10 lg:py-28"><div className="flex flex-wrap items-end justify-between gap-5"><div><SectionLabel index="OM / 13" dark>Operating economics</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Savings, on the meter.</h2></div><span className="glass-panel rounded-[7px] px-4 py-3 font-mono text-[10px] uppercase tracking-[0.13em] text-background/75">Specific case · 500 kVA at 75% load</span></div><div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4"><div className="glass-panel rounded-[10px] p-6"><p className="font-mono text-[10px] uppercase tracking-[0.13em] text-background/55">Saving due to DFK</p><p className="mt-3 font-mono text-4xl text-signal">₹561<span className="text-base text-background/55"> / hour</span></p></div><div className="glass-panel rounded-[10px] p-6"><p className="font-mono text-[10px] uppercase tracking-[0.13em] text-background/55">Estimated monthly saving</p><p className="mt-3 font-mono text-4xl">₹22,424</p></div><div className="glass-panel rounded-[10px] p-6"><p className="font-mono text-[10px] uppercase tracking-[0.13em] text-background/55">Estimated annual saving</p><p className="mt-3 font-mono text-4xl">₹2,69,082</p></div><div className="glass-panel rounded-[10px] p-6"><p className="font-mono text-[10px] uppercase tracking-[0.13em] text-background/55">Fuel cost reduction</p><p className="mt-3 font-mono text-4xl text-signal">7.6%</p></div></div><div className="mt-3 grid gap-px overflow-hidden rounded-[10px] border border-background/15 bg-background/15 sm:grid-cols-2 lg:grid-cols-4"><div className="bg-panel-soft p-5"><p className="font-mono text-[10px] uppercase tracking-[0.13em] text-background/50">Genset rating</p><p className="mt-2 font-mono text-xl">500 kVA</p></div><div className="bg-panel-soft p-5"><p className="font-mono text-[10px] uppercase tracking-[0.13em] text-background/50">Load</p><p className="mt-2 font-mono text-xl">75%</p></div><div className="bg-panel-soft p-5"><p className="font-mono text-[10px] uppercase tracking-[0.13em] text-background/50">Hours / month</p><p className="mt-2 font-mono text-xl">40 hours</p></div><div className="bg-panel-soft p-5"><p className="font-mono text-[10px] uppercase tracking-[0.13em] text-background/50">Fuel prices</p><p className="mt-2 font-mono text-sm leading-relaxed">Diesel ₹94/L · LPG ₹190/kg · PNG ₹85/Sm³</p></div></div></div></section>
+
+        <section id="substitution" className="border-b border-border"><div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:px-10 lg:py-28"><div><SectionLabel index="OM / 14">Diesel substitution</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">A key measure of kit success.</h2><p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">Diesel substitution, also known as diesel replacement, is expressed as a percentage. Higher replacement is better, though limited by exhaust temperature, knock possibility and minimum diesel required for injector lubrication and cooling.</p><div className="mt-8 rounded-[10px] border border-border bg-secondary p-5 font-mono text-sm leading-relaxed sm:p-7">Diesel Substitution (%)<br /><span className="text-primary">= (Diesel consumption in Diesel Mode − Diesel consumption in Dual Fuel Mode) ÷ Diesel consumption in Diesel Mode × 100</span></div></div><div className="rounded-[12px] bg-panel p-8 text-background"><div className="flex items-end justify-between"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-background/55">Maximum stated in profile</p><p className="font-mono text-7xl text-signal">70%</p></div><div className="mt-8 h-3 overflow-hidden rounded-full bg-background/15"><div className="h-full w-[70%] rounded-full bg-signal" /></div><div className="mt-4 flex justify-between font-mono text-[10px] text-background/55"><span>Power range: 50–70%</span><span>Subject to conditions</span></div></div></div></section>
+
+        <section id="applications" className="bg-secondary/40"><div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 15">Other applications</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-5"><h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Built for more than gensets.</h2><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Additional applications shown in the supplied company profile.</p></div><div className="mt-12 grid gap-5 md:grid-cols-3">{[["Borewell", borewellImage, "Dual-fuel kits for borewell equipment."], ["Air Compressor", compressorImage, "Field installation and testing for air-compressor applications."], ["Marine Propulsion", marineImage, "Marine propulsion equipment with gas cylinder and engine components."]].map(([title, image, text]) => <article key={title} className="group overflow-hidden rounded-[11px] border border-border bg-background"><ImageButton src={image} alt={`${title} dual-fuel application`} caption={title} onClick={() => openImage(image, `${title} dual-fuel application`)} className="aspect-[1.25/1]" /><div className="flex items-end justify-between gap-4 p-5"><div><h3 className="text-xl font-bold">{title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{text}</p></div><ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" /></div></article>)}</div></div></section>
+
+        <section id="value" className="border-b border-border"><div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center"><div><SectionLabel index="OM / 16">Business value</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Better fuel economics. Greater flexibility. Cleaner operation.</h2><p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">The profile frames the value of dual-fuel systems across five connected priorities: economy, carbon credits, compliance, flexibility and environment.</p></div><div className="grid gap-px overflow-hidden rounded-[12px] border border-border bg-border sm:grid-cols-5">{[["Economy", "₹", BarChart3], ["Carbon Credits", "↓", Leaf], ["Compliance", "✓", ShieldCheck], ["Flexibility", "↔", Network], ["Environment", "◌", Sparkles]].map(([title, symbol, Icon]) => <div key={title} className="bg-background p-5 sm:min-h-40"><span className="font-mono text-3xl text-primary">{symbol}</span><h3 className="mt-8 text-sm font-bold">{title}</h3><Icon className="mt-3 size-4 text-muted-foreground" /></div>)}</div></div></div></section>
+
+        <section id="gallery" className="bg-secondary/40"><div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><div className="flex flex-wrap items-end justify-between gap-5"><div><SectionLabel index="OM / 17">Image gallery</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">In the field.</h2></div><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Products, installations, case studies and applications from the supplied company material. Select any image to enlarge.</p></div><div className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">{galleryItems.map(([label, image, category], index) => <div key={`${label}-${index}`} className={`overflow-hidden rounded-[9px] bg-background ${index === 0 || index === 5 ? "md:col-span-2 md:row-span-2" : ""}`}><ImageButton src={image} alt={label} caption={`${category} · ${label}`} onClick={() => openImage(image, label)} className="aspect-square h-full" /></div>)}</div></div></section>
+
+        <section id="contact" className="relative overflow-hidden bg-panel text-background"><img src={generatorImage} alt="OM Solutions generator installation" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-20" /><div className="absolute inset-0 bg-panel/90" /><div className="relative mx-auto grid max-w-[1440px] gap-12 px-5 py-20 lg:grid-cols-[0.85fr_1.15fr] lg:px-10 lg:py-28"><div><SectionLabel index="OM / 18" dark>Consultation</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Talk to Our Technical Team</h2><p className="mt-6 max-w-md text-base leading-relaxed text-background/70">Share your engine, application and fuel availability for a technical conversation about dual-fuel suitability.</p><div className="mt-10 space-y-5"><a href="mailto:omsolns18@gmail.com" className="flex items-start gap-4 text-sm text-background/80 transition-colors hover:text-signal"><span className="grid size-9 place-items-center rounded-[6px] bg-background/10 text-signal">@</span><span><span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Email</span><span className="mt-1 block">omsolns18@gmail.com</span></span></a><a href="tel:+919552545042" className="flex items-start gap-4 text-sm text-background/80 transition-colors hover:text-signal"><span className="grid size-9 place-items-center rounded-[6px] bg-background/10 text-signal"><Phone className="size-4" /></span><span><span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Contact</span><span className="mt-1 block">+91 9552545042</span></span></a><div className="flex items-start gap-4 text-sm text-background/80"><span className="grid size-9 place-items-center rounded-[6px] bg-background/10 text-signal"><Factory className="size-4" /></span><span><span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Office</span><span className="mt-1 block leading-relaxed">29A, Sairam Park, Near Cipla Foundation,<br />Warje, Pune, Maharashtra, India 411058</span></span></div></div></div><div className="glass-panel rounded-[13px] p-6 sm:p-8"><form onSubmit={submitForm} className="grid gap-4 sm:grid-cols-2"><label className="grid gap-2 text-xs font-medium text-background/70">Name<input required name="name" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="Your name" /></label><label className="grid gap-2 text-xs font-medium text-background/70">Company<input required name="company" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="Company name" /></label><label className="grid gap-2 text-xs font-medium text-background/70">Phone<input name="phone" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="+91" /></label><label className="grid gap-2 text-xs font-medium text-background/70">Email<input required type="email" name="email" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="you@company.com" /></label><label className="grid gap-2 text-xs font-medium text-background/70 sm:col-span-2">Application / Requirement<select name="application" className="h-11 rounded-[6px] border border-background/15 bg-panel px-3 text-sm text-background outline-none focus:border-signal"><option>Choose an application</option><option>Generator set</option><option>Marine engine</option><option>Truck or bus</option><option>Tractor or earth mover</option><option>Other industrial application</option></select></label><label className="grid gap-2 text-xs font-medium text-background/70 sm:col-span-2">Message<textarea required name="message" rows={4} className="rounded-[6px] border border-background/15 bg-background/5 px-3 py-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="Tell us about the engine, load profile and fuel availability." /></label><div className="sm:col-span-2"><Button type="submit" className="h-12 w-full rounded-[7px] bg-primary text-sm font-semibold text-primary-foreground shadow-none hover:bg-primary/90">{formSent ? "Request noted — thank you" : "Get a Consultation"} <ArrowRight className="size-4" /></Button><p className="mt-3 font-mono text-[10px] text-background/40">Frontend-only enquiry form · no data is submitted.</p></div></form></div></div></section>
+      </main>
+
+      <footer className="border-t border-border bg-background"><div className="mx-auto max-w-[1440px] px-5 py-12 lg:px-10"><div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between"><div className="max-w-sm"><div className="flex items-center gap-3"><img src={logoImage} alt="OM Solutions" className="h-10 w-12 object-contain" /><div><p className="font-extrabold tracking-tight">OM SOLUTIONS</p><p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">Dual Fuel Systems</p></div></div><p className="mt-5 font-mono text-[11px] leading-relaxed text-muted-foreground">Smarter Power – Lower Fuel Cost – Cleaner Performance</p></div><div className="grid gap-10 sm:grid-cols-2"><div><p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Quick links</p><nav className="mt-4 grid grid-cols-2 gap-x-8 gap-y-3 text-sm">{navItems.map(([label, id]) => <a key={id} href={`#${id}`} className="transition-colors hover:text-primary">{label}</a>)}</nav></div><div><p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Contact</p><div className="mt-4 space-y-2 text-sm text-muted-foreground"><a href="mailto:omsolns18@gmail.com" className="block hover:text-primary">omsolns18@gmail.com</a><a href="tel:+919552545042" className="block hover:text-primary">+91 9552545042</a><p>Warje, Pune, Maharashtra</p></div></div></div></div><div className="mt-10 flex flex-col gap-2 border-t border-border pt-5 font-mono text-[10px] text-muted-foreground sm:flex-row sm:justify-between"><span>© 2026 OM Solutions. All Rights Reserved.</span><span>Dual Fuel &amp; RECD Technology</span></div></div></footer>
+
+      {selectedImage ? <div className="fixed inset-0 z-[60] flex items-center justify-center bg-panel/90 p-5 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label={selectedImage.alt} onClick={() => setSelectedImage(null)}><div className="relative max-h-[90vh] max-w-5xl overflow-hidden rounded-[10px] border border-background/15 bg-background" onClick={(event) => event.stopPropagation()}><Button type="button" variant="outline" size="icon" className="absolute right-3 top-3 z-10 rounded-[6px] border-border bg-background/85" aria-label="Close image viewer" onClick={() => setSelectedImage(null)}><X /></Button><img src={selectedImage.src} alt={selectedImage.alt} className="max-h-[86vh] max-w-full object-contain" /></div></div> : null}
     </div>
   );
 }

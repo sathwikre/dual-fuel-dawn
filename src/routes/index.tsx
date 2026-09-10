@@ -26,7 +26,7 @@ import { Button } from "@/components/ui/button";
 import logoImage from "@/assets/img-002.jpg";
 import founderImage from "@/assets/img-006.jpg";
 import schematicImage from "@/assets/img-039.jpg";
-import systemImage from "@/assets/img-043.jpg";
+import systemImage from "@/assets/img-039.jpg";
 import lpgKitImage from "@/assets/img-084.jpg";
 import pngKitImage from "@/assets/img-085.jpg";
 import componentImage from "@/assets/img-086.jpg";
@@ -186,33 +186,64 @@ function OmSolutionsHome() {
   };
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
-      <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-xl">
-        <div className="mx-auto flex h-[72px] max-w-[1440px] items-center justify-between gap-5 px-5 lg:px-10">
-          <a href="#home" className="flex shrink-0 items-center gap-3" onClick={closeMenu}>
-            <img src={logoImage} alt="OM Solutions" className="h-10 w-12 object-contain" />
-            <span className="hidden leading-none sm:block">
-              <span className="block text-[15px] font-extrabold tracking-tight">OM SOLUTIONS</span>
-              <span className="mt-1 block font-mono text-[9px] uppercase tracking-[0.22em] text-muted-foreground">Dual Fuel Systems</span>
+    <div className="min-h-screen overflow-x-hidden bg-background text-foreground pt-[60px]">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl">
+        <div className="mx-auto flex h-[60px] max-w-[1440px] items-center justify-between gap-3 px-5 lg:px-8">
+          {/* Logo + Brand */}
+          <a href="#home" className="flex shrink-0 items-center gap-2.5" onClick={closeMenu}>
+            <img src={logoImage} alt="OM Solutions" className="h-9 w-9 object-contain" />
+            <span className="leading-none">
+              <span className="block text-[13px] font-extrabold tracking-tight">OM Solutions</span>
+              <span className="mt-[3px] block text-[8.5px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Dual Fuel &amp; Alternate Fuel Solutions</span>
             </span>
           </a>
-          <nav className="hidden items-center gap-4 text-[12px] font-medium text-foreground/75 2xl:flex">
-            {navItems.map(([label, id]) => <a key={id} href={`#${id}`} className="transition-colors hover:text-foreground">{label}</a>)}
+
+          {/* Nav — single line, no wrapping */}
+          <nav className="hidden items-center xl:flex">
+            {navItems.map(([label, id]) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                className="whitespace-nowrap rounded-[5px] px-2.5 py-1.5 text-[11.5px] font-medium text-foreground/70 transition-colors hover:bg-secondary hover:text-foreground"
+              >
+                {label}
+              </a>
+            ))}
           </nav>
-          <div className="flex items-center gap-2">
-            <Button asChild className="hidden h-10 rounded-[7px] bg-primary px-4 text-xs font-semibold text-primary-foreground shadow-none hover:bg-primary/90 sm:inline-flex">
-              <a href="#contact">Request a Consultation</a>
-            </Button>
-            <Button type="button" variant="outline" size="icon" className="h-10 w-10 rounded-[7px] border-border 2xl:hidden" aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"} onClick={() => setMenuOpen((open) => !open)}>
-              {menuOpen ? <X /> : <Menu />}
+
+          {/* CTA + hamburger */}
+          <div className="flex shrink-0 items-center gap-2">
+            <a
+              href="#contact"
+              className="hidden h-9 whitespace-nowrap items-center justify-center rounded-[6px] bg-panel px-4 text-[12px] font-semibold text-background transition-colors hover:bg-panel/85 sm:inline-flex"
+            >
+              Request a Consultation
+            </a>
+            <Button
+              type="button"
+              variant="outline"
+              size="icon"
+              className="h-9 w-9 rounded-[6px] border-border xl:hidden"
+              aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+              onClick={() => setMenuOpen((open) => !open)}
+            >
+              {menuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
             </Button>
           </div>
         </div>
+
+        {/* Mobile menu */}
         {menuOpen ? (
-          <nav className="border-t border-border bg-background px-5 py-4 shadow-lg 2xl:hidden">
+          <nav className="border-t border-border bg-background px-5 py-4 shadow-lg xl:hidden">
             <div className="mx-auto flex max-w-[1440px] flex-col gap-1">
-              {navItems.map(([label, id]) => <a key={id} href={`#${id}`} onClick={closeMenu} className="border-b border-border py-3 text-sm font-medium">{label}</a>)}
-              <a href="#contact" onClick={closeMenu} className="mt-3 inline-flex items-center justify-center rounded-[7px] bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground">Request a Consultation <ArrowRight className="ml-2 size-4" /></a>
+              {navItems.map(([label, id]) => (
+                <a key={id} href={`#${id}`} onClick={closeMenu} className="border-b border-border py-3 text-sm font-medium">
+                  {label}
+                </a>
+              ))}
+              <a href="#contact" onClick={closeMenu} className="mt-3 inline-flex items-center justify-center rounded-[7px] bg-panel px-4 py-3 text-sm font-semibold text-background">
+                Request a Consultation <ArrowRight className="ml-2 size-4" />
+              </a>
             </div>
           </nav>
         ) : null}

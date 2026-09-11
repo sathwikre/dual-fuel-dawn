@@ -10,12 +10,16 @@ import {
   Factory,
   Fuel,
   Gauge,
+  Instagram,
   Leaf,
+  Linkedin,
   Menu,
   Network,
   Phone,
   ShieldCheck,
+  Twitter,
   X,
+  Youtube,
   Zap,
 } from "lucide-react";
 
@@ -23,8 +27,8 @@ import { Button } from "@/components/ui/button";
 
 import logoImage from "@/assets/img-002.jpg";
 import founderImage from "@/assets/img-006.jpg";
-import schematicImage from "@/assets/img-039.jpg";
-import systemImage from "@/assets/img-039.jpg";
+import schematicImage from "@/assets/imm.jpeg";
+import systemImage from "@/assets/imm.jpeg";
 import lpgKitImage from "@/assets/img-084.jpg";
 import pngKitImage from "@/assets/img-085.jpg";
 import componentImage from "@/assets/img-086.jpg";
@@ -48,6 +52,23 @@ import marineDetailImage from "@/assets/img-180.jpg";
 import marineDetailImageTwo from "@/assets/img-181.jpg";
 import marineEngineImage from "@/assets/img-185.jpg";
 import marineEngineImageTwo from "@/assets/img-186.jpg";
+import recdImage from "@/assets/image.png";
+
+// Borewell gallery
+import borewellImg1 from "@/assets/borewell/11.png";
+import borewellImg2 from "@/assets/borewell/22.png";
+import borewellImg3 from "@/assets/borewell/33.png";
+import borewellImg4 from "@/assets/borewell/44.png";
+
+// Air Compressor gallery
+import aircomp1 from "@/assets/aircompressor/1.png";
+import aircomp2 from "@/assets/aircompressor/2.png";
+import aircomp3 from "@/assets/aircompressor/3.png";
+import aircomp4 from "@/assets/aircompressor/4.png";
+
+// Marine Propulsion gallery
+import marine1 from "@/assets/Marine Propulsion/1.png";
+import marine2 from "@/assets/Marine Propulsion/2.png";
 
 export const Route = createFileRoute("/")({
   component: OmSolutionsHome,
@@ -327,6 +348,7 @@ function OmSolutionsHome() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [techDrawerOpen, setTechDrawerOpen] = useState(false);
+  const [appGallery, setAppGallery] = useState<{ title: string; images: string[]; index: number } | null>(null);
   const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
   const [formSent, setFormSent] = useState(false);
 
@@ -335,6 +357,7 @@ function OmSolutionsHome() {
       if (event.key === "Escape") {
         setSelectedImage(null);
         setTechDrawerOpen(false);
+        setAppGallery(null);
       }
     };
     window.addEventListener("keydown", onKeyDown);
@@ -480,14 +503,15 @@ function OmSolutionsHome() {
           <HeroBackground />
           {/* Dark gradient overlay so text stays readable */}
           <div className="absolute inset-0 z-[2]" style={{ background: "linear-gradient(90deg,rgba(7,18,12,.28) 0%,rgba(8,20,14,.14) 55%,rgba(8,20,14,.05)), linear-gradient(0deg,rgba(7,18,12,.28),transparent 46%)" }} />
-          <div className="relative z-[3] mx-auto flex min-h-[100svh] w-full max-w-[1440px] flex-col items-center justify-end px-5 pt-[85px] pb-28 text-center lg:px-10">
-            <div className="max-w-2xl rise-in">
-              <h1 className="mt-0 text-balance text-4xl font-extrabold leading-[1.12] tracking-tight text-background sm:text-5xl lg:text-6xl">
-                Our purpose is to build a cleaner India<br />from the engines already powering it.
+          <div className="relative z-[3] mx-auto flex min-h-[100svh] w-full max-w-[1440px] flex-col items-center justify-end px-5 pt-[85px] pb-32 text-center lg:px-16">
+            <div className="max-w-4xl rise-in">
+              <h1 className="mt-0 text-[clamp(32px,4.5vw,64px)] font-light leading-[1.1] tracking-[-0.02em] text-white">
+                Our purpose is to clean and<br />decarbonise the air
               </h1>
-              <div className="mt-6 flex justify-center">
-                <a href="#contact" className="inline-flex h-10 items-center border border-white/70 bg-transparent px-6 text-[10px] font-bold uppercase tracking-[0.1em] text-white transition-colors hover:bg-white/10">
-                  Get in touch
+              <p className="mt-5 text-sm font-normal tracking-wide text-white/80">We are OM Solutions</p>
+              <div className="mt-7">
+                <a href="#contact" className="inline-flex h-11 items-center border border-white bg-transparent px-7 text-[11px] font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-white hover:text-[#0b1f15]">
+                  Contact Us
                 </a>
               </div>
             </div>
@@ -599,7 +623,7 @@ function OmSolutionsHome() {
               </section>
 
               <section id="dr-tech" className="border-b border-border">
-                <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><div className="grid gap-12 lg:grid-cols-2 lg:items-end"><div><SectionLabel index="OM / 05">Technology</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Dual Fuel &amp; RECD Technology</h2></div><p className="max-w-xl text-base leading-relaxed text-muted-foreground">Two different approaches to particulate reduction, shown clearly for technical and operational decision-makers.</p></div><div className="mt-12 grid gap-5 lg:grid-cols-2"><article className="overflow-hidden rounded-[12px] border border-border bg-secondary"><img src={systemImage} alt="Dual fuel system diagram" loading="lazy" className="h-64 w-full object-contain bg-background p-5" /><div className="p-6"><div className="flex items-center gap-3"><span className="grid size-9 place-items-center rounded-[6px] bg-primary text-primary-foreground"><Fuel className="size-4" /></span><h3 className="text-xl font-bold">Dual Fuel</h3></div><p className="mt-4 text-sm leading-relaxed text-muted-foreground">Controlled injection of gaseous or liquid fuel into a diesel engine's air flow to replace diesel, using a controller with sensors, valves and actuators to stop or reduce gas quantity.</p><p className="mt-4 border-l-2 border-signal pl-4 text-sm font-medium">Dual-fuel kits help reduce particulate generation during combustion.</p></div></article><article className="overflow-hidden rounded-[12px] border border-border bg-secondary"><img src={systemImage} alt="Emission control device diagram" loading="lazy" className="h-64 w-full object-contain bg-background p-5 opacity-80" /><div className="p-6"><div className="flex items-center gap-3"><span className="grid size-9 place-items-center rounded-[6px] bg-danger text-destructive-foreground"><ShieldCheck className="size-4" /></span><h3 className="text-xl font-bold">RECD</h3></div><p className="mt-4 text-sm leading-relaxed text-muted-foreground">A particulate trap or mechanism added in the diesel engine exhaust with controller, sensors and arrangements to clean filters periodically.</p><p className="mt-4 border-l-2 border-danger pl-4 text-sm font-medium">RECD traps particulates emitted from diesel engine exhaust.</p></div></article></div></div>
+                <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><div className="grid gap-12 lg:grid-cols-2 lg:items-end"><div><SectionLabel index="OM / 05">Technology</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Dual Fuel &amp; RECD Technology</h2></div><p className="max-w-xl text-base leading-relaxed text-muted-foreground">Two different approaches to particulate reduction, shown clearly for technical and operational decision-makers.</p></div><div className="mt-12 grid gap-5 lg:grid-cols-2"><article className="overflow-hidden rounded-[12px] border border-border bg-secondary"><img src={systemImage} alt="Dual fuel system diagram" loading="lazy" className="h-64 w-full object-contain bg-background p-5" /><div className="p-6"><div className="flex items-center gap-3"><span className="grid size-9 place-items-center rounded-[6px] bg-primary text-primary-foreground"><Fuel className="size-4" /></span><h3 className="text-xl font-bold">Dual Fuel</h3></div><p className="mt-4 text-sm leading-relaxed text-muted-foreground">Controlled injection of gaseous or liquid fuel into a diesel engine's air flow to replace diesel, using a controller with sensors, valves and actuators to stop or reduce gas quantity.</p><p className="mt-4 border-l-2 border-signal pl-4 text-sm font-medium">Dual-fuel kits help reduce particulate generation during combustion.</p></div></article><article className="overflow-hidden rounded-[12px] border border-border bg-secondary"><img src={recdImage} alt="Emission control device diagram" loading="lazy" className="h-64 w-full object-contain bg-background p-5 opacity-80" /><div className="p-6"><div className="flex items-center gap-3"><span className="grid size-9 place-items-center rounded-[6px] bg-danger text-destructive-foreground"><ShieldCheck className="size-4" /></span><h3 className="text-xl font-bold">RECD</h3></div><p className="mt-4 text-sm leading-relaxed text-muted-foreground">A particulate trap or mechanism added in the diesel engine exhaust with controller, sensors and arrangements to clean filters periodically.</p><p className="mt-4 border-l-2 border-danger pl-4 text-sm font-medium">RECD traps particulates emitted from diesel engine exhaust.</p></div></article></div></div>
               </section>
 
               <section id="dr-benefits" className="bg-secondary/40">
@@ -615,7 +639,7 @@ function OmSolutionsHome() {
               </section>
 
               <section id="dr-installs" className="border-b border-border">
-                <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 11">Installations</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-6"><h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Real deployments.</h2><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Field results are presented as project-specific examples, not universal guarantees.</p></div><div className="mt-12 grid gap-5 lg:grid-cols-2"><article className="overflow-hidden rounded-[12px] border border-border bg-secondary"><ImageButton src={tataImage} alt="TATA 125 kVA CPCB-II diesel and LPG installation" caption="TATA 125 kVA · CPCB-II · LPG" onClick={() => openImage(tataImage, "TATA 125 kVA CPCB-II LPG installation")} className="aspect-[1.45/1]" /><div className="p-6"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Project 01 · LPG</p><h3 className="mt-3 text-2xl font-bold">TATA 125 kVA (CPCB-II)</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">TATA 6 cylinder turbocharged with EGR · CPCB-II compliant genset · LPG based installation.</p><div className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-[7px] border border-border bg-border"><div className="bg-background p-4"><p className="font-mono text-2xl text-signal">45%</p><p className="mt-1 text-xs text-muted-foreground">Diesel replacement</p></div><div className="bg-background p-4"><p className="font-mono text-2xl">75”“80%</p><p className="mt-1 text-xs text-muted-foreground">Operating load</p></div></div></div></article><article className="overflow-hidden rounded-[12px] border border-border bg-secondary"><ImageButton src={koelImage} alt="KOEL 320 kVA CPCB-II diesel and PNG installation" caption="KOEL 320 kVA · CPCB-II · PNG" onClick={() => openImage(koelImage, "KOEL 320 kVA CPCB-II PNG installation")} className="aspect-[1.45/1]" /><div className="p-6"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Project 02 · PNG 300 mbar</p><h3 className="mt-3 text-2xl font-bold">KOEL 320 kVA (CPCB-II)</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">KOEL Vee8 cylinder turbocharged · CPCB-II compliant genset · low-pressure PNG based installation.</p><div className="mt-6 grid grid-cols-3 gap-px overflow-hidden rounded-[7px] border border-border bg-border"><div className="bg-background p-4"><p className="font-mono text-2xl text-signal">65%</p><p className="mt-1 text-xs text-muted-foreground">Diesel replacement</p></div><div className="bg-background p-4"><p className="font-mono text-2xl">₹982</p><p className="mt-1 text-xs text-muted-foreground">Saving / hour</p></div><div className="bg-background p-4"><p className="font-mono text-2xl">34%</p><p className="mt-1 text-xs text-muted-foreground">Fuel cost saving</p></div></div><p className="mt-5 font-mono text-[10px] leading-relaxed text-muted-foreground">Akwel Automotive Pune India Pvt. Ltd., Kharabwadi, Chakan · Installed 10/06/2025 · Tested 25 Sep 2025</p></div></article></div></div>
+                <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 11">Installations</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-6"><h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Installations.</h2><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Field results are presented as project-specific examples, not universal guarantees.</p></div><div className="mt-12 grid gap-5 lg:grid-cols-2"><article className="overflow-hidden rounded-[12px] border border-border bg-secondary"><ImageButton src={tataImage} alt="TATA 125 kVA CPCB-II diesel and LPG installation" caption="TATA 125 kVA · CPCB-II · LPG" onClick={() => openImage(tataImage, "TATA 125 kVA CPCB-II LPG installation")} className="aspect-[1.45/1]" /><div className="p-6"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Project 01 · LPG</p><h3 className="mt-3 text-2xl font-bold">TATA 125 kVA (CPCB-II)</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">TATA 6 cylinder turbocharged with EGR · CPCB-II compliant genset · LPG based installation.</p><div className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-[7px] border border-border bg-border"><div className="bg-background p-4"><p className="font-mono text-2xl text-signal">45%</p><p className="mt-1 text-xs text-muted-foreground">Diesel replacement</p></div><div className="bg-background p-4"><p className="font-mono text-2xl">75”“80%</p><p className="mt-1 text-xs text-muted-foreground">Operating load</p></div></div></div></article><article className="overflow-hidden rounded-[12px] border border-border bg-secondary"><ImageButton src={koelImage} alt="KOEL 320 kVA CPCB-II diesel and PNG installation" caption="KOEL 320 kVA · CPCB-II · PNG" onClick={() => openImage(koelImage, "KOEL 320 kVA CPCB-II PNG installation")} className="aspect-[1.45/1]" /><div className="p-6"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Project 02 · PNG 300 mbar</p><h3 className="mt-3 text-2xl font-bold">KOEL 320 kVA (CPCB-II)</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">KOEL Vee8 cylinder turbocharged · CPCB-II compliant genset · low-pressure PNG based installation.</p><div className="mt-6 grid grid-cols-3 gap-px overflow-hidden rounded-[7px] border border-border bg-border"><div className="bg-background p-4"><p className="font-mono text-2xl text-signal">65%</p><p className="mt-1 text-xs text-muted-foreground">Diesel replacement</p></div><div className="bg-background p-4"><p className="font-mono text-2xl">₹982</p><p className="mt-1 text-xs text-muted-foreground">Saving / hour</p></div><div className="bg-background p-4"><p className="font-mono text-2xl">34%</p><p className="mt-1 text-xs text-muted-foreground">Fuel cost saving</p></div></div><p className="mt-5 font-mono text-[10px] leading-relaxed text-muted-foreground">Akwel Automotive Pune India Pvt. Ltd., Kharabwadi, Chakan · Installed 10/06/2025 · Tested 25 Sep 2025</p></div></article></div></div>
               </section>
 
               <section id="dr-cases" className="bg-panel text-background">
@@ -626,7 +650,27 @@ function OmSolutionsHome() {
 
               <section id="dr-sub" className="border-b border-border"><div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:px-10 lg:py-28"><div><SectionLabel index="OM / 14">Diesel substitution</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">A key measure of kit success.</h2><p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">Diesel substitution, also known as diesel replacement, is expressed as a percentage. Higher replacement is better, though limited by exhaust temperature, knock possibility and minimum diesel required for injector lubrication and cooling.</p><div className="mt-8 rounded-[10px] border border-border bg-secondary p-5 font-mono text-sm leading-relaxed sm:p-7">Diesel Substitution (%)<br /><span className="text-primary">= (Diesel consumption in Diesel Mode âˆ’ Diesel consumption in Dual Fuel Mode) Ã· Diesel consumption in Diesel Mode Ã— 100</span></div></div><div className="rounded-[12px] bg-panel p-8 text-background"><div className="flex items-end justify-between"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-background/55">Maximum stated in profile</p><p className="font-mono text-7xl text-signal">70%</p></div><div className="mt-8 h-3 overflow-hidden rounded-full bg-background/15"><div className="h-full w-[70%] rounded-full bg-signal" /></div><div className="mt-4 flex justify-between font-mono text-[10px] text-background/55"><span>Power range: 50”“70%</span><span>Subject to conditions</span></div></div></div></section>
 
-              <section id="dr-apps" className="bg-secondary/40"><div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 15">Other applications</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-5"><h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Built for more than gensets.</h2><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Additional applications shown in the supplied company profile.</p></div><div className="mt-12 grid gap-5 md:grid-cols-3">{[["Borewell", borewellImage, "Dual-fuel kits for borewell equipment."], ["Air Compressor", compressorImage, "Field installation and testing for air-compressor applications."], ["Marine Propulsion", marineImage, "Marine propulsion equipment with gas cylinder and engine components."]].map(([title, image, text]) => <article key={title} className="group overflow-hidden rounded-[11px] border border-border bg-background"><ImageButton src={image} alt={`${title} dual-fuel application`} caption={title} onClick={() => openImage(image, `${title} dual-fuel application`)} className="aspect-[1.25/1]" /><div className="flex items-end justify-between gap-4 p-5"><div><h3 className="text-xl font-bold">{title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{text}</p></div><ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" /></div></article>)}</div></div></section>
+              <section id="dr-apps" className="bg-secondary/40"><div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 15">Other applications</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-5"><h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Built for more than gensets.</h2><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Click any application to view all installation images.</p></div>
+                <div className="mt-12 grid gap-5 md:grid-cols-3">
+                  {([
+                    { title: "Borewell", desc: "Dual-fuel kits for borewell pump sets.", images: [borewellImg1, borewellImg2, borewellImg3, borewellImg4] },
+                    { title: "Air Compressor", desc: "Field installation for air-compressor applications.", images: [aircomp1, aircomp2, aircomp3, aircomp4] },
+                    { title: "Marine Propulsion", desc: "Marine propulsion with dual-fuel conversion.", images: [marine1, marine2] },
+                  ] as { title: string; desc: string; images: string[] }[]).map((app) => (
+                    <article key={app.title} className="group cursor-pointer overflow-hidden rounded-[11px] border border-border bg-background" onClick={() => setAppGallery({ title: app.title, images: app.images, index: 0 })}>
+                      <div className="relative overflow-hidden aspect-[1.25/1]">
+                        <img src={app.images[0]} alt={app.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+                        <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/30" />
+                        <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">{app.images.length} photos</span>
+                      </div>
+                      <div className="flex items-end justify-between gap-4 p-5">
+                        <div><h3 className="text-xl font-bold">{app.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{app.desc}</p></div>
+                        <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div></section>
 
               {/* Close button at bottom */}
               <div className="flex justify-center bg-panel py-10">
@@ -691,7 +735,7 @@ function OmSolutionsHome() {
         <section id="field" className="border-t border-border bg-background">
           <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
 
-            <h2 className="text-[11px] font-bold uppercase tracking-[0.22em] text-muted-foreground">Latest News</h2>
+            <h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Latest News</h2>
 
             {/* Category tabs */}
             <div className="mt-6 flex flex-wrap gap-6 border-b border-border pb-4">
@@ -703,40 +747,89 @@ function OmSolutionsHome() {
             {/* News grid */}
             <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
 
-              <article className="group cursor-pointer" onClick={() => openImage(koelImage, "KOEL 320 kVA — Akwel Automotive, Pune")}>
+              <article className="group cursor-default">
                 <div className="overflow-hidden">
-                  <img src={koelImage} alt="KOEL 320 kVA PNG installation at Akwel Automotive Pune" className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+                  <img
+                    src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80"
+                    alt="OM Solutions team with client at Akwel Automotive Pune handover"
+                    className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
                 </div>
-                <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Installations</p>
-                <h3 className="mt-2 text-base font-semibold leading-snug group-hover:underline">KOEL 320 kVA successfully converted to PNG dual-fuel at Akwel Automotive, Pune — 65% diesel replaced, 34% fuel cost saved.</h3>
+                <h3 className="mt-4 text-base font-semibold leading-snug">OM Solutions hands over a successfully commissioned KOEL 320 kVA PNG dual-fuel system to the team at Akwel Automotive, Pune — 65% diesel replaced from day one.</h3>              </article>
+
+              <article className="group cursor-default">
+                <div className="overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80"
+                    alt="Client team at Birla Tisya Bengaluru celebrating dual-fuel conversion"
+                    className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                </div>
+                <h3 className="mt-4 text-base font-semibold leading-snug">Birla Tisya, Bengaluru team celebrates the commissioning of three dual-fuel gensets — over 2.2 MVA now running on Piped Natural Gas.</h3>
               </article>
 
-              <article className="group cursor-pointer" onClick={() => openImage(birlaImageOne, "Birla Tisya — Bengaluru, May 2026")}>
+              <article className="group cursor-default">
                 <div className="overflow-hidden">
-                  <img src={birlaImageOne} alt="Birla Tisya Bengaluru dual-fuel genset installation" className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+                  <img
+                    src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=800&q=80"
+                    alt="OM Solutions founder with client discussing dual-fuel kit"
+                    className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
                 </div>
-                <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Installations</p>
-                <h3 className="mt-2 text-base font-semibold leading-snug group-hover:underline">Birla Tisya, Bengaluru goes dual-fuel — three gensets totalling over 2.2 MVA now running on Piped Natural Gas.</h3>
-              </article>
-
-              <article className="group cursor-pointer" onClick={() => openImage(tataImage, "TATA 125 kVA LPG installation")}>
-                <div className="overflow-hidden">
-                  <img src={tataImage} alt="TATA 125 kVA LPG dual-fuel installation" className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
-                </div>
-                <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Generator</p>
-                <h3 className="mt-2 text-base font-semibold leading-snug group-hover:underline">TATA 125 kVA LPG dual-fuel installation — 45% diesel replaced at 75–80% load. Clean, smart, reliable.</h3>
+                <h3 className="mt-4 text-base font-semibold leading-snug">Prasad Parulekar (Founder, OM Solutions) with the operations team after completing the TATA 125 kVA LPG dual-fuel retrofit — 45% diesel replaced at 75–80% load.</h3>
               </article>
 
             </div>
+
+            <p className="mt-8 text-xs text-muted-foreground">* Placeholder photos shown. Client photos will be updated once received.</p>
           </div>
         </section>
 
-        <section id="contact" className="relative overflow-hidden bg-panel text-background"><img src={generatorImage} alt="OM Solutions generator installation" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-20" /><div className="absolute inset-0 bg-panel/90" /><div className="relative mx-auto grid max-w-[1440px] gap-12 px-5 py-20 lg:grid-cols-[0.85fr_1.15fr] lg:px-10 lg:py-28"><div><SectionLabel index="OM / 18" dark>Consultation</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Talk to Our Technical Team</h2><p className="mt-6 max-w-md text-base leading-relaxed text-background/70">Share your engine, application and fuel availability for a technical conversation about dual-fuel suitability.</p><div className="mt-10 space-y-5"><a href="mailto:omsolns18@gmail.com" className="flex items-start gap-4 text-sm text-background/80 transition-colors hover:text-signal"><span className="grid size-9 place-items-center rounded-[6px] bg-background/10 text-signal">@</span><span><span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Email</span><span className="mt-1 block">omsolns18@gmail.com</span></span></a><a href="tel:+919552545042" className="flex items-start gap-4 text-sm text-background/80 transition-colors hover:text-signal"><span className="grid size-9 place-items-center rounded-[6px] bg-background/10 text-signal"><Phone className="size-4" /></span><span><span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Contact</span><span className="mt-1 block">+91 9552545042</span></span></a><div className="flex items-start gap-4 text-sm text-background/80"><span className="grid size-9 place-items-center rounded-[6px] bg-background/10 text-signal"><Factory className="size-4" /></span><span><span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Office</span><span className="mt-1 block leading-relaxed">29A, Sairam Park, Near Cipla Foundation,<br />Warje, Pune, Maharashtra, India 411058</span></span></div></div></div><div className="glass-panel rounded-[13px] p-6 sm:p-8"><form onSubmit={submitForm} className="grid gap-4 sm:grid-cols-2"><label className="grid gap-2 text-xs font-medium text-background/70">Name<input required name="name" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="Your name" /></label><label className="grid gap-2 text-xs font-medium text-background/70">Company<input required name="company" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="Company name" /></label><label className="grid gap-2 text-xs font-medium text-background/70">Phone<input name="phone" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="+91" /></label><label className="grid gap-2 text-xs font-medium text-background/70">Email<input required type="email" name="email" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="you@company.com" /></label><label className="grid gap-2 text-xs font-medium text-background/70 sm:col-span-2">Application / Requirement<select name="application" className="h-11 rounded-[6px] border border-background/15 bg-panel px-3 text-sm text-background outline-none focus:border-signal"><option>Choose an application</option><option>Generator set</option><option>Marine engine</option><option>Truck or bus</option><option>Tractor or earth mover</option><option>Other industrial application</option></select></label><label className="grid gap-2 text-xs font-medium text-background/70 sm:col-span-2">Message<textarea required name="message" rows={4} className="rounded-[6px] border border-background/15 bg-background/5 px-3 py-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="Tell us about the engine, load profile and fuel availability." /></label><div className="sm:col-span-2"><Button type="submit" className="h-12 w-full rounded-[7px] bg-primary text-sm font-semibold text-primary-foreground shadow-none hover:bg-primary/90">{formSent ? "Request noted ”” thank you" : "Get a Consultation"} <ArrowRight className="size-4" /></Button><p className="mt-3 font-mono text-[10px] text-background/40">Frontend-only enquiry form · no data is submitted.</p></div></form></div></div></section>
+        <section id="contact" className="relative overflow-hidden bg-panel text-background"><img src={generatorImage} alt="OM Solutions generator installation" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-20" /><div className="absolute inset-0 bg-panel/90" /><div className="relative mx-auto grid max-w-[1440px] gap-12 px-5 py-20 lg:grid-cols-[0.85fr_1.15fr] lg:px-10 lg:py-28"><div><SectionLabel index="OM / 18" dark>Consultation</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Talk to Our Technical Team</h2><p className="mt-6 max-w-md text-base leading-relaxed text-background/70">Share your engine, application and fuel availability for a technical conversation about dual-fuel suitability.</p><div className="mt-10 space-y-5"><a href="mailto:omsolns18@gmail.com" className="flex items-start gap-4 text-sm text-background/80 transition-colors hover:text-signal"><span className="grid size-9 place-items-center rounded-[6px] bg-background/10 text-signal">@</span><span><span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Email</span><span className="mt-1 block">omsolns18@gmail.com</span></span></a><div className="flex items-start gap-4 text-sm text-background/80"><span className="grid size-9 place-items-center rounded-[6px] bg-background/10 text-signal"><Phone className="size-4" /></span><span><span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Contact</span><a href="https://wa.me/919014941863" target="_blank" rel="noopener noreferrer" className="mt-1 block transition-colors hover:text-signal">+91 9014941863 <span className="font-mono text-[9px] text-signal">WhatsApp</span></a></span></div><div className="flex items-start gap-4 text-sm text-background/80"><span className="grid size-9 place-items-center rounded-[6px] bg-background/10 text-signal"><Factory className="size-4" /></span><span><span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Office</span><span className="mt-1 block leading-relaxed">29A, Sairam Park, Near Cipla Foundation,<br />Warje, Pune, Maharashtra, India 411058</span></span></div></div></div><div className="glass-panel rounded-[13px] p-6 sm:p-8"><form onSubmit={submitForm} className="grid gap-4 sm:grid-cols-2"><label className="grid gap-2 text-xs font-medium text-background/70">Name<input required name="name" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="Your name" /></label><label className="grid gap-2 text-xs font-medium text-background/70">Company<input required name="company" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="Company name" /></label><label className="grid gap-2 text-xs font-medium text-background/70">Phone<input name="phone" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="+91" /></label><label className="grid gap-2 text-xs font-medium text-background/70">Email<input required type="email" name="email" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="you@company.com" /></label><label className="grid gap-2 text-xs font-medium text-background/70 sm:col-span-2">Application / Requirement<select name="application" className="h-11 rounded-[6px] border border-background/15 bg-panel px-3 text-sm text-background outline-none focus:border-signal"><option>Choose an application</option><option>Generator set</option><option>Marine engine</option><option>Truck or bus</option><option>Tractor or earth mover</option><option>Other industrial application</option></select></label><label className="grid gap-2 text-xs font-medium text-background/70 sm:col-span-2">Message<textarea required name="message" rows={4} className="rounded-[6px] border border-background/15 bg-background/5 px-3 py-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="Tell us about the engine, load profile and fuel availability." /></label><div className="sm:col-span-2"><Button type="submit" className="h-12 w-full rounded-[7px] bg-primary text-sm font-semibold text-primary-foreground shadow-none hover:bg-primary/90">{formSent ? "Request noted ”” thank you" : "Get a Consultation"} <ArrowRight className="size-4" /></Button><p className="mt-3 font-mono text-[10px] text-background/40">Frontend-only enquiry form · no data is submitted.</p></div></form></div></div></section>
       </main>
 
-      <footer className="border-t border-border bg-background"><div className="mx-auto max-w-[1440px] px-5 py-12 lg:px-10"><div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between"><div className="max-w-sm"><div className="flex items-center gap-3"><img src={logoImage} alt="OM Solutions" className="h-10 w-12 object-contain" /><div><p className="font-extrabold tracking-tight">OM SOLUTIONS</p><p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">Dual Fuel Systems</p></div></div><p className="mt-5 font-mono text-[11px] leading-relaxed text-muted-foreground">Smarter Power ”“ Lower Fuel Cost ”“ Cleaner Performance</p></div><div className="grid gap-10 sm:grid-cols-2"><div><p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Quick links</p><nav className="mt-4 grid grid-cols-2 gap-x-8 gap-y-3 text-sm">{navItems.map(([label, id]) => <a key={id} href={`#${id}`} className="transition-colors hover:text-primary">{label}</a>)}</nav></div><div><p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Contact</p><div className="mt-4 space-y-2 text-sm text-muted-foreground"><a href="mailto:omsolns18@gmail.com" className="block hover:text-primary">omsolns18@gmail.com</a><a href="tel:+919552545042" className="block hover:text-primary">+91 9552545042</a><p>Warje, Pune, Maharashtra</p></div></div></div></div><div className="mt-10 flex flex-col gap-2 border-t border-border pt-5 font-mono text-[10px] text-muted-foreground sm:flex-row sm:justify-between"><span>© 2026 OM Solutions. All Rights Reserved.</span><span>Dual Fuel &amp; RECD Technology</span></div></div></footer>
+      <footer className="border-t border-border bg-background"><div className="mx-auto max-w-[1440px] px-5 py-12 lg:px-10"><div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between"><div className="max-w-sm"><div className="flex items-center gap-3"><img src={logoImage} alt="OM Solutions" className="h-10 w-12 object-contain" /><div><p className="font-extrabold tracking-tight">OM SOLUTIONS</p><p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">Dual Fuel Systems</p></div></div><p className="mt-5 font-mono text-[11px] leading-relaxed text-muted-foreground">Smarter Power ”“ Lower Fuel Cost ”“ Cleaner Performance</p><div className="mt-6 flex items-center gap-3"><a href="https://linkedin.com/company/om-solutions" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="grid h-9 w-9 place-items-center rounded-[7px] border border-border text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"><Linkedin className="size-4" /></a><a href="https://youtube.com/@omsolutions" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="grid h-9 w-9 place-items-center rounded-[7px] border border-border text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"><Youtube className="size-4" /></a><a href="https://twitter.com/omsolutions" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X" className="grid h-9 w-9 place-items-center rounded-[7px] border border-border text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"><Twitter className="size-4" /></a><a href="https://instagram.com/omsolutions" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="grid h-9 w-9 place-items-center rounded-[7px] border border-border text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"><Instagram className="size-4" /></a></div></div><div className="grid gap-10 sm:grid-cols-2"><div><p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Quick links</p><nav className="mt-4 grid grid-cols-2 gap-x-8 gap-y-3 text-sm">{navItems.map(([label, id]) => <a key={id} href={`#${id}`} className="transition-colors hover:text-primary">{label}</a>)}</nav></div><div><p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Contact</p><div className="mt-4 space-y-2 text-sm text-muted-foreground"><a href="mailto:omsolns18@gmail.com" className="block hover:text-primary">omsolns18@gmail.com</a><a href="https://wa.me/919014941863" target="_blank" rel="noopener noreferrer" className="block hover:text-primary">+91 9014941863 <span className="font-mono text-[9px] text-primary">WhatsApp</span></a><p>Warje, Pune, Maharashtra</p></div></div></div></div><div className="mt-10 flex flex-col gap-2 border-t border-border pt-5 font-mono text-[10px] text-muted-foreground sm:flex-row sm:justify-between"><span>© 2026 OM Solutions. All Rights Reserved.</span><span>Dual Fuel &amp; RECD Technology</span></div></div></footer>
 
       {selectedImage ? <div className="fixed inset-0 z-[60] flex items-center justify-center bg-panel/90 p-5 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label={selectedImage.alt} onClick={() => setSelectedImage(null)}><div className="relative max-h-[90vh] max-w-5xl overflow-hidden rounded-[10px] border border-background/15 bg-background" onClick={(event) => event.stopPropagation()}><Button type="button" variant="outline" size="icon" className="absolute right-3 top-3 z-10 rounded-[6px] border-border bg-background/85" aria-label="Close image viewer" onClick={() => setSelectedImage(null)}><X /></Button><img src={selectedImage.src} alt={selectedImage.alt} className="max-h-[86vh] max-w-full object-contain" /></div></div> : null}
+
+      {appGallery && (
+        <div className="fixed inset-0 z-[65] flex flex-col bg-panel/95 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label={`${appGallery.title} gallery`}>
+          {/* Header */}
+          <div className="flex shrink-0 items-center justify-between border-b border-white/10 px-5 py-4 lg:px-10">
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-signal">Application Gallery</p>
+              <h3 className="mt-1 text-lg font-extrabold text-white">{appGallery.title}</h3>
+            </div>
+            <div className="flex items-center gap-4">
+              <span className="font-mono text-[10px] text-white/50">{appGallery.index + 1} / {appGallery.images.length}</span>
+              <button type="button" onClick={() => setAppGallery(null)} className="flex h-9 w-9 items-center justify-center border border-white/20 text-white/70 transition-colors hover:bg-white/10 hover:text-white" aria-label="Close gallery"><X className="size-4" /></button>
+            </div>
+          </div>
+          {/* Main image — constrained to remaining viewport height */}
+          <div className="relative flex min-h-0 flex-1 items-center justify-center px-14 py-4 lg:px-20">
+            <img
+              src={appGallery.images[appGallery.index]}
+              alt={`${appGallery.title} ${appGallery.index + 1}`}
+              className="max-h-full max-w-full object-contain"
+              style={{ maxHeight: "calc(100vh - 180px)" }}
+            />
+            {appGallery.index > 0 && (
+              <button type="button" onClick={() => setAppGallery({ ...appGallery, index: appGallery.index - 1 })} className="absolute left-2 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center border border-white/20 bg-panel/70 text-xl text-white transition-colors hover:bg-white/10 lg:left-4" aria-label="Previous image">‹</button>
+            )}
+            {appGallery.index < appGallery.images.length - 1 && (
+              <button type="button" onClick={() => setAppGallery({ ...appGallery, index: appGallery.index + 1 })} className="absolute right-2 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center border border-white/20 bg-panel/70 text-xl text-white transition-colors hover:bg-white/10 lg:right-4" aria-label="Next image">›</button>
+            )}
+          </div>
+          {/* Thumbnails */}
+          <div className="flex shrink-0 items-center justify-center gap-2 border-t border-white/10 px-5 py-3">
+            {appGallery.images.map((img, i) => (
+              <button key={i} type="button" onClick={() => setAppGallery({ ...appGallery, index: i })} className={`h-12 w-16 shrink-0 overflow-hidden border-2 transition-all ${i === appGallery.index ? "border-signal opacity-100" : "border-transparent opacity-45 hover:opacity-75"}`} aria-label={`View image ${i + 1}`}>
+                <img src={img} alt={`${appGallery.title} thumbnail ${i + 1}`} className="h-full w-full object-cover" />
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

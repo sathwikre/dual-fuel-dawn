@@ -752,7 +752,7 @@ function OmSolutionsHome() {
                   <img
                     src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80"
                     alt="OM Solutions team with client at Akwel Automotive Pune handover"
-                    className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
                   />
                 </div>
                 <h3 className="mt-4 text-base font-semibold leading-snug">OM Solutions hands over a successfully commissioned KOEL 320 kVA PNG dual-fuel system to the team at Akwel Automotive, Pune — 65% diesel replaced from day one.</h3>              </article>
@@ -762,7 +762,7 @@ function OmSolutionsHome() {
                   <img
                     src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80"
                     alt="Client team at Birla Tisya Bengaluru celebrating dual-fuel conversion"
-                    className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
                   />
                 </div>
                 <h3 className="mt-4 text-base font-semibold leading-snug">Birla Tisya, Bengaluru team celebrates the commissioning of three dual-fuel gensets — over 2.2 MVA now running on Piped Natural Gas.</h3>
@@ -773,7 +773,7 @@ function OmSolutionsHome() {
                   <img
                     src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=800&q=80"
                     alt="OM Solutions founder with client discussing dual-fuel kit"
-                    className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
                   />
                 </div>
                 <h3 className="mt-4 text-base font-semibold leading-snug">Prasad Parulekar (Founder, OM Solutions) with the operations team after completing the TATA 125 kVA LPG dual-fuel retrofit — 45% diesel replaced at 75–80% load.</h3>

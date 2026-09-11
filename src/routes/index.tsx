@@ -165,6 +165,7 @@ function ImageButton({ src, alt, caption, onClick, className = "" }: { src: stri
 
 function OmSolutionsHome() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
   const [formSent, setFormSent] = useState(false);
 
@@ -176,6 +177,12 @@ function OmSolutionsHome() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 28);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const openImage = (src: string, alt: string) => setSelectedImage({ src, alt });
   const closeMenu = () => setMenuOpen(false);
   const submitForm = (event: FormEvent<HTMLFormElement>) => {
@@ -183,26 +190,45 @@ function OmSolutionsHome() {
     setFormSent(true);
   };
 
+  const navScrolled = scrolled || menuOpen;
+
   return (
-    <div className="min-h-screen overflow-x-hidden bg-background text-foreground pt-[60px]">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl">
-        <div className="mx-auto flex h-[60px] max-w-[1440px] items-center justify-between gap-3 px-5 lg:px-8">
-          {/* Logo + Brand */}
-          <a href="#home" className="flex shrink-0 items-center gap-2.5" onClick={closeMenu}>
-            <img src={logoImage} alt="OM Solutions" className="h-9 w-9 object-contain" />
-            <span className="leading-none">
-              <span className="block text-[13px] font-extrabold tracking-tight">OM Solutions</span>
-              <span className="mt-[3px] block text-[8.5px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Dual Fuel &amp; Alternate Fuel Solutions</span>
+    <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
+      <header
+        style={{ transition: "height .35s ease, background .35s ease, backdrop-filter .35s ease" }}
+        className={[
+          "fixed inset-x-0 top-0 z-50 flex flex-col",
+          navScrolled
+            ? "h-[72px] bg-[rgba(13,23,19,0.88)] backdrop-blur-[16px]"
+            : "h-[85px] bg-transparent",
+        ].join(" ")}
+      >
+        <div className="mx-auto flex w-full flex-1 max-w-[1440px] items-center justify-between px-[4.5vw]">
+          {/* Brand */}
+          <a
+            href="#home"
+            onClick={closeMenu}
+            aria-label="OM Solutions home"
+            className="flex shrink-0 items-center gap-2 text-white no-underline"
+          >
+            <span
+              className="inline-flex items-center justify-center rounded-full border border-white/80 text-[13px] font-extrabold tracking-[0.08em] leading-none"
+              style={{ padding: "3px 5px" }}
+            >
+              OM
+            </span>
+            <span className="text-[15px] font-extrabold tracking-[0.08em] uppercase leading-none">
+              Solutions
             </span>
           </a>
 
-          {/* Nav — single line, no wrapping */}
-          <nav className="hidden items-center xl:flex">
+          {/* Desktop nav */}
+          <nav className="hidden items-center gap-6 xl:flex">
             {navItems.map(([label, id]) => (
               <a
                 key={id}
                 href={`#${id}`}
-                className="whitespace-nowrap rounded-[5px] px-2.5 py-1.5 text-[11.5px] font-medium text-foreground/70 transition-colors hover:bg-secondary hover:text-foreground"
+                className="whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.11em] text-white/86 transition-colors duration-200 hover:text-[#b6ff72]"
               >
                 {label}
               </a>
@@ -213,45 +239,83 @@ function OmSolutionsHome() {
           <div className="flex shrink-0 items-center gap-2">
             <a
               href="#contact"
-              className="hidden h-9 whitespace-nowrap items-center justify-center rounded-[6px] bg-panel px-4 text-[12px] font-semibold text-background transition-colors hover:bg-panel/85 sm:inline-flex"
+              className="hidden items-center gap-3 border border-white/55 px-4 py-3 text-[10px] font-extrabold uppercase tracking-[0.1em] text-white transition-colors duration-200 hover:bg-white/10 sm:inline-flex"
             >
-              Request a Consultation
+              Get in touch
+              <span className="text-[18px] font-normal leading-none">↗</span>
             </a>
-            <Button
+            <button
               type="button"
-              variant="outline"
-              size="icon"
-              className="h-9 w-9 rounded-[6px] border-border xl:hidden"
               aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={menuOpen}
               onClick={() => setMenuOpen((open) => !open)}
+              className="flex h-9 w-9 flex-col items-center justify-center gap-[6px] border-0 bg-transparent p-2 text-white xl:hidden"
             >
-              {menuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
-            </Button>
+              <span
+                style={{
+                  display: "block",
+                  height: "1px",
+                  width: "23px",
+                  background: "currentColor",
+                  transition: "transform .25s, opacity .25s",
+                  transform: menuOpen ? "translateY(7px) rotate(45deg)" : "none",
+                }}
+              />
+              <span
+                style={{
+                  display: "block",
+                  height: "1px",
+                  width: "23px",
+                  background: "currentColor",
+                  transition: "opacity .25s",
+                  opacity: menuOpen ? 0 : 1,
+                }}
+              />
+              <span
+                style={{
+                  display: "block",
+                  height: "1px",
+                  width: "23px",
+                  background: "currentColor",
+                  transition: "transform .25s, opacity .25s",
+                  transform: menuOpen ? "translateY(-7px) rotate(-45deg)" : "none",
+                }}
+              />
+            </button>
           </div>
         </div>
 
         {/* Mobile menu */}
-        {menuOpen ? (
-          <nav className="border-t border-border bg-background px-5 py-4 shadow-lg xl:hidden">
-            <div className="mx-auto flex max-w-[1440px] flex-col gap-1">
+        {menuOpen && (
+          <nav className="border-t border-white/15 bg-[#0d1713] px-6 pb-7 pt-5 xl:hidden">
+            <div className="flex flex-col gap-1">
               {navItems.map(([label, id]) => (
-                <a key={id} href={`#${id}`} onClick={closeMenu} className="border-b border-border py-3 text-sm font-medium">
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  onClick={closeMenu}
+                  className="border-b border-white/10 py-3 text-[11px] font-bold uppercase tracking-[0.11em] text-white/80 transition-colors hover:text-[#b6ff72]"
+                >
                   {label}
                 </a>
               ))}
-              <a href="#contact" onClick={closeMenu} className="mt-3 inline-flex items-center justify-center rounded-[7px] bg-panel px-4 py-3 text-sm font-semibold text-background">
-                Request a Consultation <ArrowRight className="ml-2 size-4" />
+              <a
+                href="#contact"
+                onClick={closeMenu}
+                className="mt-4 inline-flex items-center gap-3 border border-white/40 px-4 py-3 text-[10px] font-extrabold uppercase tracking-[0.1em] text-white hover:bg-white/10"
+              >
+                Get in touch <span className="text-[18px] font-normal leading-none">↗</span>
               </a>
             </div>
           </nav>
-        ) : null}
+        )}
       </header>
 
       <main>
         <section id="home" className="relative isolate min-h-[690px] overflow-hidden bg-panel">
           <img src={birlaImageOne} alt="Industrial generator installation with dual-fuel system" className="absolute inset-0 h-full w-full object-cover opacity-55" />
           <div className="absolute inset-0 bg-panel/75" />
-          <div className="relative mx-auto flex min-h-[690px] max-w-[1440px] items-center px-5 py-20 lg:px-10">
+          <div className="relative mx-auto flex min-h-[690px] max-w-[1440px] items-center px-5 pt-[85px] pb-20 lg:px-10">
             <div className="max-w-3xl rise-in">
               <SectionLabel index="OM / 01" dark>Alternate fuel engineering · Established 2021</SectionLabel>
               <h1 className="mt-6 max-w-3xl text-balance text-5xl font-extrabold leading-[0.98] tracking-tight text-background sm:text-6xl lg:text-8xl">Power More.<br />Spend Less.<br /><span className="text-signal">Burn Cleaner.</span></h1>

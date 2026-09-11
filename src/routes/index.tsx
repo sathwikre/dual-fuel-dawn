@@ -145,6 +145,9 @@ const galleryItems = [
 
 function HeroBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const imgRef0 = useRef<HTMLImageElement>(null);
+  const imgRef1 = useRef<HTMLImageElement>(null);
+  const imgRef2 = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -152,76 +155,119 @@ function HeroBackground() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    const imgs = [imgRef0.current, imgRef1.current, imgRef2.current].filter(Boolean) as HTMLImageElement[];
+
     let raf: number;
     let t = 0;
 
-    // Particles
-    const COUNT = 55;
-    const particles = Array.from({ length: COUNT }, () => ({
+    // Slide state
+    const SLIDE_DURATION = 220;   // frames each slide holds (~7s at 30fps)
+    const FADE_DURATION  = 55;    // crossfade length in frames
+    let current = 0;
+    let frameInSlide = 0;
+
+    // Particles — heat-haze style
+    const COUNT = 60;
+    type Particle = { x: number; y: number; vx: number; vy: number; size: number; alpha: number; pulse: number };
+    const particles: Particle[] = Array.from({ length: COUNT }, () => ({
       x: Math.random(),
-      y: Math.random(),
-      vx: (Math.random() - 0.5) * 0.00018,
-      vy: -Math.random() * 0.00022 - 0.00008,
-      size: Math.random() * 2.2 + 0.6,
-      alpha: Math.random() * 0.55 + 0.1,
+      y: 0.5 + Math.random() * 0.6,
+      vx: (Math.random() - 0.5) * 0.00015,
+      vy: -(Math.random() * 0.00025 + 0.00006),
+      size: Math.random() * 2.4 + 0.5,
+      alpha: Math.random() * 0.45 + 0.08,
       pulse: Math.random() * Math.PI * 2,
     }));
 
     function resize() {
       if (!canvas) return;
-      canvas.width = canvas.offsetWidth;
+      canvas.width  = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
     }
     resize();
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
+    function drawImage(img: HTMLImageElement, alpha: number, zoom: number, panX: number, panY: number) {
+      if (!canvas || !ctx || !img.naturalWidth) return;
+      const W = canvas.width, H = canvas.height;
+      const iw = img.naturalWidth, ih = img.naturalHeight;
+      const scale = Math.max(W / iw, H / ih) * zoom;
+      const dw = iw * scale, dh = ih * scale;
+      const dx = (W - dw) / 2 + panX * W;
+      const dy = (H - dh) / 2 + panY * H;
+      ctx.globalAlpha = alpha;
+      ctx.filter = "saturate(0.75) brightness(0.88)";
+      ctx.drawImage(img, dx, dy, dw, dh);
+      ctx.filter = "none";
+      ctx.globalAlpha = 1;
+    }
+
     function draw() {
-      if (!canvas || !ctx) return;
-      const W = canvas.width;
-      const H = canvas.height;
-      t += 0.012;
+      if (!canvas || !ctx || imgs.length === 0) { raf = requestAnimationFrame(draw); return; }
+      const W = canvas.width, H = canvas.height;
+      t += 1;
+      frameInSlide += 1;
 
       ctx.clearRect(0, 0, W, H);
 
-      // ── Ken Burns: slow zoom + drift on an off-screen image element ──
-      // We drive the effect purely in CSS via a sibling element (see JSX below)
-      // and only use canvas for particles + scanlines + light sweep.
+      // Current slide Ken-Burns params
+      const progress = frameInSlide / SLIDE_DURATION;
+      const zoom    = 1 + progress * 0.07;
+      const panX    = -progress * 0.02;
+      const panY    = -progress * 0.01;
 
-      // Scanline grid — very subtle
-      ctx.strokeStyle = "rgba(180,255,140,0.028)";
-      ctx.lineWidth = 1;
-      const step = 28;
-      for (let y = 0; y < H; y += step) {
-        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+      const next = (current + 1) % imgs.length;
+
+      if (frameInSlide >= SLIDE_DURATION - FADE_DURATION) {
+        // Crossfade phase
+        const fadeProgress = (frameInSlide - (SLIDE_DURATION - FADE_DURATION)) / FADE_DURATION;
+        const alphaA = 1 - fadeProgress;
+        const alphaB = fadeProgress;
+        drawImage(imgs[current]!, alphaA, zoom, panX, panY);
+        drawImage(imgs[next]!, alphaB, 1, 0, 0);
+      } else {
+        drawImage(imgs[current]!, 1, zoom, panX, panY);
       }
 
-      // Diagonal light sweep
-      const sweep = ((t * 0.045) % 1.6) - 0.3;
-      const sx = sweep * W * 1.6 - W * 0.3;
-      const grad = ctx.createLinearGradient(sx - 180, 0, sx + 180, H);
-      grad.addColorStop(0, "rgba(182,255,114,0)");
-      grad.addColorStop(0.45, `rgba(182,255,114,${0.055 * Math.sin(t * 0.4 + 1) * 0.5 + 0.055})`);
-      grad.addColorStop(0.5, `rgba(200,255,160,${0.09 * Math.sin(t * 0.4 + 1) * 0.5 + 0.09})`);
-      grad.addColorStop(0.55, `rgba(182,255,114,${0.055 * Math.sin(t * 0.4 + 1) * 0.5 + 0.055})`);
-      grad.addColorStop(1, "rgba(182,255,114,0)");
-      ctx.fillStyle = grad;
+      if (frameInSlide >= SLIDE_DURATION) {
+        current = next;
+        frameInSlide = 0;
+      }
+
+      // ── Vignette ──
+      const vig = ctx.createRadialGradient(W / 2, H / 2, H * 0.1, W / 2, H / 2, H * 0.9);
+      vig.addColorStop(0, "rgba(0,0,0,0)");
+      vig.addColorStop(1, "rgba(5,14,10,0.22)");
+      ctx.fillStyle = vig;
       ctx.fillRect(0, 0, W, H);
 
-      // Particles
+      // ── Subtle diagonal light sweep ──
+      const sweepT = (t * 0.007) % 2.2;
+      if (sweepT < 1.4) {
+        const sx = (sweepT / 1.4) * (W + 500) - 250;
+        const sg = ctx.createLinearGradient(sx - 220, 0, sx + 220, H);
+        sg.addColorStop(0,   "rgba(200,255,180,0)");
+        sg.addColorStop(0.5, "rgba(200,255,180,0.06)");
+        sg.addColorStop(1,   "rgba(200,255,180,0)");
+        ctx.fillStyle = sg;
+        ctx.fillRect(0, 0, W, H);
+      }
+
+      // ── Particles ──
       for (const p of particles) {
-        p.x += p.vx;
-        p.y += p.vy;
-        p.pulse += 0.022;
-        if (p.y < -0.02) p.y = 1.02;
-        if (p.x < -0.02) p.x = 1.02;
-        if (p.x > 1.02) p.x = -0.02;
-        const a = p.alpha * (0.6 + 0.4 * Math.sin(p.pulse));
+        p.x     += p.vx;
+        p.y     += p.vy;
+        p.pulse += 0.018;
+        if (p.y < -0.04) { p.y = 1.0; p.x = Math.random(); }
+        if (p.x < -0.04) p.x = 1.04;
+        if (p.x >  1.04) p.x = -0.04;
+        const a = p.alpha * (0.55 + 0.45 * Math.sin(p.pulse));
         ctx.beginPath();
         ctx.arc(p.x * W, p.y * H, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(182,255,114,${a})`;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = "#b6ff72";
+        ctx.fillStyle = `rgba(180,255,120,${a})`;
+        ctx.shadowBlur  = 12;
+        ctx.shadowColor = "#9ddf60";
         ctx.fill();
         ctx.shadowBlur = 0;
       }
@@ -229,7 +275,15 @@ function HeroBackground() {
       raf = requestAnimationFrame(draw);
     }
 
-    draw();
+    // Wait for at least one image to load before starting
+    let started = false;
+    const onLoad = () => { if (!started) { started = true; draw(); } };
+    imgs.forEach((img: HTMLImageElement) => {
+      if (img.complete && img.naturalWidth > 0) onLoad();
+      else img.addEventListener("load", onLoad, { once: true });
+    });
+    if (imgs.every((i: HTMLImageElement) => i.complete && i.naturalWidth > 0)) { if (!started) { started = true; draw(); } }
+
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
@@ -238,38 +292,17 @@ function HeroBackground() {
 
   return (
     <>
-      {/* Ken Burns image — slow zoom via CSS animation */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 z-[0]"
-        style={{ animation: "heroKenBurns 18s ease-in-out infinite alternate" }}
-      >
-        <img
-          src={birlaImageOne}
-          alt=""
-          className="h-full w-full object-cover"
-          style={{ filter: "saturate(0.6) brightness(0.55)" }}
-        />
-      </div>
-      {/* Canvas for particles + sweep */}
+      {/* Preload images — hidden off-screen */}
+      <img ref={imgRef0} src={birlaImageOne}   alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef1} src={koelImage}        alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef2} src={engineImage}      alt="" aria-hidden="true" className="sr-only" />
+      {/* Canvas renders everything */}
       <canvas
         ref={canvasRef}
         aria-hidden="true"
-        className="absolute inset-0 z-[1] h-full w-full"
+        className="absolute inset-0 z-[0] h-full w-full"
         style={{ pointerEvents: "none" }}
       />
-      <style>{`
-        @keyframes heroKenBurns {
-          0%   { transform: scale(1)    translateX(0%)    translateY(0%); }
-          25%  { transform: scale(1.06) translateX(-1.2%) translateY(-0.5%); }
-          50%  { transform: scale(1.1)  translateX(-2%)   translateY(-1%); }
-          75%  { transform: scale(1.07) translateX(-1%)   translateY(-1.5%); }
-          100% { transform: scale(1.13) translateX(-2.5%) translateY(-0.8%); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          @keyframes heroKenBurns { 0%, 100% { transform: none; } }
-        }
-      `}</style>
     </>
   );
 }
@@ -445,14 +478,14 @@ function OmSolutionsHome() {
           {/* Animated hero background */}
           <HeroBackground />
           {/* Dark gradient overlay so text stays readable */}
-          <div className="absolute inset-0 z-[2]" style={{ background: "linear-gradient(90deg,rgba(7,18,12,.82) 0%,rgba(8,20,14,.52) 55%,rgba(8,20,14,.22)), linear-gradient(0deg,rgba(7,18,12,.6),transparent 46%)" }} />
-          <div className="relative z-[3] mx-auto flex min-h-[100svh] w-full max-w-[1440px] flex-col items-center justify-center px-5 pt-[85px] pb-20 text-center lg:px-10">
-            <div className="max-w-3xl rise-in">
-              <h1 className="mt-0 text-balance text-5xl font-extrabold leading-[1.08] tracking-tight text-background sm:text-6xl lg:text-7xl">
-                Our purpose is to build a cleaner India from the engines already powering it.
+          <div className="absolute inset-0 z-[2]" style={{ background: "linear-gradient(90deg,rgba(7,18,12,.28) 0%,rgba(8,20,14,.14) 55%,rgba(8,20,14,.05)), linear-gradient(0deg,rgba(7,18,12,.28),transparent 46%)" }} />
+          <div className="relative z-[3] mx-auto flex min-h-[100svh] w-full max-w-[1440px] flex-col items-center justify-end px-5 pt-[85px] pb-28 text-center lg:px-10">
+            <div className="max-w-2xl rise-in">
+              <h1 className="mt-0 text-balance text-4xl font-extrabold leading-[1.12] tracking-tight text-background sm:text-5xl lg:text-6xl">
+                Our purpose is to build a cleaner India<br />from the engines already powering it.
               </h1>
-              <div className="mt-8 flex justify-center">
-                <a href="#contact" className="inline-flex h-11 items-center border border-white/70 bg-transparent px-7 text-[11px] font-bold uppercase tracking-[0.1em] text-white transition-colors hover:bg-white/10">
+              <div className="mt-6 flex justify-center">
+                <a href="#contact" className="inline-flex h-10 items-center border border-white/70 bg-transparent px-6 text-[10px] font-bold uppercase tracking-[0.1em] text-white transition-colors hover:bg-white/10">
                   Get in touch
                 </a>
               </div>

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
   ArrowDownRight,
   ArrowRight,
@@ -73,14 +73,12 @@ export const Route = createFileRoute("/")({
 });
 
 const navItems = [
-  ["About", "about"],
-  ["Solutions", "solutions"],
-  ["Dual Fuel Kit", "kit"],
-  ["Benefits", "benefits"],
+  ["Home", "home"],
+  ["Technology", "kit"],
   ["Applications", "applications"],
   ["Installations", "installations"],
-  ["Case Studies", "case-studies"],
   ["Gallery", "gallery"],
+  ["News", "field"],
   ["Contact", "contact"],
 ] as const;
 
@@ -144,6 +142,137 @@ const galleryItems = [
   ["Marine engine installation", marineEngineImage, "Applications"],
   ["Dual-fuel control panel", controlPanelImage, "Products"],
 ] as const;
+
+function HeroBackground() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let raf: number;
+    let t = 0;
+
+    // Particles
+    const COUNT = 55;
+    const particles = Array.from({ length: COUNT }, () => ({
+      x: Math.random(),
+      y: Math.random(),
+      vx: (Math.random() - 0.5) * 0.00018,
+      vy: -Math.random() * 0.00022 - 0.00008,
+      size: Math.random() * 2.2 + 0.6,
+      alpha: Math.random() * 0.55 + 0.1,
+      pulse: Math.random() * Math.PI * 2,
+    }));
+
+    function resize() {
+      if (!canvas) return;
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+    resize();
+    const ro = new ResizeObserver(resize);
+    ro.observe(canvas);
+
+    function draw() {
+      if (!canvas || !ctx) return;
+      const W = canvas.width;
+      const H = canvas.height;
+      t += 0.012;
+
+      ctx.clearRect(0, 0, W, H);
+
+      // ── Ken Burns: slow zoom + drift on an off-screen image element ──
+      // We drive the effect purely in CSS via a sibling element (see JSX below)
+      // and only use canvas for particles + scanlines + light sweep.
+
+      // Scanline grid — very subtle
+      ctx.strokeStyle = "rgba(180,255,140,0.028)";
+      ctx.lineWidth = 1;
+      const step = 28;
+      for (let y = 0; y < H; y += step) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+      }
+
+      // Diagonal light sweep
+      const sweep = ((t * 0.045) % 1.6) - 0.3;
+      const sx = sweep * W * 1.6 - W * 0.3;
+      const grad = ctx.createLinearGradient(sx - 180, 0, sx + 180, H);
+      grad.addColorStop(0, "rgba(182,255,114,0)");
+      grad.addColorStop(0.45, `rgba(182,255,114,${0.055 * Math.sin(t * 0.4 + 1) * 0.5 + 0.055})`);
+      grad.addColorStop(0.5, `rgba(200,255,160,${0.09 * Math.sin(t * 0.4 + 1) * 0.5 + 0.09})`);
+      grad.addColorStop(0.55, `rgba(182,255,114,${0.055 * Math.sin(t * 0.4 + 1) * 0.5 + 0.055})`);
+      grad.addColorStop(1, "rgba(182,255,114,0)");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Particles
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.pulse += 0.022;
+        if (p.y < -0.02) p.y = 1.02;
+        if (p.x < -0.02) p.x = 1.02;
+        if (p.x > 1.02) p.x = -0.02;
+        const a = p.alpha * (0.6 + 0.4 * Math.sin(p.pulse));
+        ctx.beginPath();
+        ctx.arc(p.x * W, p.y * H, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(182,255,114,${a})`;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = "#b6ff72";
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+
+      raf = requestAnimationFrame(draw);
+    }
+
+    draw();
+    return () => {
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+    };
+  }, []);
+
+  return (
+    <>
+      {/* Ken Burns image — slow zoom via CSS animation */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 z-[0]"
+        style={{ animation: "heroKenBurns 18s ease-in-out infinite alternate" }}
+      >
+        <img
+          src={birlaImageOne}
+          alt=""
+          className="h-full w-full object-cover"
+          style={{ filter: "saturate(0.6) brightness(0.55)" }}
+        />
+      </div>
+      {/* Canvas for particles + sweep */}
+      <canvas
+        ref={canvasRef}
+        aria-hidden="true"
+        className="absolute inset-0 z-[1] h-full w-full"
+        style={{ pointerEvents: "none" }}
+      />
+      <style>{`
+        @keyframes heroKenBurns {
+          0%   { transform: scale(1)    translateX(0%)    translateY(0%); }
+          25%  { transform: scale(1.06) translateX(-1.2%) translateY(-0.5%); }
+          50%  { transform: scale(1.1)  translateX(-2%)   translateY(-1%); }
+          75%  { transform: scale(1.07) translateX(-1%)   translateY(-1.5%); }
+          100% { transform: scale(1.13) translateX(-2.5%) translateY(-0.8%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          @keyframes heroKenBurns { 0%, 100% { transform: none; } }
+        }
+      `}</style>
+    </>
+  );
+}
 
 function SectionLabel({ index, children, dark = false }: { index: string; children: string; dark?: boolean }) {
   return (
@@ -312,26 +441,24 @@ function OmSolutionsHome() {
       </header>
 
       <main>
-        <section id="home" className="relative isolate min-h-[690px] overflow-hidden bg-panel">
-          <img src={birlaImageOne} alt="Industrial generator installation with dual-fuel system" className="absolute inset-0 h-full w-full object-cover opacity-55" />
-          <div className="absolute inset-0 bg-panel/75" />
-          <div className="relative mx-auto flex min-h-[690px] max-w-[1440px] items-center px-5 pt-[85px] pb-20 lg:px-10">
+        <section id="home" className="relative isolate min-h-[100svh] overflow-hidden bg-panel">
+          {/* Animated hero background */}
+          <HeroBackground />
+          {/* Dark gradient overlay so text stays readable */}
+          <div className="absolute inset-0 z-[2]" style={{ background: "linear-gradient(90deg,rgba(7,18,12,.82) 0%,rgba(8,20,14,.52) 55%,rgba(8,20,14,.22)), linear-gradient(0deg,rgba(7,18,12,.6),transparent 46%)" }} />
+          <div className="relative z-[3] mx-auto flex min-h-[100svh] w-full max-w-[1440px] flex-col items-center justify-center px-5 pt-[85px] pb-20 text-center lg:px-10">
             <div className="max-w-3xl rise-in">
-              <SectionLabel index="OM / 01" dark>Alternate fuel engineering · Established 2021</SectionLabel>
-              <h1 className="mt-6 max-w-3xl text-balance text-5xl font-extrabold leading-[0.98] tracking-tight text-background sm:text-6xl lg:text-8xl">Power More.<br />Spend Less.<br /><span className="text-signal">Burn Cleaner.</span></h1>
-              <p className="mt-7 max-w-2xl text-pretty text-base leading-relaxed text-background/78 lg:text-lg">OM Solutions provides dual-fuel conversion solutions that help diesel engines operate with gaseous fuels while reducing fuel costs and particulate emissions.</p>
-              <div className="mt-9 flex flex-wrap gap-3">
-                <Button asChild className="h-12 rounded-[7px] bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-none hover:bg-primary/90"><a href="#kit">Explore Dual Fuel Solutions <ArrowRight className="size-4" /></a></Button>
-                <Button asChild variant="outline" className="h-12 rounded-[7px] border-background/30 bg-background/5 px-5 text-sm font-semibold text-background shadow-none hover:bg-background/10 hover:text-background"><a href="#contact">Contact Us</a></Button>
-              </div>
-              <div className="mt-14 grid max-w-2xl grid-cols-2 gap-px overflow-hidden rounded-[10px] border border-background/15 bg-background/15 sm:grid-cols-3">
-                <div className="bg-panel/55 p-5"><p className="font-mono text-3xl text-background">2021</p><p className="mt-1 text-xs text-background/55">Established</p></div>
-                <div className="bg-panel/55 p-5"><p className="font-mono text-3xl text-signal">14+</p><p className="mt-1 text-xs text-background/55">Years alternate-fuel experience</p></div>
-                <div className="col-span-2 bg-panel/55 p-5 sm:col-span-1"><p className="font-mono text-3xl text-background">8</p><p className="mt-1 text-xs text-background/55">Solution paths</p></div>
+              <h1 className="mt-0 text-balance text-5xl font-extrabold leading-[1.08] tracking-tight text-background sm:text-6xl lg:text-7xl">
+                Our purpose is to build a cleaner India from the engines already powering it.
+              </h1>
+              <div className="mt-8 flex justify-center">
+                <a href="#contact" className="inline-flex h-11 items-center border border-white/70 bg-transparent px-7 text-[11px] font-bold uppercase tracking-[0.1em] text-white transition-colors hover:bg-white/10">
+                  Get in touch
+                </a>
               </div>
             </div>
           </div>
-          <div className="absolute bottom-7 right-5 hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-background/45 lg:flex lg:right-10"><span className="h-px w-10 bg-signal" /> Field-ready conversion systems</div>
+          <div className="absolute bottom-7 right-5 hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-background/45 lg:flex lg:right-10 z-[3]"><span className="h-px w-10 bg-signal" /> Field-ready conversion systems</div>
         </section>
 
         <section id="about" className="border-b border-border">

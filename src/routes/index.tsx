@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { SavingsAssistant } from "@/components/SavingsAssistant/SavingsAssistant";
 
 import logoImage from "@/assets/img-002.jpg";
 import founderImage from "@/assets/img-006.jpg";
@@ -53,6 +54,16 @@ import marineDetailImageTwo from "@/assets/img-181.jpg";
 import marineEngineImage from "@/assets/img-185.jpg";
 import marineEngineImageTwo from "@/assets/img-186.jpg";
 import recdImage from "@/assets/image.png";
+
+// Image Gallery — Birla Tisya, Bengaluru
+import galleryBirla1 from "@/assets/Image gallery/birla_tisya_bangaloore/1.png";
+import galleryBirla2 from "@/assets/Image gallery/birla_tisya_bangaloore/2.png";
+import galleryBirla3 from "@/assets/Image gallery/birla_tisya_bangaloore/3.png";
+import galleryBirla4 from "@/assets/Image gallery/birla_tisya_bangaloore/4.png";
+import galleryBirla5 from "@/assets/Image gallery/birla_tisya_bangaloore/5.png";
+import galleryBirla6 from "@/assets/Image gallery/birla_tisya_bangaloore/6.png";
+import galleryBirla7 from "@/assets/Image gallery/birla_tisya_bangaloore/7.png";
+import galleryBirla8 from "@/assets/Image gallery/birla_tisya_bangaloore/8.png";
 
 // Borewell gallery
 import borewellImg1 from "@/assets/borewell/11.png";
@@ -95,6 +106,7 @@ export const Route = createFileRoute("/")({
 
 const navItems = [
   ["Home", "home"],
+  ["About", "about"],
   ["Technology", "kit"],
   ["Gallery", "gallery"],
   ["News", "field"],
@@ -372,9 +384,25 @@ function OmSolutionsHome() {
 
   const openImage = (src: string, alt: string) => setSelectedImage({ src, alt });
   const closeMenu = () => setMenuOpen(false);
-  const submitForm = (event: FormEvent<HTMLFormElement>) => {
+  const submitForm = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setFormSent(true);
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    try {
+      const res = await fetch("https://formspree.io/f/xppznglk", {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        setFormSent(true);
+        form.reset();
+      } else {
+        alert("Something went wrong. Please email us directly at omsolns18@gmail.com");
+      }
+    } catch {
+      alert("Could not send. Please email us directly at omsolns18@gmail.com");
+    }
   };
 
   const navScrolled = scrolled || menuOpen;
@@ -694,39 +722,35 @@ function OmSolutionsHome() {
                 <SectionLabel index="OM / 17">Image gallery</SectionLabel>
                 <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">In the field.</h2>
               </div>
-              <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">Real installations, real hardware, real results. Click any image to enlarge.</p>
+              <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">Real installations from the field. Click any image to view the full gallery.</p>
             </div>
-            {/* Hero + 4 supporting grid */}
-            <div className="mt-10 grid gap-3 lg:grid-cols-[1.6fr_1fr_1fr] lg:grid-rows-2">
-              {/* Tall hero — left column, spans 2 rows */}
-              <div className="lg:row-span-2 overflow-hidden">
-                <ImageButton src={birlaImageOne} alt="Birla Tisya Bengaluru generator installation" caption="Birla Tisya · Bengaluru" onClick={() => openImage(birlaImageOne, "Birla Tisya Bengaluru")} className="h-full min-h-[260px] lg:min-h-[520px]" />
-              </div>
-              {/* Top-right two */}
-              <div className="overflow-hidden">
-                <ImageButton src={koelImage} alt="KOEL 320 kVA PNG installation" caption="KOEL 320 kVA · PNG" onClick={() => openImage(koelImage, "KOEL 320 kVA PNG")} className="aspect-[1.6/1]" />
-              </div>
-              <div className="overflow-hidden">
-                <ImageButton src={tataImage} alt="TATA 125 kVA LPG installation" caption="TATA 125 kVA · LPG" onClick={() => openImage(tataImage, "TATA 125 kVA LPG")} className="aspect-[1.6/1]" />
-              </div>
-              {/* Bottom-right two */}
-              <div className="overflow-hidden">
-                <ImageButton src={engineImage} alt="Engine components" caption="Engine components" onClick={() => openImage(engineImage, "Engine components")} className="aspect-[1.6/1]" />
-              </div>
-              <div className="overflow-hidden">
-                <ImageButton src={marineDetailImage} alt="Marine propulsion" caption="Marine propulsion" onClick={() => openImage(marineDetailImage, "Marine propulsion")} className="aspect-[1.6/1]" />
-              </div>
-            </div>
-            {/* Bottom strip — 3 wide landscape */}
-            <div className="mt-3 grid grid-cols-3 gap-3">
-              <div className="overflow-hidden">
-                <ImageButton src={gasSystemImage} alt="Gas system assembly" caption="Gas system · MaxGen" onClick={() => openImage(gasSystemImage, "Gas system assembly")} className="aspect-[1.8/1]" />
-              </div>
-              <div className="overflow-hidden">
-                <ImageButton src={controlPanelImage} alt="Dual-fuel control panel" caption="Control panel" onClick={() => openImage(controlPanelImage, "Dual-fuel control panel")} className="aspect-[1.8/1]" />
-              </div>
-              <div className="overflow-hidden">
-                <ImageButton src={birlaImageTwo} alt="Birla Tisya outdoor generator" caption="Birla Tisya · outdoor" onClick={() => openImage(birlaImageTwo, "Birla Tisya outdoor")} className="aspect-[1.8/1]" />
+
+            {/* Birla Tisya — single installation card */}
+            <div className="mt-10">
+              <div
+                className="group relative cursor-pointer overflow-hidden rounded-[12px] border border-border"
+                onClick={() => setAppGallery({ title: "Birla Tisya, Bengaluru", images: [galleryBirla1, galleryBirla2, galleryBirla3, galleryBirla4, galleryBirla5, galleryBirla6, galleryBirla7, galleryBirla8], index: 0 })}
+              >
+                {/* 4-image preview grid */}
+                <div className="grid grid-cols-4 gap-0.5">
+                  {[galleryBirla1, galleryBirla2, galleryBirla3, galleryBirla4].map((img, i) => (
+                    <div key={i} className="overflow-hidden aspect-square">
+                      <img src={img} alt={`Birla Tisya Bengaluru installation ${i + 1}`} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+                    </div>
+                  ))}
+                </div>
+                {/* Overlay info bar */}
+                <div className="flex items-center justify-between bg-panel px-5 py-4">
+                  <div>
+                    <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-signal">Installation · May 2026</p>
+                    <h3 className="mt-1 text-base font-extrabold text-white">Birla Tisya, Bengaluru</h3>
+                    <p className="mt-0.5 text-[11px] text-white/50">Force MTU 1010 kVA × 2 · Greaves 200 kVA × 1 · Piped Natural Gas</p>
+                  </div>
+                  <div className="flex items-center gap-3 shrink-0">
+                    <span className="font-mono text-[10px] text-white/40">8 photos</span>
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/60 group-hover:border-signal group-hover:text-signal transition-colors text-lg">›</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -793,43 +817,50 @@ function OmSolutionsHome() {
       {selectedImage ? <div className="fixed inset-0 z-[60] flex items-center justify-center bg-panel/90 p-5 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label={selectedImage.alt} onClick={() => setSelectedImage(null)}><div className="relative max-h-[90vh] max-w-5xl overflow-hidden rounded-[10px] border border-background/15 bg-background" onClick={(event) => event.stopPropagation()}><Button type="button" variant="outline" size="icon" className="absolute right-3 top-3 z-10 rounded-[6px] border-border bg-background/85" aria-label="Close image viewer" onClick={() => setSelectedImage(null)}><X /></Button><img src={selectedImage.src} alt={selectedImage.alt} className="max-h-[86vh] max-w-full object-contain" /></div></div> : null}
 
       {appGallery && (
-        <div className="fixed inset-0 z-[65] flex flex-col bg-panel/95 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label={`${appGallery.title} gallery`}>
-          {/* Header */}
-          <div className="flex shrink-0 items-center justify-between border-b border-white/10 px-5 py-4 lg:px-10">
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-signal">Application Gallery</p>
-              <h3 className="mt-1 text-lg font-extrabold text-white">{appGallery.title}</h3>
+        <div
+          className="fixed inset-0 z-[65] flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm"
+          onClick={() => setAppGallery(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${appGallery.title} gallery`}
+        >
+          <div
+            className="relative flex flex-col overflow-hidden rounded-[14px] bg-[oklch(0.14_0.04_158)] shadow-2xl w-full"
+            style={{ maxWidth: 520, maxHeight: "90svh", border: "1px solid rgba(255,255,255,0.1)" }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex shrink-0 items-center justify-between px-4 py-3 border-b border-white/8">
+              <div>
+                <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-signal">Application Gallery</p>
+                <h3 className="text-sm font-extrabold text-white leading-tight">{appGallery.title}</h3>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-[10px] text-white/40">{appGallery.index + 1} / {appGallery.images.length}</span>
+                <button type="button" onClick={() => setAppGallery(null)} className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-white/60 transition-colors hover:bg-white/10 hover:text-white" aria-label="Close gallery">
+                  <X className="size-3.5" />
+                </button>
+              </div>
             </div>
-            <div className="flex items-center gap-4">
-              <span className="font-mono text-[10px] text-white/50">{appGallery.index + 1} / {appGallery.images.length}</span>
-              <button type="button" onClick={() => setAppGallery(null)} className="flex h-9 w-9 items-center justify-center border border-white/20 text-white/70 transition-colors hover:bg-white/10 hover:text-white" aria-label="Close gallery"><X className="size-4" /></button>
+            <div className="relative flex min-h-0 flex-1 items-center justify-center bg-black/30">
+              <img src={appGallery.images[appGallery.index]} alt={`${appGallery.title} ${appGallery.index + 1}`} className="w-full object-contain" style={{ maxHeight: "60svh" }} />
+              {appGallery.index > 0 && (
+                <button type="button" onClick={() => setAppGallery({ ...appGallery, index: appGallery.index - 1 })} className="absolute left-2 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/50 text-xl text-white transition-colors hover:bg-white/15" aria-label="Previous image">&#8249;</button>
+              )}
+              {appGallery.index < appGallery.images.length - 1 && (
+                <button type="button" onClick={() => setAppGallery({ ...appGallery, index: appGallery.index + 1 })} className="absolute right-2 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/50 text-xl text-white transition-colors hover:bg-white/15" aria-label="Next image">&#8250;</button>
+              )}
             </div>
-          </div>
-          {/* Main image — constrained to remaining viewport height */}
-          <div className="relative flex min-h-0 flex-1 items-center justify-center px-14 py-4 lg:px-20">
-            <img
-              src={appGallery.images[appGallery.index]}
-              alt={`${appGallery.title} ${appGallery.index + 1}`}
-              className="max-h-full max-w-full object-contain"
-              style={{ maxHeight: "calc(100vh - 180px)" }}
-            />
-            {appGallery.index > 0 && (
-              <button type="button" onClick={() => setAppGallery({ ...appGallery, index: appGallery.index - 1 })} className="absolute left-2 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center border border-white/20 bg-panel/70 text-xl text-white transition-colors hover:bg-white/10 lg:left-4" aria-label="Previous image">‹</button>
-            )}
-            {appGallery.index < appGallery.images.length - 1 && (
-              <button type="button" onClick={() => setAppGallery({ ...appGallery, index: appGallery.index + 1 })} className="absolute right-2 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center border border-white/20 bg-panel/70 text-xl text-white transition-colors hover:bg-white/10 lg:right-4" aria-label="Next image">›</button>
-            )}
-          </div>
-          {/* Thumbnails */}
-          <div className="flex shrink-0 items-center justify-center gap-2 border-t border-white/10 px-5 py-3">
-            {appGallery.images.map((img, i) => (
-              <button key={i} type="button" onClick={() => setAppGallery({ ...appGallery, index: i })} className={`h-12 w-16 shrink-0 overflow-hidden border-2 transition-all ${i === appGallery.index ? "border-signal opacity-100" : "border-transparent opacity-45 hover:opacity-75"}`} aria-label={`View image ${i + 1}`}>
-                <img src={img} alt={`${appGallery.title} thumbnail ${i + 1}`} className="h-full w-full object-cover" />
-              </button>
-            ))}
+            <div className="flex shrink-0 items-center justify-center gap-2 border-t border-white/8 px-4 py-3">
+              {appGallery.images.map((img, i) => (
+                <button key={i} type="button" onClick={() => setAppGallery({ ...appGallery, index: i })} className={`h-14 w-14 shrink-0 overflow-hidden rounded-[6px] border-2 transition-all ${i === appGallery.index ? "border-signal opacity-100 scale-105" : "border-transparent opacity-45 hover:opacity-80"}`} aria-label={`View image ${i + 1}`}>
+                  <img src={img} alt={`${appGallery.title} thumbnail ${i + 1}`} className="h-full w-full object-cover" />
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       )}
+      <SavingsAssistant />
     </div>
   );
 }

@@ -22,7 +22,7 @@ DO NOT invent company information, fake customers, fake statistics, fake certifi
 
 Do not simply convert the PDF pages into website sections. Transform the information into a clean, professional corporate website.
 
------------------------------   ---------------------
+--------------------------------------------------
 DESIGN DIRECTION
 --------------------------------------------------
 

@@ -186,6 +186,41 @@ export function CalculatorResults({ inputs, results, onReset }: Props) {
           </div>
         </div>
 
+        {/* Environmental Impact */}
+        {results.co2ReductionPerYear > 0 && (
+          <div className="mt-4 rounded-[8px] border border-white/10 p-4"
+            style={{ borderColor: "oklch(0.72 0.16 155 / 0.25)", background: "oklch(0.72 0.16 155 / 0.06)" }}>
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-sm">🌱</span>
+              <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-[oklch(0.72_0.16_155)]">CO₂ Reduction</p>
+            </div>
+            <div className="grid grid-cols-3 gap-2 text-center">
+              <div className="rounded-[6px] bg-white/4 p-3">
+                <p className="font-mono text-[8px] uppercase tracking-[0.1em] text-white/40">CO₂ / Hour</p>
+                <p className="mt-1 text-sm font-extrabold text-white">{results.co2ReductionPerHour.toFixed(1)}</p>
+                <p className="font-mono text-[8px] text-white/35">kg CO₂</p>
+              </div>
+              <div className="rounded-[6px] bg-white/4 p-3">
+                <p className="font-mono text-[8px] uppercase tracking-[0.1em] text-white/40">CO₂ / Month</p>
+                <p className="mt-1 text-sm font-extrabold text-[oklch(0.72_0.16_155)]">
+                  {(results.co2ReductionPerMonth / 1000).toFixed(1)}
+                </p>
+                <p className="font-mono text-[8px] text-white/35">tonnes</p>
+              </div>
+              <div className="rounded-[6px] bg-white/4 p-3">
+                <p className="font-mono text-[8px] uppercase tracking-[0.1em] text-white/40">CO₂ / Year</p>
+                <p className="mt-1 text-sm font-extrabold text-[oklch(0.72_0.16_155)]">
+                  {(results.co2ReductionPerYear / 1000).toFixed(1)}
+                </p>
+                <p className="font-mono text-[8px] text-white/35">tonnes</p>
+              </div>
+            </div>
+            <p className="mt-3 text-[9px] leading-relaxed text-white/25">
+              Estimated CO₂ reduction is calculated from diesel consumption reduction using a configured diesel emission factor ({results.co2ReductionPerHour > 0 ? (results.co2ReductionPerHour / results.hourlyDieselReduction).toFixed(2) : "2.68"} kg CO₂/L). Actual emissions may vary depending on engine, load, fuel quality, operating conditions, and measurement methodology.
+            </p>
+          </div>
+        )}
+
         {/* Reference case */}
         <div className="mt-4 rounded-[8px] border border-white/8 bg-white/3 p-4">
           <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/35 mb-2">Real OM Solutions Result</p>

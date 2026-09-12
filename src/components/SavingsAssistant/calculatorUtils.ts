@@ -1,5 +1,14 @@
 export type GasType = "PNG" | "CNG" | "LPG";
 
+/**
+ * CO₂ emission factor for diesel.
+ * Unit: kg CO₂ per litre of diesel burned.
+ * Source: commonly used industry reference value (IPCC / UK DEFRA).
+ * NOTE: This is NOT an OM Solutions claim. Define the approved value here
+ * once the company confirms their preferred emission factor.
+ */
+export const DIESEL_CO2_FACTOR = 2.68; // kg CO₂ / litre
+
 export interface CalculatorInputs {
   // Step 1 — Diesel consumption (diesel-only mode)
   dieselConsumption: number;        // L/hr
@@ -37,6 +46,11 @@ export interface CalculatorResults {
   hourlyDieselReduction: number;    // L/hr
   monthlyDieselReduction: number;   // L/month
   annualDieselReduction: number;    // L/year
+  // CO₂ reduction (calculated from diesel reduction × DIESEL_CO2_FACTOR)
+  co2ReductionPerHour: number;      // kg CO₂/hr
+  co2ReductionPerDay: number;       // kg CO₂/day
+  co2ReductionPerMonth: number;     // kg CO₂/month (displayed in tonnes)
+  co2ReductionPerYear: number;      // kg CO₂/year  (displayed in tonnes)
 }
 
 export function calculate(inputs: CalculatorInputs): CalculatorResults {
@@ -74,6 +88,12 @@ export function calculate(inputs: CalculatorInputs): CalculatorResults {
   const monthlyDieselReduction = hourlyDieselReduction * operatingHoursPerDay * operatingDaysPerMonth;
   const annualDieselReduction  = monthlyDieselReduction * 12;
 
+  // CO₂ reduction — uses the single configurable DIESEL_CO2_FACTOR constant
+  const co2ReductionPerHour  = hourlyDieselReduction * DIESEL_CO2_FACTOR;
+  const co2ReductionPerDay   = co2ReductionPerHour * operatingHoursPerDay;
+  const co2ReductionPerMonth = co2ReductionPerDay * operatingDaysPerMonth;
+  const co2ReductionPerYear  = co2ReductionPerMonth * 12;
+
   return {
     dieselOnlyCostPerHour,
     dualFuelDieselCostPerHour,
@@ -88,6 +108,10 @@ export function calculate(inputs: CalculatorInputs): CalculatorResults {
     hourlyDieselReduction,
     monthlyDieselReduction,
     annualDieselReduction,
+    co2ReductionPerHour,
+    co2ReductionPerDay,
+    co2ReductionPerMonth,
+    co2ReductionPerYear,
   };
 }
 

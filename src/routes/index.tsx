@@ -36,6 +36,8 @@ import componentImage from "@/assets/img-086.jpg";
 import energyMeterImage from "@/assets/img-087.jpg";
 import tataImage from "@/assets/img-089.jpg";
 import koelImage from "@/assets/img-092.jpg";
+import koelImg1 from "@/assets/WhatsApp Image 2026-08-28 at 3.55.36 PM.jpeg";
+import koelImg2 from "@/assets/Gross picture DFK2.jpeg";
 import birlaImageOne from "@/assets/img-095.jpg";
 import birlaImageTwo from "@/assets/img-096.jpg";
 import engineImage from "@/assets/img-098.jpg";
@@ -56,14 +58,14 @@ import marineEngineImageTwo from "@/assets/img-186.jpg";
 import recdImage from "@/assets/image.png";
 
 // Image Gallery — Birla Tisya, Bengaluru
-import galleryBirla1 from "@/assets/Image gallery/birla_tisya_bangaloore/1.png";
-import galleryBirla2 from "@/assets/Image gallery/birla_tisya_bangaloore/2.png";
-import galleryBirla3 from "@/assets/Image gallery/birla_tisya_bangaloore/3.png";
-import galleryBirla4 from "@/assets/Image gallery/birla_tisya_bangaloore/4.png";
-import galleryBirla5 from "@/assets/Image gallery/birla_tisya_bangaloore/5.png";
-import galleryBirla6 from "@/assets/Image gallery/birla_tisya_bangaloore/6.png";
-import galleryBirla7 from "@/assets/Image gallery/birla_tisya_bangaloore/7.png";
-import galleryBirla8 from "@/assets/Image gallery/birla_tisya_bangaloore/8.png";
+import galleryBirla1 from "@/assets/Image gallery/birla_tisya_bangaloore/IMG20260520124033.jpg";
+import galleryBirla2 from "@/assets/Image gallery/birla_tisya_bangaloore/WhatsApp Image 2026-05-20 at 1.19.45 PM.jpeg";
+import galleryBirla3 from "@/assets/Image gallery/birla_tisya_bangaloore/WhatsApp Image 2026-05-21 at 4.16.01 PM.jpeg";
+import galleryBirla4 from "@/assets/Image gallery/birla_tisya_bangaloore/WhatsApp Image 2026-05-21 at 4.16.03 PM (1).jpeg";
+import galleryBirla5 from "@/assets/Image gallery/birla_tisya_bangaloore/WhatsApp Image 2026-05-21 at 4.16.05 PM.jpeg";
+import galleryBirla6 from "@/assets/Image gallery/birla_tisya_bangaloore/WhatsApp Image 2026-05-21 at 4.16.08 PM (1).jpeg";
+import galleryBirla7 from "@/assets/Image gallery/birla_tisya_bangaloore/WhatsApp Image 2026-05-21 at 4.16.08 PM (2).jpeg";
+import galleryBirla8 from "@/assets/Image gallery/birla_tisya_bangaloore/WhatsApp Image 2026-05-21 at 4.16.09 PM.jpeg";
 
 // Borewell gallery
 import borewellImg1 from "@/assets/borewell/11.png";
@@ -72,10 +74,13 @@ import borewellImg3 from "@/assets/borewell/33.png";
 import borewellImg4 from "@/assets/borewell/44.png";
 
 // Air Compressor gallery
-import aircomp1 from "@/assets/aircompressor/1.png";
-import aircomp2 from "@/assets/aircompressor/2.png";
-import aircomp3 from "@/assets/aircompressor/3.png";
-import aircomp4 from "@/assets/aircompressor/4.png";
+import aircomp1 from "@/assets/aircompressor/IMG_20250521_164915.jpg";
+import aircomp2 from "@/assets/aircompressor/IMG_20250521_164929.jpg";
+import aircomp3 from "@/assets/aircompressor/IMG_20250521_164944.jpg";
+import aircomp4 from "@/assets/aircompressor/IMG_20250521_165003.jpg";
+import aircomp5 from "@/assets/aircompressor/IMG_20250521_165101.jpg";
+import aircomp6 from "@/assets/aircompressor/IMG_20250522_151044.jpg";
+import aircomp7 from "@/assets/aircompressor/IMG_20250522_155429.jpg";
 
 // Marine Propulsion gallery
 import marine1 from "@/assets/Marine Propulsion/1.png";
@@ -667,7 +672,7 @@ function OmSolutionsHome() {
               </section>
 
               <section id="dr-installs" className="border-b border-border">
-                <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 11">Installations</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-6"><h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Installations.</h2><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Field results are presented as project-specific examples, not universal guarantees.</p></div><div className="mt-12 grid gap-5 lg:grid-cols-2"><article className="overflow-hidden rounded-[12px] border border-border bg-secondary"><ImageButton src={tataImage} alt="TATA 125 kVA CPCB-II diesel and LPG installation" caption="TATA 125 kVA · CPCB-II · LPG" onClick={() => openImage(tataImage, "TATA 125 kVA CPCB-II LPG installation")} className="aspect-[1.45/1]" /><div className="p-6"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Project 01 · LPG</p><h3 className="mt-3 text-2xl font-bold">TATA 125 kVA (CPCB-II)</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">TATA 6 cylinder turbocharged with EGR · CPCB-II compliant genset · LPG based installation.</p><div className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-[7px] border border-border bg-border"><div className="bg-background p-4"><p className="font-mono text-2xl text-signal">45%</p><p className="mt-1 text-xs text-muted-foreground">Diesel replacement</p></div><div className="bg-background p-4"><p className="font-mono text-2xl">75”“80%</p><p className="mt-1 text-xs text-muted-foreground">Operating load</p></div></div></div></article><article className="overflow-hidden rounded-[12px] border border-border bg-secondary"><ImageButton src={koelImage} alt="KOEL 320 kVA CPCB-II diesel and PNG installation" caption="KOEL 320 kVA · CPCB-II · PNG" onClick={() => openImage(koelImage, "KOEL 320 kVA CPCB-II PNG installation")} className="aspect-[1.45/1]" /><div className="p-6"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Project 02 · PNG 300 mbar</p><h3 className="mt-3 text-2xl font-bold">KOEL 320 kVA (CPCB-II)</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">KOEL Vee8 cylinder turbocharged · CPCB-II compliant genset · low-pressure PNG based installation.</p><div className="mt-6 grid grid-cols-3 gap-px overflow-hidden rounded-[7px] border border-border bg-border"><div className="bg-background p-4"><p className="font-mono text-2xl text-signal">65%</p><p className="mt-1 text-xs text-muted-foreground">Diesel replacement</p></div><div className="bg-background p-4"><p className="font-mono text-2xl">₹982</p><p className="mt-1 text-xs text-muted-foreground">Saving / hour</p></div><div className="bg-background p-4"><p className="font-mono text-2xl">34%</p><p className="mt-1 text-xs text-muted-foreground">Fuel cost saving</p></div></div><p className="mt-5 font-mono text-[10px] leading-relaxed text-muted-foreground">Akwel Automotive Pune India Pvt. Ltd., Kharabwadi, Chakan · Installed 10/06/2025 · Tested 25 Sep 2025</p></div></article></div></div>
+                <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 11">Installations</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-6"><h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Installations.</h2><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Field results are presented as project-specific examples, not universal guarantees.</p></div><div className="mt-12 grid gap-5 lg:grid-cols-2"><article className="overflow-hidden rounded-[12px] border border-border bg-secondary"><ImageButton src={tataImage} alt="TATA 125 kVA CPCB-II diesel and LPG installation" caption="TATA 125 kVA · CPCB-II · LPG" onClick={() => openImage(tataImage, "TATA 125 kVA CPCB-II LPG installation")} className="aspect-[1.45/1]" /><div className="p-6"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Project 01 · LPG</p><h3 className="mt-3 text-2xl font-bold">TATA 125 kVA (CPCB-II)</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">TATA 6 cylinder turbocharged with EGR · CPCB-II compliant genset · LPG based installation.</p><div className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-[7px] border border-border bg-border"><div className="bg-background p-4"><p className="font-mono text-2xl text-signal">45%</p><p className="mt-1 text-xs text-muted-foreground">Diesel replacement</p></div><div className="bg-background p-4"><p className="font-mono text-2xl">75”“80%</p><p className="mt-1 text-xs text-muted-foreground">Operating load</p></div></div></div></article><article className="overflow-hidden rounded-[12px] border border-border bg-secondary"><div className="group relative cursor-pointer" onClick={() => setAppGallery({ title: "KOEL 320 kVA · PNG Installation", images: [koelImg1, koelImg2], index: 0 })}><img src={koelImg1} alt="KOEL 320 kVA CPCB-II diesel and PNG installation" className="aspect-[1.45/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" /><span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">2 photos</span></div><div className="p-6"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Project 02 · PNG 300 mbar</p><h3 className="mt-3 text-2xl font-bold">KOEL 320 kVA (CPCB-II)</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">KOEL Vee8 cylinder turbocharged · CPCB-II compliant genset · low-pressure PNG based installation.</p><div className="mt-6 grid grid-cols-3 gap-px overflow-hidden rounded-[7px] border border-border bg-border"><div className="bg-background p-4"><p className="font-mono text-2xl text-signal">65%</p><p className="mt-1 text-xs text-muted-foreground">Diesel replacement</p></div><div className="bg-background p-4"><p className="font-mono text-2xl">₹982</p><p className="mt-1 text-xs text-muted-foreground">Saving / hour</p></div><div className="bg-background p-4"><p className="font-mono text-2xl">34%</p><p className="mt-1 text-xs text-muted-foreground">Fuel cost saving</p></div></div><p className="mt-5 font-mono text-[10px] leading-relaxed text-muted-foreground">Akwel Automotive Pune India Pvt. Ltd., Kharabwadi, Chakan · Installed 10/06/2025 · Tested 25 Sep 2025</p></div></article></div></div>
               </section>
 
               <section id="dr-cases" className="bg-panel text-background">
@@ -682,7 +687,7 @@ function OmSolutionsHome() {
                 <div className="mt-12 grid gap-5 md:grid-cols-3">
                   {([
                     { title: "Borewell", desc: "Dual-fuel kits for borewell pump sets.", images: [borewellImg1, borewellImg2, borewellImg3, borewellImg4] },
-                    { title: "Air Compressor", desc: "Field installation for air-compressor applications.", images: [aircomp1, aircomp2, aircomp3, aircomp4] },
+                    { title: "Air Compressor", desc: "Field installation for air-compressor applications.", images: [aircomp1, aircomp2, aircomp3, aircomp4, aircomp5, aircomp6, aircomp7] },
                     { title: "Marine Propulsion", desc: "Marine propulsion with dual-fuel conversion.", images: [marine1, marine2] },
                   ] as { title: string; desc: string; images: string[] }[]).map((app) => (
                     <article key={app.title} className="group cursor-pointer overflow-hidden rounded-[11px] border border-border bg-background" onClick={() => setAppGallery({ title: app.title, images: app.images, index: 0 })}>

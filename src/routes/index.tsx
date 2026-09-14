@@ -30,7 +30,7 @@ import logoImage from "@/assets/img-002.jpg";
 import founderImage from "@/assets/img-006.jpg";
 import schematicImage from "@/assets/imm.jpeg";
 import systemImage from "@/assets/imm.jpeg";
-import lpgKitImage from "@/assets/img-084.jpg";
+import lpgKitImage from "@/assets/IMG-20260203-WA0076.jpg";
 import pngKitImage from "@/assets/img-085.jpg";
 import componentImage from "@/assets/img-086.jpg";
 import energyMeterImage from "@/assets/img-087.jpg";
@@ -68,10 +68,13 @@ import galleryBirla7 from "@/assets/Image gallery/birla_tisya_bangaloore/WhatsAp
 import galleryBirla8 from "@/assets/Image gallery/birla_tisya_bangaloore/WhatsApp Image 2026-05-21 at 4.16.08 PM (1).jpeg";
 
 // Borewell gallery
-import borewellImg1 from "@/assets/borewell/11.png";
-import borewellImg2 from "@/assets/borewell/22.png";
-import borewellImg3 from "@/assets/borewell/33.png";
-import borewellImg4 from "@/assets/borewell/44.png";
+import borewellImg1 from "@/assets/borewell/IMG_20251009_125203.jpg";
+import borewellImg2 from "@/assets/borewell/IMG_20251009_131145.jpg";
+import borewellImg3 from "@/assets/borewell/IMG_20260206_073457.jpg";
+import borewellImg4 from "@/assets/borewell/IMG_20260206_073503.jpg";
+import borewellImg5 from "@/assets/borewell/IMG_20260206_073508.jpg";
+import borewellImg6 from "@/assets/borewell/IMG_20260206_074148.jpg";
+import borewellImg7 from "@/assets/borewell/IMG_20260206_100059.jpg";
 
 // Air Compressor gallery
 import aircomp1 from "@/assets/aircompressor/IMG_20250521_164915.jpg";
@@ -685,7 +688,7 @@ function OmSolutionsHome() {
               <section id="dr-apps" className="bg-secondary/40"><div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 15">Other applications</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-5"><h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Built for more than gensets.</h2><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Click any application to view all installation images.</p></div>
                 <div className="mt-12 grid gap-5 md:grid-cols-3">
                   {([
-                    { title: "Borewell", desc: "Dual-fuel kits for borewell pump sets.", images: [borewellImg1, borewellImg2, borewellImg3, borewellImg4] },
+                    { title: "Borewell", desc: "Dual-fuel kits for borewell pump sets.", images: [borewellImg1, borewellImg2, borewellImg3, borewellImg4, borewellImg5, borewellImg6, borewellImg7] },
                     { title: "Air Compressor", desc: "Field installation for air-compressor applications.", images: [aircomp1, aircomp2, aircomp3, aircomp4, aircomp5, aircomp6, aircomp7] },
                     { title: "Marine Propulsion", desc: "Marine propulsion with dual-fuel conversion.", images: [marine1, marine2] },
                   ] as { title: string; desc: string; images: string[] }[]).map((app) => (

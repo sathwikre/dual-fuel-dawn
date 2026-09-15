@@ -787,7 +787,7 @@ function OmSolutionsHome() {
                 <SectionLabel index="OM / 17">Image gallery</SectionLabel>
                 <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">In the field.</h2>
               </div>
-              <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">Real installations from the field. Click any image to view the full gallery.</p>
+              <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">Installations from the field. Click any image to view the full gallery.</p>
             </div>
 
             {/* Birla Tisya — single installation card */}

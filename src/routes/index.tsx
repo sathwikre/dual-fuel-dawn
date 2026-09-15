@@ -187,7 +187,7 @@ const componentGallery = [
   ["Control panel", controlPanelImage],
   ["Gas system assembly", gasSystemImage],
   ["Gas pressure and valve set", marineEngineImage],
-  ["Engine sensing hardware", engineDetailImage],
+  ["Knock sensor mounting", engineDetailImage],
 ] as const;
 
 const galleryItems = [

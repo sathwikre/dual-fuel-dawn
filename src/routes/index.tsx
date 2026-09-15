@@ -63,6 +63,7 @@ import heroBg18 from "@/assets/background/the-transport-enthusiast-dc-EvvoBu0nBn
 import heroBg19 from "@/assets/background/valentin-Tk7abNpQ3ZI-unsplash.jpg";
 import heroBg20 from "@/assets/background/venti-views-1cqIcrWFQBI-unsplash.jpg";
 import heroBg21 from "@/assets/background/worksite-ltd-MVA-zlTQdSE-unsplash.jpg";
+import birlaNewsImage from "@/assets/WhatsApp Image 2026-09-15 at 10.10.22 PM.jpeg";
 import engineImage from "@/assets/img-098.jpg";
 import engineDetailImage from "@/assets/img-099.jpg";
 import generatorImage from "@/assets/img-103.jpg";
@@ -849,7 +850,7 @@ function OmSolutionsHome() {
               <article className="group cursor-default">
                 <div className="overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80"
+                    src={birlaNewsImage}
                     alt="Client team at Birla Tisya Bengaluru celebrating dual-fuel conversion"
                     className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
                   />

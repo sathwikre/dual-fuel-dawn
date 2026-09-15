@@ -1,5 +1,5 @@
 import { useState } from "react";
-import buttonIcon from "@/assets/ChatGPT Image Sep 15, 2026, 09_36_11 PM.png";
+import buttonIcon from "@/assets/WhatsApp Image 2026-09-15 at 10.05.40 PM.jpeg";
 
 interface Props {
   onClick: () => void;

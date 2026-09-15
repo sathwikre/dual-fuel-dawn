@@ -3,7 +3,7 @@ interface Props {
   totalSteps: number;
 }
 
-const LABELS = ["Diesel", "Price", "Dual-Fuel", "Gas Type", "Gas Use", "Gas Price", "Hours", "Days"];
+const LABELS = ["Genset", "Fuel Type", "Hours", "Prices", "Diesel", "DF Diesel", "DF Gas"];
 
 export function CalculatorProgress({ currentStep, totalSteps }: Props) {
   const pct = Math.round((currentStep / totalSteps) * 100);

@@ -648,7 +648,7 @@ function OmSolutionsHome() {
           <div className="relative z-10 flex min-h-[480px] flex-col justify-end px-5 pb-16 pt-24 lg:px-10">
             <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#b6ff72]">OM Solutions · Technology</p>
             <h2 className="mt-4 max-w-2xl text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-             Focused on<br />Alternate Fuels for <br/>I.C. Engines.
+             Focused on<br />Alternate Fuels for <br/>I.C. Engines
             </h2>
             <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/70">
               To make engine operation cleaner and more cost-effective, we need to make the shift to intelligent dual-fuel systems.

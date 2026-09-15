@@ -619,7 +619,7 @@ function OmSolutionsHome() {
           <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10 lg:py-28">
             <div>
               <SectionLabel index="OM / 02">About OM Solutions</SectionLabel>
-              <h2 className="mt-5 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight lg:text-6xl">Alternate-fuel thinking for working engines.</h2>
+              <h2 className="mt-5 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight lg:text-6xl">Focused on Alternate Fuels for Internal Combustion Engines</h2>
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">OM Solutions was established in 2021 by <strong className="text-foreground">Prasad Parulekar (IIT Bombay)</strong>, with 14+ years of experience at Cummins India Ltd on alternate-fuel engines.</p>
               <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">The company delivers alternate-fuel and dual-fuel solutions across engine and industrial applications ”” from generator sets and commercial vehicles to marine propulsion, tractors, earth movers, producer gas and liquid fuels.</p>
               <div className="mt-8 flex flex-wrap gap-2">

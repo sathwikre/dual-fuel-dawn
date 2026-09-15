@@ -66,6 +66,17 @@ import heroBg21 from "@/assets/background/worksite-ltd-MVA-zlTQdSE-unsplash.jpg"
 import birlaNewsImage from "@/assets/WhatsApp Image 2026-09-15 at 10.10.22 PM.jpeg";
 import akwelImage from "@/assets/aqual.jpeg";
 import ammeniEngineImage from "@/assets/ammeni engine.jpeg";
+
+// Nevatia Maxgen gallery
+import nevatiaMg1 from "@/assets/Nevatia Maxgen/IMG20260804120546 (1).jpg";
+import nevatiaMg2 from "@/assets/Nevatia Maxgen/IMG20260804162319.jpg";
+import nevatiaMg3 from "@/assets/Nevatia Maxgen/IMG20260804162351.jpg";
+import nevatiaMg4 from "@/assets/Nevatia Maxgen/IMG20260804162440.jpg";
+import nevatiaMg5 from "@/assets/Nevatia Maxgen/IMG20260804162502.jpg";
+import nevatiaMg6 from "@/assets/Nevatia Maxgen/IMG20260805175535.jpg";
+import nevatiaMg7 from "@/assets/Nevatia Maxgen/WhatsApp Image 2026-08-04 at 4.39.30 PM (10).jpeg";
+import nevatiaMg8 from "@/assets/Nevatia Maxgen/WhatsApp Image 2026-08-04 at 4.39.30 PM (24).jpeg";
+import nevatiaMg9 from "@/assets/Nevatia Maxgen/WhatsApp Image 2026-08-04 at 4.39.30 PM (3).jpeg";
 import engineImage from "@/assets/img-098.jpg";
 import engineDetailImage from "@/assets/img-099.jpg";
 import generatorImage from "@/assets/img-103.jpg";
@@ -793,33 +804,43 @@ function OmSolutionsHome() {
               <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">Installations from the field. Click any image to view the full gallery.</p>
             </div>
 
-            {/* Birla Tisya — single installation card */}
-            <div className="mt-10">
-              <div
-                className="group relative cursor-pointer overflow-hidden rounded-[12px] border border-border"
-                onClick={() => setAppGallery({ title: "Birla Tisya, Bengaluru", images: [galleryBirla1, galleryBirla2, galleryBirla3, galleryBirla4, galleryBirla5, galleryBirla6, galleryBirla7, galleryBirla8], index: 0 })}
-              >
-                {/* 4-image preview grid */}
-                <div className="grid grid-cols-4 gap-0.5">
-                  {[galleryBirla1, galleryBirla2, galleryBirla3, galleryBirla4].map((img, i) => (
-                    <div key={i} className="overflow-hidden aspect-square">
-                      <img src={img} alt={`Birla Tisya Bengaluru installation ${i + 1}`} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
-                    </div>
-                  ))}
+            {/* Installation galleries — side by side */}
+            <div className="mt-10 grid gap-5 md:grid-cols-2">
+
+              {/* Birla Tisya */}
+              <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer"
+                onClick={() => setAppGallery({ title: "Birla Tisya, Bengaluru", images: [galleryBirla1, galleryBirla2, galleryBirla3, galleryBirla4, galleryBirla5, galleryBirla6, galleryBirla7, galleryBirla8], index: 0 })}>
+                <div className="relative overflow-hidden aspect-[1.25/1]">
+                  <img src={galleryBirla1} alt="Birla Tisya Bengaluru installation" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+                  <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
+                  <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">8 photos</span>
                 </div>
-                {/* Overlay info bar */}
-                <div className="flex items-center justify-between bg-panel px-5 py-4">
+                <div className="flex items-end justify-between gap-4 p-5">
                   <div>
-                    <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-signal">Installation · May 2026</p>
-                    <h3 className="mt-1 text-base font-extrabold text-white">Birla Tisya, Bengaluru</h3>
-                    <p className="mt-0.5 text-[11px] text-white/50">Force MTU 1010 kVA × 2 · Greaves 200 kVA × 1 · Piped Natural Gas</p>
+                    <h3 className="text-xl font-bold">Birla Tisya, Bengaluru</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Force MTU 1010 kVA × 2 · Greaves 200 kVA × 1 · Piped Natural Gas · May 2026</p>
                   </div>
-                  <div className="flex items-center gap-3 shrink-0">
-                    <span className="font-mono text-[10px] text-white/40">8 photos</span>
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/60 group-hover:border-signal group-hover:text-signal transition-colors text-lg">›</span>
-                  </div>
+                  <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
                 </div>
-              </div>
+              </article>
+
+              {/* Nevatia Maxgen */}
+              <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer"
+                onClick={() => setAppGallery({ title: "Nevatia Steel & Alloys — MaxGen Energy", images: [nevatiaMg1, nevatiaMg2, nevatiaMg3, nevatiaMg4, nevatiaMg5, nevatiaMg6, nevatiaMg7, nevatiaMg8, nevatiaMg9], index: 0 })}>
+                <div className="relative overflow-hidden aspect-[1.25/1]">
+                  <img src={nevatiaMg1} alt="Nevatia Steel MaxGen Energy dual-fuel installation" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+                  <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
+                  <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">9 photos</span>
+                </div>
+                <div className="flex items-end justify-between gap-4 p-5">
+                  <div>
+                    <h3 className="text-xl font-bold">Nevatia Steel & Alloys</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">MaxGen Energy · Dual Fuel Controller · Gas Mixer · Sensors & Gas System · August 2026</p>
+                  </div>
+                  <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
+                </div>
+              </article>
+
             </div>
           </div>
         </section>

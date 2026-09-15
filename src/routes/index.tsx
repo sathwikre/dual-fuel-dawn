@@ -826,7 +826,7 @@ function OmSolutionsHome() {
         <section id="field" className="border-t border-border bg-background">
           <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
 
-            <h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Latest News</h2>
+            <h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Memories</h2>
 
             {/* Category tabs */}
             <div className="mt-6 flex flex-wrap gap-6 border-b border-border pb-4">

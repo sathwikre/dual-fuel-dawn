@@ -854,7 +854,7 @@ function OmSolutionsHome() {
                     className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
                   />
                 </div>
-                <h3 className="mt-4 text-base font-semibold leading-snug">Birla Tisya, Bengaluru team celebrates the commissioning of three dual-fuel gensets — over 2.2 MVA now running on Piped Natural Gas.</h3>
+                <h3 className="mt-4 text-base font-semibold leading-snug">Birla Tisya, Bengaluru team celebrates the commissioning of three dual-fuel gensets — over 2.2 MVA ready to run on Piped Natural Gas.</h3>
               </article>
 
               <article className="group cursor-default">

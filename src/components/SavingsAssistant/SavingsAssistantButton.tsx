@@ -1,4 +1,5 @@
 import { useState } from "react";
+import buttonIcon from "@/assets/ChatGPT Image Sep 15, 2026, 09_36_11 PM.png";
 
 interface Props {
   onClick: () => void;
@@ -74,24 +75,8 @@ export function SavingsAssistantButton({ onClick, isOpen }: Props) {
               <path d="M5 5L15 15M15 5L5 15" stroke="oklch(0.72 0.16 155)" strokeWidth="1.8" strokeLinecap="round" />
             </svg>
           ) : (
-            /* Minimal engineering / AI assistant icon */
-            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
-              {/* Circuit-style icon — technical, minimal, clean-energy */}
-              {/* Outer ring */}
-              <circle cx="13" cy="13" r="11.5" stroke="oklch(0.72 0.16 155)" strokeWidth="1" opacity="0.4" />
-              {/* Inner chip body */}
-              <rect x="8" y="8" width="10" height="10" rx="2" stroke="oklch(0.72 0.16 155)" strokeWidth="1.4" fill="none" />
-              {/* Pins left */}
-              <line x1="8" y1="10.5" x2="5.5" y2="10.5" stroke="oklch(0.72 0.16 155)" strokeWidth="1.2" strokeLinecap="round" />
-              <line x1="8" y1="13" x2="5.5" y2="13" stroke="oklch(0.72 0.16 155)" strokeWidth="1.2" strokeLinecap="round" />
-              <line x1="8" y1="15.5" x2="5.5" y2="15.5" stroke="oklch(0.72 0.16 155)" strokeWidth="1.2" strokeLinecap="round" />
-              {/* Pins right */}
-              <line x1="18" y1="10.5" x2="20.5" y2="10.5" stroke="oklch(0.72 0.16 155)" strokeWidth="1.2" strokeLinecap="round" />
-              <line x1="18" y1="13" x2="20.5" y2="13" stroke="oklch(0.72 0.16 155)" strokeWidth="1.2" strokeLinecap="round" />
-              <line x1="18" y1="15.5" x2="20.5" y2="15.5" stroke="oklch(0.72 0.16 155)" strokeWidth="1.2" strokeLinecap="round" />
-              {/* Centre dot */}
-              <circle cx="13" cy="13" r="2" fill="oklch(0.72 0.16 155)" />
-            </svg>
+            /* Custom OM Solutions calculator icon */
+            <img src={buttonIcon} alt="" aria-hidden="true" style={{ width: 34, height: 34, objectFit: "contain" }} />
           )}
         </button>
       </div>

@@ -26,7 +26,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { SavingsAssistant } from "@/components/SavingsAssistant/SavingsAssistant";
 
-import logoImage from "@/assets/img-002.jpg";
+import logoImage from "@/assets/ChatGPT Image Sep 15, 2026, 06_07_17 PM.png";
 import founderImage from "@/assets/img-006.jpg";
 import schematicImage from "@/assets/imm.jpeg";
 import systemImage from "@/assets/imm.jpeg";
@@ -43,11 +43,26 @@ import birlaImageTwo from "@/assets/img-096.jpg";
 
 // Hero background images
 import heroBg1 from "@/assets/background/Gross picture DFK2.jpeg";
-import heroBg2 from "@/assets/background/IMG_20250522_155429.jpg";
-import heroBg3 from "@/assets/background/IMG_20260206_073457.jpg";
-import heroBg4 from "@/assets/background/IMG_20260206_073508.jpg";
-import heroBg5 from "@/assets/background/IMG_20260206_074148.jpg";
-import heroBg6 from "@/assets/background/WhatsApp Image 2026-05-21 at 4.16.08 PM (2).jpeg";
+import heroBg2 from "@/assets/background/IMG_20260206_073457.jpg";
+import heroBg3 from "@/assets/background/IMG_20260206_073508.jpg";
+import heroBg4 from "@/assets/background/IMG_20260206_074148.jpg";
+import heroBg5 from "@/assets/background/WhatsApp Image 2026-05-21 at 4.16.08 PM (2).jpeg";
+import heroBg6 from "@/assets/background/WhatsApp Image 2026-08-28 at 3.55.36 PM.jpeg";
+import heroBg7 from "@/assets/background/arno-senoner-coEeAHagUEo-unsplash.jpg";
+import heroBg8 from "@/assets/background/bent-van-aeken-0A7YwYhZhWw-unsplash.jpg";
+import heroBg9 from "@/assets/background/dusan-veverkolog-SwRy_vjCbhE-unsplash.jpg";
+import heroBg10 from "@/assets/background/jonny-gios-dxGvEIJDD6Q-unsplash.jpg";
+import heroBg11 from "@/assets/background/jonny-gios-EfdJiKMq1hs-unsplash.jpg";
+import heroBg12 from "@/assets/background/jordan-allen-walters-j8QUs2P-_Rs-unsplash.jpg";
+import heroBg13 from "@/assets/background/jorge-cesar-wZm7-G8G_ec-unsplash.jpg";
+import heroBg14 from "@/assets/background/julia-taubitz-ezegOH-cBFE-unsplash.jpg";
+import heroBg15 from "@/assets/background/karsten-wurth-0w-uTa0Xz7w-unsplash.jpg";
+import heroBg16 from "@/assets/background/matthew-henry-yETqkLnhsUI-unsplash.jpg";
+import heroBg17 from "@/assets/background/paul-einerhand-eysa6RORvl0-unsplash.jpg";
+import heroBg18 from "@/assets/background/the-transport-enthusiast-dc-EvvoBu0nBnc-unsplash.jpg";
+import heroBg19 from "@/assets/background/valentin-Tk7abNpQ3ZI-unsplash.jpg";
+import heroBg20 from "@/assets/background/venti-views-1cqIcrWFQBI-unsplash.jpg";
+import heroBg21 from "@/assets/background/worksite-ltd-MVA-zlTQdSE-unsplash.jpg";
 import engineImage from "@/assets/img-098.jpg";
 import engineDetailImage from "@/assets/img-099.jpg";
 import generatorImage from "@/assets/img-103.jpg";
@@ -198,6 +213,21 @@ function HeroBackground() {
   const imgRef3 = useRef<HTMLImageElement>(null);
   const imgRef4 = useRef<HTMLImageElement>(null);
   const imgRef5 = useRef<HTMLImageElement>(null);
+  const imgRef6 = useRef<HTMLImageElement>(null);
+  const imgRef7 = useRef<HTMLImageElement>(null);
+  const imgRef8 = useRef<HTMLImageElement>(null);
+  const imgRef9 = useRef<HTMLImageElement>(null);
+  const imgRef10 = useRef<HTMLImageElement>(null);
+  const imgRef11 = useRef<HTMLImageElement>(null);
+  const imgRef12 = useRef<HTMLImageElement>(null);
+  const imgRef13 = useRef<HTMLImageElement>(null);
+  const imgRef14 = useRef<HTMLImageElement>(null);
+  const imgRef15 = useRef<HTMLImageElement>(null);
+  const imgRef16 = useRef<HTMLImageElement>(null);
+  const imgRef17 = useRef<HTMLImageElement>(null);
+  const imgRef18 = useRef<HTMLImageElement>(null);
+  const imgRef19 = useRef<HTMLImageElement>(null);
+  const imgRef20 = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -205,7 +235,7 @@ function HeroBackground() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const imgs = [imgRef0.current, imgRef1.current, imgRef2.current, imgRef3.current, imgRef4.current, imgRef5.current].filter(Boolean) as HTMLImageElement[];
+    const imgs = [imgRef0.current, imgRef1.current, imgRef2.current, imgRef3.current, imgRef4.current, imgRef5.current, imgRef6.current, imgRef7.current, imgRef8.current, imgRef9.current, imgRef10.current, imgRef11.current, imgRef12.current, imgRef13.current, imgRef14.current, imgRef15.current, imgRef16.current, imgRef17.current, imgRef18.current, imgRef19.current, imgRef20.current].filter(Boolean) as HTMLImageElement[];
 
     let raf: number;
     let t = 0;
@@ -343,11 +373,27 @@ function HeroBackground() {
   return (
     <>
       {/* Preload images — hidden off-screen */}
-      <img ref={imgRef0} src={heroBg1} alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef1} src={heroBg2} alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef2} src={heroBg3} alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef3} src={heroBg4} alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef4} src={heroBg5} alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef0}  src={heroBg1}  alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef1}  src={heroBg2}  alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef2}  src={heroBg3}  alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef3}  src={heroBg4}  alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef4}  src={heroBg5}  alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef5}  src={heroBg6}  alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef6}  src={heroBg7}  alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef7}  src={heroBg8}  alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef8}  src={heroBg9}  alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef9}  src={heroBg10} alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef10} src={heroBg11} alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef11} src={heroBg12} alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef12} src={heroBg13} alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef13} src={heroBg14} alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef14} src={heroBg15} alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef15} src={heroBg16} alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef16} src={heroBg17} alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef17} src={heroBg18} alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef18} src={heroBg19} alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef19} src={heroBg20} alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef20} src={heroBg21} alt="" aria-hidden="true" className="sr-only" />
       <img ref={imgRef5} src={heroBg6} alt="" aria-hidden="true" className="sr-only" />
       {/* Canvas renders everything */}
       <canvas

@@ -76,7 +76,7 @@ export function SavingsAssistantButton({ onClick, isOpen }: Props) {
             </svg>
           ) : (
             /* Custom OM Solutions calculator icon */
-            <img src={buttonIcon} alt="" aria-hidden="true" style={{ width: 34, height: 34, objectFit: "contain" }} />
+            <img src={buttonIcon} alt="" aria-hidden="true" style={{ width: 56, height: 56, objectFit: "cover", borderRadius: "50%" }} />
           )}
         </button>
       </div>

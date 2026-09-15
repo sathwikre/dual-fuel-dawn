@@ -40,6 +40,14 @@ import koelImg1 from "@/assets/WhatsApp Image 2026-08-28 at 3.55.36 PM.jpeg";
 import koelImg2 from "@/assets/Gross picture DFK2.jpeg";
 import birlaImageOne from "@/assets/img-095.jpg";
 import birlaImageTwo from "@/assets/img-096.jpg";
+
+// Hero background images
+import heroBg1 from "@/assets/background/Gross picture DFK2.jpeg";
+import heroBg2 from "@/assets/background/IMG_20250522_155429.jpg";
+import heroBg3 from "@/assets/background/IMG_20260206_073457.jpg";
+import heroBg4 from "@/assets/background/IMG_20260206_073508.jpg";
+import heroBg5 from "@/assets/background/IMG_20260206_074148.jpg";
+import heroBg6 from "@/assets/background/WhatsApp Image 2026-05-21 at 4.16.08 PM (2).jpeg";
 import engineImage from "@/assets/img-098.jpg";
 import engineDetailImage from "@/assets/img-099.jpg";
 import generatorImage from "@/assets/img-103.jpg";
@@ -187,6 +195,9 @@ function HeroBackground() {
   const imgRef0 = useRef<HTMLImageElement>(null);
   const imgRef1 = useRef<HTMLImageElement>(null);
   const imgRef2 = useRef<HTMLImageElement>(null);
+  const imgRef3 = useRef<HTMLImageElement>(null);
+  const imgRef4 = useRef<HTMLImageElement>(null);
+  const imgRef5 = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -194,7 +205,7 @@ function HeroBackground() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const imgs = [imgRef0.current, imgRef1.current, imgRef2.current].filter(Boolean) as HTMLImageElement[];
+    const imgs = [imgRef0.current, imgRef1.current, imgRef2.current, imgRef3.current, imgRef4.current, imgRef5.current].filter(Boolean) as HTMLImageElement[];
 
     let raf: number;
     let t = 0;
@@ -331,10 +342,13 @@ function HeroBackground() {
 
   return (
     <>
-      {/* Preload images ”” hidden off-screen */}
-      <img ref={imgRef0} src={birlaImageOne}   alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef1} src={koelImage}        alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef2} src={engineImage}      alt="" aria-hidden="true" className="sr-only" />
+      {/* Preload images — hidden off-screen */}
+      <img ref={imgRef0} src={heroBg1} alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef1} src={heroBg2} alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef2} src={heroBg3} alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef3} src={heroBg4} alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef4} src={heroBg5} alt="" aria-hidden="true" className="sr-only" />
+      <img ref={imgRef5} src={heroBg6} alt="" aria-hidden="true" className="sr-only" />
       {/* Canvas renders everything */}
       <canvas
         ref={canvasRef}
@@ -682,8 +696,6 @@ function OmSolutionsHome() {
                 <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 12" dark>Case studies</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-6"><h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Installations in context.</h2><p className="max-w-md text-sm leading-relaxed text-background/65">Two additional project records from the company profile, shown with their equipment and fuel context.</p></div><div className="mt-12 grid gap-5 lg:grid-cols-2"><article className="glass-panel overflow-hidden rounded-[12px]"><div className="grid grid-cols-2 gap-1"><ImageButton src={birlaImageOne} alt="Birla Tisya Bengaluru generator installation" onClick={() => openImage(birlaImageOne, "Birla Tisya Bengaluru generator installation")} className="aspect-square" /><ImageButton src={birlaImageTwo} alt="Birla Tisya Bengaluru outdoor generator" onClick={() => openImage(birlaImageTwo, "Birla Tisya Bengaluru outdoor generator")} className="aspect-square" /></div><div className="p-6"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-signal">May 2026 · Bengaluru</p><h3 className="mt-3 text-2xl font-bold">Birla Tisya, Bengaluru</h3><div className="mt-4 space-y-2 text-sm text-background/72"><p>Force MTU 1010 kVA Ã— 2</p><p>Greaves 200 kVA Ã— 1</p><p>Piped Natural Gas with minimum 1 bar pressure</p></div></div></article><article className="glass-panel overflow-hidden rounded-[12px]"><ImageButton src={gasSystemImage} alt="MaxGen Energy gas system components" onClick={() => openImage(gasSystemImage, "MaxGen Energy gas system components")} className="aspect-[1.7/1]" /><div className="p-6"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-signal">Equipment record</p><h3 className="mt-3 text-2xl font-bold">MaxGen Energy for Nevatia Steel and Alloys PL</h3><div className="mt-5 flex flex-wrap gap-2">{["Dual Fuel Controller", "Air Gas Mixer", "Gas Leak Detector", "Knock Sensor", "Pre-Turbo Exhaust Temperature Sensor", "Mechanical Gas Shut Off Valve", "Slam Shut Off Valve", "Electronic Gas Shut Off Valve", "Electronic Gas Flow Control Valve", "Gas Pressure Regulator", "Gas Pressure Switch"].map((tag) => <span key={tag} className="rounded-[5px] border border-background/15 px-3 py-2 font-mono text-[10px] text-background/68">{tag}</span>)}</div></div></article></div></div>
               </section>
 
-
-              <section id="dr-sub" className="border-b border-border"><div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:px-10 lg:py-28"><div><SectionLabel index="OM / 14">Diesel substitution</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">A key measure of kit success.</h2><p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">Diesel substitution, also known as diesel replacement, is expressed as a percentage. Higher replacement is better, though limited by exhaust temperature, knock possibility and minimum diesel required for injector lubrication and cooling.</p><div className="mt-8 rounded-[10px] border border-border bg-secondary p-5 font-mono text-sm leading-relaxed sm:p-7">Diesel Substitution (%)<br /><span className="text-primary">= (Diesel consumption in Diesel Mode âˆ’ Diesel consumption in Dual Fuel Mode) Ã· Diesel consumption in Diesel Mode Ã— 100</span></div></div><div className="rounded-[12px] bg-panel p-8 text-background"><div className="flex items-end justify-between"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-background/55">Maximum stated in profile</p><p className="font-mono text-7xl text-signal">70%</p></div><div className="mt-8 h-3 overflow-hidden rounded-full bg-background/15"><div className="h-full w-[70%] rounded-full bg-signal" /></div><div className="mt-4 flex justify-between font-mono text-[10px] text-background/55"><span>Power range: 50”“70%</span><span>Subject to conditions</span></div></div></div></section>
 
               <section id="dr-apps" className="bg-secondary/40"><div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 15">Other applications</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-5"><h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Built for more than gensets.</h2><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Click any application to view all installation images.</p></div>
                 <div className="mt-12 grid gap-5 md:grid-cols-3">

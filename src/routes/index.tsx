@@ -65,6 +65,7 @@ import heroBg20 from "@/assets/background/venti-views-1cqIcrWFQBI-unsplash.jpg";
 import heroBg21 from "@/assets/background/worksite-ltd-MVA-zlTQdSE-unsplash.jpg";
 import birlaNewsImage from "@/assets/WhatsApp Image 2026-09-15 at 10.10.22 PM.jpeg";
 import akwelImage from "@/assets/aqual.jpeg";
+import ammeniEngineImage from "@/assets/ammeni engine.jpeg";
 import engineImage from "@/assets/img-098.jpg";
 import engineDetailImage from "@/assets/img-099.jpg";
 import generatorImage from "@/assets/img-103.jpg";
@@ -862,12 +863,12 @@ function OmSolutionsHome() {
               <article className="group cursor-default">
                 <div className="overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=800&q=80"
+                    src={ammeniEngineImage}
                     alt="OM Solutions founder with client discussing dual-fuel kit"
                     className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
                   />
                 </div>
-                <h3 className="mt-4 text-base font-semibold leading-snug">Prasad Parulekar (Founder, OM Solutions) with the operations team after completing the TATA 125 kVA LPG dual-fuel retrofit — 45% diesel replaced at 75–80% load.</h3>
+                <h3 className="mt-4 text-base font-semibold leading-snug">OM Solutions successfully installs Dual Fuel kit based on LPG for TATA 125 kVA at Amane Engineers — 45% diesel replaced at 75–80% load.</h3>
               </article>
 
             </div>

@@ -11,14 +11,14 @@ function Row({ label, value, accent = false, sub }: {
   label: string; value: string; accent?: boolean; sub?: string;
 }) {
   return (
-    <div className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
-      <span className="text-[11px] text-white/55">{label}</span>
+    <div className="flex items-center justify-between gap-3 py-3 border-b-2 border-white/10 last:border-0">
+      <span className="text-[13px] font-semibold text-white/80">{label}</span>
       <div className="text-right">
-        <span className="font-mono text-[12px] font-bold"
+        <span className="text-[15px] font-extrabold"
           style={{ color: accent ? "oklch(0.72 0.16 155)" : "white" }}>
           {value}
         </span>
-        {sub && <span className="ml-1 font-mono text-[10px] text-white/35">{sub}</span>}
+        {sub && <span className="ml-1 text-[12px] font-semibold text-white/60">{sub}</span>}
       </div>
     </div>
   );
@@ -26,9 +26,9 @@ function Row({ label, value, accent = false, sub }: {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-[8px] border border-white/10 overflow-hidden mb-3">
-      <div className="px-4 py-2.5 border-b border-white/10" style={{ background: "rgba(255,255,255,0.05)" }}>
-        <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-white/50">{title}</p>
+    <div className="rounded-[3px] border-2 border-white/20 overflow-hidden mb-4">
+      <div className="px-4 py-3 border-b-2 border-white/20" style={{ background: "rgba(255,255,255,0.08)" }}>
+        <p className="text-[12px] font-extrabold uppercase tracking-[0.1em] text-white">{title}</p>
       </div>
       <div className="px-4 py-1">{children}</div>
     </div>
@@ -69,46 +69,46 @@ export function CalculatorResults({ inputs, results, onReset }: Props) {
 
         {/* Header */}
         <div className="mb-4 pb-3 border-b border-white/10">
-          <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-[oklch(0.72_0.16_155)]">
+          <p className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-[oklch(0.72_0.16_155)]">
             Operating Economics
           </p>
-          <h3 className="mt-1 text-[13px] font-extrabold text-white leading-tight">
+          <h3 className="mt-1 text-[17px] font-black text-white leading-tight">
             {inputs.gensetRating} kVA · {inputs.load}% Load · NG
           </h3>
-          <p className="mt-0.5 font-mono text-[10px] text-white/35">
+          <p className="mt-1 text-[12px] font-semibold text-white/65">
             {inputs.hoursPerMonth} hrs/month · ₹{inputs.dieselPrice}/L diesel · ₹{inputs.ngPrice}/Sm³ NG
           </p>
         </div>
 
         {/* Hero — Saving Due to DFK */}
-        <div className="mb-4 rounded-[8px] p-4"
+        <div className="mb-5 rounded-[3px] p-5"
           style={{
             background: saving ? "oklch(0.72 0.16 155 / 0.12)" : "rgba(255,255,255,0.05)",
             border: saving ? "1px solid oklch(0.72 0.16 155 / 0.45)" : "1px solid rgba(255,255,255,0.1)",
           }}>
-          <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-white/45 mb-2">Saving Due to DFK</p>
+          <p className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/75 mb-2">Saving Due to DFK</p>
           <div className="flex items-end justify-between">
             <div>
-              <p className="text-3xl font-extrabold" style={{ color: saving ? "oklch(0.72 0.16 155)" : "rgba(255,255,255,0.5)" }}>
+              <p className="text-4xl font-black" style={{ color: saving ? "oklch(0.72 0.16 155)" : "rgba(255,255,255,0.5)" }}>
                 {formatINR(savingPerHour)}
               </p>
-              <p className="font-mono text-[10px] text-white/40 mt-0.5">INR / hr</p>
+              <p className="text-[12px] font-bold text-white/70 mt-1">INR / hr</p>
             </div>
             <div className="text-right">
-              <p className="text-sm font-bold text-white">{formatINR(savingPerMonth, true)}</p>
-              <p className="font-mono text-[9px] text-white/35">/ Month</p>
-              <p className="mt-1 text-sm font-bold text-white">{formatINR(savingPerYear, true)}</p>
-              <p className="font-mono text-[9px] text-white/35">/ Year</p>
+              <p className="text-[16px] font-extrabold text-white">{formatINR(savingPerMonth, true)}</p>
+              <p className="text-[11px] font-semibold text-white/65">/ Month</p>
+              <p className="mt-2 text-[16px] font-extrabold text-white">{formatINR(savingPerYear, true)}</p>
+              <p className="text-[11px] font-semibold text-white/65">/ Year</p>
             </div>
           </div>
           <div className="mt-3 flex gap-4">
             <div>
-              <p className="font-mono text-[9px] text-white/35">Cost Reduction</p>
-              <p className="text-sm font-bold text-white">{costReductionPct.toFixed(1)}%</p>
+              <p className="text-[11px] font-bold text-white/65">Cost Reduction</p>
+              <p className="text-[16px] font-extrabold text-white">{costReductionPct.toFixed(1)}%</p>
             </div>
             <div>
-              <p className="font-mono text-[9px] text-white/35">Diesel Replacement</p>
-              <p className="text-sm font-bold" style={{ color: "oklch(0.72 0.16 155)" }}>
+              <p className="text-[11px] font-bold text-white/65">Diesel Replacement</p>
+              <p className="text-[16px] font-extrabold" style={{ color: "oklch(0.72 0.16 155)" }}>
                 {dieselReplacementPct.toFixed(1)}%
               </p>
             </div>
@@ -169,7 +169,7 @@ export function CalculatorResults({ inputs, results, onReset }: Props) {
       {/* Footer */}
       <div className="shrink-0 border-t border-white/10 px-5 py-4">
         <button type="button" onClick={onReset}
-          className="flex h-9 w-full items-center justify-center border border-white/15 text-[10px] font-bold uppercase tracking-[0.1em] text-white/55 transition-colors hover:border-white/30 hover:text-white/80">
+          className="flex h-11 w-full items-center justify-center border-2 border-white/35 text-[12px] font-extrabold uppercase tracking-[0.08em] text-white transition-colors hover:border-white hover:text-white">
           ← Calculate Again
         </button>
       </div>

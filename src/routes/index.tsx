@@ -43,8 +43,7 @@ import birlaImageTwo from "@/assets/img-096.jpg";
 
 // Hero background images
 import heroBg1 from "@/assets/background/Gross picture DFK2.jpeg";
-import heroBg2 from "@/assets/background/IMG_20260206_073457.jpg";
-import heroBg3 from "@/assets/background/IMG_20260206_073508.jpg";
+
 import heroBg4 from "@/assets/background/IMG_20260206_074148.jpg";
 import heroBg5 from "@/assets/background/WhatsApp Image 2026-05-21 at 4.16.08 PM (2).jpeg";
 import heroBg6 from "@/assets/background/WhatsApp Image 2026-08-28 at 3.55.36 PM.jpeg";

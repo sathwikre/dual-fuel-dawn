@@ -834,7 +834,7 @@ function OmSolutionsHome() {
                 </div>
                 <div className="flex items-end justify-between gap-4 p-5">
                   <div>
-                    <h3 className="text-xl font-bold">Nevatia Steel & Alloys</h3>
+                    <h3 className="text-xl font-bold">Nevatia Maxgen</h3>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">MaxGen Energy · Dual Fuel Controller · Gas Mixer · Sensors & Gas System · August 2026</p>
                   </div>
                   <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />

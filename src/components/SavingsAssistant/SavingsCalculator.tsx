@@ -50,6 +50,8 @@ export function SavingsCalculator({ onClose }: Props) {
           border: 1px solid rgba(45,189,110,0.22);
           box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
         }
+        .calc-panel input { font-weight: 600; }
+        .calc-panel input::placeholder { font-weight: 400; }
         /* Desktop: right-anchored fixed width */
         @media (min-width: 540px) {
           .calc-panel {

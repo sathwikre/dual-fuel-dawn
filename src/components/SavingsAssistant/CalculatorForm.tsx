@@ -53,9 +53,9 @@ const stepMessages: Record<number, { greeting: string; question: string }> = {
   },
 };
 
-const labelClass = "block mb-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-white/50";
-const unitBadge  = "px-2.5 py-2.5 font-mono text-[11px] text-white/55 border border-white/10 rounded-r-[6px] bg-white/5 whitespace-nowrap";
-const inputClass = "flex-1 bg-white/5 px-3 py-2.5 text-sm text-white outline-none placeholder:text-white/30";
+const labelClass = "block mb-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-white/65";
+const unitBadge  = "px-2.5 py-2.5 font-mono text-[11px] font-semibold text-white/70 border border-white/10 rounded-r-[6px] bg-white/5 whitespace-nowrap";
+const inputClass = "flex-1 bg-white/5 px-3 py-2.5 text-sm font-semibold text-white outline-none placeholder:font-normal placeholder:text-white/30";
 const rowClass   = "flex overflow-hidden rounded-[6px] border border-white/15 focus-within:border-[oklch(0.72_0.16_155)] transition-colors";
 
 export function CalculatorForm({ onComplete }: Props) {
@@ -93,7 +93,7 @@ export function CalculatorForm({ onComplete }: Props) {
         {/* Prompt */}
         <div className="mb-5">
           <p className="text-[13px] font-semibold text-[oklch(0.72_0.16_155)]">{msg?.greeting ?? ""}</p>
-          <p className="mt-1 text-sm text-white/80">{msg?.question ?? ""}</p>
+          <p className="mt-1 text-sm font-semibold text-white/85">{msg?.question ?? ""}</p>
         </div>
 
         {/* ── Step 1: Genset Rating + Load ── */}
@@ -118,7 +118,7 @@ export function CalculatorForm({ onComplete }: Props) {
                   className={inputClass} onKeyDown={(e) => e.key === "Enter" && next()} />
                 <span className={unitBadge}>%</span>
               </div>
-              <p className="mt-2 text-[11px] text-white/35">Operating load as a percentage of genset rating.</p>
+              <p className="mt-2 text-[11px] font-medium text-white/45">Operating load as a percentage of genset rating.</p>
             </div>
           </div>
         )}

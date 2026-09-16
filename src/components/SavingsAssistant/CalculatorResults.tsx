@@ -64,7 +64,7 @@ export function CalculatorResults({ inputs, results, onReset }: Props) {
   const saving = savingPerHour > 0;
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100%", minHeight: 0 }}>
+    <div className="calc-results" style={{ display: "flex", flexDirection: "column", height: "100%", minHeight: 0 }}>
       <div style={{ flex: 1, overflowY: "auto", minHeight: 0 }} className="px-5 py-4">
 
         {/* Header */}
@@ -113,8 +113,8 @@ export function CalculatorResults({ inputs, results, onReset }: Props) {
               </p>
             </div>
             <div>
-              <p className="font-mono text-[9px] text-white/35">CO₂ Saving / yr</p>
-              <p className="text-sm font-bold" style={{ color: "oklch(0.72 0.16 155)" }}>
+              <p className="text-[12px] font-black text-white">CO₂ Saving / yr</p>
+              <p className="text-[17px] font-black" style={{ color: "oklch(0.72 0.16 155)" }}>
                 {annualCO2SavingTonnes.toFixed(2)} t
               </p>
             </div>

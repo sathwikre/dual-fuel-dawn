@@ -59,6 +59,7 @@ export function SavingsCalculator({ onClose }: Props) {
         }
         .calc-panel input::placeholder { font-weight: 500; }
         .calc-panel button { min-height: 44px; font-size: 11px; font-weight: 800; }
+        .calc-results, .calc-results * { font-weight: 800 !important; }
         .calc-panel .rounded-\[6px\], .calc-panel .rounded-\[8px\], .calc-panel .rounded-full { border-radius: 3px; }
         .calc-panel .border-white\/10, .calc-panel .border-white\/15, .calc-panel .border-white\/20 { border-width: 2px; }
         /* Desktop: right-anchored fixed width */

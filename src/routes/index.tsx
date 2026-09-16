@@ -1051,7 +1051,7 @@ function OmSolutionsHome() {
                     className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
                   />
                 </div>
-                <h3 className="mt-4 text-base font-semibold leading-snug">Birla Tisya, Bengaluru team celebrates the commissioning of three dual-fuel gensets — over 2.2 MVA Power Generation Setup ready to run on Dual Fuel with Diesel & Piped Natural Gas.</h3>
+                <h3 className="mt-4 text-base font-semibold leading-snug">Om Solutions, installed 3 nos of Dual Fuel kits at Birla Tisya, Bengaluru. The gensets total capacity rated 2.2 MVA are ready to run on Dual Fuel with Diesel & Piped Natural Gas.</h3>
               </article>
 
               <article className="group cursor-default">

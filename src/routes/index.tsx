@@ -974,7 +974,7 @@ function OmSolutionsHome() {
                 <div className="flex items-end justify-between gap-4 p-5">
                   <div>
                     <h3 className="text-xl font-bold">Akwel Automotive</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">KOEL Vee8 turbocharged · PNG 300 mbar · 65% diesel replacement · ₹982 saving/hr · 34% fuel cost saving</p>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">KOEL 320 kVA CPCB-II Genset <br></br>KOEL Vee8 turbocharged · PNG 300 mbar · 65% diesel replacement · ₹982 saving/hr · 34% fuel cost saving</p>
                   </div>
                   <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
                 </div>

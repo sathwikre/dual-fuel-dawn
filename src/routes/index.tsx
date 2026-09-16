@@ -43,6 +43,8 @@ import birlaImageTwo from "@/assets/img-096.jpg";
 
 // Hero background images
 import heroBg1 from "@/assets/background/Gross picture DFK2.jpeg";
+import heroBg2 from "@/assets/background/IMG_20260206_073457.jpg";
+import heroBg3 from "@/assets/background/IMG_20260206_073508.jpg";
 
 import heroBg4 from "@/assets/background/IMG_20260206_074148.jpg";
 import heroBg5 from "@/assets/background/WhatsApp Image 2026-05-21 at 4.16.08 PM (2).jpeg";
@@ -502,7 +504,6 @@ function HeroBackground() {
       <img ref={imgRef18} src={heroBg19} alt="" aria-hidden="true" className="sr-only" />
       <img ref={imgRef19} src={heroBg20} alt="" aria-hidden="true" className="sr-only" />
       <img ref={imgRef20} src={heroBg21} alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef5} src={heroBg6} alt="" aria-hidden="true" className="sr-only" />
       {/* Canvas renders everything */}
       <canvas
         ref={canvasRef}
@@ -1006,7 +1007,7 @@ function OmSolutionsHome() {
                 </div>
                 <div className="flex items-end justify-between gap-4 p-5">
                   <div>
-                    <h3 className="text-xl font-bold">Nevatia Maxgen</h3>
+                    <h3 className="text-xl font-bold">Nevatia Steel and Alloys Pvt. Ltd.</h3>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">MaxGen Energy · Dual Fuel Controller · Gas Mixer · Sensors & Gas System · August 2026</p>
                   </div>
                   <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />

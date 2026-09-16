@@ -193,6 +193,53 @@ const comparisonRows = [
   ["Service Skillset", "Very high skillset", "Very high skillset", "No special skillset required", "No special skillset required"],
 ];
 
+const recdTypes = {
+  selfCleaning: {
+    label: "Self-Cleaning",
+    heading: "Self-Cleaning Type",
+    points: [
+      "Back-pressure sensor-based operation",
+      "Additional back pressure on the engine",
+      "Higher power loss",
+      "Higher diesel consumption",
+      "Lower thermal efficiency",
+      "Higher CO₂ emission",
+      "Particulates are generated and then captured",
+      "Disposal of collected particulates is a concern",
+      "Pressure sensor failure can cause major engine damage",
+    ],
+  },
+  regeneration: {
+    label: "Regeneration",
+    heading: "Regeneration Type",
+    points: [
+      "Back-pressure sensor-based operation",
+      "Additional back pressure on the engine",
+      "Higher power loss",
+      "Higher diesel consumption",
+      "Lower thermal efficiency",
+      "Higher CO₂ emission",
+      "Particulates are generated, captured and then regeneration is performed as per logic",
+      "Pressure sensor failure can cause major engine damage",
+    ],
+  },
+  noRegeneration: {
+    label: "No Self-Cleaning / Regeneration",
+    heading: "No Self-Cleaning / Regeneration",
+    points: [
+      "Additional back pressure on the engine",
+      "Higher power loss",
+      "Higher diesel consumption",
+      "Lower thermal efficiency",
+      "Higher CO₂ emission",
+      "Particulates are generated and then captured",
+      "Disposal of collected particulates is a major concern",
+    ],
+  },
+} as const;
+
+type RecdType = keyof typeof recdTypes;
+
 const componentGallery = [
   ["LPG dual-fuel kit", lpgKitImage],
   ["PNG dual-fuel kit", pngKitImage],
@@ -482,6 +529,8 @@ function OmSolutionsHome() {
   const [appGallery, setAppGallery] = useState<{ title: string; images: string[]; index: number } | null>(null);
   const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
   const [formSent, setFormSent] = useState(false);
+  const [technologyView, setTechnologyView] = useState<"dualFuel" | "recd">("dualFuel");
+  const [recdType, setRecdType] = useState<RecdType>("selfCleaning");
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -770,7 +819,39 @@ function OmSolutionsHome() {
               </section>
 
               <section id="dr-tech" className="border-b border-border">
-                <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><div className="grid gap-12 lg:grid-cols-2 lg:items-end"><div><SectionLabel index="OM / 05">Technology</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Dual Fuel kit Vs RECD</h2></div><p className="max-w-xl text-base leading-relaxed text-muted-foreground">Two different approaches to particulate reduction, shown clearly for technical and operational decision-makers.</p></div><div className="mt-12 grid gap-5 lg:grid-cols-2"><article className="overflow-hidden rounded-[12px] border border-border bg-secondary"><img src={systemImage} alt="Dual fuel system diagram" loading="lazy" className="h-64 w-full object-contain bg-background p-5" /><div className="p-6"><div className="flex items-center gap-3"><span className="grid size-9 place-items-center rounded-[6px] bg-primary text-primary-foreground"><Fuel className="size-4" /></span><h3 className="text-xl font-bold">Dual Fuel</h3></div><p className="mt-4 text-sm leading-relaxed text-muted-foreground">Controlled injection of gaseous or liquid fuel into a diesel engine's air flow to replace diesel, using a controller with sensors, valves and actuators to stop or reduce gas quantity.</p><p className="mt-4 border-l-2 border-signal pl-4 text-sm font-medium">Dual-fuel kits help reduce particulate generation during combustion.</p></div></article><article className="overflow-hidden rounded-[12px] border border-border bg-secondary"><img src={recdImage} alt="Emission control device diagram" loading="lazy" className="h-64 w-full object-contain bg-background p-5 opacity-80" /><div className="p-6"><div className="flex items-center gap-3"><span className="grid size-9 place-items-center rounded-[6px] bg-danger text-destructive-foreground"><ShieldCheck className="size-4" /></span><h3 className="text-xl font-bold">RECD</h3></div><p className="mt-4 text-sm leading-relaxed text-muted-foreground">A particulate trap or mechanism added in the diesel engine exhaust with controller, sensors and arrangements to clean filters periodically.</p><p className="mt-4 border-l-2 border-danger pl-4 text-sm font-medium">RECD traps particulates emitted from diesel engine exhaust.</p></div></article></div></div>
+                <div className="mx-auto max-w-[1440px] px-5 py-16 lg:px-10 lg:py-20">
+                  <div className="grid gap-6 lg:grid-cols-2 lg:items-end">
+                    <div><SectionLabel index="OM / 05">Technology</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Dual Fuel Kit vs RECD</h2></div>
+                    <p className="max-w-xl text-base leading-relaxed text-muted-foreground">Two different approaches to particulate reduction.</p>
+                  </div>
+
+                  <div className="mt-9 overflow-hidden rounded-[12px] border border-border bg-background shadow-[0_18px_45px_-35px_rgba(10,28,22,0.55)]">
+                    <div role="tablist" aria-label="Technology comparison" className="grid grid-cols-2 border-b border-border bg-secondary/65 p-2">
+                      {(["dualFuel", "recd"] as const).map((view) => {
+                        const active = technologyView === view;
+                        const isDualFuel = view === "dualFuel";
+                        return <button key={view} id={`${view}-tab`} type="button" role="tab" aria-selected={active} aria-controls="technology-panel" onClick={() => setTechnologyView(view)} className={`flex items-center gap-3 rounded-[8px] px-4 py-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${active ? "bg-panel text-background shadow-sm" : "text-muted-foreground hover:bg-background hover:text-primary"}`}>
+                          <span className={`grid size-8 shrink-0 place-items-center rounded-[6px] ${active ? "bg-signal text-panel" : isDualFuel ? "bg-primary/10 text-primary" : "bg-danger/10 text-danger"}`}>{isDualFuel ? <Fuel className="size-4" /> : <ShieldCheck className="size-4" />}</span>
+                          <span><span className="block text-sm font-bold sm:text-base">{isDualFuel ? "Dual Fuel" : "RECD"}</span><span className={`mt-0.5 block font-mono text-[9px] uppercase tracking-[0.1em] ${active ? "text-background/55" : "text-muted-foreground"}`}>{isDualFuel ? "During combustion" : "After generation"}</span></span>
+                        </button>;
+                      })}
+                    </div>
+
+                    <article id="technology-panel" role="tabpanel" aria-labelledby={`${technologyView}-tab`} className="min-h-[332px] bg-background">
+                      {technologyView === "dualFuel" ? (
+                        <div key="dual-fuel" className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
+                          <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6" onClick={() => openImage(systemImage, "OM Solutions dual-fuel kit schematic")} aria-label="Open Dual Fuel schematic"><span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-signal">Air intake system</span><img src={systemImage} alt="Dual Fuel system schematic" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" /></button>
+                          <div className="p-5 sm:p-7"><div className="flex items-start justify-between gap-4"><div><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Dual Fuel</p><h3 className="mt-2 text-2xl font-bold">Reduce at combustion.</h3></div><span className="hidden rounded-full bg-primary-soft px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-primary sm:block">Engine air flow</span></div><p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">Controlled introduction of alternate fuel into the engine air flow to reduce diesel consumption and particulate generation during combustion.</p><div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">{["Reduces particulate generation during combustion", "Uses controlled fuel injection with sensors, valves and actuators", "Can reduce diesel consumption under suitable operating conditions", "Existing diesel operation can be retained"].map((point) => <div key={point} className="flex gap-2 text-xs leading-snug"><Check className="mt-0.5 size-3.5 shrink-0 text-signal" />{point}</div>)}</div></div>
+                        </div>
+                      ) : (
+                        <div key={`${recdType}-recd`} className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
+                          <div className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6"><span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-signal">Exhaust system</span><img src={recdImage} alt="RECD exhaust emission control device diagram" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain opacity-85" /></div>
+                          <div className="p-5 sm:p-7"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-danger">RECD</p><h3 className="mt-2 text-2xl font-bold">RECD <span className="text-muted-foreground">(Retrofit Emission Control Device)</span></h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">Retrofit Emission Control Device added to the diesel engine exhaust to capture particulates.</p><div role="tablist" aria-label="RECD type" className="mt-4 flex gap-2 overflow-x-auto pb-1">{(Object.keys(recdTypes) as RecdType[]).map((type) => <button key={type} type="button" role="tab" aria-selected={recdType === type} onClick={() => setRecdType(type)} className={`shrink-0 rounded-full border px-3 py-2 font-mono text-[10px] uppercase tracking-[0.08em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${recdType === type ? "border-primary bg-primary text-primary-foreground" : "border-border bg-secondary text-muted-foreground hover:border-primary/40"}`}>{recdTypes[type].label}</button>)}</div><div className="mt-4 border-t border-border pt-4"><h4 className="text-sm font-bold">{recdTypes[recdType].heading}</h4><div className="mt-3 grid gap-x-5 gap-y-2 sm:grid-cols-2">{recdTypes[recdType].points.map((point) => <p key={point} className="flex gap-2 text-xs leading-snug text-muted-foreground"><span className="mt-1.5 size-1 shrink-0 rounded-full bg-danger" />{point}</p>)}</div></div></div>
+                        </div>
+                      )}
+                    </article>
+                  </div>
+                </div>
               </section>
 
               <section id="dr-benefits" className="bg-secondary/40">

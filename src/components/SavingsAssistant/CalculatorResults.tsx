@@ -1,5 +1,5 @@
 import type { CalculatorInputs, CalculatorResults as Results } from "./calculatorUtils";
-import { formatINR, altFuelUnit } from "./calculatorUtils";
+import { formatINR } from "./calculatorUtils";
 
 interface Props {
   inputs: CalculatorInputs;
@@ -7,13 +7,17 @@ interface Props {
   onReset: () => void;
 }
 
-function Row({ label, value, accent = false, sub }: { label: string; value: string; accent?: boolean; sub?: string }) {
+function Row({ label, value, accent = false, sub }: {
+  label: string; value: string; accent?: boolean; sub?: string;
+}) {
   return (
     <div className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
       <span className="text-[11px] text-white/55">{label}</span>
       <div className="text-right">
         <span className="font-mono text-[12px] font-bold"
-          style={{ color: accent ? "oklch(0.72 0.16 155)" : "white" }}>{value}</span>
+          style={{ color: accent ? "oklch(0.72 0.16 155)" : "white" }}>
+          {value}
+        </span>
         {sub && <span className="ml-1 font-mono text-[10px] text-white/35">{sub}</span>}
       </div>
     </div>
@@ -23,8 +27,7 @@ function Row({ label, value, accent = false, sub }: { label: string; value: stri
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="rounded-[8px] border border-white/10 overflow-hidden mb-3">
-      <div className="px-4 py-2.5 border-b border-white/10"
-        style={{ background: "rgba(255,255,255,0.05)" }}>
+      <div className="px-4 py-2.5 border-b border-white/10" style={{ background: "rgba(255,255,255,0.05)" }}>
         <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-white/50">{title}</p>
       </div>
       <div className="px-4 py-1">{children}</div>
@@ -34,20 +37,28 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 export function CalculatorResults({ inputs, results, onReset }: Props) {
   const {
-    dieselModeCostPerHour,
-    dfDieselCostPerHour,
-    altFuelCostPerHour,
-    totalDfCostPerHour,
+    operatingGensetRating,
+    electricalPowerKWe,
+    engineBrakePower,
+    totalEngineBrakePower,
+    engineIndicatedPower,
+    dieselConsumptionLPerHr,
+    dfDieselConsumptionLPerHr,
+    ngConsumptionSm3PerHr,
+    dieselCostPerHr,
+    dfDieselCostPerHr,
+    ngCostPerHr,
+    totalDualFuelCostPerHr,
     savingPerHour,
     savingPerMonth,
     savingPerYear,
     costReductionPct,
     dieselReplacementPct,
-    co2DieselModePerHour,
-    co2DfTotalPerHour,
-    co2ReductionPerHour,
-    co2ReductionPerMonth,
-    co2ReductionPerYear,
+    dieselCO2KgPerHr,
+    totalDualFuelCO2KgPerHr,
+    co2SavingKgPerHr,
+    monthlyCO2SavingKg,
+    annualCO2SavingTonnes,
   } = results;
 
   const saving = savingPerHour > 0;
@@ -56,26 +67,26 @@ export function CalculatorResults({ inputs, results, onReset }: Props) {
     <div style={{ display: "flex", flexDirection: "column", height: "100%", minHeight: 0 }}>
       <div style={{ flex: 1, overflowY: "auto", minHeight: 0 }} className="px-5 py-4">
 
-        {/* Case label */}
+        {/* Header */}
         <div className="mb-4 pb-3 border-b border-white/10">
           <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-[oklch(0.72_0.16_155)]">
             Operating Economics
           </p>
           <h3 className="mt-1 text-[13px] font-extrabold text-white leading-tight">
-            {inputs.gensetRating} kVA · {inputs.load}% Load · {inputs.altFuelType}
+            {inputs.gensetRating} kVA · {inputs.load}% Load · NG
           </h3>
           <p className="mt-0.5 font-mono text-[10px] text-white/35">
-            {inputs.hoursPerMonth} hrs/month
+            {inputs.hoursPerMonth} hrs/month · ₹{inputs.dieselPrice}/L diesel · ₹{inputs.ngPrice}/Sm³ NG
           </p>
         </div>
 
-        {/* Saving due to DFK — hero highlight */}
+        {/* Hero — Saving Due to DFK */}
         <div className="mb-4 rounded-[8px] p-4"
-          style={{ background: saving ? "oklch(0.72 0.16 155 / 0.12)" : "rgba(255,255,255,0.05)",
-                   border: saving ? "1px solid oklch(0.72 0.16 155 / 0.45)" : "1px solid rgba(255,255,255,0.1)" }}>
-          <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-white/45 mb-2">
-            Saving Due to DFK
-          </p>
+          style={{
+            background: saving ? "oklch(0.72 0.16 155 / 0.12)" : "rgba(255,255,255,0.05)",
+            border: saving ? "1px solid oklch(0.72 0.16 155 / 0.45)" : "1px solid rgba(255,255,255,0.1)",
+          }}>
+          <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-white/45 mb-2">Saving Due to DFK</p>
           <div className="flex items-end justify-between">
             <div>
               <p className="text-3xl font-extrabold" style={{ color: saving ? "oklch(0.72 0.16 155)" : "rgba(255,255,255,0.5)" }}>
@@ -101,54 +112,56 @@ export function CalculatorResults({ inputs, results, onReset }: Props) {
                 {dieselReplacementPct.toFixed(1)}%
               </p>
             </div>
+            <div>
+              <p className="font-mono text-[9px] text-white/35">CO₂ Saving / yr</p>
+              <p className="text-sm font-bold" style={{ color: "oklch(0.72 0.16 155)" }}>
+                {annualCO2SavingTonnes.toFixed(2)} t
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Diesel Mode */}
-        <Section title="Diesel Mode">
-          <Row label="Diesel Consumption" value={`${inputs.dieselConsumption.toFixed(1)} L/hr`} />
-          <Row label="Diesel Cost" value={formatINR(dieselModeCostPerHour)} sub="/hr" />
+        {/* Fuel Consumption */}
+        <Section title="Fuel Consumption">
+          <Row label="Diesel (diesel-only mode)" value={`${dieselConsumptionLPerHr.toFixed(1)} L/hr`} />
+          <Row label="DF Diesel (dual-fuel mode)" value={`${dfDieselConsumptionLPerHr.toFixed(1)} L/hr`} />
+          <Row label="NG Consumption" value={`${ngConsumptionSm3PerHr.toFixed(1)} Sm³/hr`} accent />
         </Section>
 
-        {/* Dual-Fuel Mode */}
-        <Section title="Dual-Fuel Mode">
-          <Row label="DF Diesel" value={`${inputs.dfDieselConsumption.toFixed(1)} L/hr`} />
-          <Row label={`DF ${inputs.altFuelType}`}
-               value={`${inputs.dfAltFuelConsumption.toFixed(1)} ${altFuelUnit(inputs.altFuelType)}`} />
-          <Row label="DF Diesel Cost" value={formatINR(dfDieselCostPerHour)} sub="/hr" />
-          <Row label={`${inputs.altFuelType} Cost`} value={formatINR(altFuelCostPerHour)} sub="/hr" />
-          <Row label="Total DF Cost" value={formatINR(totalDfCostPerHour)} sub="/hr" accent />
+        {/* Operating Cost */}
+        <Section title="Operating Cost">
+          <Row label="Diesel Mode" value={formatINR(dieselCostPerHr)} sub="/hr" />
+          <Row label="DF Diesel Cost" value={formatINR(dfDieselCostPerHr)} sub="/hr" />
+          <Row label="NG Cost" value={formatINR(ngCostPerHr)} sub="/hr" />
+          <Row label="Total Dual-Fuel Cost" value={formatINR(totalDualFuelCostPerHr)} sub="/hr" accent />
         </Section>
 
-        {/* Environmental Impact */}
+        {/* Engine Parameters */}
+        <Section title="Engine Parameters">
+          <Row label="Operating Genset Rating" value={`${operatingGensetRating.toFixed(0)} kVA`} />
+          <Row label="Electrical Power" value={`${electricalPowerKWe.toFixed(1)} kWe`} />
+          <Row label="Engine Brake Power" value={`${engineBrakePower.toFixed(1)} kW`} />
+          <Row label="Total Engine Brake Power" value={`${totalEngineBrakePower.toFixed(1)} kW`} />
+          <Row label="Engine Indicated Power" value={`${engineIndicatedPower.toFixed(1)} kW`} />
+        </Section>
+
+        {/* CO₂ Reduction */}
         <Section title="Environmental Impact (CO₂)">
-          <Row label="CO₂ — Diesel Mode" value={`${co2DieselModePerHour.toFixed(2)} kg/hr`} />
-          <Row label="CO₂ — Dual-Fuel Mode"
-               value={co2DfTotalPerHour !== null ? `${co2DfTotalPerHour.toFixed(2)} kg/hr` : "—"} />
-          <Row label="CO₂ Reduction"
-               value={co2ReductionPerHour !== null ? `${co2ReductionPerHour.toFixed(2)} kg/hr` : "—"}
-               accent={co2ReductionPerHour !== null && co2ReductionPerHour > 0} />
-          {co2ReductionPerMonth !== null && (
-            <Row label="CO₂ Reduction / Month"
-                 value={`${(co2ReductionPerMonth / 1000).toFixed(2)} tonnes`}
-                 accent />
-          )}
-          {co2ReductionPerYear !== null && (
-            <Row label="CO₂ Reduction / Year"
-                 value={`${(co2ReductionPerYear / 1000).toFixed(2)} tonnes`}
-                 accent />
-          )}
+          <Row label="CO₂ — Diesel Mode" value={`${dieselCO2KgPerHr.toFixed(2)} kg/hr`} />
+          <Row label="CO₂ — Dual-Fuel Mode" value={`${totalDualFuelCO2KgPerHr.toFixed(2)} kg/hr`} />
+          <Row label="CO₂ Saving / Hour" value={`${co2SavingKgPerHr.toFixed(2)} kg/hr`} accent />
+          <Row label="CO₂ Saving / Month" value={`${(monthlyCO2SavingKg / 1000).toFixed(2)} tonnes`} />
+          <Row label="CO₂ Saving / Year" value={`${annualCO2SavingTonnes.toFixed(2)} tonnes`} accent />
           <div className="py-2">
             <p className="text-[9px] text-white/25 leading-relaxed">
-              Diesel: 0.03 GJ/L × 70.55 kg CO₂/GJ = 2.1165 kg CO₂/L.
-              Natural Gas: 0.05 GJ/kg × 55.22 kg CO₂/GJ = 2.761 kg CO₂/kg.
-              Source: OM Solutions client reference.
+              Diesel: 32 MJ/L × 70.55 kg CO₂/GJ. NG: 49 MJ/kg × 55.22 kg CO₂/GJ.
+              Source: OM Solutions Excel calculator.
             </p>
           </div>
         </Section>
 
         <p className="mt-2 text-[10px] leading-relaxed text-white/25">
-          Estimates based on the values provided. Actual savings depend on engine condition,
+          Estimates based on the OM Solutions BMEP calculation model. Actual savings depend on engine condition,
           load profile, fuel quality and site conditions.
         </p>
       </div>

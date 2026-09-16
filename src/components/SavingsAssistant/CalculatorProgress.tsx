@@ -3,11 +3,10 @@ interface Props {
   totalSteps: number;
 }
 
-const LABELS = ["Genset", "Fuel Type", "Hours", "Prices", "Diesel", "DF Diesel", "DF Gas"];
+const LABELS = ["Genset", "Hours", "Prices"];
 
 export function CalculatorProgress({ currentStep, totalSteps }: Props) {
   const pct = Math.round((currentStep / totalSteps) * 100);
-
   return (
     <div className="px-5 pt-3 pb-2">
       <div className="flex items-center justify-between mb-1.5">

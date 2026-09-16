@@ -240,6 +240,17 @@ const recdTypes = {
 
 type RecdType = keyof typeof recdTypes;
 
+const dualFuelConsiderations = [
+  { id: "gasAvailability", label: "Gas Availability", statement: "Dual Fuel mode is possible only with Alternate fuel / Gas availability." },
+  { id: "loadDefinition", label: "Load Definition", statement: "Appropriate load definition is VIMP." },
+  { id: "weather", label: "Weather Conditions", statement: "Diesel replacement is sensitive to weather conditions." },
+  { id: "loadCycle", label: "Load Cycle", statement: "Diesel replacement is dependent on Engine Application (Load cycle)." },
+  { id: "fuelQuality", label: "Fuel Quality", statement: "Diesel replacement is dependent on Fuel Quality." },
+  { id: "engineHealth", label: "Engine Health", statement: "Appropriate sensing is needed for engine health monitoring." },
+] as const;
+
+type DualFuelConsideration = (typeof dualFuelConsiderations)[number]["id"];
+
 const componentGallery = [
   ["LPG dual-fuel kit", lpgKitImage],
   ["PNG dual-fuel kit", pngKitImage],
@@ -531,6 +542,7 @@ function OmSolutionsHome() {
   const [formSent, setFormSent] = useState(false);
   const [technologyView, setTechnologyView] = useState<"dualFuel" | "recd">("dualFuel");
   const [recdType, setRecdType] = useState<RecdType>("selfCleaning");
+  const [selectedConsideration, setSelectedConsideration] = useState<DualFuelConsideration>("gasAvailability");
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -786,7 +798,7 @@ function OmSolutionsHome() {
 
               {/* Section links — hidden on mobile */}
               <nav className="hidden items-center gap-6 xl:flex">
-              {[["Solutions", "dr-solutions"], ["Dual Fuel Kit", "dr-kit"], ["Technology", "dr-tech"], ["Benefits", "dr-benefits"], ["Comparison", "dr-compare"], ["Components", "dr-components"], ["Installations", "dr-installs"], ["Case Studies", "dr-cases"]].map(([label, id]) => (
+              {[["Solutions", "dr-solutions"], ["Dual Fuel Kit", "dr-kit"], ["Technology", "dr-tech"], ["Benefits", "dr-benefits"], ["Considerations", "dr-considerations"], ["Comparison", "dr-compare"], ["Components", "dr-components"], ["Case Studies", "dr-cases"]].map(([label, id]) => (
                   <a key={id} href={`#${id}`} className="whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.11em] text-white/75 transition-colors hover:text-[#b6ff72]">{label}</a>
                 ))}
               </nav>
@@ -863,18 +875,27 @@ function OmSolutionsHome() {
                 <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><div className="flex flex-wrap items-end justify-between gap-6"><div><SectionLabel index="OM / 06">Why dual fuel</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Benefits of using a Dual Fuel kit</h2></div><p className="max-w-md text-sm leading-relaxed text-muted-foreground">The 70% figure is the maximum gaseous fuel use stated in the profile and depends on engine, application, load and fuel conditions.</p></div><div className="mt-12 grid gap-px overflow-hidden rounded-[12px] border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">{benefits.map((benefit, index) => <div key={benefit} className={`flex gap-4 bg-background p-5 ${index < 4 ? "lg:p-7" : ""}`}><span className={`mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-signal text-panel`}><Check className="size-3.5" /></span><div><p className="text-sm font-semibold leading-snug">{benefit}</p>{index === 2 ? <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.1em] text-muted-foreground">Maximum stated figure</p> : null}</div></div>)}</div></div>
               </section>
 
+              <section id="dr-considerations" className="border-b border-border bg-background">
+                <div className="mx-auto max-w-[1440px] px-5 py-16 lg:px-10 lg:py-20">
+                  <div className="flex flex-wrap items-end justify-between gap-5"><div><SectionLabel index="OM / 07">Operating considerations</SectionLabel><h2 className="mt-4 text-3xl font-extrabold tracking-tight lg:text-4xl">Challenges while using a Dual Fuel Kit</h2></div><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Dual-fuel performance depends on operating conditions. These considerations should be evaluated for the intended engine application.</p></div>
+                  <div className="mt-8 grid items-stretch gap-3 lg:grid-cols-[1fr_300px_1fr] lg:gap-5">
+                    <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">{dualFuelConsiderations.slice(0, 3).map((item, index) => <button key={item.id} type="button" onClick={() => setSelectedConsideration(item.id)} aria-pressed={selectedConsideration === item.id} className={`rounded-[8px] border px-4 py-3 text-left transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${selectedConsideration === item.id ? "border-signal bg-background shadow-sm" : "border-border bg-secondary/45 hover:-translate-y-0.5 hover:border-primary/35 hover:bg-background"}`}><span className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">0{index + 1} · {item.label}</span><span className="mt-1.5 block text-sm leading-snug">{item.statement}</span></button>)}</div>
+                    <div className="relative flex min-h-[268px] flex-col items-center justify-center overflow-hidden rounded-[12px] bg-panel px-6 text-center text-background"><div className="absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(182,255,114,0.24)_1px,transparent_1px),linear-gradient(90deg,rgba(182,255,114,0.24)_1px,transparent_1px)] [background-size:24px_24px]" /><span className="relative grid size-16 place-items-center rounded-full border border-signal/40 bg-signal/10 font-mono text-lg font-bold text-signal">DF</span><p className="relative mt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-signal">Dual Fuel · Operating Range</p><span className="relative mt-3 rounded-full border border-signal/40 bg-background/10 px-4 py-2 font-mono text-xs font-bold text-signal">30–80% Load</span><p className="relative mt-3 max-w-[210px] text-[10px] leading-relaxed text-background/55">Diesel replacement is effective between 30% to 80% load.</p></div>
+                    <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">{dualFuelConsiderations.slice(3).map((item, index) => <button key={item.id} type="button" onClick={() => setSelectedConsideration(item.id)} aria-pressed={selectedConsideration === item.id} className={`rounded-[8px] border px-4 py-3 text-left transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${selectedConsideration === item.id ? "border-signal bg-background shadow-sm" : "border-border bg-secondary/45 hover:-translate-y-0.5 hover:border-primary/35 hover:bg-background"}`}><span className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">0{index + 4} · {item.label}</span><span className="mt-1.5 block text-sm leading-snug">{item.statement}</span></button>)}</div>
+                  </div>
+                  <p className="mt-4 text-center font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">Select a consideration to highlight it in the system context.</p>
+                </div>
+              </section>
+
               <section id="dr-compare" className="border-b border-border">
-                <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 09">Technology comparison</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-6"><h2 className="text-4xl font-extrabold tracking-tight lg:text-5xl">Comparison of technology options to comply SPCB notification for PM reduction</h2><p className="max-w-sm text-sm leading-relaxed text-muted-foreground">Comparison reproduced from the company profile. Scroll horizontally on smaller screens.</p></div><div className="mt-12 overflow-x-auto rounded-[12px] border border-border"><table className="w-full min-w-[980px] border-collapse text-left text-sm"><thead><tr className="bg-panel text-background"><th className="w-[18%] px-5 py-4 font-mono text-[10px] uppercase tracking-[0.12em] text-background/65">Category</th><th className="px-5 py-4 font-semibold">New Gas Genset CPCB-IV+</th><th className="px-5 py-4 font-semibold">New Diesel Genset CPCB-IV+</th><th className="px-5 py-4 font-semibold">Retrofit Emission Control Device</th><th className="bg-primary px-5 py-4 font-semibold text-primary-foreground">Dual Fuel Kit</th></tr></thead><tbody>{comparisonRows.map((row) => <tr key={row[0]} className="border-t border-border"><th className="px-5 py-5 font-semibold">{row[0]}</th><td className="px-5 py-5 text-muted-foreground">{row[1]}</td><td className="px-5 py-5 text-muted-foreground">{row[2]}</td><td className="px-5 py-5 text-muted-foreground">{row[3]}</td><td className="bg-primary-soft px-5 py-5 font-semibold text-primary">{row[4]}</td></tr>)}</tbody></table></div></div>
+                <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 09">Technology comparison</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-6"><h2 className="text-4xl font-extrabold tracking-tight lg:text-5xl">Comparison of technology options to comply SPCB notification for PM reduction</h2><p className="max-w-sm text-sm leading-relaxed text-muted-foreground"></p></div><div className="mt-12 overflow-x-auto rounded-[12px] border border-border"><table className="w-full min-w-[980px] border-collapse text-left text-sm"><thead><tr className="bg-panel text-background"><th className="w-[18%] px-5 py-4 font-mono text-[10px] uppercase tracking-[0.12em] text-background/65">Category</th><th className="px-5 py-4 font-semibold">New Gas Genset CPCB-IV+</th><th className="px-5 py-4 font-semibold">New Diesel Genset CPCB-IV+</th><th className="px-5 py-4 font-semibold">Retrofit Emission Control Device</th><th className="bg-primary px-5 py-4 font-semibold text-primary-foreground">Dual Fuel Kit</th></tr></thead><tbody>{comparisonRows.map((row) => <tr key={row[0]} className="border-t border-border"><th className="px-5 py-5 font-semibold">{row[0]}</th><td className="px-5 py-5 text-muted-foreground">{row[1]}</td><td className="px-5 py-5 text-muted-foreground">{row[2]}</td><td className="px-5 py-5 text-muted-foreground">{row[3]}</td><td className="bg-primary-soft px-5 py-5 font-semibold text-primary">{row[4]}</td></tr>)}</tbody></table></div></div>
               </section>
 
               <section id="dr-components" className="bg-secondary/40">
                 <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><div className="flex flex-wrap items-end justify-between gap-5"><div><SectionLabel index="OM / 10">Product gallery</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Dual Fuel Kit Components</h2></div><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Control, sensing and gas-handling hardware shown in the supplied product photographs.</p></div><div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4">{componentGallery.map(([label, image]) => <div key={label} className="group overflow-hidden rounded-[9px] border border-border bg-background"><button type="button" className="block aspect-square w-full overflow-hidden" onClick={() => openImage(image, label)}><img src={image} alt={label} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]" /></button><p className="p-4 text-sm font-semibold">{label}</p></div>)}</div></div>
               </section>
 
-              <section id="dr-installs" className="border-b border-border">
                 <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 11">Installations</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-6"><h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Installations.</h2><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Field results are presented as project-specific examples, not universal guarantees.</p></div><div className="mt-12 grid gap-5 lg:grid-cols-2"><article className="overflow-hidden rounded-[12px] border border-border bg-secondary"><ImageButton src={tataImage} alt="TATA 125 kVA CPCB-II diesel and LPG installation" caption="TATA 125 kVA · CPCB-II · LPG" onClick={() => openImage(tataImage, "TATA 125 kVA CPCB-II LPG installation")} className="aspect-[1.45/1]" /><div className="p-6"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Project 01 · LPG</p><h3 className="mt-3 text-2xl font-bold">TATA 125 kVA (CPCB-II)</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">TATA 6 cylinder turbocharged with EGR · CPCB-II compliant genset · LPG based installation.</p><div className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-[7px] border border-border bg-border"><div className="bg-background p-4"><p className="font-mono text-2xl text-signal">45%</p><p className="mt-1 text-xs text-muted-foreground">Diesel replacement</p></div><div className="bg-background p-4"><p className="font-mono text-2xl">75 to 80%</p><p className="mt-1 text-xs text-muted-foreground">Operating load</p></div></div></div></article><article className="overflow-hidden rounded-[12px] border border-border bg-secondary"><div className="group relative cursor-pointer" onClick={() => setAppGallery({ title: "KOEL 320 kVA · PNG Installation", images: [koelImg1, koelImg2], index: 0 })}><img src={koelImg1} alt="KOEL 320 kVA CPCB-II diesel and PNG installation" className="aspect-[1.45/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" /><span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">2 photos</span></div><div className="p-6"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Project 02 · PNG 300 mbar</p><h3 className="mt-3 text-2xl font-bold">KOEL 320 kVA (CPCB-II)</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">KOEL Vee8 cylinder turbocharged · CPCB-II compliant genset · low-pressure PNG based installation.</p><div className="mt-6 grid grid-cols-3 gap-px overflow-hidden rounded-[7px] border border-border bg-border"><div className="bg-background p-4"><p className="font-mono text-2xl text-signal">65%</p><p className="mt-1 text-xs text-muted-foreground">Diesel replacement</p></div><div className="bg-background p-4"><p className="font-mono text-2xl">₹982</p><p className="mt-1 text-xs text-muted-foreground">Saving / hour</p></div><div className="bg-background p-4"><p className="font-mono text-2xl">34%</p><p className="mt-1 text-xs text-muted-foreground">Fuel cost saving</p></div></div><p className="mt-5 font-mono text-[10px] leading-relaxed text-muted-foreground">Akwel Automotive Pune India Pvt. Ltd., Kharabwadi, Chakan · Installed 10/06/2025 · Tested 25 Sep 2025</p></div></article></div></div>
-              </section>
-
               <section id="dr-cases" className="bg-panel text-background">
                 <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 12" dark>Case studies</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-6"><h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Installations in context.</h2><p className="max-w-md text-sm leading-relaxed text-background/65">Two additional project records from the company profile, shown with their equipment and fuel context.</p></div><div className="mt-12 grid gap-5 lg:grid-cols-2"><article className="glass-panel overflow-hidden rounded-[12px]"><div className="grid grid-cols-2 gap-1"><ImageButton src={birlaImageOne} alt="Birla Tisya Bengaluru generator installation" onClick={() => openImage(birlaImageOne, "Birla Tisya Bengaluru generator installation")} className="aspect-square" /><ImageButton src={birlaImageTwo} alt="Birla Tisya Bengaluru outdoor generator" onClick={() => openImage(birlaImageTwo, "Birla Tisya Bengaluru outdoor generator")} className="aspect-square" /></div><div className="p-6"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-signal">May 2026 · Bengaluru</p><h3 className="mt-3 text-2xl font-bold">Birla Tisya, Bengaluru</h3><div className="mt-4 space-y-2 text-sm text-background/72"><p>Force MTU 1010 kVA × 2</p><p>Greaves 200 kVA × 1</p><p>Piped Natural Gas with minimum 1 bar pressure</p></div></div></article><article className="glass-panel overflow-hidden rounded-[12px]"><ImageButton src={gasSystemImage} alt="MaxGen Energy gas system components" onClick={() => openImage(gasSystemImage, "MaxGen Energy gas system components")} className="aspect-[1.7/1]" /><div className="p-6"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-signal">Equipment record</p><h3 className="mt-3 text-2xl font-bold">MaxGen Energy for Nevatia Steel and Alloys PL</h3><div className="mt-5 flex flex-wrap gap-2">{["Dual Fuel Controller", "Air Gas Mixer", "Gas Leak Detector", "Knock Sensor", "Pre-Turbo Exhaust Temperature Sensor", "Mechanical Gas Shut Off Valve", "Slam Shut Off Valve", "Electronic Gas Shut Off Valve", "Electronic Gas Flow Control Valve", "Gas Pressure Regulator", "Gas Pressure Switch"].map((tag) => <span key={tag} className="rounded-[5px] border border-background/15 px-3 py-2 font-mono text-[10px] text-background/68">{tag}</span>)}</div></div></article></div></div>
               </section>
@@ -927,8 +948,42 @@ function OmSolutionsHome() {
               <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">Installations from the field. Click any image to view the full gallery.</p>
             </div>
 
-            {/* Installation galleries — side by side */}
-            <div className="mt-10 grid gap-5 md:grid-cols-2">
+            {/* Installation galleries — 2×2 grid */}
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+
+              {/* TATA 125 kVA */}
+              <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer"
+                onClick={() => setAppGallery({ title: "TATA 125 kVA · CPCB-II · LPG", images: [tataImage], index: 0 })}>
+                <div className="relative overflow-hidden aspect-[1.25/1]">
+                  <img src={tataImage} alt="TATA 125 kVA LPG installation" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+                  <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
+                  <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">1 photo</span>
+                </div>
+                <div className="flex items-end justify-between gap-4 p-5">
+                  <div>
+                    <h3 className="text-xl font-bold">TATA 125 kVA (CPCB-II)</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">TATA 6 cyl. turbocharged with EGR · LPG · 45% diesel replacement · 75–80% load</p>
+                  </div>
+                  <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
+                </div>
+              </article>
+
+              {/* KOEL 320 kVA */}
+              <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer"
+                onClick={() => setAppGallery({ title: "KOEL 320 kVA · CPCB-II · PNG", images: [koelImg1, koelImg2], index: 0 })}>
+                <div className="relative overflow-hidden aspect-[1.25/1]">
+                  <img src={koelImg1} alt="KOEL 320 kVA PNG installation" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+                  <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
+                  <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">2 photos</span>
+                </div>
+                <div className="flex items-end justify-between gap-4 p-5">
+                  <div>
+                    <h3 className="text-xl font-bold">KOEL 320 kVA (CPCB-II)</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">KOEL Vee8 turbocharged · PNG 300 mbar · 65% diesel replacement · ₹982 saving/hr · 34% fuel cost saving</p>
+                  </div>
+                  <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
+                </div>
+              </article>
 
               {/* Birla Tisya */}
               <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer"

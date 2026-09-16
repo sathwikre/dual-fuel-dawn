@@ -219,6 +219,43 @@ const galleryItems = [
   ["Dual-fuel control panel", controlPanelImage, "Products"],
 ] as const;
 
+function TypewriterText({ text }: { text: string }) {
+  const [displayed, setDisplayed] = useState("");
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    // Small delay so the page loads first, then typing begins
+    const startTimer = setTimeout(() => setStarted(true), 400);
+    return () => clearTimeout(startTimer);
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+    if (displayed.length >= text.length) return;
+    const timer = setTimeout(() => {
+      setDisplayed(text.slice(0, displayed.length + 1));
+    }, 38);
+    return () => clearTimeout(timer);
+  }, [started, displayed, text]);
+
+  // Split at "decarbonise" to preserve the line break
+  const breakIdx = text.indexOf("decarbonise");
+  const line1 = displayed.slice(0, Math.min(displayed.length, breakIdx));
+  const line2 = displayed.length > breakIdx ? displayed.slice(breakIdx) : "";
+
+  return (
+    <>
+      {line1}
+      {displayed.length >= breakIdx && <br />}
+      {line2}
+      {/* blinking cursor while typing */}
+      {displayed.length < text.length && (
+        <span className="inline-block w-[2px] h-[0.85em] bg-white align-middle ml-1 animate-pulse" />
+      )}
+    </>
+  );
+}
+
 function HeroBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imgRef0 = useRef<HTMLImageElement>(null);
@@ -616,7 +653,7 @@ function OmSolutionsHome() {
           <div className="relative z-[3] mx-auto flex min-h-[100svh] w-full max-w-[1440px] flex-col items-center justify-end px-5 pt-[85px] pb-32 text-center lg:px-16">
             <div className="max-w-4xl rise-in">
               <h1 className="mt-0 text-[clamp(32px,4.5vw,64px)] font-light leading-[1.1] tracking-[-0.02em] text-white">
-                Our purpose is to clean and<br />decarbonise the air
+                <TypewriterText text="Our purpose is to clean and decarbonise the air" />
               </h1>
               <p className="mt-5 text-sm font-normal tracking-wide text-white/80">We are OM Solutions</p>
               <div className="mt-7">

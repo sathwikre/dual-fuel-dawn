@@ -43,8 +43,6 @@ import birlaImageTwo from "@/assets/img-096.jpg";
 
 // Hero background images
 import heroBg1 from "@/assets/background/Gross picture DFK2.jpeg";
-import heroBg2 from "@/assets/background/IMG_20260206_073457.jpg";
-import heroBg3 from "@/assets/background/IMG_20260206_073508.jpg";
 
 import heroBg4 from "@/assets/background/IMG_20260206_074148.jpg";
 import heroBg5 from "@/assets/background/WhatsApp Image 2026-05-21 at 4.16.08 PM (2).jpeg";
@@ -484,8 +482,6 @@ function HeroBackground() {
     <>
       {/* Preload images — hidden off-screen */}
       <img ref={imgRef0}  src={heroBg1}  alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef1}  src={heroBg2}  alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef2}  src={heroBg3}  alt="" aria-hidden="true" className="sr-only" />
       <img ref={imgRef3}  src={heroBg4}  alt="" aria-hidden="true" className="sr-only" />
       <img ref={imgRef4}  src={heroBg5}  alt="" aria-hidden="true" className="sr-only" />
       <img ref={imgRef5}  src={heroBg6}  alt="" aria-hidden="true" className="sr-only" />

@@ -7,15 +7,29 @@ interface Props {
   onReset: () => void;
 }
 
-function Row({ label, value, accent = false, sub }: {
-  label: string; value: string; accent?: boolean; sub?: string;
+type ResultTone = "positive" | "negative" | "neutral";
+
+const toneColor: Record<ResultTone, string> = {
+  positive: "oklch(0.78 0.18 155)",
+  negative: "oklch(0.72 0.2 28)",
+  neutral: "oklch(0.8 0.02 250)",
+};
+
+function toneFor(value: number): ResultTone {
+  if (value > 0) return "positive";
+  if (value < 0) return "negative";
+  return "neutral";
+}
+
+function Row({ label, value, accent = false, tone, sub }: {
+  label: string; value: string; accent?: boolean; tone?: ResultTone; sub?: string;
 }) {
   return (
     <div className="flex items-center justify-between gap-3 py-3 border-b-2 border-white/10 last:border-0">
       <span className="text-[13px] font-semibold text-white/80">{label}</span>
       <div className="text-right">
         <span className="text-[15px] font-extrabold"
-          style={{ color: accent ? "oklch(0.72 0.16 155)" : "white" }}>
+          style={{ color: tone ? toneColor[tone] : accent ? "oklch(0.72 0.16 155)" : "white" }}>
           {value}
         </span>
         {sub && <span className="ml-1 text-[12px] font-semibold text-white/60">{sub}</span>}
@@ -61,7 +75,8 @@ export function CalculatorResults({ inputs, results, onReset }: Props) {
     annualCO2SavingTonnes,
   } = results;
 
-  const saving = savingPerHour > 0;
+  const savingTone = toneFor(savingPerHour);
+  const co2Tone = toneFor(co2SavingKgPerHr);
 
   return (
     <div className="calc-results" style={{ display: "flex", flexDirection: "column", height: "100%", minHeight: 0 }}>
@@ -83,13 +98,13 @@ export function CalculatorResults({ inputs, results, onReset }: Props) {
         {/* Hero — Saving Due to DFK */}
         <div className="mb-5 rounded-[3px] p-5"
           style={{
-            background: saving ? "oklch(0.72 0.16 155 / 0.12)" : "rgba(255,255,255,0.05)",
-            border: saving ? "1px solid oklch(0.72 0.16 155 / 0.45)" : "1px solid rgba(255,255,255,0.1)",
+            background: savingTone === "positive" ? "oklch(0.72 0.16 155 / 0.12)" : savingTone === "negative" ? "oklch(0.72 0.2 28 / 0.14)" : "rgba(255,255,255,0.05)",
+            border: `2px solid ${toneColor[savingTone]}`,
           }}>
           <p className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/75 mb-2">Saving Due to DFK</p>
           <div className="flex items-end justify-between">
             <div>
-              <p className="text-4xl font-black" style={{ color: saving ? "oklch(0.72 0.16 155)" : "rgba(255,255,255,0.5)" }}>
+              <p className="text-4xl font-black" style={{ color: toneColor[savingTone] }}>
                 {formatINR(savingPerHour)}
               </p>
               <p className="text-[12px] font-bold text-white/70 mt-1">INR / hr</p>
@@ -114,7 +129,7 @@ export function CalculatorResults({ inputs, results, onReset }: Props) {
             </div>
             <div>
               <p className="text-[12px] font-black text-white">CO₂ Saving / yr</p>
-              <p className="text-[17px] font-black" style={{ color: "oklch(0.72 0.16 155)" }}>
+              <p className="text-[17px] font-black" style={{ color: toneColor[co2Tone] }}>
                 {annualCO2SavingTonnes.toFixed(2)} t
               </p>
             </div>
@@ -149,9 +164,9 @@ export function CalculatorResults({ inputs, results, onReset }: Props) {
         <Section title="Environmental Impact (CO₂)">
           <Row label="CO₂ — Diesel Mode" value={`${dieselCO2KgPerHr.toFixed(2)} kg/hr`} />
           <Row label="CO₂ — Dual-Fuel Mode" value={`${totalDualFuelCO2KgPerHr.toFixed(2)} kg/hr`} />
-          <Row label="CO₂ Saving / Hour" value={`${co2SavingKgPerHr.toFixed(2)} kg/hr`} accent />
-          <Row label="CO₂ Saving / Month" value={`${(monthlyCO2SavingKg / 1000).toFixed(2)} tonnes`} />
-          <Row label="CO₂ Saving / Year" value={`${annualCO2SavingTonnes.toFixed(2)} tonnes`} accent />
+          <Row label="CO₂ Saving / Hour" value={`${co2SavingKgPerHr.toFixed(2)} kg/hr`} tone={co2Tone} />
+          <Row label="CO₂ Saving / Month" value={`${(monthlyCO2SavingKg / 1000).toFixed(2)} tonnes`} tone={toneFor(monthlyCO2SavingKg)} />
+          <Row label="CO₂ Saving / Year" value={`${annualCO2SavingTonnes.toFixed(2)} tonnes`} tone={toneFor(annualCO2SavingTonnes)} />
           <div className="py-2">
             <p className="text-[9px] text-white/25 leading-relaxed">
               Diesel: 32 MJ/L × 70.55 kg CO₂/GJ. NG: 49 MJ/kg × 55.22 kg CO₂/GJ.

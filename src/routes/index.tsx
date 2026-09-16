@@ -64,7 +64,7 @@ import heroBg18 from "@/assets/background/the-transport-enthusiast-dc-EvvoBu0nBn
 import heroBg19 from "@/assets/background/valentin-Tk7abNpQ3ZI-unsplash.jpg";
 import heroBg20 from "@/assets/background/venti-views-1cqIcrWFQBI-unsplash.jpg";
 import heroBg21 from "@/assets/background/worksite-ltd-MVA-zlTQdSE-unsplash.jpg";
-import birlaNewsImage from "@/assets/WhatsApp Image 2026-09-15 at 10.10.22 PM.jpeg";
+import birlaNewsImage from "@/assets/WhatsApp Image 2026-05-21 at 4.16.09 PM.jpeg";
 import akwelImage from "@/assets/aqual.jpeg";
 import ammeniEngineImage from "@/assets/ammeni engine.jpeg";
 

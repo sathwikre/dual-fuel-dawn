@@ -45,13 +45,22 @@ export function SavingsCalculator({ onClose }: Props) {
           display: flex;
           flex-direction: column;
           overflow: hidden;
-          border-radius: 12px;
+          border-radius: 8px;
           background: oklch(0.14 0.04 158);
-          border: 1px solid rgba(45,189,110,0.22);
+          border: 2px solid rgba(84, 222, 145, 0.65);
           box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
+          font-family: Arial, Helvetica, sans-serif;
         }
-        .calc-panel input { font-weight: 600; }
-        .calc-panel input::placeholder { font-weight: 400; }
+        .calc-panel input {
+          min-height: 48px;
+          font-size: 16px;
+          font-weight: 700;
+          color: #fff;
+        }
+        .calc-panel input::placeholder { font-weight: 500; }
+        .calc-panel button { min-height: 44px; font-size: 11px; font-weight: 800; }
+        .calc-panel .rounded-\[6px\], .calc-panel .rounded-\[8px\], .calc-panel .rounded-full { border-radius: 3px; }
+        .calc-panel .border-white\/10, .calc-panel .border-white\/15, .calc-panel .border-white\/20 { border-width: 2px; }
         /* Desktop: right-anchored fixed width */
         @media (min-width: 540px) {
           .calc-panel {
@@ -76,21 +85,21 @@ export function SavingsCalculator({ onClose }: Props) {
         aria-label="Dual Fuel Savings Calculator"
       >
         {/* Header — fixed, never scrolls */}
-        <div className="shrink-0 flex items-start justify-between gap-3 px-5 py-4 border-b border-white/8">
+        <div className="shrink-0 flex items-start justify-between gap-3 border-b-2 border-white/20 px-5 py-5">
           <div className="min-w-0">
             <div className="flex items-center gap-2 mb-1">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                 <rect x="3.5" y="3.5" width="7" height="7" rx="1.5" stroke="oklch(0.72 0.16 155)" strokeWidth="1.2" />
                 <circle cx="7" cy="7" r="1.2" fill="oklch(0.72 0.16 155)" />
               </svg>
-              <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-[oklch(0.72_0.16_155)]">
+              <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-[oklch(0.72_0.16_155)]">
                 OM Solutions
               </span>
             </div>
-            <h2 className="text-[13px] font-extrabold uppercase tracking-[0.05em] text-white leading-tight">
+            <h2 className="text-[16px] font-black uppercase tracking-[0.04em] text-white leading-tight">
               Dual Fuel Savings Calculator
             </h2>
-            <p className="mt-0.5 text-[11px] text-white/45 leading-snug">
+            <p className="mt-1 text-[13px] font-medium text-white/75 leading-snug">
               Estimate the potential fuel savings for your engine.
             </p>
           </div>
@@ -98,7 +107,7 @@ export function SavingsCalculator({ onClose }: Props) {
             type="button"
             onClick={onClose}
             aria-label="Close calculator"
-            className="shrink-0 flex h-7 w-7 items-center justify-center rounded-full border border-white/15 text-white/50 transition-colors hover:border-white/30 hover:text-white"
+            className="shrink-0 flex h-9 w-9 items-center justify-center rounded-full border-2 border-white/45 text-white transition-colors hover:border-white hover:bg-white/10"
           >
             <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
               <path d="M2 2L8 8M8 2L2 8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />

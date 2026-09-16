@@ -33,10 +33,10 @@ const stepMessages: Record<number, { greeting: string; question: string }> = {
   },
 };
 
-const labelClass = "block mb-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-white/50";
-const unitBadge  = "px-2.5 py-2.5 font-mono text-[11px] text-white/55 border border-white/10 rounded-r-[6px] bg-white/5 whitespace-nowrap";
-const inputBase  = "flex-1 bg-white/5 px-3 py-2.5 text-sm text-white outline-none placeholder:text-white/30";
-const rowClass   = "flex overflow-hidden rounded-[6px] border border-white/15 focus-within:border-[oklch(0.72_0.16_155)] transition-colors";
+const labelClass = "block mb-2 text-[12px] font-extrabold uppercase tracking-[0.08em] text-white";
+const unitBadge  = "px-3 py-3 text-[12px] font-bold text-white border-l-2 border-white/25 bg-white/10 whitespace-nowrap";
+const inputBase  = "flex-1 bg-white/5 px-4 py-3 text-base font-bold text-white outline-none placeholder:text-white/45";
+const rowClass   = "flex overflow-hidden border-2 border-white/35 focus-within:border-[oklch(0.72_0.16_155)] focus-within:ring-2 focus-within:ring-[oklch(0.72_0.16_155/0.25)] transition-colors";
 
 export function CalculatorForm({ onComplete }: Props) {
   const [step, setStep] = useState(1);
@@ -72,8 +72,8 @@ export function CalculatorForm({ onComplete }: Props) {
       <div style={{ flex: 1, overflowY: "auto", minHeight: 0 }} className="px-5 py-4">
         {/* Prompt */}
         <div className="mb-5">
-          <p className="text-[13px] font-semibold text-[oklch(0.72_0.16_155)]">{msg?.greeting ?? ""}</p>
-          <p className="mt-1 text-sm text-white/80">{msg?.question ?? ""}</p>
+          <p className="text-[15px] font-extrabold text-[oklch(0.72_0.16_155)]">{msg?.greeting ?? ""}</p>
+          <p className="mt-1 text-[16px] font-semibold text-white">{msg?.question ?? ""}</p>
         </div>
 
         {/* ── Step 1: Genset Rating + Load + Fuel ── */}
@@ -156,22 +156,22 @@ export function CalculatorForm({ onComplete }: Props) {
 
         {/* Error */}
         {error && (
-          <p className="mt-3 rounded-[6px] bg-[oklch(0.64_0.18_28/0.15)] px-3 py-2 text-[11px] text-[oklch(0.64_0.18_28)]">
+          <p className="mt-3 border-2 border-[oklch(0.64_0.18_28/0.65)] bg-[oklch(0.64_0.18_28/0.15)] px-3 py-3 text-[13px] font-bold text-[oklch(0.82_0.16_28)]">
             {error}
           </p>
         )}
       </div>
 
       {/* Navigation */}
-      <div className="shrink-0 border-t border-white/10 px-5 py-4 flex items-center gap-3">
+      <div className="shrink-0 border-t-2 border-white/20 px-5 py-4 flex items-center gap-3">
         {step > 1 && (
           <button type="button" onClick={back}
-            className="flex h-10 items-center gap-1.5 border border-white/20 px-4 text-[10px] font-bold uppercase tracking-[0.1em] text-white/60 transition-colors hover:border-white/40 hover:text-white">
+            className="flex h-11 items-center gap-1.5 border-2 border-white/45 px-4 text-[11px] font-extrabold uppercase tracking-[0.08em] text-white transition-colors hover:border-white hover:bg-white/10">
             ← Back
           </button>
         )}
         <button type="button" onClick={next}
-          className="flex-1 h-10 bg-[oklch(0.72_0.16_155)] text-[oklch(0.19_0.045_158)] text-[10px] font-extrabold uppercase tracking-[0.12em] transition-colors hover:bg-white">
+          className="flex-1 h-11 bg-[oklch(0.72_0.16_155)] text-[oklch(0.19_0.045_158)] text-[11px] font-black uppercase tracking-[0.1em] transition-colors hover:bg-white">
           {step === TOTAL_STEPS ? "Calculate My Savings →" : "Continue →"}
         </button>
       </div>

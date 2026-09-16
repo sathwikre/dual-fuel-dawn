@@ -774,10 +774,15 @@ function OmSolutionsHome() {
             {/* Drawer header — full-width dark nav matching the main site */}
             <div className="sticky top-0 z-10 flex items-center justify-between bg-panel px-[4.5vw] py-5">
               {/* Brand */}
-              <div className="flex items-center gap-2.5">
+              <a
+                href="#home"
+                onClick={() => setTechDrawerOpen(false)}
+                className="flex items-center gap-2.5 rounded-sm transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b6ff72]"
+                aria-label="OM Solutions — return to home"
+              >
                 <img src={logoImage} alt="OM Solutions" className="h-9 w-9 rounded-full object-cover ring-1 ring-white/20" />
                 <span className="text-[15px] font-extrabold uppercase tracking-[0.08em] text-white">OM Solutions</span>
-              </div>
+              </a>
 
               {/* Section links — hidden on mobile */}
               <nav className="hidden items-center gap-6 xl:flex">

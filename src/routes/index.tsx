@@ -657,7 +657,7 @@ function OmSolutionsHome() {
               </h1>
               <p className="mt-5 text-sm font-normal tracking-wide text-white/80">We are OM Solutions</p>
               <div className="mt-7">
-                <a href="#contact" className="inline-flex h-11 items-center border border-white bg-transparent px-7 text-[11px] font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-white hover:text-[#0b1f15]">
+                <a href="https://wa.me/917387591083" target="_blank" rel="noopener noreferrer" className="inline-flex h-11 items-center border border-white bg-transparent px-7 text-[11px] font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-white hover:text-[#0b1f15]">
                   Contact Us
                 </a>
               </div>

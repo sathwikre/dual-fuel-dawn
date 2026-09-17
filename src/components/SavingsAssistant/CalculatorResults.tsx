@@ -62,10 +62,18 @@ export function CalculatorResults({ inputs, results, onReset }: Props) {
             <SavingsValue label="Monthly saving" value={formatINR(savingPerMonth, true)} sub="per month" />
             <SavingsValue label="Annual saving" value={formatINR(savingPerYear, true)} sub="per year" largest />
           </div>
-          <div className="mt-7 grid gap-3 border-t border-white/20 pt-5 sm:grid-cols-3">
+          
+          <div className="mt-8 border-t border-white/20 pt-6">
+            <div className="grid gap-6 md:grid-cols-3 md:items-end">
+              <SavingsValue label="CO₂ saving / hour" value={`${co2SavingKgPerHr.toFixed(2)} kg`} sub="per hour" />
+              <SavingsValue label="Monthly CO₂ saving" value={`${(co2SavingKgPerHr * inputs.hoursPerMonth).toFixed(1)} kg`} sub="per month" />
+              <SavingsValue label="Annual CO₂ saving" value={`${annualCO2SavingTonnes.toFixed(2)} tonnes`} sub="per year" largest />
+            </div>
+          </div>
+
+          <div className="mt-7 grid gap-3 border-t border-white/20 pt-5 sm:grid-cols-2">
             <Metric label="Cost reduction" value={`${costReductionPct.toFixed(1)}%`} />
             <Metric label="Diesel replacement" value={`${dieselReplacementPct.toFixed(1)}%`} />
-            <Metric label="Annual CO₂ reduction" value={`${annualCO2SavingTonnes.toFixed(2)} tonnes`} />
           </div>
         </section>
 
@@ -86,7 +94,7 @@ function ResultGroup({ title, rows, accent = false }: { title: string; rows: [st
 }
 
 function SavingsValue({ label, value, sub, largest = false }: { label: string; value: string; sub: string; largest?: boolean }) {
-  return <div className={largest ? "md:text-right" : ""}><p className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-white">{label}</p><p className={`mt-2 font-black text-[oklch(0.78_0.18_155)] ${largest ? "text-4xl sm:text-5xl" : "text-3xl sm:text-4xl"}`}>{value}</p><p className="mt-1 text-sm font-semibold text-white/75">{sub}</p></div>;
+  return <div className={largest ? "md:text-right" : ""}><p className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-white">{label}</p><p className={`mt-2 font-black text-[oklch(0.78_0.18_155)] ${largest ? "text-4xl sm:text-5xl" : "text-3xl sm:text-4xl"}`}>{value}</p><p className="mt-1 text-sm font-extrabold text-white">{sub}</p></div>;
 }
 
 function Metric({ label, value }: { label: string; value: string }) {

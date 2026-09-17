@@ -944,7 +944,7 @@ function OmSolutionsHome() {
 
               {/* TATA 125 kVA */}
               <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer"
-                onClick={() => setAppGallery({ title: "TATA 125 kVA · CPCB-II · LPG", images: [tataImage], index: 0 })}>
+                onClick={() => setAppGallery({ title: "Sai Sound Service (Amane Engineers), Waki (B)", images: [tataImage], index: 0 })}>
                 <div className="relative overflow-hidden aspect-[1.25/1]">
                   <img src={tataImage} alt="TATA 125 kVA LPG installation" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
                   <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
@@ -952,8 +952,12 @@ function OmSolutionsHome() {
                 </div>
                 <div className="flex items-end justify-between gap-4 p-5">
                   <div>
-                    <h3 className="text-xl font-bold">Sai Sound Service, Amane Engineers, Waki (Bu), Chakan</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">TATA 6 cyl. turbocharged with EGR · LPG · 45% diesel replacement · 75–80% load</p>
+                    <h3 className="text-xl font-bold">Sai Sound Service (Amane Engineers), Waki (B)</h3>
+                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground">
+                      <li><span className="font-medium text-foreground">Genset:</span> TATA 125 kVA CPCB-II</li>
+                      <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + LPG</li>
+                      <li><span className="font-medium text-foreground">Operating load:</span> 60–85%</li>
+                    </ul>
                   </div>
                   <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
                 </div>
@@ -961,7 +965,7 @@ function OmSolutionsHome() {
 
               {/* KOEL 320 kVA */}
               <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer"
-                onClick={() => setAppGallery({ title: "KOEL 320 kVA · CPCB-II · PNG", images: [koelImg1, koelImg2], index: 0 })}>
+                onClick={() => setAppGallery({ title: "Akwel Automotive India Pvt Ltd", images: [koelImg1, koelImg2], index: 0 })}>
                 <div className="relative overflow-hidden aspect-[1.25/1]">
                   <img src={koelImg1} alt="KOEL 320 kVA PNG installation" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
                   <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
@@ -969,8 +973,12 @@ function OmSolutionsHome() {
                 </div>
                 <div className="flex items-end justify-between gap-4 p-5">
                   <div>
-                    <h3 className="text-xl font-bold">Akwel Automotive</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">KOEL 320 kVA CPCB-II Genset <br></br>KOEL Vee8 turbocharged · PNG 300 mbar · 65% diesel replacement · ₹982 saving/hr · 34% fuel cost saving</p>
+                    <h3 className="text-xl font-bold">Akwel Automotive India Pvt Ltd</h3>
+                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground">
+                      <li><span className="font-medium text-foreground">Genset:</span> KOEL 320 kVA CPCB-II</li>
+                      <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + PNG (300 bar)</li>
+                      <li><span className="font-medium text-foreground">Operating load:</span> 50–80%</li>
+                    </ul>
                   </div>
                   <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
                 </div>
@@ -987,7 +995,11 @@ function OmSolutionsHome() {
                 <div className="flex items-end justify-between gap-4 p-5">
                   <div>
                     <h3 className="text-xl font-bold">Birla Tisya, Bengaluru</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Force MTU 1010 kVA × 2 · Greaves 200 kVA × 1 · Piped Natural Gas · May 2026</p>
+                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground">
+                      <li><span className="font-medium text-foreground">Gensets:</span> FMTU 1010 kVA CPCB-IV+ × 2; Greaves 200 kVA CPCB-IV+</li>
+                      <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + PNG (1 bar)</li>
+                      <li><span className="font-medium text-foreground">Operating load:</span> 50–60%</li>
+                    </ul>
                   </div>
                   <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
                 </div>
@@ -995,7 +1007,7 @@ function OmSolutionsHome() {
 
               {/* Nevatia Maxgen */}
               <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer"
-                onClick={() => setAppGallery({ title: "Nevatia Steel & Alloys — MaxGen Energy", images: [nevatiaMg1, nevatiaMg2, nevatiaMg3, nevatiaMg4, nevatiaMg5, nevatiaMg6, nevatiaMg7, nevatiaMg8, nevatiaMg9], index: 0 })}>
+                onClick={() => setAppGallery({ title: "Nevatia Steels & Alloys, Boisar, Tarapur", images: [nevatiaMg1, nevatiaMg2, nevatiaMg3, nevatiaMg4, nevatiaMg5, nevatiaMg6, nevatiaMg7, nevatiaMg8, nevatiaMg9], index: 0 })}>
                 <div className="relative overflow-hidden aspect-[1.25/1]">
                   <img src={nevatiaMg1} alt="Nevatia Steel MaxGen Energy dual-fuel installation" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
                   <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
@@ -1003,8 +1015,12 @@ function OmSolutionsHome() {
                 </div>
                 <div className="flex items-end justify-between gap-4 p-5">
                   <div>
-                    <h3 className="text-xl font-bold">Nevatia Steel and Alloys Pvt. Ltd.</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">MaxGen Energy · Dual Fuel Controller · Gas Mixer · Sensors & Gas System · August 2026</p>
+                    <h3 className="text-xl font-bold">Nevatia Steels & Alloys, Boisar, Tarapur</h3>
+                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground">
+                      <li><span className="font-medium text-foreground">Genset:</span> MTU 1000 kVA CPCB-II</li>
+                      <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + PNG (1 bar)</li>
+                      <li><span className="font-medium text-foreground">Operating load:</span> 60–80%</li>
+                    </ul>
                   </div>
                   <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
                 </div>

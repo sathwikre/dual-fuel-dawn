@@ -164,15 +164,18 @@ const navItems = [
   ["Contact", "contact"],
 ] as const;
 
-const solutions = [
-  { title: "Marine Outboard Engines", text: "Petrol operation to LPG bi-fuel operation.", icon: Fuel, image: marineOutboardImage, imageClass: "rounded-full" },
-  { title: "Marine Inboard Engines", text: "Diesel operation to LPG dual-fuel operation.", icon: Network, image: marineInboardImage, imageClass: "rounded-full" },
-  { title: "Trucks & Buses", text: "Diesel to CNG Mono CNG and dual-fuel operation.", icon: Factory, image: busesTrucksImage },
-  { title: "Generator Sets", text: "Diesel to CNG / LPG based dual-fuel operation.", icon: Zap, image: generatorSetImage },
-  { title: "Tractors & Earth Movers", text: "Diesel to CNG / LPG based dual-fuel operation.", icon: Cog, image: tractorsEarthMoversImage },
-  { title: "Producer Gas & Syngas", text: "Biogas, MSW / wood based producer gas and syngas power plants & thermal applications.", icon: Leaf, image: producerGasSyngasImage },
-  { title: "Liquid Fuels", text: "Biodiesel, ethanol, methanol, DME and other liquid fuels.", icon: CircleGauge, image: liquidFuelsImage },
-];
+const fuelColumns = ["PNG", "CNG", "LPG", "LNG", "Ethanol", "Methanol", "Isobutane"] as const;
+
+const fuelArchitecture = [
+  { application: "Diesel Generator set", supported: ["PNG", "CNG", "LPG", "LNG", "Ethanol", "Methanol", "Isobutane"] },
+  { application: "Marine Propulsion Engine", supported: ["LPG", "LNG", "Ethanol", "Methanol", "Isobutane"] },
+  { application: "Marine Generator set", supported: ["LPG", "LNG", "Ethanol", "Methanol", "Isobutane"] },
+  { application: "Diesel engine based Air Compressor", supported: ["CNG", "LPG", "LNG", "Ethanol", "Methanol", "Isobutane"] },
+  { application: "Diesel engine based Borewell", supported: ["CNG", "LPG", "LNG", "Ethanol", "Methanol", "Isobutane"] },
+  { application: "Diesel engine based Harvester", supported: ["CNG", "LPG", "LNG", "Ethanol", "Methanol", "Isobutane"] },
+  { application: "Diesel engine based Tractor", supported: ["CNG", "LPG", "LNG", "Ethanol", "Methanol", "Isobutane"] },
+  { application: "Diesel engine based Earthmover", supported: ["CNG", "LPG", "LNG", "Ethanol", "Methanol", "Isobutane"] },
+] as const;
 
 const benefits = [
   "Reduces particulate emissions",
@@ -564,6 +567,15 @@ function OmSolutionsHome() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    document.querySelectorAll<HTMLAnchorElement>('a[href="mailto:omsolns18@gmail.com"]').forEach((link) => {
+      link.href = "mailto:support.omsolutions@gmail.com";
+      const address = link.querySelector("span span:last-child");
+      if (address) address.textContent = "support.omsolutions@gmail.com";
+      else link.textContent = "support.omsolutions@gmail.com";
+    });
+  }, []);
+
   const openImage = (src: string, alt: string) => setSelectedImage({ src, alt });
   const closeMenu = () => setMenuOpen(false);
   const submitForm = async (event: FormEvent<HTMLFormElement>) => {
@@ -580,10 +592,10 @@ function OmSolutionsHome() {
         setFormSent(true);
         form.reset();
       } else {
-        alert("Something went wrong. Please email us directly at omsolns18@gmail.com");
+        alert("Something went wrong. Please email us directly at support.omsolutions@gmail.com");
       }
     } catch {
-      alert("Could not send. Please email us directly at omsolns18@gmail.com");
+      alert("Could not send. Please email us directly at support.omsolutions@gmail.com");
     }
   };
 
@@ -744,7 +756,7 @@ function OmSolutionsHome() {
             <div className="grid grid-cols-[1fr_0.8fr] gap-3">
               <button type="button" className="row-span-2 overflow-hidden rounded-[10px] bg-secondary text-left" onClick={() => openImage(founderImage, "Prasad Parulekar, OM Solutions founder")}><img src={founderImage} alt="Prasad Parulekar" className="h-full min-h-[330px] w-full object-cover transition-transform duration-500 hover:scale-[1.03]" /></button>
               <div className="rounded-[10px] bg-panel p-5 text-background"><p className="font-mono text-4xl text-signal">2021</p><p className="mt-2 text-sm text-background/60">Company established</p></div>
-              <div className="rounded-[10px] bg-primary p-5 text-primary-foreground"><p className="font-mono text-4xl">20+</p><p className="mt-2 text-sm text-primary-foreground/75">Alternate-Fuel-Based Power Generation Experience</p></div>
+              <div className="rounded-[10px] bg-primary p-5 text-primary-foreground"><p className="font-mono text-4xl">20+ Years of Industry Experience</p><p className="mt-2 text-sm text-primary-foreground/75">Extensive experience in alternate-fuel-based power generation</p></div>
             </div>
           </div>
         </section>
@@ -821,10 +833,17 @@ function OmSolutionsHome() {
 
               <section id="dr-solutions" className="bg-secondary/40">
                 <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
-                  <div className="flex flex-wrap items-end justify-between gap-6"><div><SectionLabel index="OM / 03">Solutions</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Customized Dual Fuel technology <br />architecture for multiple applications.</h2></div><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Solutions listed in the company profile, mapped to the engine and fuel context where they apply.</p></div>
-                  <div className="mt-12 grid gap-px overflow-hidden rounded-[12px] border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-                    {solutions.map(({ title, text, icon: Icon, image, imageClass }, index) => <article key={`${title}-${index}`} className="group last:lg:col-span-2 bg-background p-6 transition-colors hover:bg-panel hover:text-background"><div className="flex items-start justify-between">{image ? <img src={image} alt={`${title} application`} className={`size-11 object-cover ${imageClass ?? "rounded-[7px]"}`} /> : <span className="grid size-11 place-items-center rounded-[7px] bg-primary-soft text-primary transition-colors group-hover:bg-signal group-hover:text-panel"><Icon className="size-5" /></span>}<span className="font-mono text-[10px] text-muted-foreground group-hover:text-background/45">0{index + 1}</span></div><h3 className="mt-8 text-lg font-bold tracking-tight">{title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground group-hover:text-background/65">{text}</p></article>)}
+                  <div className="flex flex-wrap items-end justify-between gap-6"><div><SectionLabel index="OM / 03">Technology matrix</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Dual fuel technology architecture</h2></div><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Explore supported alternate-fuel pathways across engine applications.</p></div>
+                  <div className="mt-12 overflow-hidden rounded-[16px] border border-border/80 bg-[#fcfdfb] shadow-[0_14px_42px_rgba(11,31,21,0.06)]">
+                    <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border/70 px-6 py-5"><div><p className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">Fuel compatibility matrix</p><p className="mt-1 text-sm font-medium text-foreground">Application × alternate fuel coverage</p></div><div className="flex items-center gap-2 text-xs text-muted-foreground"><span className="size-2 rounded-full bg-primary" /> Supported pathway</div></div>
+                    <div className="overflow-x-auto">
+                    <table className="w-full min-w-[980px] border-separate border-spacing-y-1 px-3 text-left">
+                      <thead><tr><th scope="col" className="sticky left-0 z-20 min-w-[300px] bg-[#fcfdfb] px-6 py-4 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Applications</th>{fuelColumns.map((fuel) => <th key={fuel} scope="col" className="min-w-[92px] px-3 py-4 text-center font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground"><span className="mx-auto mb-2 block size-1.5 rounded-full bg-border" />{fuel}</th>)}</tr></thead>
+                      <tbody>{fuelArchitecture.map(({ application, supported }, index) => <tr key={application} className="group"><th scope="row" className="sticky left-0 z-10 bg-[#fcfdfb] px-6 py-4 text-sm font-semibold text-foreground transition-colors group-hover:bg-primary-soft"><span className="mr-3 inline-block font-mono text-[10px] tracking-[0.1em] text-primary transition-transform group-hover:translate-x-0.5">0{index + 1}</span>{application}</th>{fuelColumns.map((fuel) => { const isSupported = supported.includes(fuel); return <td key={fuel} className="px-1 py-2 text-center"><span title={isSupported ? "Supported fuel pathway" : "Not supported for this application"} className={`mx-auto grid h-11 w-[66px] place-items-center rounded-[7px] border transition-all duration-200 ${isSupported ? "border-primary/25 bg-primary/10 text-primary group-hover:border-primary/45 group-hover:bg-primary/15 hover:!scale-105 hover:!bg-primary/20" : "border-transparent bg-secondary/45 text-muted-foreground/35"}`}>{isSupported ? <span className="flex items-center gap-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.08em]"><span className="size-1.5 rounded-full bg-primary" />On</span> : <span className="size-1 rounded-full bg-border" />}</span></td>; })}</tr>)}</tbody>
+                    </table>
+                    </div>
                   </div>
+                  <p className="mt-4 text-xs leading-relaxed text-muted-foreground">Supported pathways are subject to engine configuration, fuel availability and application requirements.</p>
                 </div>
               </section>
 

@@ -86,7 +86,10 @@ import marineImage from "@/assets/img-158.jpg";
 import marineOutboardImage from "@/assets/Marine Outboard Engines .png";
 import marineInboardImage from "@/assets/Marine Inboard Engines.png";
 import busesTrucksImage from "@/assets/Trucks & Buses.png";
-import generatorSetImage from "@/assets/Power Generator Set.jpeg";
+import generatorSetImage from "@/assets/Generator Sets.png";
+import tractorsEarthMoversImage from "@/assets/Tractors & Earth Movers.png";
+import producerGasSyngasImage from "@/assets/Producer Gas & Syngas.png";
+import liquidFuelsImage from "@/assets/Liquid Fuels.png";
 import borewellImage from "@/assets/img-160.jpg";
 import compressorImage from "@/assets/img-161.jpg";
 import compressorNightImage from "@/assets/img-162.jpg";
@@ -166,9 +169,9 @@ const solutions = [
   { title: "Marine Inboard Engines", text: "Diesel operation to LPG dual-fuel operation.", icon: Network, image: marineInboardImage, imageClass: "rounded-full" },
   { title: "Trucks & Buses", text: "Diesel to CNG Mono CNG and dual-fuel operation.", icon: Factory, image: busesTrucksImage },
   { title: "Generator Sets", text: "Diesel to CNG / LPG based dual-fuel operation.", icon: Zap, image: generatorSetImage },
-  { title: "Tractors & Earth Movers", text: "Diesel to CNG / LPG based dual-fuel operation.", icon: Cog },
-  { title: "Producer Gas & Syngas", text: "Biogas, MSW / wood based producer gas and syngas power plants & thermal applications.", icon: Leaf },
-  { title: "Liquid Fuels", text: "Biodiesel, ethanol, methanol, DME and other liquid fuels.", icon: CircleGauge },
+  { title: "Tractors & Earth Movers", text: "Diesel to CNG / LPG based dual-fuel operation.", icon: Cog, image: tractorsEarthMoversImage },
+  { title: "Producer Gas & Syngas", text: "Biogas, MSW / wood based producer gas and syngas power plants & thermal applications.", icon: Leaf, image: producerGasSyngasImage },
+  { title: "Liquid Fuels", text: "Biodiesel, ethanol, methanol, DME and other liquid fuels.", icon: CircleGauge, image: liquidFuelsImage },
 ];
 
 const benefits = [

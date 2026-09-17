@@ -85,7 +85,7 @@ import environmentImage from "@/assets/img-152.jpg";
 import marineImage from "@/assets/img-158.jpg";
 import marineOutboardImage from "@/assets/Marine Outboard Engines .png";
 import marineInboardImage from "@/assets/Marine Inboard Engines.png";
-import busesTrucksImage from "@/assets/Buses, Trucks.jpeg";
+import busesTrucksImage from "@/assets/Trucks & Buses.png";
 import generatorSetImage from "@/assets/Power Generator Set.jpeg";
 import borewellImage from "@/assets/img-160.jpg";
 import compressorImage from "@/assets/img-161.jpg";

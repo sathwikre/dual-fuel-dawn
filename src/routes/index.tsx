@@ -718,7 +718,7 @@ function OmSolutionsHome() {
               <h1 className="mt-0 text-[clamp(32px,4.5vw,64px)] font-light leading-[1.1] tracking-[-0.02em] text-white">
                 <TypewriterText text="Our purpose is to clean and decarbonise the air" />
               </h1>
-              <p className="mt-5 text-sm font-normal tracking-wide text-white/80">We are OM Solutions</p>
+              <p className="mt-5 text-lg font-bold tracking-wide text-white drop-shadow-md sm:text-xl">We are OM Solutions</p>
               <div className="mt-7">
                 <a href="https://wa.me/917387591083" target="_blank" rel="noopener noreferrer" className="inline-flex h-11 items-center border border-white bg-transparent px-7 text-[11px] font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-white hover:text-[#0b1f15]">
                   Contact Us

@@ -9,11 +9,13 @@ interface Props {
 }
 
 type View = "form" | "results";
+type ResizeEdge = "left" | "right" | "top" | "bottom";
+type PanelBox = { left: number; top: number; width: number; height: number };
 
 export function SavingsCalculator({ onClose }: Props) {
   const [view, setView] = useState<View>("form");
   const [inputs, setInputs] = useState<CalculatorInputs | null>(null);
-  const [panelWidth, setPanelWidth] = useState<number | null>(null);
+  const [panelBox, setPanelBox] = useState<PanelBox | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
   function handleComplete(data: CalculatorInputs) {
@@ -26,14 +28,32 @@ export function SavingsCalculator({ onClose }: Props) {
     setView("form");
   }
 
-  function startResize(event: ReactMouseEvent<HTMLDivElement>) {
-    const initialWidth = panelRef.current?.getBoundingClientRect().width;
-    if (!initialWidth) return;
+  function startResize(edge: ResizeEdge, event: ReactMouseEvent<HTMLDivElement>) {
+    event.preventDefault();
+    const rect = panelRef.current?.getBoundingClientRect();
+    if (!rect) return;
 
+    const initialBox = { left: rect.left, top: rect.top, width: rect.width, height: rect.height };
     const startX = event.clientX;
+    const startY = event.clientY;
     const resize = (moveEvent: MouseEvent) => {
-      const nextWidth = Math.min(Math.max(initialWidth + startX - moveEvent.clientX, 340), window.innerWidth - 48);
-      setPanelWidth(nextWidth);
+      const dx = moveEvent.clientX - startX;
+      const dy = moveEvent.clientY - startY;
+      const nextBox = { ...initialBox };
+
+      if (edge === "left") {
+        nextBox.left = Math.min(Math.max(24, initialBox.left + dx), initialBox.left + initialBox.width - 340);
+        nextBox.width = initialBox.width + initialBox.left - nextBox.left;
+      } else if (edge === "right") {
+        nextBox.width = Math.min(Math.max(340, initialBox.width + dx), window.innerWidth - initialBox.left - 24);
+      } else if (edge === "top") {
+        nextBox.top = Math.min(Math.max(24, initialBox.top + dy), initialBox.top + initialBox.height - 420);
+        nextBox.height = initialBox.height + initialBox.top - nextBox.top;
+      } else {
+        nextBox.height = Math.min(Math.max(420, initialBox.height + dy), window.innerHeight - initialBox.top - 24);
+      }
+
+      setPanelBox(nextBox);
     };
     const stopResize = () => {
       window.removeEventListener("mousemove", resize);
@@ -105,20 +125,15 @@ export function SavingsCalculator({ onClose }: Props) {
       <div
         ref={panelRef}
         className="calc-panel"
-        style={panelWidth ? { width: `${panelWidth}px` } : undefined}
+        style={panelBox ? { left: `${panelBox.left}px`, top: `${panelBox.top}px`, right: "auto", bottom: "auto", width: `${panelBox.width}px`, height: `${panelBox.height}px` } : undefined}
         role="dialog"
         aria-modal="true"
         aria-label="Dual Fuel Savings Calculator"
       >
-        <div
-          role="separator"
-          aria-label="Drag to resize calculator"
-          aria-orientation="vertical"
-          onMouseDown={startResize}
-          className="absolute inset-y-0 left-0 z-10 hidden w-3 cursor-ew-resize items-center justify-center sm:flex"
-        >
-          <span className="h-14 w-px bg-[oklch(0.72_0.16_155)] opacity-70 transition-all hover:h-24 hover:w-0.5 hover:opacity-100" />
-        </div>
+        <div role="separator" aria-label="Resize calculator from the left" aria-orientation="vertical" onMouseDown={(event) => startResize("left", event)} className="absolute inset-y-3 left-0 z-10 hidden w-3 cursor-ew-resize items-center justify-center sm:flex"><span className="h-14 w-px bg-[oklch(0.72_0.16_155)] opacity-70" /></div>
+        <div role="separator" aria-label="Resize calculator from the right" aria-orientation="vertical" onMouseDown={(event) => startResize("right", event)} className="absolute inset-y-3 right-0 z-10 hidden w-3 cursor-ew-resize items-center justify-center sm:flex"><span className="h-14 w-px bg-[oklch(0.72_0.16_155)] opacity-70" /></div>
+        <div role="separator" aria-label="Resize calculator from the top" aria-orientation="horizontal" onMouseDown={(event) => startResize("top", event)} className="absolute inset-x-3 top-0 z-10 hidden h-3 cursor-ns-resize items-center justify-center sm:flex"><span className="h-px w-14 bg-[oklch(0.72_0.16_155)] opacity-70" /></div>
+        <div role="separator" aria-label="Resize calculator from the bottom" aria-orientation="horizontal" onMouseDown={(event) => startResize("bottom", event)} className="absolute inset-x-3 bottom-0 z-10 hidden h-3 cursor-ns-resize items-center justify-center sm:flex"><span className="h-px w-14 bg-[oklch(0.72_0.16_155)] opacity-70" /></div>
         {/* Header — fixed, never scrolls */}
         <div className="shrink-0 flex items-start justify-between gap-3 border-b-2 border-white/20 px-5 py-5">
           <div className="min-w-0">

@@ -1085,6 +1085,8 @@ function OmSolutionsHome() {
                       <li><span className="font-medium text-foreground">Genset:</span> KOEL 320 kVA CPCB-II</li>
                       <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + PNG (300 bar)</li>
                       <li><span className="font-medium text-foreground">Operating load:</span> 50–80%</li>
+                      <li><span className="font-medium text-foreground">Fuel Cost Saving:</span> ₹7.92 lakhs</li>
+                      <li><span className="font-medium text-foreground">CO₂ reduction:</span> 12.26 tonnes</li>
                     </ul>
                   </div>
                   <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
@@ -1127,6 +1129,8 @@ function OmSolutionsHome() {
                       <li><span className="font-medium text-foreground">Genset:</span> MTU 1000 kVA CPCB-II</li>
                       <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + PNG (1 bar)</li>
                       <li><span className="font-medium text-foreground">Operating load:</span> 60–80%</li>
+                       <li><span className="font-medium text-foreground">Fuel Cost Saving:</span> ₹1.53 lakhs</li>
+                      <li><span className="font-medium text-foreground">CO₂ reduction:</span> 1.86 tonnes</li>
                     </ul>
                   </div>
                   <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />

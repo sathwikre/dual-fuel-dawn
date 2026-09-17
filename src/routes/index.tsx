@@ -844,28 +844,28 @@ function OmSolutionsHome() {
                   {/* Premium Compatibility Matrix */}
                   <div className="mt-10 overflow-hidden rounded-[20px] border border-border/60 bg-[#f9faf8] shadow-[0_8px_40px_rgba(11,31,21,0.07)]">
                     {/* Matrix header bar */}
-                    <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border/50 bg-white/70 px-6 py-4 backdrop-blur-sm">
-                      <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-primary/60">Fuel Compatibility Matrix</p>
+                    <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border/50 bg-white px-7 py-5">
+                      <p className="text-sm font-bold uppercase tracking-[0.12em] text-foreground">Fuel Compatibility Matrix</p>
                       <div className="flex items-center gap-2">
                         <span className="size-2 rounded-full" style={{ background: "oklch(0.72 0.16 155)" }} />
-                        <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">Supported pathway</span>
+                        <span className="text-sm font-semibold text-foreground">Supported pathway</span>
                       </div>
                     </div>
 
                     {/* Scrollable table */}
                     <div className="overflow-x-auto">
-                      <table className="w-full min-w-[860px] border-collapse">
+                      <table className="w-full min-w-[1050px] border-collapse">
                         {/* Fuel column headers */}
                         <thead>
                           <tr className="border-b border-border/40">
-                            <th scope="col" className="sticky left-0 z-20 min-w-[260px] bg-[#f9faf8] px-6 py-5 text-left">
-                              <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground/60">Application</span>
+                            <th scope="col" className="sticky left-0 z-20 min-w-[360px] bg-[#f9faf8] px-7 py-6 text-left">
+                              <span className="text-sm font-bold uppercase tracking-[0.1em] text-foreground">Application</span>
                             </th>
                             {fuelColumns.map((fuel) => (
-                              <th key={fuel} scope="col" className="min-w-[88px] px-2 py-5 text-center">
+                              <th key={fuel} scope="col" className="min-w-[98px] px-2 py-6 text-center">
                                 <div className="flex flex-col items-center gap-1.5">
                                   <span className="size-1.5 rounded-full bg-border/60" />
-                                  <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-muted-foreground/70">{fuel}</span>
+                                  <span className="text-sm font-bold uppercase tracking-[0.08em] text-foreground">{fuel}</span>
                                 </div>
                               </th>
                             ))}
@@ -875,14 +875,14 @@ function OmSolutionsHome() {
                         {/* Application rows */}
                         <tbody>
                           {fuelArchitecture.map(({ application, supported }, index) => (
-                            <tr key={application} className="group border-b border-border/25 last:border-0 transition-colors hover:bg-primary/[0.03]">
+                            <tr key={application} className="group border-b border-border/40 last:border-0 transition-colors hover:bg-primary/[0.04]">
                               {/* Application name — sticky */}
-                              <th scope="row" className="sticky left-0 z-10 bg-[#f9faf8] px-6 py-4 text-left transition-colors group-hover:bg-primary/[0.04]">
+                              <th scope="row" className="sticky left-0 z-10 bg-[#f9faf8] px-7 py-5 text-left transition-colors group-hover:bg-primary/[0.04]">
                                 <div className="flex items-center gap-3">
-                                  <span className="font-mono text-[9px] font-medium tracking-[0.1em] text-primary/50 transition-all duration-200 group-hover:text-primary/80">
+                                  <span className="font-mono text-xs font-bold tracking-[0.1em] text-primary/70 transition-all duration-200 group-hover:text-primary">
                                     {String(index + 1).padStart(2, "0")}
                                   </span>
-                                  <span className="text-[13px] font-semibold leading-snug text-foreground/85 group-hover:text-foreground transition-colors">
+                                  <span className="text-lg font-bold leading-snug text-foreground group-hover:text-foreground transition-colors">
                                     {application}
                                   </span>
                                 </div>
@@ -892,21 +892,21 @@ function OmSolutionsHome() {
                               {fuelColumns.map((fuel) => {
                                 const isSupported = (supported as readonly string[]).includes(fuel);
                                 return (
-                                  <td key={fuel} className="px-2 py-3 text-center">
+                                  <td key={fuel} className="px-2 py-4 text-center">
                                     {isSupported ? (
                                       <span
                                         title="Supported fuel pathway"
-                                        className="mx-auto flex h-9 w-14 flex-col items-center justify-center gap-0.5 rounded-[8px] border transition-all duration-200 cursor-default hover:scale-105"
+                                        className="mx-auto flex h-12 w-[82px] items-center justify-center rounded-[8px] border text-xs font-bold text-primary transition-all duration-200 cursor-default hover:scale-105"
                                         style={{
                                           background: "oklch(0.72 0.16 155 / 0.09)",
                                           borderColor: "oklch(0.72 0.16 155 / 0.28)",
                                         }}
                                       >
-                                        <span className="size-1.5 rounded-full" style={{ background: "oklch(0.72 0.16 155)" }} />
+                                        <Check className="mr-1.5 size-4 stroke-[3]" /> Available
                                       </span>
                                     ) : (
-                                      <span className="mx-auto flex h-9 w-14 items-center justify-center rounded-[8px]">
-                                        <span className="size-1 rounded-full bg-border/50" />
+                                      <span className="mx-auto flex h-12 w-[82px] items-center justify-center rounded-[8px] text-base font-medium text-muted-foreground/65">
+                                        —
                                       </span>
                                     )}
                                   </td>
@@ -919,7 +919,7 @@ function OmSolutionsHome() {
                     </div>
                   </div>
 
-                  <p className="mt-4 font-mono text-[10px] leading-relaxed text-muted-foreground/50">
+                  <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
                     Supported pathways are subject to engine configuration, fuel availability and application requirements.
                   </p>
                 </div>

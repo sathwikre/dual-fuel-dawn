@@ -127,11 +127,28 @@ export function CalculatorResults({ inputs, results, onReset }: Props) {
                 {dieselReplacementPct.toFixed(1)}%
               </p>
             </div>
+          </div>
+        </div>
+
+        {/* Hero — CO₂ Saving */}
+        <div className="mb-5 rounded-[3px] p-5"
+          style={{
+            background: co2Tone === "positive" ? "oklch(0.72 0.16 155 / 0.12)" : co2Tone === "negative" ? "oklch(0.72 0.2 28 / 0.14)" : "rgba(255,255,255,0.05)",
+            border: `2px solid ${toneColor[co2Tone]}`,
+          }}>
+          <p className="mb-2 text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/75">CO₂ Saving Due to DFK</p>
+          <div className="flex items-end justify-between">
             <div>
-              <p className="text-[12px] font-black text-white">CO₂ Saving / yr</p>
-              <p className="text-[17px] font-black" style={{ color: toneColor[co2Tone] }}>
-                {annualCO2SavingTonnes.toFixed(2)} t
+              <p className="text-4xl font-black" style={{ color: toneColor[co2Tone] }}>
+                {co2SavingKgPerHr.toFixed(2)} kg
               </p>
+              <p className="mt-1 text-[12px] font-bold text-white/70">CO₂ / hr</p>
+            </div>
+            <div className="text-right">
+              <p className="text-[16px] font-extrabold text-white">{(monthlyCO2SavingKg / 1000).toFixed(2)} t</p>
+              <p className="text-[11px] font-semibold text-white/65">/ Month</p>
+              <p className="mt-2 text-[16px] font-extrabold text-white">{annualCO2SavingTonnes.toFixed(2)} t</p>
+              <p className="text-[11px] font-semibold text-white/65">/ Year</p>
             </div>
           </div>
         </div>

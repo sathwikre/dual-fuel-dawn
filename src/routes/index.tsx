@@ -894,22 +894,22 @@ function OmSolutionsHome() {
                               {fuelColumns.map((fuel) => {
                                 const isSupported = (supported as readonly string[]).includes(fuel);
                                 return (
-                                  <td key={fuel} className={`px-2 py-4 text-center transition-colors ${selectedFuel === fuel ? "bg-primary/[0.06]" : ""}`}>
+                                  <td key={fuel} className={`px-2 py-4 text-center transition-colors duration-200 ${selectedFuel === fuel ? "bg-primary/[0.06]" : ""}`}>
                                     {isSupported ? (
                                       <button
                                         type="button"
                                         onClick={() => { setSelectedFuelApplication(index); setSelectedFuel(fuel); }}
                                         aria-label={`${application} supports ${fuel}`}
-                                        className={`mx-auto flex h-12 w-[82px] items-center justify-center rounded-[8px] border text-xs font-bold text-primary transition-all duration-200 hover:scale-105 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 ${selectedFuelApplication === index && selectedFuel === fuel ? "ring-2 ring-primary ring-offset-2" : ""}`}
+                                        className={`mx-auto grid size-10 place-items-center rounded-[6px] border text-primary transition-all duration-200 hover:scale-105 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 group-hover:border-primary/50 group-hover:bg-primary/15 ${selectedFuelApplication === index && selectedFuel === fuel ? "ring-2 ring-primary ring-offset-2" : ""}`}
                                         style={{
                                           background: "oklch(0.72 0.16 155 / 0.09)",
                                           borderColor: "oklch(0.72 0.16 155 / 0.28)",
                                         }}
                                       >
-                                        <Check className="mr-1.5 size-4 stroke-[3]" /> Available
+                                        <Check className="size-4 stroke-[3]" />
                                       </button>
                                     ) : (
-                                      <button type="button" onClick={() => { setSelectedFuelApplication(index); setSelectedFuel(fuel); }} aria-label={`${application} does not support ${fuel}`} className="mx-auto flex h-12 w-[82px] items-center justify-center rounded-[8px] text-base font-medium text-muted-foreground/65 focus-visible:outline-2 focus-visible:outline-primary">
+                                      <button type="button" onClick={() => { setSelectedFuelApplication(index); setSelectedFuel(fuel); }} aria-label={`${application} does not support ${fuel}`} className="mx-auto grid size-10 place-items-center text-base font-medium text-muted-foreground/50 transition-colors duration-200 group-hover:text-muted-foreground/70 focus-visible:outline-2 focus-visible:outline-primary">
                                         —
                                       </button>
                                     )}

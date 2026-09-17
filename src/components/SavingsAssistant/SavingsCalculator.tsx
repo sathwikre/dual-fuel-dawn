@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState, type MouseEvent as ReactMouseEvent } from "react";
 import type { CalculatorInputs } from "./calculatorUtils";
 import { calculate } from "./calculatorUtils";
 import { CalculatorForm } from "./CalculatorForm";
@@ -13,6 +13,8 @@ type View = "form" | "results";
 export function SavingsCalculator({ onClose }: Props) {
   const [view, setView] = useState<View>("form");
   const [inputs, setInputs] = useState<CalculatorInputs | null>(null);
+  const [panelWidth, setPanelWidth] = useState<number | null>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   function handleComplete(data: CalculatorInputs) {
     setInputs(data);
@@ -22,6 +24,24 @@ export function SavingsCalculator({ onClose }: Props) {
   function handleReset() {
     setInputs(null);
     setView("form");
+  }
+
+  function startResize(event: ReactMouseEvent<HTMLDivElement>) {
+    const initialWidth = panelRef.current?.getBoundingClientRect().width;
+    if (!initialWidth) return;
+
+    const startX = event.clientX;
+    const resize = (moveEvent: MouseEvent) => {
+      const nextWidth = Math.min(Math.max(initialWidth + startX - moveEvent.clientX, 340), window.innerWidth - 48);
+      setPanelWidth(nextWidth);
+    };
+    const stopResize = () => {
+      window.removeEventListener("mousemove", resize);
+      window.removeEventListener("mouseup", stopResize);
+    };
+
+    window.addEventListener("mousemove", resize);
+    window.addEventListener("mouseup", stopResize);
   }
 
   const results = inputs ? calculate(inputs) : null;
@@ -68,6 +88,9 @@ export function SavingsCalculator({ onClose }: Props) {
             left: auto;
             right: 24px;
             width: 420px;
+            min-width: 340px;
+            min-height: 420px;
+            max-width: calc(100vw - 48px);
           }
         }
       `}</style>
@@ -80,11 +103,22 @@ export function SavingsCalculator({ onClose }: Props) {
       />
 
       <div
+        ref={panelRef}
         className="calc-panel"
+        style={panelWidth ? { width: `${panelWidth}px` } : undefined}
         role="dialog"
         aria-modal="true"
         aria-label="Dual Fuel Savings Calculator"
       >
+        <div
+          role="separator"
+          aria-label="Drag to resize calculator"
+          aria-orientation="vertical"
+          onMouseDown={startResize}
+          className="absolute inset-y-0 left-0 z-10 hidden w-3 cursor-ew-resize items-center justify-center sm:flex"
+        >
+          <span className="h-14 w-px bg-[oklch(0.72_0.16_155)] opacity-70 transition-all hover:h-24 hover:w-0.5 hover:opacity-100" />
+        </div>
         {/* Header — fixed, never scrolls */}
         <div className="shrink-0 flex items-start justify-between gap-3 border-b-2 border-white/20 px-5 py-5">
           <div className="min-w-0">

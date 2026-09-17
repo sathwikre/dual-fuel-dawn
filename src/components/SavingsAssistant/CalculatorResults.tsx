@@ -29,7 +29,7 @@ function Row({ label, value, accent = false, tone, sub }: {
       <span className="text-[13px] font-semibold text-white/80">{label}</span>
       <div className="text-right">
         <span className="text-[15px] font-extrabold"
-          style={{ color: tone ? toneColor[tone] : accent ? "oklch(0.72 0.16 155)" : "white" }}>
+          style={{ color: "oklch(0.78 0.18 155)" }}>
           {value}
         </span>
         {sub && <span className="ml-1 text-[12px] font-semibold text-white/60">{sub}</span>}
@@ -82,7 +82,7 @@ export function CalculatorResults({ inputs, results, onReset }: Props) {
 }
 
 function ResultGroup({ title, rows, accent = false }: { title: string; rows: [string, string][]; accent?: boolean }) {
-  return <section className="rounded-[7px] border border-white/15 bg-white/[0.04] p-5"><p className="text-sm font-extrabold uppercase tracking-[0.12em] text-white">{title}</p><div className="mt-4 space-y-4">{rows.map(([label, value]) => <div key={label} className="flex items-start justify-between gap-4"><span className="text-sm font-semibold leading-snug text-white/80">{label}</span><strong className={`text-right text-base ${accent ? "text-[oklch(0.72_0.16_155)]" : "text-white"}`}>{value}</strong></div>)}</div></section>;
+  return <section className="rounded-[7px] border border-white/15 bg-white/[0.04] p-5"><p className="text-sm font-extrabold uppercase tracking-[0.12em] text-white">{title}</p><div className="mt-4 space-y-4">{rows.map(([label, value]) => <div key={label} className="flex items-start justify-between gap-4"><span className="text-sm font-semibold leading-snug text-white/80">{label}</span><strong className="text-right text-base text-[oklch(0.78_0.18_155)]">{value}</strong></div>)}</div></section>;
 }
 
 function SavingsValue({ label, value, sub, largest = false }: { label: string; value: string; sub: string; largest?: boolean }) {
@@ -90,7 +90,7 @@ function SavingsValue({ label, value, sub, largest = false }: { label: string; v
 }
 
 function Metric({ label, value }: { label: string; value: string }) {
-  return <div><p className="text-sm font-extrabold uppercase tracking-[0.1em] text-white">{label}</p><p className="mt-1 text-2xl font-black text-white">{value}</p></div>;
+  return <div><p className="text-sm font-extrabold uppercase tracking-[0.1em] text-white">{label}</p><p className="mt-1 text-2xl font-black text-[oklch(0.78_0.18_155)]">{value}</p></div>;
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {

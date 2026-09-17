@@ -38,6 +38,61 @@ function Row({ label, value, accent = false, tone, sub }: {
   );
 }
 
+export function CalculatorResults({ inputs, results, onReset }: Props) {
+  const {
+    dieselConsumptionLPerHr, dfDieselConsumptionLPerHr, ngConsumptionSm3PerHr,
+    dieselCostPerHr, dfDieselCostPerHr, ngCostPerHr, totalDualFuelCostPerHr,
+    savingPerHour, savingPerMonth, savingPerYear, costReductionPct, dieselReplacementPct,
+    dieselCO2KgPerHr, totalDualFuelCO2KgPerHr, co2SavingKgPerHr, annualCO2SavingTonnes,
+  } = results;
+  const savingTone = toneFor(savingPerHour);
+
+  return (
+    <div className="calc-results flex h-full min-h-0 flex-col">
+      <div className="flex-1 overflow-y-auto px-5 py-5 sm:px-7">
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-4 border-b border-white/15 pb-5">
+          <div><p className="text-[11px] uppercase tracking-[0.14em] text-[oklch(0.72_0.16_155)]">Dual fuel assessment</p><h3 className="mt-2 text-2xl font-black text-white">Your operating results</h3></div>
+          <p className="text-sm text-white/65">{inputs.gensetRating} kVA · {inputs.load}% load · {inputs.hoursPerMonth} hrs/month</p>
+        </div>
+
+        <section className="mb-6 overflow-hidden rounded-[8px] border-2 p-6 sm:p-8" style={{ background: savingTone === "positive" ? "oklch(0.72 0.16 155 / 0.12)" : "rgba(255,255,255,0.05)", borderColor: toneColor[savingTone] }}>
+          <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-white">Your savings with OM Solutions</p>
+          <div className="mt-6 grid gap-6 md:grid-cols-3 md:items-end">
+            <SavingsValue label="Saving / hour" value={formatINR(savingPerHour)} sub="per hour" />
+            <SavingsValue label="Monthly saving" value={formatINR(savingPerMonth, true)} sub="per month" />
+            <SavingsValue label="Annual saving" value={formatINR(savingPerYear, true)} sub="per year" largest />
+          </div>
+          <div className="mt-7 grid gap-3 border-t border-white/20 pt-5 sm:grid-cols-3">
+            <Metric label="Cost reduction" value={`${costReductionPct.toFixed(1)}%`} />
+            <Metric label="Diesel replacement" value={`${dieselReplacementPct.toFixed(1)}%`} />
+            <Metric label="Annual CO₂ reduction" value={`${annualCO2SavingTonnes.toFixed(2)} tonnes`} />
+          </div>
+        </section>
+
+        <div className="grid gap-4 lg:grid-cols-3">
+          <ResultGroup title="Fuel consumption" rows={[["Diesel consumption", `${dieselConsumptionLPerHr.toFixed(1)} L/hr`], ["DF diesel consumption", `${dfDieselConsumptionLPerHr.toFixed(1)} L/hr`], ["NG consumption", `${ngConsumptionSm3PerHr.toFixed(1)} Sm³/hr`]]} />
+          <ResultGroup title="Operating cost" rows={[["Diesel mode cost", `${formatINR(dieselCostPerHr)}/hr`], ["Dual fuel diesel cost", `${formatINR(dfDieselCostPerHr)}/hr`], ["NG cost", `${formatINR(ngCostPerHr)}/hr`], ["Total dual fuel cost", `${formatINR(totalDualFuelCostPerHr)}/hr`]]} />
+          <ResultGroup title="Environmental impact" rows={[["Diesel mode CO₂", `${dieselCO2KgPerHr.toFixed(2)} kg/hr`], ["Dual fuel CO₂", `${totalDualFuelCO2KgPerHr.toFixed(2)} kg/hr`], ["CO₂ saving", `${co2SavingKgPerHr.toFixed(2)} kg/hr`]]} accent />
+        </div>
+        <p className="mt-4 text-xs leading-relaxed text-white/45">Estimates are based on the OM Solutions BMEP calculation model. Actual savings depend on engine condition, load profile, fuel quality and site conditions.</p>
+      </div>
+      <div className="shrink-0 border-t border-white/15 px-5 py-4 sm:px-7"><button type="button" onClick={onReset} className="h-11 w-full border-2 border-white/35 text-xs font-extrabold uppercase tracking-[0.1em] text-white transition-colors hover:border-[oklch(0.72_0.16_155)] hover:text-[oklch(0.72_0.16_155)]">Calculate again</button></div>
+    </div>
+  );
+}
+
+function ResultGroup({ title, rows, accent = false }: { title: string; rows: [string, string][]; accent?: boolean }) {
+  return <section className="rounded-[7px] border border-white/15 bg-white/[0.04] p-5"><p className="text-sm font-extrabold uppercase tracking-[0.12em] text-white">{title}</p><div className="mt-4 space-y-4">{rows.map(([label, value]) => <div key={label} className="flex items-start justify-between gap-4"><span className="text-sm font-semibold leading-snug text-white/80">{label}</span><strong className={`text-right text-base ${accent ? "text-[oklch(0.72_0.16_155)]" : "text-white"}`}>{value}</strong></div>)}</div></section>;
+}
+
+function SavingsValue({ label, value, sub, largest = false }: { label: string; value: string; sub: string; largest?: boolean }) {
+  return <div className={largest ? "md:text-right" : ""}><p className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-white">{label}</p><p className={`mt-2 font-black text-[oklch(0.78_0.18_155)] ${largest ? "text-4xl sm:text-5xl" : "text-3xl sm:text-4xl"}`}>{value}</p><p className="mt-1 text-sm font-semibold text-white/75">{sub}</p></div>;
+}
+
+function Metric({ label, value }: { label: string; value: string }) {
+  return <div><p className="text-sm font-extrabold uppercase tracking-[0.1em] text-white">{label}</p><p className="mt-1 text-2xl font-black text-white">{value}</p></div>;
+}
+
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="rounded-[3px] border-2 border-white/20 overflow-hidden mb-4">
@@ -49,7 +104,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-export function CalculatorResults({ inputs, results, onReset }: Props) {
+function LegacyCalculatorResults({ inputs, results, onReset }: Props) {
   const {
     operatingGensetRating,
     electricalPowerKWe,

@@ -77,10 +77,10 @@ export function SavingsCalculator({ onClose }: Props) {
           animation: calcSlideIn 0.3s cubic-bezier(0.34,1.2,0.64,1) both;
           /* Mobile default: full width with 8px margins */
           position: fixed;
+          top: 8px;
           left: 8px;
           right: 8px;
           bottom: 88px;
-          max-height: calc(100svh - 110px);
           z-index: 99;
           display: flex;
           flex-direction: column;
@@ -105,11 +105,12 @@ export function SavingsCalculator({ onClose }: Props) {
         /* Desktop: right-anchored fixed width */
         @media (min-width: 540px) {
           .calc-panel {
+            top: 24px;
             left: auto;
             right: 24px;
-            width: 420px;
+            width: min(960px, calc(100vw - 48px));
             min-width: 340px;
-            min-height: 420px;
+            min-height: 0;
             max-width: calc(100vw - 48px);
           }
         }

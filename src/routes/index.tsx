@@ -955,7 +955,7 @@ function OmSolutionsHome() {
                     <h3 className="text-xl font-bold">Sai Sound Service (Amane Engineers), Waki (B)</h3>
                     <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground">
                       <li><span className="font-medium text-foreground">Genset:</span> TATA 125 kVA CPCB-II</li>
-                      <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + LPG</li>
+                      <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + LPG (LOT)</li>
                       <li><span className="font-medium text-foreground">Operating load:</span> 60–85%</li>
                     </ul>
                   </div>

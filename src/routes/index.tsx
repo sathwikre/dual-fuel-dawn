@@ -83,9 +83,10 @@ import controlPanelImage from "@/assets/img-117.jpg";
 import economicsImage from "@/assets/img-150.jpg";
 import environmentImage from "@/assets/img-152.jpg";
 import marineImage from "@/assets/img-158.jpg";
-import marineOutboardImage from "@/assets/Marine Outboard Engine.jpeg";
-import marineInboardImage from "@/assets/Marine Inboard Engine (Propulsion).jpeg";
+import marineOutboardImage from "@/assets/Marine Outboard Engines .png";
+import marineInboardImage from "@/assets/Marine Inboard Engines.png";
 import busesTrucksImage from "@/assets/Buses, Trucks.jpeg";
+import generatorSetImage from "@/assets/Power Generator Set.jpeg";
 import borewellImage from "@/assets/img-160.jpg";
 import compressorImage from "@/assets/img-161.jpg";
 import compressorNightImage from "@/assets/img-162.jpg";
@@ -161,11 +162,10 @@ const navItems = [
 ] as const;
 
 const solutions = [
-  { title: "Marine Outboard Engines", text: "Petrol operation to LPG bi-fuel operation.", icon: Fuel, image: marineOutboardImage },
-  { title: "Marine Inboard Engines", text: "Diesel operation to LPG dual-fuel operation.", icon: Network, image: marineInboardImage },
-  { title: "Trucks & Buses", text: "Diesel to CNG (Mono CNG) operation.", icon: Factory, image: busesTrucksImage },
-  { title: "Trucks & Buses", text: "Diesel to CNG dual-fuel operation.", icon: Gauge, image: busesTrucksImage },
-  { title: "Generator Sets", text: "Diesel to CNG / LPG based dual-fuel operation.", icon: Zap },
+  { title: "Marine Outboard Engines", text: "Petrol operation to LPG bi-fuel operation.", icon: Fuel, image: marineOutboardImage, imageClass: "rounded-full" },
+  { title: "Marine Inboard Engines", text: "Diesel operation to LPG dual-fuel operation.", icon: Network, image: marineInboardImage, imageClass: "rounded-full" },
+  { title: "Trucks & Buses", text: "Diesel to CNG Mono CNG and dual-fuel operation.", icon: Factory, image: busesTrucksImage },
+  { title: "Generator Sets", text: "Diesel to CNG / LPG based dual-fuel operation.", icon: Zap, image: generatorSetImage },
   { title: "Tractors & Earth Movers", text: "Diesel to CNG / LPG based dual-fuel operation.", icon: Cog },
   { title: "Producer Gas & Syngas", text: "Biogas, MSW / wood based producer gas and syngas power plants & thermal applications.", icon: Leaf },
   { title: "Liquid Fuels", text: "Biodiesel, ethanol, methanol, DME and other liquid fuels.", icon: CircleGauge },
@@ -820,7 +820,7 @@ function OmSolutionsHome() {
                 <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
                   <div className="flex flex-wrap items-end justify-between gap-6"><div><SectionLabel index="OM / 03">Solutions</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Customized Dual Fuel technology <br />architecture for multiple applications.</h2></div><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Solutions listed in the company profile, mapped to the engine and fuel context where they apply.</p></div>
                   <div className="mt-12 grid gap-px overflow-hidden rounded-[12px] border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-                    {solutions.map(({ title, text, icon: Icon, image }, index) => <article key={`${title}-${index}`} className="group bg-background p-6 transition-colors hover:bg-panel hover:text-background"><div className="flex items-start justify-between">{image ? <img src={image} alt={`${title} application`} className="size-11 rounded-[7px] object-cover" /> : <span className="grid size-11 place-items-center rounded-[7px] bg-primary-soft text-primary transition-colors group-hover:bg-signal group-hover:text-panel"><Icon className="size-5" /></span>}<span className="font-mono text-[10px] text-muted-foreground group-hover:text-background/45">0{index + 1}</span></div><h3 className="mt-8 text-lg font-bold tracking-tight">{title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground group-hover:text-background/65">{text}</p></article>)}
+                    {solutions.map(({ title, text, icon: Icon, image, imageClass }, index) => <article key={`${title}-${index}`} className="group last:lg:col-span-2 bg-background p-6 transition-colors hover:bg-panel hover:text-background"><div className="flex items-start justify-between">{image ? <img src={image} alt={`${title} application`} className={`size-11 object-cover ${imageClass ?? "rounded-[7px]"}`} /> : <span className="grid size-11 place-items-center rounded-[7px] bg-primary-soft text-primary transition-colors group-hover:bg-signal group-hover:text-panel"><Icon className="size-5" /></span>}<span className="font-mono text-[10px] text-muted-foreground group-hover:text-background/45">0{index + 1}</span></div><h3 className="mt-8 text-lg font-bold tracking-tight">{title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground group-hover:text-background/65">{text}</p></article>)}
                   </div>
                 </div>
               </section>

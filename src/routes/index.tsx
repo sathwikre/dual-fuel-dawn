@@ -718,7 +718,7 @@ function OmSolutionsHome() {
               <h1 className="mt-0 text-[clamp(32px,4.5vw,64px)] font-light leading-[1.1] tracking-[-0.02em] text-white">
                 <TypewriterText text="Our purpose is to clean and decarbonise the air" />
               </h1>
-              <p className="mt-7 inline-flex items-center gap-3 rounded-full border border-[#b6ff72]/70 bg-[#0b1f15]/65 px-5 py-2.5 text-base font-extrabold uppercase tracking-[0.14em] text-[#d8ffad] shadow-[0_0_28px_rgba(182,255,114,0.22)] backdrop-blur-sm sm:text-lg"><span className="size-2 rounded-full bg-[#b6ff72] shadow-[0_0_10px_#b6ff72]" />We are OM Solutions</p>
+              <p className="mt-7 inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.18em] text-white sm:text-base"><span className="h-px w-8 bg-[#b6ff72]" />We are OM Solutions<span className="h-px w-8 bg-[#b6ff72]" /></p>
               <div className="mt-7">
                 <a href="https://wa.me/917387591083" target="_blank" rel="noopener noreferrer" className="inline-flex h-11 items-center border border-white bg-transparent px-7 text-[11px] font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-white hover:text-[#0b1f15]">
                   Contact Us

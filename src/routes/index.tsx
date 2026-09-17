@@ -952,7 +952,7 @@ function OmSolutionsHome() {
                 </div>
                 <div className="flex items-end justify-between gap-4 p-5">
                   <div>
-                    <h3 className="text-xl font-bold">TATA 125 kVA (CPCB-II)</h3>
+                    <h3 className="text-xl font-bold">Sai Sound Service, Amane Engineers, Waki (Bu), Chakan</h3>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">TATA 6 cyl. turbocharged with EGR · LPG · 45% diesel replacement · 75–80% load</p>
                   </div>
                   <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />

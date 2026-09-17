@@ -84,6 +84,8 @@ import economicsImage from "@/assets/img-150.jpg";
 import environmentImage from "@/assets/img-152.jpg";
 import marineImage from "@/assets/img-158.jpg";
 import marineOutboardImage from "@/assets/Marine Outboard Engine.jpeg";
+import marineInboardImage from "@/assets/Marine Inboard Engine (Propulsion).jpeg";
+import busesTrucksImage from "@/assets/Buses, Trucks.jpeg";
 import borewellImage from "@/assets/img-160.jpg";
 import compressorImage from "@/assets/img-161.jpg";
 import compressorNightImage from "@/assets/img-162.jpg";
@@ -160,9 +162,9 @@ const navItems = [
 
 const solutions = [
   { title: "Marine Outboard Engines", text: "Petrol operation to LPG bi-fuel operation.", icon: Fuel, image: marineOutboardImage },
-  { title: "Marine Inboard Engines", text: "Diesel operation to LPG dual-fuel operation.", icon: Network },
-  { title: "Trucks & Buses", text: "Diesel to CNG (Mono CNG) operation.", icon: Factory },
-  { title: "Trucks & Buses", text: "Diesel to CNG dual-fuel operation.", icon: Gauge },
+  { title: "Marine Inboard Engines", text: "Diesel operation to LPG dual-fuel operation.", icon: Network, image: marineInboardImage },
+  { title: "Trucks & Buses", text: "Diesel to CNG (Mono CNG) operation.", icon: Factory, image: busesTrucksImage },
+  { title: "Trucks & Buses", text: "Diesel to CNG dual-fuel operation.", icon: Gauge, image: busesTrucksImage },
   { title: "Generator Sets", text: "Diesel to CNG / LPG based dual-fuel operation.", icon: Zap },
   { title: "Tractors & Earth Movers", text: "Diesel to CNG / LPG based dual-fuel operation.", icon: Cog },
   { title: "Producer Gas & Syngas", text: "Biogas, MSW / wood based producer gas and syngas power plants & thermal applications.", icon: Leaf },
@@ -893,7 +895,7 @@ function OmSolutionsHome() {
                 <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><div className="flex flex-wrap items-end justify-between gap-5"><div><SectionLabel index="OM / 10">Product gallery</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Dual Fuel Kit Components</h2></div><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Control, sensing and gas-handling hardware shown in the supplied product photographs.</p></div><div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4">{componentGallery.map(([label, image]) => <div key={label} className="group overflow-hidden rounded-[9px] border border-border bg-background"><button type="button" className="block aspect-square w-full overflow-hidden" onClick={() => openImage(image, label)}><img src={image} alt={label} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]" /></button><p className="p-4 text-sm font-semibold">{label}</p></div>)}</div></div>
               </section>
 
-              <section id="dr-apps" className="bg-secondary/40"><div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 15">Other applications</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-5"><h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Built for more than gensets.</h2><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Click any application to view all installation images.</p></div>
+              <section id="dr-apps" className="bg-secondary/40"><div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 15">Other applications</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-5"><h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Applications other than gensets.</h2><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Click any application to view all installation images.</p></div>
                 <div className="mt-12 grid gap-5 md:grid-cols-3">
                   {([
                     { title: "Borewell", desc: "Dual-fuel kits for borewell pump sets.", images: [borewellImg1, borewellImg2, borewellImg3, borewellImg4, borewellImg5, borewellImg6, borewellImg7] },

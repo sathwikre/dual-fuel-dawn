@@ -756,7 +756,7 @@ function OmSolutionsHome() {
             <div className="grid grid-cols-[1fr_0.8fr] gap-3">
               <button type="button" className="row-span-2 overflow-hidden rounded-[10px] bg-secondary text-left" onClick={() => openImage(founderImage, "Prasad Parulekar, OM Solutions founder")}><img src={founderImage} alt="Prasad Parulekar" className="h-full min-h-[330px] w-full object-cover transition-transform duration-500 hover:scale-[1.03]" /></button>
               <div className="rounded-[10px] bg-panel p-5 text-background"><p className="font-mono text-4xl text-signal">2021</p><p className="mt-2 text-sm text-background/60">Company established</p></div>
-              <div className="rounded-[10px] bg-primary p-5 text-primary-foreground"><p className="font-mono text-4xl">20+ Years of Industry Experience</p><p className="mt-2 text-sm text-primary-foreground/75">Extensive experience in alternate-fuel-based power generation</p></div>
+              <div className="rounded-[10px] bg-primary p-5 text-primary-foreground"><p className="font-mono text-4xl">20+ Years of Industry Experience</p><p className="mt-2 text-sm text-primary-foreground/75">Extensive in alternate-fuel-based power generation</p></div>
             </div>
           </div>
         </section>
@@ -831,19 +831,97 @@ function OmSolutionsHome() {
             {/* Scrollable content */}
             <div className="flex-1 overflow-y-auto">
 
-              <section id="dr-solutions" className="bg-secondary/40">
+              <section id="dr-solutions" className="bg-background">
                 <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
-                  <div className="flex flex-wrap items-end justify-between gap-6"><div><SectionLabel index="OM / 03">Technology matrix</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Dual fuel technology architecture</h2></div><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Explore supported alternate-fuel pathways across engine applications.</p></div>
-                  <div className="mt-12 overflow-hidden rounded-[16px] border border-border/80 bg-[#fcfdfb] shadow-[0_14px_42px_rgba(11,31,21,0.06)]">
-                    <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border/70 px-6 py-5"><div><p className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">Fuel compatibility matrix</p><p className="mt-1 text-sm font-medium text-foreground">Application × alternate fuel coverage</p></div><div className="flex items-center gap-2 text-xs text-muted-foreground"><span className="size-2 rounded-full bg-primary" /> Supported pathway</div></div>
+                  <div className="flex flex-wrap items-end justify-between gap-6">
+                    <div>
+                      <SectionLabel index="OM / 03">Technology matrix</SectionLabel>
+                      <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Dual fuel technology architecture</h2>
+                    </div>
+                    <p className="max-w-md text-sm leading-relaxed text-muted-foreground">Explore supported alternate-fuel pathways across engine applications.</p>
+                  </div>
+
+                  {/* Premium Compatibility Matrix */}
+                  <div className="mt-10 overflow-hidden rounded-[20px] border border-border/60 bg-[#f9faf8] shadow-[0_8px_40px_rgba(11,31,21,0.07)]">
+                    {/* Matrix header bar */}
+                    <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border/50 bg-white/70 px-6 py-4 backdrop-blur-sm">
+                      <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-primary/60">Fuel Compatibility Matrix</p>
+                      <div className="flex items-center gap-2">
+                        <span className="size-2 rounded-full" style={{ background: "oklch(0.72 0.16 155)" }} />
+                        <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">Supported pathway</span>
+                      </div>
+                    </div>
+
+                    {/* Scrollable table */}
                     <div className="overflow-x-auto">
-                    <table className="w-full min-w-[980px] border-separate border-spacing-y-1 px-3 text-left">
-                      <thead><tr><th scope="col" className="sticky left-0 z-20 min-w-[300px] bg-[#fcfdfb] px-6 py-4 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Applications</th>{fuelColumns.map((fuel) => <th key={fuel} scope="col" className="min-w-[92px] px-3 py-4 text-center font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground"><span className="mx-auto mb-2 block size-1.5 rounded-full bg-border" />{fuel}</th>)}</tr></thead>
-                      <tbody>{fuelArchitecture.map(({ application, supported }, index) => <tr key={application} className="group"><th scope="row" className="sticky left-0 z-10 bg-[#fcfdfb] px-6 py-4 text-sm font-semibold text-foreground transition-colors group-hover:bg-primary-soft"><span className="mr-3 inline-block font-mono text-[10px] tracking-[0.1em] text-primary transition-transform group-hover:translate-x-0.5">0{index + 1}</span>{application}</th>{fuelColumns.map((fuel) => { const isSupported = supported.includes(fuel); return <td key={fuel} className="px-1 py-2 text-center"><span title={isSupported ? "Supported fuel pathway" : "Not supported for this application"} className={`mx-auto grid h-11 w-[66px] place-items-center rounded-[7px] border transition-all duration-200 ${isSupported ? "border-primary/25 bg-primary/10 text-primary group-hover:border-primary/45 group-hover:bg-primary/15 hover:!scale-105 hover:!bg-primary/20" : "border-transparent bg-secondary/45 text-muted-foreground/35"}`}>{isSupported ? <span className="flex items-center gap-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.08em]"><span className="size-1.5 rounded-full bg-primary" />On</span> : <span className="size-1 rounded-full bg-border" />}</span></td>; })}</tr>)}</tbody>
-                    </table>
+                      <table className="w-full min-w-[860px] border-collapse">
+                        {/* Fuel column headers */}
+                        <thead>
+                          <tr className="border-b border-border/40">
+                            <th scope="col" className="sticky left-0 z-20 min-w-[260px] bg-[#f9faf8] px-6 py-5 text-left">
+                              <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground/60">Application</span>
+                            </th>
+                            {fuelColumns.map((fuel) => (
+                              <th key={fuel} scope="col" className="min-w-[88px] px-2 py-5 text-center">
+                                <div className="flex flex-col items-center gap-1.5">
+                                  <span className="size-1.5 rounded-full bg-border/60" />
+                                  <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-muted-foreground/70">{fuel}</span>
+                                </div>
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+
+                        {/* Application rows */}
+                        <tbody>
+                          {fuelArchitecture.map(({ application, supported }, index) => (
+                            <tr key={application} className="group border-b border-border/25 last:border-0 transition-colors hover:bg-primary/[0.03]">
+                              {/* Application name — sticky */}
+                              <th scope="row" className="sticky left-0 z-10 bg-[#f9faf8] px-6 py-4 text-left transition-colors group-hover:bg-primary/[0.04]">
+                                <div className="flex items-center gap-3">
+                                  <span className="font-mono text-[9px] font-medium tracking-[0.1em] text-primary/50 transition-all duration-200 group-hover:text-primary/80">
+                                    {String(index + 1).padStart(2, "0")}
+                                  </span>
+                                  <span className="text-[13px] font-semibold leading-snug text-foreground/85 group-hover:text-foreground transition-colors">
+                                    {application}
+                                  </span>
+                                </div>
+                              </th>
+
+                              {/* Fuel cells */}
+                              {fuelColumns.map((fuel) => {
+                                const isSupported = (supported as readonly string[]).includes(fuel);
+                                return (
+                                  <td key={fuel} className="px-2 py-3 text-center">
+                                    {isSupported ? (
+                                      <span
+                                        title="Supported fuel pathway"
+                                        className="mx-auto flex h-9 w-14 flex-col items-center justify-center gap-0.5 rounded-[8px] border transition-all duration-200 cursor-default hover:scale-105"
+                                        style={{
+                                          background: "oklch(0.72 0.16 155 / 0.09)",
+                                          borderColor: "oklch(0.72 0.16 155 / 0.28)",
+                                        }}
+                                      >
+                                        <span className="size-1.5 rounded-full" style={{ background: "oklch(0.72 0.16 155)" }} />
+                                      </span>
+                                    ) : (
+                                      <span className="mx-auto flex h-9 w-14 items-center justify-center rounded-[8px]">
+                                        <span className="size-1 rounded-full bg-border/50" />
+                                      </span>
+                                    )}
+                                  </td>
+                                );
+                              })}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
                   </div>
-                  <p className="mt-4 text-xs leading-relaxed text-muted-foreground">Supported pathways are subject to engine configuration, fuel availability and application requirements.</p>
+
+                  <p className="mt-4 font-mono text-[10px] leading-relaxed text-muted-foreground/50">
+                    Supported pathways are subject to engine configuration, fuel availability and application requirements.
+                  </p>
                 </div>
               </section>
 

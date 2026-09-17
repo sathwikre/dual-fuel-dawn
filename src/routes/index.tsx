@@ -1190,7 +1190,7 @@ function OmSolutionsHome() {
 
             </div>
 
-            <p className="mt-8 text-xs text-muted-foreground">* Placeholder photos shown. Client photos will be updated once received.</p>
+            <p className="mt-8 text-xs text-muted-foreground"></p>
           </div>
         </section>
 

@@ -30,6 +30,7 @@ import logoImage from "@/assets/ChatGPT Image Sep 15, 2026, 06_07_17 PM.png";
 import founderImage from "@/assets/img-006.jpg";
 import schematicImage from "@/assets/imm.jpeg";
 import systemImage from "@/assets/IMAG.jpeg";
+import gasHandlingImage from "@/assets/GAS handling system.jpeg";
 import lpgKitImage from "@/assets/IMG-20260203-WA0076.jpg";
 import pngKitImage from "@/assets/img-085.jpg";
 import componentImage from "@/assets/img-086.jpg";
@@ -262,7 +263,7 @@ type DualFuelConsideration = (typeof dualFuelConsiderations)[number]["id"];
 const componentGallery = [
   ["LPG dual-fuel kit", lpgKitImage],
   ["PNG dual-fuel kit", pngKitImage],
-  ["Gas control components", componentImage],
+  ["Gas control components", gasHandlingImage],
   ["Energy meter", energyMeterImage],
   ["Control panel", controlPanelImage],
   ["Gas system assembly", gasSystemImage],

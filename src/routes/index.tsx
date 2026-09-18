@@ -29,7 +29,7 @@ import { SavingsAssistant } from "@/components/SavingsAssistant/SavingsAssistant
 import logoImage from "@/assets/ChatGPT Image Sep 15, 2026, 06_07_17 PM.png";
 import founderImage from "@/assets/img-006.jpg";
 import schematicImage from "@/assets/imm.jpeg";
-import systemImage from "@/assets/IMAG.jpeg";
+import systemImage from "@/assets/renamed_pistion.png";
 import gasHandlingImage from "@/assets/GAS handling system.jpeg";
 import exhaustTemperatureSensorsImage from "@/assets/Exhaust Temperature Sensors.jpeg";
 import airGasMixerImage from "@/assets/Air Gas Mixer.jpeg";

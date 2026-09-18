@@ -766,7 +766,7 @@ function OmSolutionsHome() {
                 <img
                   src={founderImage}
                   alt="Prasad Parulekar"
-                  className="block aspect-[16/9] w-full object-cover object-center transition-transform duration-500 hover:scale-[1.03] lg:h-full lg:min-h-[330px] lg:object-cover"
+                  className="block h-[360px] w-full object-contain object-center bg-secondary transition-transform duration-500 hover:scale-[1.03] sm:h-[420px] lg:h-full lg:min-h-[330px] lg:object-cover"
                 />
               </button>
               <div className="rounded-[10px] bg-panel p-4 text-background sm:p-5">

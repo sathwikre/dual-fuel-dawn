@@ -873,19 +873,19 @@ function OmSolutionsHome() {
                     </div>
 
                     {/* Scrollable table */}
-                    <div className="overflow-x-auto">
-                      <table className="w-full min-w-[1050px] border-collapse">
+                    <div className="overflow-x-auto -webkit-overflow-scrolling-touch">
+                      <table className="w-full min-w-[680px] border-collapse">
                         {/* Fuel column headers */}
                         <thead>
                           <tr className="border-b border-border/40">
-                            <th scope="col" className="sticky left-0 z-20 min-w-[360px] bg-[#f9faf8] px-7 py-6 text-left">
-                              <span className="text-sm font-bold uppercase tracking-[0.1em] text-foreground">Application</span>
+                            <th scope="col" className="sticky left-0 z-20 min-w-[160px] sm:min-w-[260px] bg-[#f9faf8] px-3 sm:px-7 py-4 sm:py-6 text-left">
+                              <span className="text-[10px] sm:text-sm font-bold uppercase tracking-[0.1em] text-foreground">Application</span>
                             </th>
                             {fuelColumns.map((fuel) => (
-                              <th key={fuel} scope="col" className={`min-w-[98px] px-2 py-6 text-center transition-colors ${selectedFuel === fuel ? "bg-primary/10" : ""}`}>
-                                <button type="button" onClick={() => setSelectedFuel(selectedFuel === fuel ? null : fuel)} aria-pressed={selectedFuel === fuel} className="flex w-full flex-col items-center gap-1.5 rounded-[6px] py-1 focus-visible:outline-2 focus-visible:outline-primary">
-                                  <span className={`size-2 rounded-full ${selectedFuel === fuel ? "bg-primary" : "bg-border/60"}`} />
-                                  <span className="text-sm font-bold uppercase tracking-[0.08em] text-foreground">{fuel}</span>
+                              <th key={fuel} scope="col" className={`min-w-[62px] sm:min-w-[88px] px-1 sm:px-2 py-4 sm:py-6 text-center transition-colors ${selectedFuel === fuel ? "bg-primary/10" : ""}`}>
+                                <button type="button" onClick={() => setSelectedFuel(selectedFuel === fuel ? null : fuel)} aria-pressed={selectedFuel === fuel} className="flex w-full flex-col items-center gap-1 rounded-[6px] py-1 focus-visible:outline-2 focus-visible:outline-primary">
+                                  <span className={`size-1.5 rounded-full ${selectedFuel === fuel ? "bg-primary" : "bg-border/60"}`} />
+                                  <span className="text-[9px] sm:text-xs font-bold uppercase tracking-[0.06em] sm:tracking-[0.08em] text-foreground">{fuel}</span>
                                 </button>
                               </th>
                             ))}
@@ -897,12 +897,12 @@ function OmSolutionsHome() {
                           {fuelArchitecture.map(({ application, supported }, index) => (
                             <tr key={application} className={`group border-b border-border/40 last:border-0 transition-colors hover:bg-primary/[0.04] ${selectedFuelApplication === index ? "bg-primary/[0.06]" : ""}`}>
                               {/* Application name — sticky */}
-                              <th scope="row" className={`sticky left-0 z-10 px-7 py-5 text-left transition-colors ${selectedFuelApplication === index ? "bg-primary-soft" : "bg-[#f9faf8] group-hover:bg-primary/[0.04]"}`}>
-                                <button type="button" onClick={() => setSelectedFuelApplication(index)} className="flex w-full items-center gap-3 text-left focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-4">
-                                  <span className={`font-mono text-xs font-bold tracking-[0.1em] transition-all duration-200 ${selectedFuelApplication === index ? "text-primary" : "text-primary/70 group-hover:text-primary"}`}>
+                              <th scope="row" className={`sticky left-0 z-10 px-3 sm:px-7 py-3 sm:py-5 text-left transition-colors ${selectedFuelApplication === index ? "bg-primary-soft" : "bg-[#f9faf8] group-hover:bg-primary/[0.04]"}`}>
+                                <button type="button" onClick={() => setSelectedFuelApplication(index)} className="flex w-full items-center gap-2 sm:gap-3 text-left focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-4">
+                                  <span className={`shrink-0 font-mono text-[9px] sm:text-xs font-bold tracking-[0.1em] transition-all duration-200 ${selectedFuelApplication === index ? "text-primary" : "text-primary/70 group-hover:text-primary"}`}>
                                     {String(index + 1).padStart(2, "0")}
                                   </span>
-                                  <span className="text-lg font-bold leading-snug text-foreground">
+                                  <span className="text-[11px] sm:text-base font-semibold sm:font-bold leading-snug text-foreground">
                                     {application}
                                   </span>
                                 </button>
@@ -912,22 +912,22 @@ function OmSolutionsHome() {
                               {fuelColumns.map((fuel) => {
                                 const isSupported = (supported as readonly string[]).includes(fuel);
                                 return (
-                                  <td key={fuel} className={`px-2 py-4 text-center transition-colors duration-200 ${selectedFuel === fuel ? "bg-primary/[0.06]" : ""}`}>
+                                  <td key={fuel} className={`px-0.5 sm:px-2 py-2 sm:py-4 text-center transition-colors duration-200 ${selectedFuel === fuel ? "bg-primary/[0.06]" : ""}`}>
                                     {isSupported ? (
                                       <button
                                         type="button"
                                         onClick={() => { setSelectedFuelApplication(index); setSelectedFuel(fuel); }}
                                         aria-label={`${application} supports ${fuel}`}
-                                        className={`mx-auto grid size-10 place-items-center rounded-[6px] border text-primary transition-all duration-200 hover:scale-105 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 group-hover:border-primary/50 group-hover:bg-primary/15 ${selectedFuelApplication === index && selectedFuel === fuel ? "ring-2 ring-primary ring-offset-2" : ""}`}
+                                        className={`mx-auto grid size-7 sm:size-10 place-items-center rounded-[5px] sm:rounded-[6px] border text-primary transition-all duration-200 hover:scale-105 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 group-hover:border-primary/50 group-hover:bg-primary/15 ${selectedFuelApplication === index && selectedFuel === fuel ? "ring-2 ring-primary ring-offset-2" : ""}`}
                                         style={{
                                           background: "oklch(0.72 0.16 155 / 0.09)",
                                           borderColor: "oklch(0.72 0.16 155 / 0.28)",
                                         }}
                                       >
-                                        <Check className="size-4 stroke-[3]" />
+                                        <Check className="size-3 sm:size-4 stroke-[3]" />
                                       </button>
                                     ) : (
-                                      <button type="button" onClick={() => { setSelectedFuelApplication(index); setSelectedFuel(fuel); }} aria-label={`${application} does not support ${fuel}`} className="mx-auto grid size-10 place-items-center text-base font-medium text-muted-foreground/50 transition-colors duration-200 group-hover:text-muted-foreground/70 focus-visible:outline-2 focus-visible:outline-primary">
+                                      <button type="button" onClick={() => { setSelectedFuelApplication(index); setSelectedFuel(fuel); }} aria-label={`${application} does not support ${fuel}`} className="mx-auto grid size-7 sm:size-10 place-items-center text-sm sm:text-base font-medium text-muted-foreground/40 transition-colors duration-200 group-hover:text-muted-foreground/60 focus-visible:outline-2 focus-visible:outline-primary">
                                         —
                                       </button>
                                     )}

@@ -266,7 +266,6 @@ const componentGallery = [
   ["Energy meter", energyMeterImage],
   ["Control panel", controlPanelImage],
   ["Gas system assembly", gasSystemImage],
-  ["Blunder", marineEngineImage],
   ["Knock sensor mounting", engineDetailImage],
 ] as const;
 

@@ -761,10 +761,22 @@ function OmSolutionsHome() {
                 <span className="rounded-[6px] border border-border bg-secondary px-3 py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">Cummins India experience</span>
               </div>
             </div>
-            <div className="grid grid-cols-[1fr_0.8fr] gap-3">
-              <button type="button" className="row-span-2 overflow-hidden rounded-[10px] bg-secondary text-left" onClick={() => openImage(founderImage, "Prasad Parulekar, OM Solutions founder")}><img src={founderImage} alt="Prasad Parulekar" className="h-full min-h-[330px] w-full object-cover transition-transform duration-500 hover:scale-[1.03]" /></button>
-              <div className="rounded-[10px] bg-panel p-5 text-background"><p className="font-mono text-4xl text-signal">2021</p><p className="mt-2 text-sm text-background/60">Company established</p></div>
-              <div className="rounded-[10px] bg-primary p-5 text-primary-foreground"><p className="font-mono text-4xl">20+ Years of Industry Experience</p><p className="mt-2 text-sm text-primary-foreground/75">Extensive in alternate-fuel-based power generation</p></div>
+            <div className="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-[1fr_0.8fr] lg:gap-3">
+              <button type="button" className="overflow-hidden rounded-[20px] bg-secondary text-left lg:row-span-2" onClick={() => openImage(founderImage, "Prasad Parulekar, OM Solutions founder")}>
+                <img
+                  src={founderImage}
+                  alt="Prasad Parulekar"
+                  className="block aspect-[16/9] w-full object-cover object-center transition-transform duration-500 hover:scale-[1.03] lg:h-full lg:min-h-[330px] lg:object-cover"
+                />
+              </button>
+              <div className="rounded-[10px] bg-panel p-4 text-background sm:p-5">
+                <p className="font-mono text-3xl leading-none text-signal sm:text-4xl">2021</p>
+                <p className="mt-2 text-sm text-background/60">Company established</p>
+              </div>
+              <div className="rounded-[10px] bg-primary p-4 text-primary-foreground sm:p-5">
+                <p className="font-mono text-[clamp(1.45rem,5vw,2.75rem)] leading-[1.05] tracking-[-0.04em]">20+ Years of Industry Experience</p>
+                <p className="mt-2 text-sm text-primary-foreground/75">Extensive in alternate-fuel-based power generation</p>
+              </div>
             </div>
           </div>
         </section>

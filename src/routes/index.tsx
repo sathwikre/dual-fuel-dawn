@@ -751,7 +751,7 @@ function OmSolutionsHome() {
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">OM Solutions was established in 2021 by <strong className="text-foreground">Prasad Parulekar (IIT Bombay)</strong>, with 20+ years of alternate-fuel-based power generation experience.</p>
               <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">The company delivers alternate-fuel and dual-fuel solutions across engine and industrial applications from generator sets and commercial vehicles to marine propulsion, tractors, earth movers, producer gas and liquid fuels.</p>
               <div className="mt-8 flex flex-wrap gap-2">
-                <span className="rounded-[6px] border border-border bg-secondary px-3 py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">IIT Bombay founder</span>
+                <span className="rounded-[6px] border border-border bg-secondary px-3 py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">IIT Bombay Mtech Energy Science</span>
                 <span className="rounded-[6px] border border-border bg-secondary px-3 py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">Cummins India experience</span>
               </div>
             </div>

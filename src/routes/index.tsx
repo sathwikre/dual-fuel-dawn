@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
   ArrowDownRight,
   ArrowRight,
+  ArrowLeft,
   Check,
   ChevronDown,
   CircleGauge,
@@ -14,8 +15,11 @@ import {
   Leaf,
   Linkedin,
   Menu,
+  Minus,
   Network,
   Phone,
+  Plus,
+  RotateCcw,
   ShieldCheck,
   Twitter,
   X,
@@ -51,6 +55,18 @@ import koelImg1 from "@/assets/WhatsApp Image 2026-08-28 at 3.55.36 PM.jpeg";
 import koelImg2 from "@/assets/Gross picture DFK2.jpeg";
 import birlaImageOne from "@/assets/img-095.jpg";
 import birlaImageTwo from "@/assets/img-096.jpg";
+
+// Component images for schematic viewer
+import airGasMixerComponent from "@/assets/components/Air Gas Mixer.jpeg";
+import controlPanelComponent from "@/assets/components/Control panel.jpg";
+import energyMeterComponent from "@/assets/components/Energy meter.jpg";
+import exhaustTemperatureSensorsComponent from "@/assets/components/Exhaust Temperature Sensors.jpeg";
+import gasHandlingSystemComponent from "@/assets/components/GAS handling system.jpeg";
+import gasLeakDetectorComponent from "@/assets/components/Gas Leak Detector.jpeg";
+import gasSystemAssemblyComponent from "@/assets/components/Gas system assembly.jpg";
+import knockSensorMountingComponent from "@/assets/components/Knock sensor mounting.jpg";
+import knockSensorComponent from "@/assets/components/Knock sensor.jpeg";
+import lpgPressureRegulatorComponent from "@/assets/components/LPG Pressure regulator (LOT capable).jpeg";
 
 // Hero background images
 import heroBg4 from "@/assets/background/bent-van-aeken-0A7YwYhZhWw-unsplash.jpg";
@@ -191,6 +207,81 @@ const regulationsData = [
   { name: "Odisha", pdf: "/documents/regulations/Odisha - 2023-Odisha-Circular-DG-Sets-15730-dtd.-6.10.2023-2.pdf" },
   { name: "Tamil Nadu", pdf: "/documents/regulations/Tamil Nadu - Year-2021_Notice_Followup_RECD_DFK-1.pdf" },
 ] as const;
+
+// Schematic component configuration for interactive viewer
+type SchematicComponent = {
+  id: string;
+  name: string;
+  image?: string;
+  secondaryImages?: { label: string; image: string }[];
+  hotspot: { x: number; y: number; width: number; height: number };
+  description?: string;
+};
+
+const schematicComponents: SchematicComponent[] = [
+  {
+    id: "gas-air-mixer",
+    name: "Gas Air Mixer",
+    image: airGasMixerComponent,
+    hotspot: { x: 10, y: 33, width: 12, height: 10 },
+  },
+  {
+    id: "control-panel",
+    name: "Control Panel",
+    image: controlPanelComponent,
+    hotspot: { x: 15, y: 80, width: 15, height: 12 },
+  },
+  {
+    id: "energy-meter",
+    name: "Energy Meter",
+    image: energyMeterComponent,
+    hotspot: { x: 45, y: 55, width: 10, height: 8 },
+  },
+  {
+    id: "egt-sensor",
+    name: "EGT Sensor",
+    image: exhaustTemperatureSensorsComponent,
+    hotspot: { x: 60, y: 60, width: 8, height: 8 },
+  },
+  {
+    id: "knock-sensor",
+    name: "Knock Sensor",
+    image: knockSensorComponent,
+    secondaryImages: [{ label: "Installation View", image: knockSensorMountingComponent }],
+    hotspot: { x: 45, y: 75, width: 8, height: 8 },
+  },
+  {
+    id: "gas-pressure-regulator",
+    name: "Gas Pressure Regulator",
+    image: lpgPressureRegulatorComponent,
+    hotspot: { x: 60, y: 40, width: 10, height: 10 },
+  },
+  {
+    id: "air-filter",
+    name: "Air Filter",
+    hotspot: { x: 10, y: 45, width: 10, height: 10 },
+  },
+  {
+    id: "gas-filter",
+    name: "Gas Filter",
+    hotspot: { x: 70, y: 40, width: 8, height: 8 },
+  },
+  {
+    id: "gas-flow-control",
+    name: "Gas Flow Control",
+    hotspot: { x: 25, y: 25, width: 8, height: 8 },
+  },
+  {
+    id: "diesel-engine",
+    name: "Diesel Engine",
+    hotspot: { x: 50, y: 65, width: 20, height: 20 },
+  },
+  {
+    id: "alternator",
+    name: "Alternator",
+    hotspot: { x: 78, y: 75, width: 12, height: 12 },
+  },
+];
 
 const fuelColumns = ["PNG", "CNG", "LPG", "LNG", "Ethanol", "Methanol", "Isobutane"] as const;
 
@@ -587,6 +678,13 @@ function OmSolutionsHome() {
   const [selectedFuel, setSelectedFuel] = useState<(typeof fuelColumns)[number] | null>(null);
   const [dealershipModalOpen, setDealershipModalOpen] = useState(false);
   const [mobileRegulationsOpen, setMobileRegulationsOpen] = useState(false);
+  
+  // Schematic viewer state
+  const [schematicViewerOpen, setSchematicViewerOpen] = useState(false);
+  const [selectedComponent, setSelectedComponent] = useState<SchematicComponent | null>(null);
+  const [schematicZoom, setSchematicZoom] = useState(1);
+  const [hoveredComponent, setHoveredComponent] = useState<string | null>(null);
+  const [componentImageIndex, setComponentImageIndex] = useState(0);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -595,11 +693,24 @@ function OmSolutionsHome() {
         setTechDrawerOpen(false);
         setAppGallery(null);
         setDealershipModalOpen(false);
+        setSchematicViewerOpen(false);
+        setSelectedComponent(null);
+      }
+      if (schematicViewerOpen && selectedComponent) {
+        const currentIndex = schematicComponents.findIndex(c => c.id === selectedComponent.id);
+        if (event.key === "ArrowLeft" && currentIndex > 0) {
+          setSelectedComponent(schematicComponents[currentIndex - 1]);
+          setComponentImageIndex(0);
+        }
+        if (event.key === "ArrowRight" && currentIndex < schematicComponents.length - 1) {
+          setSelectedComponent(schematicComponents[currentIndex + 1]);
+          setComponentImageIndex(0);
+        }
       }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, []);
+  }, [schematicViewerOpen, selectedComponent]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 28);
@@ -617,6 +728,12 @@ function OmSolutionsHome() {
   }, []);
 
   const openImage = (src: string, alt: string) => setSelectedImage({ src, alt });
+  const openSchematicViewer = () => {
+    setSchematicViewerOpen(true);
+    setSelectedComponent(null);
+    setSchematicZoom(1);
+    setComponentImageIndex(0);
+  };
   const closeMenu = () => setMenuOpen(false);
   const submitForm = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -872,7 +989,7 @@ function OmSolutionsHome() {
           <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
             <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
               <div><SectionLabel index="OM / 04">Primary product</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl text-gray-900">OM Solutions<br />Dual Fuel Kit</h2><p className="mt-6 max-w-xl text-base leading-relaxed text-gray-600">A dual-fuel system allows a diesel engine to use diesel together with an alternate gaseous fuel, reducing diesel consumption while maintaining engine operation.</p><div className="mt-8 grid grid-cols-2 gap-3"><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Fuel mode</p><p className="mt-2 font-mono text-lg text-gray-900">Dual=Diesel+NG</p></div><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Gas usage</p><p className="mt-2 text-sm font-semibold text-gray-900">up to 70%</p></div><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Control</p><p className="mt-2 font-mono text-lg text-gray-900">Sensors + valves</p></div><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Existing genset</p><p className="mt-2 font-mono text-lg text-gray-900">No replacement</p></div></div></div>
-              <div className="rounded-[12px] border border-gray-200 bg-gray-50 p-4 sm:p-6"><div className="flex items-center justify-between"><p className="font-mono text-xs uppercase tracking-[0.18em] text-gray-500">System schematic</p><span className="flex items-center gap-2 font-mono text-[10px] text-[#b6ff72]"><span className="size-2 rounded-full bg-[#b6ff72]" /> System view</span></div><button type="button" className="mt-5 block w-full overflow-hidden rounded-[8px] bg-white" onClick={() => openImage(schematicImage, "OM Solutions dual-fuel kit schematic")}><img src={schematicImage} alt="Dual fuel kit schematic" className="aspect-[1.75/1] w-full object-contain transition-transform duration-500 hover:scale-[1.02]" /></button><div className="mt-5 grid grid-cols-2 gap-x-5 gap-y-2 font-mono text-[10px] text-gray-600 sm:grid-cols-3"><span>· Air Filter</span><span>· Gas Air Mixer</span><span>· Gas Filter</span><span>· Pressure Regulator</span><span>· Gas Flow Control</span><span>· Knock Sensor</span><span>· EGT Sensor</span><span>· Control Panel</span><span>· Energy Meter</span></div></div>
+              <div className="rounded-[12px] border border-gray-200 bg-gray-50 p-4 sm:p-6"><div className="flex items-center justify-between"><p className="font-mono text-xs uppercase tracking-[0.18em] text-gray-500">System schematic</p><span className="flex items-center gap-2 font-mono text-[10px] text-[#b6ff72]"><span className="size-2 rounded-full bg-[#b6ff72]" /> Interactive view</span></div><button type="button" className="mt-5 block w-full overflow-hidden rounded-[8px] bg-white" onClick={openSchematicViewer}><img src={schematicImage} alt="Dual fuel kit schematic" className="aspect-[1.75/1] w-full object-contain transition-transform duration-500 hover:scale-[1.02]" /></button><div className="mt-5 grid grid-cols-2 gap-x-5 gap-y-2 font-mono text-[10px] text-gray-600 sm:grid-cols-3"><span>· Air Filter</span><span>· Gas Air Mixer</span><span>· Gas Filter</span><span>· Pressure Regulator</span><span>· Gas Flow Control</span><span>· Knock Sensor</span><span>· EGT Sensor</span><span>· Control Panel</span><span>· Energy Meter</span></div></div>
             </div>
           </div>
         </section>
@@ -1331,6 +1448,240 @@ function OmSolutionsHome() {
       <footer className="border-t border-border bg-background"><div className="mx-auto max-w-[1440px] px-5 py-12 lg:px-10"><div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between"><div className="max-w-sm"><div className="flex items-center gap-3"><img src={logoImage} alt="OM Solutions" className="h-10 w-12 object-contain" /><div><p className="font-extrabold tracking-tight">OM SOLUTIONS</p><p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">Dual Fuel Systems</p></div></div><p className="mt-5 font-mono text-[11px] leading-relaxed text-muted-foreground">Smarter Power ”“ Lower Fuel Cost ”“ Cleaner Performance</p><div className="mt-6 flex items-center gap-3"><a href="https://linkedin.com/company/om-solutions" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="grid h-9 w-9 place-items-center rounded-[7px] border border-border text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"><Linkedin className="size-4" /></a><a href="https://youtube.com/@omsolutions" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="grid h-9 w-9 place-items-center rounded-[7px] border border-border text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"><Youtube className="size-4" /></a><a href="https://twitter.com/omsolutions" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X" className="grid h-9 w-9 place-items-center rounded-[7px] border border-border text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"><Twitter className="size-4" /></a><a href="https://instagram.com/omsolutions" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="grid h-9 w-9 place-items-center rounded-[7px] border border-border text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"><Instagram className="size-4" /></a></div></div><div className="grid gap-10 sm:grid-cols-2"><div><p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Quick links</p><nav className="mt-4 grid grid-cols-2 gap-x-8 gap-y-3 text-sm">{navItems.map(([label, id]) => <a key={id} href={`#${id}`} className="transition-colors hover:text-primary">{label}</a>)}</nav></div><div><p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Contact</p><div className="mt-4 space-y-2 text-sm text-muted-foreground"><a href="mailto:omsolns18@gmail.com" className="block hover:text-primary">omsolns18@gmail.com</a><a href="https://wa.me/917387591083" target="_blank" rel="noopener noreferrer" className="block hover:text-primary">+91 73875 91083 <span className="font-mono text-[9px] text-primary">WhatsApp</span></a><p>Warje, Pune, Maharashtra</p></div></div></div></div><div className="mt-10 flex flex-col gap-2 border-t border-border pt-5 font-mono text-[10px] text-muted-foreground sm:flex-row sm:justify-between"><span>© 2026 OM Solutions. All Rights Reserved.</span><span>Dual Fuel &amp; RECD Technology</span></div></div></footer>
 
       {selectedImage ? <div className="fixed inset-0 z-[60] flex items-center justify-center bg-panel/90 p-5 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label={selectedImage.alt} onClick={() => setSelectedImage(null)}><div className="relative max-h-[90vh] max-w-5xl overflow-hidden rounded-[10px] border border-background/15 bg-background" onClick={(event) => event.stopPropagation()}><Button type="button" variant="outline" size="icon" className="absolute right-3 top-3 z-10 rounded-[6px] border-border bg-background/85" aria-label="Close image viewer" onClick={() => setSelectedImage(null)}><X /></Button><img src={selectedImage.src} alt={selectedImage.alt} className="max-h-[86vh] max-w-full object-contain" /></div></div> : null}
+
+      {/* Interactive Schematic Viewer */}
+      {schematicViewerOpen && (
+        <div
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-[#0a0f0d]/95 p-4 backdrop-blur-sm"
+          onClick={() => setSchematicViewerOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Dual Fuel Kit Schematic Viewer"
+        >
+          <div
+            className="relative flex flex-col overflow-hidden rounded-[14px] bg-[#0d1410] shadow-2xl w-full"
+            style={{ maxWidth: "90vw", maxHeight: "90vh", border: "1px solid rgba(182,255,114,0.15)" }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="flex shrink-0 items-center justify-between px-5 py-4 border-b border-white/10">
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#b6ff72]">
+                  {selectedComponent ? "Component Detail" : "System Schematic"}
+                </p>
+                <h3 className="text-base font-extrabold text-white leading-tight">
+                  {selectedComponent ? selectedComponent.name : "Dual Fuel Kit"}
+                </h3>
+              </div>
+              <div className="flex items-center gap-3">
+                {!selectedComponent && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => setSchematicZoom(Math.max(0.5, schematicZoom - 0.25))}
+                      className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/15 bg-white/5 text-white/60 transition-colors hover:bg-white/10 hover:text-white"
+                      aria-label="Zoom out"
+                    >
+                      <Minus className="size-4" />
+                    </button>
+                    <span className="font-mono text-[11px] text-white/50 w-12 text-center">{Math.round(schematicZoom * 100)}%</span>
+                    <button
+                      type="button"
+                      onClick={() => setSchematicZoom(Math.min(3, schematicZoom + 0.25))}
+                      className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/15 bg-white/5 text-white/60 transition-colors hover:bg-white/10 hover:text-white"
+                      aria-label="Zoom in"
+                    >
+                      <Plus className="size-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setSchematicZoom(1)}
+                      className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/15 bg-white/5 text-white/60 transition-colors hover:bg-white/10 hover:text-white"
+                      aria-label="Reset zoom"
+                    >
+                      <RotateCcw className="size-4" />
+                    </button>
+                  </>
+                )}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSchematicViewerOpen(false);
+                    setSelectedComponent(null);
+                    setSchematicZoom(1);
+                    setComponentImageIndex(0);
+                  }}
+                  className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-white/60 transition-colors hover:bg-white/10 hover:text-white"
+                  aria-label="Close viewer"
+                >
+                  <X className="size-3.5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Content */}
+            {selectedComponent ? (
+              // Component Detail View
+              <div className="relative flex min-h-0 flex-1 flex-col">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSelectedComponent(null);
+                    setComponentImageIndex(0);
+                  }}
+                  className="absolute left-4 top-4 z-10 flex items-center gap-2 rounded-lg border border-white/15 bg-black/50 px-3 py-2 text-xs font-semibold text-white/80 transition-colors hover:bg-black/70 hover:text-white"
+                  aria-label="Back to schematic"
+                >
+                  <ArrowLeft className="size-4" />
+                  Back to Schematic
+                </button>
+
+                <div className="flex min-h-0 flex-1 items-center justify-center bg-black/30 p-6">
+                  {selectedComponent.image ? (
+                    <div className="relative flex flex-col items-center">
+                      <img
+                        src={
+                          componentImageIndex === 0 && selectedComponent.secondaryImages
+                            ? selectedComponent.secondaryImages[componentImageIndex]?.image || selectedComponent.image
+                            : selectedComponent.secondaryImages && componentImageIndex > 0
+                            ? selectedComponent.secondaryImages[componentImageIndex - 1]?.image
+                            : selectedComponent.image
+                        }
+                        alt={selectedComponent.name}
+                        className="max-h-[60vh] max-w-full object-contain"
+                      />
+                      {selectedComponent.secondaryImages && selectedComponent.secondaryImages.length > 0 && (
+                        <div className="mt-4 flex gap-2">
+                          <button
+                            type="button"
+                            onClick={() => setComponentImageIndex(0)}
+                            className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
+                              componentImageIndex === 0
+                                ? "bg-[#b6ff72] text-[#0d1410]"
+                                : "bg-white/10 text-white/60 hover:bg-white/15"
+                            }`}
+                          >
+                            Component
+                          </button>
+                          {selectedComponent.secondaryImages.map((img, idx) => (
+                            <button
+                              key={idx}
+                              type="button"
+                              onClick={() => setComponentImageIndex(idx + 1)}
+                              className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
+                                componentImageIndex === idx + 1
+                                  ? "bg-[#b6ff72] text-[#0d1410]"
+                                  : "bg-white/10 text-white/60 hover:bg-white/15"
+                              }`}
+                            >
+                              {img.label}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    // Placeholder for components without images
+                    <div className="flex flex-col items-center justify-center text-center p-8">
+                      <div className="grid size-16 place-items-center rounded-full border-2 border-dashed border-white/20">
+                        <Cog className="size-6 text-white/30" />
+                      </div>
+                      <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.14em] text-white/40">
+                        Component image coming soon
+                      </p>
+                      <p className="mt-2 text-sm font-semibold text-white/60">{selectedComponent.name}</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Navigation */}
+                <div className="flex shrink-0 items-center justify-between border-t border-white/10 px-5 py-4">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const currentIndex = schematicComponents.findIndex(c => c.id === selectedComponent.id);
+                      if (currentIndex > 0) {
+                        setSelectedComponent(schematicComponents[currentIndex - 1]);
+                        setComponentImageIndex(0);
+                      }
+                    }}
+                    disabled={schematicComponents.findIndex(c => c.id === selectedComponent.id) === 0}
+                    className="flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold text-white/60 transition-colors hover:bg-white/10 hover:text-white disabled:opacity-30 disabled:hover:bg-white/5 disabled:hover:text-white/60"
+                    aria-label="Previous component"
+                  >
+                    <ArrowLeft className="size-4" />
+                    Previous
+                  </button>
+                  <span className="font-mono text-[10px] text-white/40">
+                    {schematicComponents.findIndex(c => c.id === selectedComponent.id) + 1} / {schematicComponents.length}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const currentIndex = schematicComponents.findIndex(c => c.id === selectedComponent.id);
+                      if (currentIndex < schematicComponents.length - 1) {
+                        setSelectedComponent(schematicComponents[currentIndex + 1]);
+                        setComponentImageIndex(0);
+                      }
+                    }}
+                    disabled={schematicComponents.findIndex(c => c.id === selectedComponent.id) === schematicComponents.length - 1}
+                    className="flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold text-white/60 transition-colors hover:bg-white/10 hover:text-white disabled:opacity-30 disabled:hover:bg-white/5 disabled:hover:text-white/60"
+                    aria-label="Next component"
+                  >
+                    Next
+                    <ArrowRight className="size-4" />
+                  </button>
+                </div>
+              </div>
+            ) : (
+              // Schematic View with Hotspots
+              <div className="relative flex min-h-0 flex-1 items-center justify-center bg-black/30 p-6 overflow-hidden">
+                <div
+                  className="relative"
+                  style={{ transform: `scale(${schematicZoom})`, transformOrigin: "center" }}
+                >
+                  <img
+                    src={schematicImage}
+                    alt="Dual Fuel Kit Schematic"
+                    className="max-h-[60vh] max-w-full object-contain"
+                  />
+                  {/* Hotspots */}
+                  {schematicComponents.map((component) => (
+                    <button
+                      key={component.id}
+                      type="button"
+                      onClick={() => {
+                        setSelectedComponent(component);
+                        setComponentImageIndex(0);
+                      }}
+                      onMouseEnter={() => setHoveredComponent(component.id)}
+                      onMouseLeave={() => setHoveredComponent(null)}
+                      className="absolute rounded-full border-2 transition-all duration-200"
+                      style={{
+                        left: `${component.hotspot.x}%`,
+                        top: `${component.hotspot.y}%`,
+                        width: `${component.hotspot.width}%`,
+                        height: `${component.hotspot.height}%`,
+                        borderColor: hoveredComponent === component.id ? "rgba(182,255,114,0.8)" : "rgba(182,255,114,0.3)",
+                        backgroundColor: hoveredComponent === component.id ? "rgba(182,255,114,0.15)" : "transparent",
+                        boxShadow: hoveredComponent === component.id ? "0 0 20px rgba(182,255,114,0.4)" : "none",
+                      }}
+                      aria-label={`View ${component.name}`}
+                    >
+                      {/* Tooltip */}
+                      {hoveredComponent === component.id && (
+                        <div className="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-[#0d1410] border border-[#b6ff72]/30 px-3 py-1.5 text-xs font-semibold text-white shadow-lg">
+                          {component.name}
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {appGallery && (
         <div

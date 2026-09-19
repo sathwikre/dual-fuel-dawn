@@ -68,12 +68,11 @@ import heroBg15 from "@/assets/background/valentin-Tk7abNpQ3ZI-unsplash.jpg";
 import heroBg16 from "@/assets/background/venti-views-1cqIcrWFQBI-unsplash.jpg";
 import heroBg17 from "@/assets/background/worksite-ltd-MVA-zlTQdSE-unsplash.jpg";
 import heroBg18 from "@/assets/background/Gross picture DFK2.jpeg";
-import heroBg19 from "@/assets/background/IMG_20260206_073457.jpg";
-import heroBg20 from "@/assets/background/IMG_20260206_073508.jpg";
-import heroBg21 from "@/assets/background/WhatsApp Image 2026-05-21 at 4.16.08 PM (2).jpeg";
-import heroBg22 from "@/assets/background/WhatsApp Image 2026-08-28 at 3.55.36 PM.jpeg";
-import heroBg23 from "@/assets/background/image.jpeg";
-import heroBg24 from "@/assets/background/arno-senoner-coEeAHagUEo-unsplash.jpg";
+import heroBg19 from "@/assets/background/IMG_20260206_073508.jpg";
+import heroBg20 from "@/assets/background/WhatsApp Image 2026-05-21 at 4.16.08 PM (2).jpeg";
+import heroBg21 from "@/assets/background/WhatsApp Image 2026-08-28 at 3.55.36 PM.jpeg";
+import heroBg22 from "@/assets/background/image.jpeg";
+import heroBg23 from "@/assets/background/arno-senoner-coEeAHagUEo-unsplash.jpg";
 import birlaNewsImage from "@/assets/WhatsApp Image 2026-05-21 at 4.16.09 PM.jpeg";
 import akwelImage from "@/assets/aqual.jpeg";
 import ammeniEngineImage from "@/assets/ammeni engine.jpeg";
@@ -365,7 +364,6 @@ function HeroBackground() {
   const imgRef20 = useRef<HTMLImageElement>(null);
   const imgRef21 = useRef<HTMLImageElement>(null);
   const imgRef22 = useRef<HTMLImageElement>(null);
-  const imgRef23 = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -373,7 +371,7 @@ function HeroBackground() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const imgs = [imgRef0.current, imgRef1.current, imgRef2.current, imgRef3.current, imgRef4.current, imgRef5.current, imgRef6.current, imgRef7.current, imgRef8.current, imgRef9.current, imgRef10.current, imgRef11.current, imgRef12.current, imgRef13.current, imgRef14.current, imgRef15.current, imgRef16.current, imgRef17.current, imgRef18.current, imgRef19.current, imgRef20.current, imgRef21.current, imgRef22.current, imgRef23.current].filter(Boolean) as HTMLImageElement[];
+    const imgs = [imgRef0.current, imgRef1.current, imgRef2.current, imgRef3.current, imgRef4.current, imgRef5.current, imgRef6.current, imgRef7.current, imgRef8.current, imgRef9.current, imgRef10.current, imgRef11.current, imgRef12.current, imgRef13.current, imgRef14.current, imgRef15.current, imgRef16.current, imgRef17.current, imgRef18.current, imgRef19.current, imgRef20.current, imgRef21.current, imgRef22.current].filter(Boolean) as HTMLImageElement[];
 
     let raf: number;
     let t = 0;
@@ -531,7 +529,6 @@ function HeroBackground() {
       <img ref={imgRef17} src={heroBg21} alt="" aria-hidden="true" className="sr-only" />
       <img ref={imgRef18} src={heroBg22} alt="" aria-hidden="true" className="sr-only" />
       <img ref={imgRef19} src={heroBg23} alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef20} src={heroBg24} alt="" aria-hidden="true" className="sr-only" />
       {/* Canvas renders everything */}
       <canvas
         ref={canvasRef}

@@ -180,7 +180,7 @@ const navItems = [
 
 const regulationsData = [
   { name: "Andhra Pradesh", pdf: "/documents/regulations/Andhra Pradesh - andhara.pdf" },
-  { name: "Delhi / NCR", pdf: "/documents/regulations/Delhi - Year-2023_CAQM-Direction-No.-76.pdf" },
+  { name: "Delhi ", pdf: "/documents/regulations/Delhi - Year-2023_CAQM-Direction-No.-76.pdf" },
   { name: "Goa", pdf: "/documents/regulations/Goa - Year-2023_Goa-State-Pollution-Control-Board-Dated-28th-March-2023.pdf" },
   { name: "Gujarat", pdf: "/documents/regulations/Gujrat - Year-2023-Gujarat-Circular-26-10-2023.pdf" },
   { name: "Haryana", pdf: "/documents/regulations/Haryana - Year-2020_Haryana_NCR_500_RECD_DFK.pdf" },
@@ -867,6 +867,45 @@ function OmSolutionsHome() {
           <div className="absolute bottom-7 right-5 hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-background/45 lg:flex lg:right-10 z-[3]"><span className="h-px w-10 bg-signal" /> Field-ready conversion systems</div>
         </section>
 
+        {/* OM / 04 Primary product - Dual Fuel Kit */}
+        <section id="dr-kit" className="bg-white">
+          <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
+            <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+              <div><SectionLabel index="OM / 04">Primary product</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl text-gray-900">OM Solutions<br />Dual Fuel Kit</h2><p className="mt-6 max-w-xl text-base leading-relaxed text-gray-600">A dual-fuel system allows a diesel engine to use diesel together with an alternate gaseous fuel, reducing diesel consumption while maintaining engine operation.</p><div className="mt-8 grid grid-cols-2 gap-3"><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Fuel mode</p><p className="mt-2 font-mono text-lg text-gray-900">Dual=Diesel+NG</p></div><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Gas usage</p><p className="mt-2 text-sm font-semibold text-gray-900">up to 70%</p></div><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Control</p><p className="mt-2 font-mono text-lg text-gray-900">Sensors + valves</p></div><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Existing genset</p><p className="mt-2 font-mono text-lg text-gray-900">No replacement</p></div></div></div>
+              <div className="rounded-[12px] border border-gray-200 bg-gray-50 p-4 sm:p-6"><div className="flex items-center justify-between"><p className="font-mono text-xs uppercase tracking-[0.18em] text-gray-500">System schematic</p><span className="flex items-center gap-2 font-mono text-[10px] text-[#b6ff72]"><span className="size-2 rounded-full bg-[#b6ff72]" /> System view</span></div><button type="button" className="mt-5 block w-full overflow-hidden rounded-[8px] bg-white" onClick={() => openImage(schematicImage, "OM Solutions dual-fuel kit schematic")}><img src={schematicImage} alt="Dual fuel kit schematic" className="aspect-[1.75/1] w-full object-contain transition-transform duration-500 hover:scale-[1.02]" /></button><div className="mt-5 grid grid-cols-2 gap-x-5 gap-y-2 font-mono text-[10px] text-gray-600 sm:grid-cols-3"><span>· Air Filter</span><span>· Gas Air Mixer</span><span>· Gas Filter</span><span>· Pressure Regulator</span><span>· Gas Flow Control</span><span>· Knock Sensor</span><span>· EGT Sensor</span><span>· Control Panel</span><span>· Energy Meter</span></div></div>
+            </div>
+          </div>
+        </section>
+
+        {/* â"€â"€ Cinematic "Explore Technology" banner â"€â"€ */}
+        <section className="relative isolate min-h-[480px] overflow-hidden">
+          <img
+            src={compressorNightImage}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover"
+            style={{ filter: "saturate(0.6) brightness(0.55)" }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[rgba(7,20,13,0.82)] via-[rgba(7,20,13,0.55)] to-[rgba(7,20,13,0.25)]" />
+          <div className="relative z-10 flex min-h-[480px] flex-col justify-end px-5 pb-16 pt-24 lg:px-10">
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#b6ff72]">OM Solutions · Technology</p>
+            <h2 className="mt-4 max-w-2xl text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+             Focused on<br />Alternate Fuels for <br/>I.C. Engines
+            </h2>
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/70">
+              To make engine operation cleaner and more cost-effective, we need to make the shift to intelligent dual-fuel systems.
+            </p>
+            <button
+              type="button"
+              onClick={() => setTechDrawerOpen(true)}
+              className="mt-8 inline-flex w-fit items-center gap-3 bg-[#b6ff72] px-6 py-3 text-[11px] font-extrabold uppercase tracking-[0.12em] text-[#0d1f16] transition-colors hover:bg-white"
+            >
+              Explore Technology <ArrowRight className="size-4" />
+            </button>
+          </div>
+        </section>
+
+        {/* About section - moved here */}
         <section id="about" className="border-b border-border">
           <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10 lg:py-28">
             <div>
@@ -896,34 +935,6 @@ function OmSolutionsHome() {
                 <p className="mt-2 text-sm text-primary-foreground/75">Extensive in alternate-fuel-based power generation</p>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* â”€â”€ Cinematic "Explore Technology" banner â”€â”€ */}
-        <section className="relative isolate min-h-[480px] overflow-hidden">
-          <img
-            src={compressorNightImage}
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 h-full w-full object-cover"
-            style={{ filter: "saturate(0.6) brightness(0.55)" }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[rgba(7,20,13,0.82)] via-[rgba(7,20,13,0.55)] to-[rgba(7,20,13,0.25)]" />
-          <div className="relative z-10 flex min-h-[480px] flex-col justify-end px-5 pb-16 pt-24 lg:px-10">
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#b6ff72]">OM Solutions · Technology</p>
-            <h2 className="mt-4 max-w-2xl text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-             Focused on<br />Alternate Fuels for <br/>I.C. Engines
-            </h2>
-            <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/70">
-              To make engine operation cleaner and more cost-effective, we need to make the shift to intelligent dual-fuel systems.
-            </p>
-            <button
-              type="button"
-              onClick={() => setTechDrawerOpen(true)}
-              className="mt-8 inline-flex w-fit items-center gap-3 bg-[#b6ff72] px-6 py-3 text-[11px] font-extrabold uppercase tracking-[0.12em] text-[#0d1f16] transition-colors hover:bg-white"
-            >
-              Explore Technology <ArrowRight className="size-4" />
-            </button>
           </div>
         </section>
 
@@ -1062,15 +1073,6 @@ function OmSolutionsHome() {
                   <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
                     Supported pathways are subject to engine configuration, fuel availability and application requirements.
                   </p>
-                </div>
-              </section>
-
-              <section id="dr-kit" className="bg-panel text-background">
-                <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
-                  <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
-                    <div><SectionLabel index="OM / 04" dark>Primary product</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">OM Solutions<br />Dual Fuel Kit</h2><p className="mt-6 max-w-xl text-base leading-relaxed text-background/72">A dual-fuel system allows a diesel engine to use diesel together with an alternate gaseous fuel, reducing diesel consumption while maintaining engine operation.</p><div className="mt-8 grid grid-cols-2 gap-3"><div className="glass-panel rounded-[9px] p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-signal">Fuel mode</p><p className="mt-2 font-mono text-lg">Dual=Diesel+NG</p></div><div className="glass-panel rounded-[9px] p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-signal">Gas usage</p><p className="mt-2 text-sm font-semibold">up to 70%</p></div><div className="glass-panel rounded-[9px] p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-signal">Control</p><p className="mt-2 font-mono text-lg">Sensors + valves</p></div><div className="glass-panel rounded-[9px] p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-signal">Existing genset</p><p className="mt-2 font-mono text-lg">No replacement</p></div></div></div>
-                    <div className="glass-panel rounded-[12px] p-4 sm:p-6"><div className="flex items-center justify-between"><p className="font-mono text-xs uppercase tracking-[0.18em] text-background/65">System schematic</p><span className="flex items-center gap-2 font-mono text-[10px] text-signal"><span className="size-2 rounded-full bg-signal" /> System view</span></div><button type="button" className="mt-5 block w-full overflow-hidden rounded-[8px] bg-background/5" onClick={() => openImage(schematicImage, "OM Solutions dual-fuel kit schematic")}><img src={schematicImage} alt="Dual fuel kit schematic" className="aspect-[1.75/1] w-full object-contain transition-transform duration-500 hover:scale-[1.02]" /></button><div className="mt-5 grid grid-cols-2 gap-x-5 gap-y-2 font-mono text-[10px] text-background/65 sm:grid-cols-3"><span>· Air Filter</span><span>· Gas Air Mixer</span><span>· Gas Filter</span><span>· Pressure Regulator</span><span>· Gas Flow Control</span><span>· Knock Sensor</span><span>· EGT Sensor</span><span>· Control Panel</span><span>· Energy Meter</span></div></div>
-                  </div>
                 </div>
               </section>
 

@@ -586,7 +586,6 @@ function OmSolutionsHome() {
   const [selectedFuelApplication, setSelectedFuelApplication] = useState(0);
   const [selectedFuel, setSelectedFuel] = useState<(typeof fuelColumns)[number] | null>(null);
   const [dealershipModalOpen, setDealershipModalOpen] = useState(false);
-  const [regulationsDropdownOpen, setRegulationsDropdownOpen] = useState(false);
   const [mobileRegulationsOpen, setMobileRegulationsOpen] = useState(false);
 
   useEffect(() => {
@@ -677,20 +676,18 @@ function OmSolutionsHome() {
               label === "Regulations" ? (
                 <div
                   key={id}
-                  className="relative"
-                  onMouseEnter={() => setRegulationsDropdownOpen(true)}
-                  onMouseLeave={() => setRegulationsDropdownOpen(false)}
+                  className="relative group/regulations"
                 >
                   <button
                     className="flex items-center gap-1 whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.11em] text-white/86 transition-colors duration-200 hover:text-[#b6ff72]"
                   >
                     {label}
-                    <ChevronDown className={`size-3 transition-transform duration-200 ${regulationsDropdownOpen ? "rotate-180" : ""}`} />
+                    <ChevronDown className="size-3 transition-transform duration-200 group-hover/regulations:rotate-180" />
                   </button>
                   
                   {/* Dropdown */}
-                  {regulationsDropdownOpen && (
-                    <div className="absolute left-0 top-full mt-3 w-[440px] overflow-hidden rounded-xl border border-white/15 bg-[#0a120f]/98 backdrop-blur-md shadow-[0_25px_80px_rgba(0,0,0,0.5)] animate-in fade-in slide-in-from-top-2 duration-300">
+                  <div className="absolute left-0 top-full opacity-0 invisible group-hover/regulations:opacity-100 group-hover/regulations:visible transition-all duration-300">
+                    <div className="relative w-[440px] overflow-hidden rounded-xl border border-white/15 bg-[#0a120f]/98 backdrop-blur-md shadow-[0_25px_80px_rgba(0,0,0,0.5)] mt-3">
                       <div className="border-b border-white/12 bg-gradient-to-b from-white/[0.04] to-transparent px-6 py-5">
                         <p className="text-xs font-bold uppercase tracking-[0.14em] text-white">Pollution Control Board Notifications</p>
                         <p className="mt-2 text-[11px] leading-relaxed text-white/55">Official notifications and directions related to DG-set emission control and cleaner power generation.</p>
@@ -710,7 +707,7 @@ function OmSolutionsHome() {
                         ))}
                       </div>
                     </div>
-                  )}
+                  </div>
                 </div>
               ) : (
                 <a

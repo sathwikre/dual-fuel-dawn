@@ -170,8 +170,8 @@ export const Route = createFileRoute("/")({
 
 const navItems = [
   ["Home", "home"],
-  ["About", "about"],
   ["Technology", "kit"],
+  ["About", "about"],
   ["Regulations", "regulations"],
   ["Gallery", "gallery"],
   ["News", "field"],

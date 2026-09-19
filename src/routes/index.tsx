@@ -25,6 +25,13 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { SavingsAssistant } from "@/components/SavingsAssistant/SavingsAssistant";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 import logoImage from "@/assets/ChatGPT Image Sep 15, 2026, 06_07_17 PM.png";
 import founderImage from "@/assets/img-006.jpg";
@@ -560,6 +567,7 @@ function OmSolutionsHome() {
   const [selectedConsideration, setSelectedConsideration] = useState<DualFuelConsideration>("gasAvailability");
   const [selectedFuelApplication, setSelectedFuelApplication] = useState(0);
   const [selectedFuel, setSelectedFuel] = useState<(typeof fuelColumns)[number] | null>(null);
+  const [dealershipModalOpen, setDealershipModalOpen] = useState(false);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -567,6 +575,7 @@ function OmSolutionsHome() {
         setSelectedImage(null);
         setTechDrawerOpen(false);
         setAppGallery(null);
+        setDealershipModalOpen(false);
       }
     };
     window.addEventListener("keydown", onKeyDown);
@@ -657,6 +666,13 @@ function OmSolutionsHome() {
 
           {/* CTA + hamburger */}
           <div className="flex shrink-0 items-center gap-2">
+            <button
+              onClick={() => setDealershipModalOpen(true)}
+              className="group hidden items-center gap-3 border border-white/55 px-4 py-3 text-[10px] font-extrabold uppercase tracking-[0.1em] text-white transition-all duration-200 hover:bg-white/10 hover:border-white/80 sm:inline-flex"
+            >
+              Dealership
+              <span className="text-[18px] font-normal leading-none transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+            </button>
             <a
               href="#contact"
               className="hidden items-center gap-3 border border-white/55 px-4 py-3 text-[10px] font-extrabold uppercase tracking-[0.1em] text-white transition-colors duration-200 hover:bg-white/10 sm:inline-flex"
@@ -719,10 +735,19 @@ function OmSolutionsHome() {
                   {label}
                 </a>
               ))}
+              <button
+                onClick={() => {
+                  setDealershipModalOpen(true);
+                  closeMenu();
+                }}
+                className="mt-4 inline-flex items-center gap-3 border border-white/40 px-4 py-3 text-[10px] font-extrabold uppercase tracking-[0.1em] text-white hover:bg-white/10"
+              >
+                Dealership <span className="text-[18px] font-normal leading-none">↗</span>
+              </button>
               <a
                 href="#contact"
                 onClick={closeMenu}
-                className="mt-4 inline-flex items-center gap-3 border border-white/40 px-4 py-3 text-[10px] font-extrabold uppercase tracking-[0.1em] text-white hover:bg-white/10"
+                className="mt-2 inline-flex items-center gap-3 border border-white/40 px-4 py-3 text-[10px] font-extrabold uppercase tracking-[0.1em] text-white hover:bg-white/10"
               >
                 Get in touch <span className="text-[18px] font-normal leading-none">↗</span>
               </a>
@@ -1267,6 +1292,28 @@ function OmSolutionsHome() {
           </div>
         </div>
       )}
+
+      {/* Dealership Modal */}
+      <Dialog open={dealershipModalOpen} onOpenChange={setDealershipModalOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-lg font-semibold">Dealership Opportunities</DialogTitle>
+            <DialogDescription className="text-base">
+              We are currently processing dealership appointments across India.
+              Please check back soon for more information.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex justify-end mt-4">
+            <Button
+              onClick={() => setDealershipModalOpen(false)}
+              className="w-full sm:w-auto"
+            >
+              Close
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
       <SavingsAssistant />
     </div>
   );

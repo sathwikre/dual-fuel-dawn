@@ -132,7 +132,7 @@ import aircomp3 from "@/assets/aircompressor/IMG_20250521_164944.jpg";
 import aircomp4 from "@/assets/aircompressor/IMG_20250521_165003.jpg";
 import aircomp5 from "@/assets/aircompressor/IMG_20250521_165101.jpg";
 import aircomp6 from "@/assets/aircompressor/IMG_20250522_151044.jpg";
-import aircomp7 from "@/assets/aircompressor/IMG_20250522_155429.jpg";
+import aircomp7 from "@/assets/aircompressor/air.jpeg";
 
 // Marine Propulsion gallery
 import marine1 from "@/assets/Marine Propulsion/1.png";
@@ -1025,7 +1025,7 @@ function OmSolutionsHome() {
                 <div className="mt-12 grid gap-5 md:grid-cols-3">
                   {([
                     { title: "Borewell", desc: "Dual-fuel kits for borewell pump sets.", images: [ borewellImg3,borewellImg1, borewellImg2, borewellImg5, borewellImg4, borewellImg6, borewellImg7] },
-                    { title: "Air Compressor", desc: "Field installation for air-compressor applications.", images: [aircomp1, aircomp2, aircomp3, aircomp4, aircomp5, aircomp6, aircomp7] },
+                    { title: "Air Compressor", desc: "Field installation for air-compressor applications.", images: [aircomp7,aircomp1, aircomp2, aircomp3, aircomp4, aircomp5, aircomp6] },
                     { title: "Marine Propulsion", desc: "Marine propulsion with dual-fuel conversion.", images: [marine1, marine2] },
                   ] as { title: string; desc: string; images: string[] }[]).map((app) => (
                     <article key={app.title} className="group cursor-pointer overflow-hidden rounded-[11px] border border-border bg-background" onClick={() => setAppGallery({ title: app.title, images: app.images, index: 0 })}>

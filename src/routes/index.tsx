@@ -1024,7 +1024,7 @@ function OmSolutionsHome() {
               <section id="dr-apps" className="bg-secondary/40"><div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 15">Other applications</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-5"><h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Applications other than gensets.</h2><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Click any application to view all installation images.</p></div>
                 <div className="mt-12 grid gap-5 md:grid-cols-3">
                   {([
-                    { title: "Borewell", desc: "Dual-fuel kits for borewell pump sets.", images: [ borewellImg4,borewellImg1, borewellImg2, borewellImg3, borewellImg5, borewellImg6, borewellImg7] },
+                    { title: "Borewell", desc: "Dual-fuel kits for borewell pump sets.", images: [ borewellImg3,borewellImg1, borewellImg2, borewellImg5, borewellImg4, borewellImg6, borewellImg7] },
                     { title: "Air Compressor", desc: "Field installation for air-compressor applications.", images: [aircomp1, aircomp2, aircomp3, aircomp4, aircomp5, aircomp6, aircomp7] },
                     { title: "Marine Propulsion", desc: "Marine propulsion with dual-fuel conversion.", images: [marine1, marine2] },
                   ] as { title: string; desc: string; images: string[] }[]).map((app) => (

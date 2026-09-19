@@ -918,14 +918,7 @@ function OmSolutionsHome() {
                 <span className="rounded-[6px] border border-border bg-secondary px-3 py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">Cummins India experience</span>
               </div>
             </div>
-            <div className="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-[1fr_0.8fr] lg:gap-3">
-              <button type="button" className="overflow-hidden rounded-[20px] bg-secondary text-left lg:row-span-2" onClick={() => openImage(founderImage, "Prasad Parulekar, OM Solutions founder")}>
-                <img
-                  src={founderImage}
-                  alt="Prasad Parulekar"
-                  className="block h-[360px] w-full object-contain object-center bg-secondary transition-transform duration-500 hover:scale-[1.03] sm:h-[420px] lg:h-full lg:min-h-[330px] lg:object-cover"
-                />
-              </button>
+            <div className="grid grid-cols-1 gap-4 sm:gap-5 lg:gap-3">
               <div className="rounded-[10px] bg-panel p-4 text-background sm:p-5">
                 <p className="font-mono text-3xl leading-none text-signal sm:text-4xl">2021</p>
                 <p className="mt-2 text-sm text-background/60">Company established</p>

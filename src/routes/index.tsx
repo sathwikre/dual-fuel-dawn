@@ -269,7 +269,7 @@ const componentGallery = [
   ["Gas Handling System for PNG", gasHandlingImage],
   ["Exhaust Temperature Sensors", exhaustTemperatureSensorsImage],
   ["Air Gas Mixer", airGasMixerImage],
-  ["LPG Pressure regulator (LOT capable).jpeg", lpgPressureRegulatorImage],
+  ["LPG Pressure regulator (LOT capable)", lpgPressureRegulatorImage],
   ["Energy meter", energyMeterImage],
   ["Control panel", controlPanelImage],
   ["Gas system assembly", gasSystemImage],

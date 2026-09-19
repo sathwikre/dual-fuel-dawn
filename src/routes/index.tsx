@@ -35,7 +35,7 @@ import exhaustTemperatureSensorsImage from "@/assets/Exhaust Temperature Sensors
 import airGasMixerImage from "@/assets/Air Gas Mixer.jpeg";
 import lpgPressureRegulatorImage from "@/assets/LPG Pressure regulator (LOT capable).jpeg";
 import lpgKitImage from "@/assets/IMG-20260203-WA0076.jpg";
-import pngKitImage from "@/assets/img-085.jpg";
+import pngKitImage from "@/assets/img-085.jpeg";
 import componentImage from "@/assets/img-086.jpg";
 import energyMeterImage from "@/assets/img-087.jpg";
 import tataImage from "@/assets/img-089.jpg";
@@ -267,7 +267,7 @@ const componentGallery = [
   ["LPG dual-fuel kit", lpgKitImage],
   ["PNG dual-fuel kit", pngKitImage],
   ["Gas Handling System for PNG", gasHandlingImage],
-  ["Exhaust Temperature Sensors.jpeg", exhaustTemperatureSensorsImage],
+  ["Exhaust Temperature Sensors", exhaustTemperatureSensorsImage],
   ["Air Gas Mixer.jpeg", airGasMixerImage],
   ["LPG Pressure regulator (LOT capable).jpeg", lpgPressureRegulatorImage],
   ["Energy meter", energyMeterImage],

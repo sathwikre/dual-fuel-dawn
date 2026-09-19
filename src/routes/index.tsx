@@ -268,12 +268,13 @@ const componentGallery = [
   ["PNG dual-fuel kit", pngKitImage],
   ["Gas Handling System for PNG", gasHandlingImage],
   ["Exhaust Temperature Sensors", exhaustTemperatureSensorsImage],
-  ["Air Gas Mixer.jpeg", airGasMixerImage],
+  ["Air Gas Mixer", airGasMixerImage],
   ["LPG Pressure regulator (LOT capable).jpeg", lpgPressureRegulatorImage],
   ["Energy meter", energyMeterImage],
   ["Control panel", controlPanelImage],
   ["Gas system assembly", gasSystemImage],
   ["Knock sensor mounting", engineDetailImage],
+ 
 ] as const;
 
 const galleryItems = [

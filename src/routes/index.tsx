@@ -34,7 +34,7 @@ import gasHandlingImage from "@/assets/GAS handling system.jpeg";
 import exhaustTemperatureSensorsImage from "@/assets/Exhaust Temperature Sensors.jpeg";
 import airGasMixerImage from "@/assets/Air Gas Mixer.jpeg";
 import lpgPressureRegulatorImage from "@/assets/LPG Pressure regulator (LOT capable).jpeg";
-import lpgKitImage from "@/assets/IMG-20260203-WA0076.jpg";
+import lpgKitImage from "@/assets/LPG based Dual Fuel kit.jpeg";
 import pngKitImage from "@/assets/img-085.jpeg";
 import componentImage from "@/assets/img-086.jpg";
 import energyMeterImage from "@/assets/img-087.jpg";

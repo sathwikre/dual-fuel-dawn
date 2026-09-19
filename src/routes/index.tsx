@@ -83,6 +83,7 @@ import nevatiaMg9 from "@/assets/Nevatia Maxgen/WhatsApp Image 2026-08-04 at 4.3
 import engineImage from "@/assets/img-098.jpg";
 import engineDetailImage from "@/assets/img-099.jpg";
 import knockSensorImage from "@/assets/Knock sensor.jpeg";
+import gasleakdeact from "@/assets/Gas Leak Detector.jpeg"
 import generatorImage from "@/assets/img-103.jpg";
 import controlPanelImage from "@/assets/img-117.jpg";
 import economicsImage from "@/assets/img-150.jpg";
@@ -276,7 +277,7 @@ const componentGallery = [
   ["Gas system assembly", gasSystemImage],
   ["Knock sensor mounting", engineDetailImage],
   ["Knock Sensor", knockSensorImage],
- 
+  ["Gas Leak Detector",gasleakdeact]
 ] as const;
 
 const galleryItems = [

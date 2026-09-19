@@ -55,7 +55,7 @@ import birlaImageTwo from "@/assets/img-096.jpg";
 // Hero background images
 import heroBg1 from "@/assets/background/Gross picture DFK2.jpeg";
 
-import heroBg4 from "@/assets/background/IMG_20260206_074148.jpg";
+import heroBg4 from "@/assets/background/image.jpeg";
 import heroBg5 from "@/assets/background/WhatsApp Image 2026-05-21 at 4.16.08 PM (2).jpeg";
 import heroBg6 from "@/assets/background/WhatsApp Image 2026-08-28 at 3.55.36 PM.jpeg";
 import heroBg7 from "@/assets/background/arno-senoner-coEeAHagUEo-unsplash.jpg";
@@ -129,7 +129,7 @@ import borewellImg2 from "@/assets/borewell/IMG_20251009_131145.jpg";
 import borewellImg3 from "@/assets/borewell/IMG_20260206_073457.jpg";
 import borewellImg4 from "@/assets/borewell/IMG_20260206_073503.jpg";
 import borewellImg5 from "@/assets/borewell/IMG_20260206_073508.jpg";
-import borewellImg6 from "@/assets/borewell/IMG_20260206_074148.jpg";
+import borewellImg6 from "@/assets/borewell/image.jpeg";
 import borewellImg7 from "@/assets/borewell/IMG_20260206_100059.jpg";
 
 // Air Compressor gallery

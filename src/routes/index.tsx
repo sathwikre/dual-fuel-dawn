@@ -39,7 +39,7 @@ import {
 
 import logoImage from "@/assets/ChatGPT Image Sep 15, 2026, 06_07_17 PM.png";
 import founderImage from "@/assets/img-006.jpg";
-import schematicImage from "@/assets/imm.jpeg";
+import schematicImage from "@/assets/WhatsApp Image 2026-09-20 at 6.51.25 PM.jpeg";
 import systemImage from "@/assets/gg.jpeg";
 import gasHandlingImage from "@/assets/GAS handling system.jpeg";
 import exhaustTemperatureSensorsImage from "@/assets/Exhaust Temperature Sensors.jpeg";

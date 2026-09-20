@@ -1005,32 +1005,6 @@ function OmSolutionsHome() {
           </div>
         </section>
 
-        {/* About section - moved here */}
-        <section id="about" className="border-b border-border">
-          <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10 lg:py-28">
-            <div>
-              <SectionLabel index="OM / 02">About OM Solutions</SectionLabel>
-              <h2 className="mt-5 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight lg:text-6xl">Focused on Alternate Fuels for Internal Combustion Engines</h2>
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">OM Solutions was established in 2021 by <strong className="text-foreground">Prasad Parulekar (IIT Bombay)</strong>, with 20+ years of alternate-fuel-based power generation experience.</p>
-              <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">The company delivers alternate-fuel and dual-fuel solutions across engine and industrial applications from generator sets and commercial vehicles to marine propulsion, tractors, earth movers, producer gas and liquid fuels.</p>
-              <div className="mt-8 flex flex-wrap gap-2">
-                <span className="rounded-[6px] border border-border bg-secondary px-3 py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">IIT Bombay Mtech Energy Science</span>
-                <span className="rounded-[6px] border border-border bg-secondary px-3 py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">Cummins India experience</span>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 gap-4 sm:gap-5 lg:gap-3">
-              <div className="rounded-[10px] bg-panel p-4 text-background sm:p-5">
-                <p className="font-mono text-3xl leading-none text-signal sm:text-4xl">2021</p>
-                <p className="mt-2 text-sm text-background/60">Company established</p>
-              </div>
-              <div className="rounded-[10px] bg-primary p-4 text-primary-foreground sm:p-5">
-                <p className="font-mono text-[clamp(1.45rem,5vw,2.75rem)] leading-[1.05] tracking-[-0.04em]">20+ Years of Industry Experience</p>
-                <p className="mt-2 text-sm text-primary-foreground/75">Extensive in alternate-fuel-based power generation</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* â”€â”€ Tech Drawer â”€â”€ */}
         {techDrawerOpen && (
           <div
@@ -1459,6 +1433,32 @@ function OmSolutionsHome() {
             </div>
 
             <p className="mt-8 text-xs text-muted-foreground"></p>
+          </div>
+        </section>
+
+        {/* About section - moved here */}
+        <section id="about" className="border-b border-border">
+          <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10 lg:py-28">
+            <div>
+              <SectionLabel index="OM / 02">About OM Solutions</SectionLabel>
+              <h2 className="mt-5 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight lg:text-6xl">Focused on Alternate Fuels for Internal Combustion Engines</h2>
+              <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">OM Solutions was established in 2021 by <strong className="text-foreground">Prasad Parulekar (IIT Bombay)</strong>, with 20+ years of alternate-fuel-based power generation experience.</p>
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">The company delivers alternate-fuel and dual-fuel solutions across engine and industrial applications from generator sets and commercial vehicles to marine propulsion, tractors, earth movers, producer gas and liquid fuels.</p>
+              <div className="mt-8 flex flex-wrap gap-2">
+                <span className="rounded-[6px] border border-border bg-secondary px-3 py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">IIT Bombay Mtech Energy Science</span>
+                <span className="rounded-[6px] border border-border bg-secondary px-3 py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">Cummins India experience</span>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 gap-4 sm:gap-5 lg:gap-3">
+              <div className="rounded-[10px] bg-panel p-4 text-background sm:p-5">
+                <p className="font-mono text-3xl leading-none text-signal sm:text-4xl">2021</p>
+                <p className="mt-2 text-sm text-background/60">Company established</p>
+              </div>
+              <div className="rounded-[10px] bg-primary p-4 text-primary-foreground sm:p-5">
+                <p className="font-mono text-[clamp(1.45rem,5vw,2.75rem)] leading-[1.05] tracking-[-0.04em]">20+ Years of Industry Experience</p>
+                <p className="mt-2 text-sm text-primary-foreground/75">Extensive in alternate-fuel-based power generation</p>
+              </div>
+            </div>
           </div>
         </section>
 

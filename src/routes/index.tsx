@@ -670,7 +670,7 @@ function OmSolutionsHome() {
   const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
   const [formSent, setFormSent] = useState(false);
   const [technologyView, setTechnologyView] = useState<"dualFuel" | "recd">("dualFuel");
-  const [fuelKitView, setFuelKitView] = useState<"lpg" | "png">("lpg");
+  const [fuelKitView, setFuelKitView] = useState<"lpg" | "png">("png");
   const [recdType, setRecdType] = useState<RecdType>("selfCleaning");
   const [selectedConsideration, setSelectedConsideration] = useState<DualFuelConsideration>("gasAvailability");
   const [selectedFuelApplication, setSelectedFuelApplication] = useState(0);
@@ -1189,26 +1189,26 @@ function OmSolutionsHome() {
 
                   <div className="mt-9 overflow-hidden rounded-[12px] border border-border bg-background shadow-[0_18px_45px_-35px_rgba(10,28,22,0.55)]">
                     <div role="tablist" aria-label="Fuel kit comparison" className="grid grid-cols-2 border-b border-border bg-secondary/65 p-2">
-                      {(["lpg", "png"] as const).map((view) => {
+                      {(["png", "lpg"] as const).map((view) => {
                         const active = fuelKitView === view;
-                        const isLpg = view === "lpg";
+                        const isPng = view === "png";
                         return <button key={view} id={`${view}-tab`} type="button" role="tab" aria-selected={active} aria-controls="fuel-kit-panel" onClick={() => setFuelKitView(view)} className={`flex items-center gap-3 rounded-[8px] px-4 py-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${active ? "bg-panel text-background shadow-sm" : "text-muted-foreground hover:bg-background hover:text-primary"}`}>
-                          <span className={`grid size-8 shrink-0 place-items-center rounded-[6px] ${active ? "bg-signal text-panel" : isLpg ? "bg-orange-500/10 text-orange-500" : "bg-blue-500/10 text-blue-500"}`}><Zap className="size-4" /></span>
-                          <span><span className="block text-sm font-bold sm:text-base">{isLpg ? "LPG Kit" : "PNG Kit"}</span><span className={`mt-0.5 block font-mono text-[9px] uppercase tracking-[0.1em] ${active ? "text-background/55" : "text-muted-foreground"}`}>{isLpg ? "LPG System" : "PNG System"}</span></span>
+                          <span className={`grid size-8 shrink-0 place-items-center rounded-[6px] ${active ? "bg-signal text-panel" : isPng ? "bg-blue-500/10 text-blue-500" : "bg-orange-500/10 text-orange-500"}`}><Zap className="size-4" /></span>
+                          <span><span className="block text-sm font-bold sm:text-base">{isPng ? "PNG Kit" : "LPG Kit"}</span><span className={`mt-0.5 block font-mono text-[9px] uppercase tracking-[0.1em] ${active ? "text-background/55" : "text-muted-foreground"}`}>{isPng ? "PNG System" : "LPG System"}</span></span>
                         </button>;
                       })}
                     </div>
 
                     <article id="fuel-kit-panel" role="tabpanel" aria-labelledby={`${fuelKitView}-tab`} className="min-h-[332px] bg-background">
-                      {fuelKitView === "lpg" ? (
-                        <div key="lpg" className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
-                          <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6" onClick={() => openImage(lpgKitImage, "OM Solutions LPG dual-fuel kit")} aria-label="Open LPG kit image"><span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-orange-500">LPG System</span><img src={lpgKitImage} alt="LPG dual-fuel kit" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" /></button>
-                          <div className="p-5 sm:p-7"><div className="flex items-start justify-between gap-4"><div><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-orange-500">LPG Dual Fuel</p><h3 className="mt-2 text-2xl font-bold">LPG-Powered Efficiency.</h3></div><span className="hidden rounded-full bg-orange-100 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-orange-600 sm:block">Liquefied Petroleum Gas</span></div><p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">LPG dual-fuel systems enable diesel engines to operate with LPG as the alternate fuel, offering cost savings and reduced emissions for stationary and mobile applications.</p><div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">{["Cost-effective fuel alternative with high availability", "Clean combustion with lower particulate emissions", "Suitable for generator sets and industrial applications", "Easy integration with existing diesel engines"].map((point) => <div key={point} className="flex gap-2 text-xs leading-snug"><Check className="mt-0.5 size-3.5 shrink-0 text-orange-500" />{point}</div>)}</div></div>
-                        </div>
-                      ) : (
+                      {fuelKitView === "png" ? (
                         <div key="png" className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
                           <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6" onClick={() => openImage(pngKitImage, "OM Solutions PNG dual-fuel kit")} aria-label="Open PNG kit image"><span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-blue-500">PNG System</span><img src={pngKitImage} alt="PNG dual-fuel kit" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" /></button>
                           <div className="p-5 sm:p-7"><div className="flex items-start justify-between gap-4"><div><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-blue-500">PNG Dual Fuel</p><h3 className="mt-2 text-2xl font-bold">Natural Gas Solution.</h3></div><span className="hidden rounded-full bg-blue-100 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-blue-600 sm:block">Piped Natural Gas</span></div><p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">PNG dual-fuel systems utilize piped natural gas for continuous, reliable operation with consistent fuel supply and lower operating costs for grid-connected facilities.</p><div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">{["Continuous fuel supply via pipeline infrastructure", "Lower fuel cost compared to diesel and LPG", "Clean-burning with minimal environmental impact", "Ideal for facilities with PNG availability"].map((point) => <div key={point} className="flex gap-2 text-xs leading-snug"><Check className="mt-0.5 size-3.5 shrink-0 text-blue-500" />{point}</div>)}</div></div>
+                        </div>
+                      ) : (
+                        <div key="lpg" className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
+                          <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6" onClick={() => openImage(lpgKitImage, "OM Solutions LPG dual-fuel kit")} aria-label="Open LPG kit image"><span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-orange-500">LPG System</span><img src={lpgKitImage} alt="LPG dual-fuel kit" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" /></button>
+                          <div className="p-5 sm:p-7"><div className="flex items-start justify-between gap-4"><div><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-orange-500">LPG Dual Fuel</p><h3 className="mt-2 text-2xl font-bold">LPG-Powered Efficiency.</h3></div><span className="hidden rounded-full bg-orange-100 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-orange-600 sm:block">Liquefied Petroleum Gas</span></div><p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">LPG dual-fuel systems enable diesel engines to operate with LPG as the alternate fuel, offering cost savings and reduced emissions for stationary and mobile applications.</p><div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">{["Cost-effective fuel alternative with high availability", "Clean combustion with lower particulate emissions", "Suitable for generator sets and industrial applications", "Easy integration with existing diesel engines"].map((point) => <div key={point} className="flex gap-2 text-xs leading-snug"><Check className="mt-0.5 size-3.5 shrink-0 text-orange-500" />{point}</div>)}</div></div>
                         </div>
                       )}
                     </article>

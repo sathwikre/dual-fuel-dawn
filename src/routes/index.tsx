@@ -63,6 +63,7 @@ import energyMeterComponent from "@/assets/components/Energy meter.jpg";
 import exhaustTemperatureSensorsComponent from "@/assets/components/Exhaust Temperature Sensors.jpeg";
 import gasHandlingSystemComponent from "@/assets/components/GAS handling system.jpeg";
 import gasLeakDetectorComponent from "@/assets/components/Gas Leak Detector.jpeg";
+import gasPressureSwitchComponent from "@/assets/components/gas pressure switch.png";
 import gasSystemAssemblyComponent from "@/assets/components/Gas system assembly.jpg";
 import knockSensorMountingComponent from "@/assets/components/Knock sensor mounting.jpg";
 import knockSensorComponent from "@/assets/components/Knock sensor.jpeg";
@@ -219,43 +220,29 @@ type SchematicComponent = {
 };
 
 const schematicComponents: SchematicComponent[] = [
-  {
-    id: "air-filter",
-    name: "Air Filter",
-    hotspot: { x: 5, y: 15, width: 12, height: 12 },
-  },
+  
   {
     id: "gas-air-mixer",
     name: "Gas Air Mixer",
     image: airGasMixerComponent,
-    hotspot: { x: 25, y: 35, width: 14, height: 12 },
+    hotspot: { x: 25, y: 50, width: 14, height: 12 },
   },
-  {
-    id: "gas-filter",
-    name: "Gas Filter",
-    hotspot: { x: 45, y: 20, width: 10, height: 10 },
-  },
+  
   {
     id: "gas-pressure-regulator",
     name: "Gas Pressure Regulator",
     image: lpgPressureRegulatorComponent,
-    hotspot: { x: 60, y: 15, width: 12, height: 12 },
+    hotspot: { x: 63, y: 45, width: 12, height: 12 },
   },
+ 
   {
-    id: "gas-flow-control",
-    name: "Gas Flow Control",
-    hotspot: { x: 52, y: 28, width: 10, height: 10 },
+    id: "gas-pressure-switch",
+    name: "Gas Pressure Switch",
+    image: gasPressureSwitchComponent,
+    hotspot: { x: 48, y: 45, width: 10, height: 10 },
   },
-  {
-    id: "diesel-engine",
-    name: "Diesel Engine",
-    hotspot: { x: 35, y: 50, width: 25, height: 25 },
-  },
-  {
-    id: "alternator",
-    name: "Alternator",
-    hotspot: { x: 70, y: 55, width: 15, height: 15 },
-  },
+ 
+  
   {
     id: "egt-sensor",
     name: "EGT Sensor",

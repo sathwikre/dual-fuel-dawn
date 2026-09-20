@@ -186,7 +186,7 @@ export const Route = createFileRoute("/")({
 
 const navItems = [
   ["Home", "home"],
-  ["Technology", "kit"],
+  ["Technology", "technology"],
   ["About", "about"],
   ["Regulations", "regulations"],
   ["Gallery", "gallery"],
@@ -968,7 +968,7 @@ function OmSolutionsHome() {
         </section>
 
         {/* OM / 04 Primary product - Dual Fuel Kit */}
-        <section id="dr-kit" className="bg-white">
+        <section id="kit" className="bg-white">
           <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
             <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
               <div><SectionLabel index="OM / 04">Primary product</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl text-gray-900">OM Solutions<br />Dual Fuel Kit</h2><p className="mt-6 max-w-xl text-base leading-relaxed text-gray-600">A dual-fuel system allows a diesel engine to use diesel together with an alternate gaseous fuel, reducing diesel consumption while maintaining engine operation.</p><div className="mt-8 grid grid-cols-2 gap-3"><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Fuel mode</p><p className="mt-2 font-mono text-lg text-gray-900">Dual=Diesel+NG</p></div><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Gas usage</p><p className="mt-2 text-sm font-semibold text-gray-900">up to 70%</p></div><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Control</p><p className="mt-2 font-mono text-lg text-gray-900">Sensors + valves</p></div><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Existing genset</p><p className="mt-2 font-mono text-lg text-gray-900">No replacement</p></div></div></div>
@@ -977,8 +977,8 @@ function OmSolutionsHome() {
           </div>
         </section>
 
-        {/* â"€â"€ Cinematic "Explore Technology" banner â"€â"€ */}
-        <section className="relative isolate min-h-[480px] overflow-hidden">
+        {/* ——— Cinematic "Explore Technology" banner —— */}
+        <section id="technology" className="relative isolate min-h-[480px] overflow-hidden">
           <img
             src={compressorNightImage}
             alt=""

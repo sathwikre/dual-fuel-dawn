@@ -1028,7 +1028,7 @@ function OmSolutionsHome() {
 
               {/* Section links — hidden on mobile */}
               <nav className="hidden items-center gap-6 xl:flex">
-              {[["Components", "dr-components"], ["Technology", "dr-tech"], ["Technology Matrix", "dr-solutions"], ["Benefits", "dr-benefits"], ["Considerations", "dr-considerations"], ["Comparison", "dr-compare"], ["Applications", "dr-apps"]].map(([label, id]) => (
+              {[["Technology", "dr-tech"], ["Technology Matrix", "dr-solutions"], ["Benefits", "dr-benefits"], ["Considerations", "dr-considerations"], ["Comparison", "dr-compare"], ["Applications", "dr-apps"]].map(([label, id]) => (
                   <a key={id} href={`#${id}`} className="whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.11em] text-white/75 transition-colors hover:text-[#b6ff72]">{label}</a>
                 ))}
               </nav>
@@ -1046,10 +1046,6 @@ function OmSolutionsHome() {
 
             {/* Scrollable content */}
             <div className="flex-1 overflow-y-auto">
-
-              <section id="dr-components" className="bg-secondary/40">
-                <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><div className="flex flex-wrap items-end justify-between gap-5"><div><SectionLabel index="OM / 10">Product gallery</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Dual Fuel Kit Components</h2></div><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Control, sensing and gas-handling hardware shown in the supplied product photographs.</p></div><div className="mt-12"><div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">{componentGallery.map(([label, image]) => <div key={label} className="group overflow-hidden rounded-[9px] border border-border bg-background"><button type="button" className="block aspect-square w-full overflow-hidden" onClick={() => openImage(image, label)}><img src={image} alt={label} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]" /></button><p className="p-3 text-xs font-semibold sm:p-4 sm:text-sm">{label}</p></div>)}</div></div></div>
-              </section>
 
               <section id="dr-tech" className="border-b border-border">
                 <div className="mx-auto max-w-[1440px] px-5 py-16 lg:px-10 lg:py-20">

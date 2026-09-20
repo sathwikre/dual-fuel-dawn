@@ -241,13 +241,19 @@ const schematicComponents: SchematicComponent[] = [
     image: gasPressureSwitchComponent,
     hotspot: { x: 48, y: 45, width: 10, height: 10 },
   },
+  {
+    id: "gas-leak-detector",
+    name: "Gas Leak Detector",
+    image: gasLeakDetectorComponent,
+    hotspot: { x: 83, y: 63, width: 10, height: 10 },
+  },
  
   
   {
     id: "egt-sensor",
     name: "EGT Sensor",
     image: exhaustTemperatureSensorsComponent,
-    hotspot: { x: 55, y: 75, width: 10, height: 10 },
+    hotspot: { x: 5, y: 70, width: 10, height: 10 },
   },
   {
     id: "knock-sensor",
@@ -255,6 +261,12 @@ const schematicComponents: SchematicComponent[] = [
     image: knockSensorComponent,
     secondaryImages: [{ label: "Installation View", image: knockSensorMountingComponent }],
     hotspot: { x: 25, y: 70, width: 10, height: 10 },
+  },
+  {
+    id: "egt-sensor",
+    name: "EGT Sensor",
+    image: exhaustTemperatureSensorsComponent,
+    hotspot: { x: 5, y: 45, width: 10, height: 10 },
   },
   {
     id: "control-panel",

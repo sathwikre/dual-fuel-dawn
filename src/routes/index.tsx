@@ -1028,7 +1028,7 @@ function OmSolutionsHome() {
 
               {/* Section links — hidden on mobile */}
               <nav className="hidden items-center gap-6 xl:flex">
-              {[["Technology", "dr-tech"], ["Technology Matrix", "dr-solutions"], ["Benefits", "dr-benefits"], ["Considerations", "dr-considerations"], ["Comparison", "dr-compare"], ["Applications", "dr-apps"]].map(([label, id]) => (
+              {[["Technology Matrix", "dr-solutions"], ["Technology", "dr-tech"], ["Benefits", "dr-benefits"], ["Considerations", "dr-considerations"], ["Comparison", "dr-compare"]].map(([label, id]) => (
                   <a key={id} href={`#${id}`} className="whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.11em] text-white/75 transition-colors hover:text-[#b6ff72]">{label}</a>
                 ))}
               </nav>
@@ -1046,79 +1046,6 @@ function OmSolutionsHome() {
 
             {/* Scrollable content */}
             <div className="flex-1 overflow-y-auto">
-
-              <section id="dr-tech" className="border-b border-border">
-                <div className="mx-auto max-w-[1440px] px-5 py-16 lg:px-10 lg:py-20">
-                  <div className="grid gap-6 lg:grid-cols-2 lg:items-end">
-                    <div><SectionLabel index="OM / 05">Technology</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Dual Fuel Kit vs RECD</h2></div>
-                    <p className="max-w-xl text-base leading-relaxed text-muted-foreground">Two different approaches to particulate reduction.</p>
-                  </div>
-
-                  <div className="mt-9 overflow-hidden rounded-[12px] border border-border bg-background shadow-[0_18px_45px_-35px_rgba(10,28,22,0.55)]">
-                    <div role="tablist" aria-label="Technology comparison" className="grid grid-cols-2 border-b border-border bg-secondary/65 p-2">
-                      {(["dualFuel", "recd"] as const).map((view) => {
-                        const active = technologyView === view;
-                        const isDualFuel = view === "dualFuel";
-                        return <button key={view} id={`${view}-tab`} type="button" role="tab" aria-selected={active} aria-controls="technology-panel" onClick={() => setTechnologyView(view)} className={`flex items-center gap-3 rounded-[8px] px-4 py-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${active ? "bg-panel text-background shadow-sm" : "text-muted-foreground hover:bg-background hover:text-primary"}`}>
-                          <span className={`grid size-8 shrink-0 place-items-center rounded-[6px] ${active ? "bg-signal text-panel" : isDualFuel ? "bg-primary/10 text-primary" : "bg-danger/10 text-danger"}`}>{isDualFuel ? <Fuel className="size-4" /> : <ShieldCheck className="size-4" />}</span>
-                          <span><span className="block text-sm font-bold sm:text-base">{isDualFuel ? "Dual Fuel" : "RECD"}</span><span className={`mt-0.5 block font-mono text-[9px] uppercase tracking-[0.1em] ${active ? "text-background/55" : "text-muted-foreground"}`}>{isDualFuel ? "During combustion" : "After generation"}</span></span>
-                        </button>;
-                      })}
-                    </div>
-
-                    <article id="technology-panel" role="tabpanel" aria-labelledby={`${technologyView}-tab`} className="min-h-[332px] bg-background">
-                      {technologyView === "dualFuel" ? (
-                        <div key="dual-fuel" className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
-                          <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6" onClick={() => openImage(systemImage, "OM Solutions dual-fuel kit schematic")} aria-label="Open Dual Fuel schematic"><span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-signal">Air intake system</span><img src={systemImage} alt="Dual Fuel system schematic" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" /></button>
-                          <div className="p-5 sm:p-7"><div className="flex items-start justify-between gap-4"><div><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Dual Fuel</p><h3 className="mt-2 text-2xl font-bold">Reduce In Situ.</h3></div><span className="hidden rounded-full bg-primary-soft px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-primary sm:block">Engine air flow</span></div><p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">Controlled introduction of alternate fuel into the engine air flow to reduce diesel consumption and particulate generation during combustion.</p><div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">{["Reduces particulate generation during combustion", "Uses controlled fuel injection with sensors, valves and actuators", "Can reduce diesel consumption under suitable operating conditions", "Existing diesel operation can be retained"].map((point) => <div key={point} className="flex gap-2 text-xs leading-snug"><Check className="mt-0.5 size-3.5 shrink-0 text-signal" />{point}</div>)}</div></div>
-                        </div>
-                      ) : (
-                        <div key={`${recdType}-recd`} className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
-                          <div className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6"><span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-signal">Exhaust system</span><img src={recdImage} alt="RECD exhaust emission control device diagram" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain opacity-85" /></div>
-                          <div className="p-5 sm:p-7"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-danger">RECD</p><h3 className="mt-2 text-2xl font-bold">RECD <span className="text-muted-foreground">(Retrofit Emission Control Device)</span></h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">Retrofit Emission Control Device added to the diesel engine exhaust to capture particulates.</p><div role="tablist" aria-label="RECD type" className="mt-4 flex gap-2 overflow-x-auto pb-1">{(Object.keys(recdTypes) as RecdType[]).map((type) => <button key={type} type="button" role="tab" aria-selected={recdType === type} onClick={() => setRecdType(type)} className={`shrink-0 rounded-full border px-3 py-2 font-mono text-[10px] uppercase tracking-[0.08em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${recdType === type ? "border-primary bg-primary text-primary-foreground" : "border-border bg-secondary text-muted-foreground hover:border-primary/40"}`}>{recdTypes[type].label}</button>)}</div><div className="mt-4 border-t border-border pt-4"><h4 className="text-sm font-bold">{recdTypes[recdType].heading}</h4><div className="mt-3 grid gap-x-5 gap-y-2 sm:grid-cols-2">{recdTypes[recdType].points.map((point) => <p key={point} className="flex gap-2 text-xs leading-snug text-muted-foreground"><span className="mt-1.5 size-1 shrink-0 rounded-full bg-danger" />{point}</p>)}</div></div></div>
-                        </div>
-                      )}
-                    </article>
-                  </div>
-                </div>
-              </section>
-
-              {/* LPG & PNG Dual Fuel Kits Section */}
-              <section id="dr-fuel-kits" className="border-b border-border">
-                <div className="mx-auto max-w-[1440px] px-5 py-16 lg:px-10 lg:py-20">
-                  <div className="grid gap-6 lg:grid-cols-2 lg:items-end">
-                    <div><SectionLabel index="OM / 06">Fuel Systems</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">LPG & PNG Dual Fuel Kits</h2></div>
-                    <p className="max-w-xl text-base leading-relaxed text-muted-foreground">Dual-fuel solutions for different gas types and applications.</p>
-                  </div>
-
-                  <div className="mt-9 overflow-hidden rounded-[12px] border border-border bg-background shadow-[0_18px_45px_-35px_rgba(10,28,22,0.55)]">
-                    <div role="tablist" aria-label="Fuel kit comparison" className="grid grid-cols-2 border-b border-border bg-secondary/65 p-2">
-                      {(["lpg", "png"] as const).map((view) => {
-                        const active = fuelKitView === view;
-                        const isLpg = view === "lpg";
-                        return <button key={view} id={`${view}-tab`} type="button" role="tab" aria-selected={active} aria-controls="fuel-kit-panel" onClick={() => setFuelKitView(view)} className={`flex items-center gap-3 rounded-[8px] px-4 py-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${active ? "bg-panel text-background shadow-sm" : "text-muted-foreground hover:bg-background hover:text-primary"}`}>
-                          <span className={`grid size-8 shrink-0 place-items-center rounded-[6px] ${active ? "bg-signal text-panel" : isLpg ? "bg-orange-500/10 text-orange-500" : "bg-blue-500/10 text-blue-500"}`}><Zap className="size-4" /></span>
-                          <span><span className="block text-sm font-bold sm:text-base">{isLpg ? "LPG Kit" : "PNG Kit"}</span><span className={`mt-0.5 block font-mono text-[9px] uppercase tracking-[0.1em] ${active ? "text-background/55" : "text-muted-foreground"}`}>{isLpg ? "LPG System" : "PNG System"}</span></span>
-                        </button>;
-                      })}
-                    </div>
-
-                    <article id="fuel-kit-panel" role="tabpanel" aria-labelledby={`${fuelKitView}-tab`} className="min-h-[332px] bg-background">
-                      {fuelKitView === "lpg" ? (
-                        <div key="lpg" className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
-                          <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6" onClick={() => openImage(lpgKitImage, "OM Solutions LPG dual-fuel kit")} aria-label="Open LPG kit image"><span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-orange-500">LPG System</span><img src={lpgKitImage} alt="LPG dual-fuel kit" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" /></button>
-                          <div className="p-5 sm:p-7"><div className="flex items-start justify-between gap-4"><div><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-orange-500">LPG Dual Fuel</p><h3 className="mt-2 text-2xl font-bold">LPG-Powered Efficiency.</h3></div><span className="hidden rounded-full bg-orange-100 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-orange-600 sm:block">Liquefied Petroleum Gas</span></div><p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">LPG dual-fuel systems enable diesel engines to operate with LPG as the alternate fuel, offering cost savings and reduced emissions for stationary and mobile applications.</p><div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">{["Cost-effective fuel alternative with high availability", "Clean combustion with lower particulate emissions", "Suitable for generator sets and industrial applications", "Easy integration with existing diesel engines"].map((point) => <div key={point} className="flex gap-2 text-xs leading-snug"><Check className="mt-0.5 size-3.5 shrink-0 text-orange-500" />{point}</div>)}</div></div>
-                        </div>
-                      ) : (
-                        <div key="png" className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
-                          <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6" onClick={() => openImage(pngKitImage, "OM Solutions PNG dual-fuel kit")} aria-label="Open PNG kit image"><span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-blue-500">PNG System</span><img src={pngKitImage} alt="PNG dual-fuel kit" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" /></button>
-                          <div className="p-5 sm:p-7"><div className="flex items-start justify-between gap-4"><div><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-blue-500">PNG Dual Fuel</p><h3 className="mt-2 text-2xl font-bold">Natural Gas Solution.</h3></div><span className="hidden rounded-full bg-blue-100 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-blue-600 sm:block">Piped Natural Gas</span></div><p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">PNG dual-fuel systems utilize piped natural gas for continuous, reliable operation with consistent fuel supply and lower operating costs for grid-connected facilities.</p><div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">{["Continuous fuel supply via pipeline infrastructure", "Lower fuel cost compared to diesel and LPG", "Clean-burning with minimal environmental impact", "Ideal for facilities with PNG availability"].map((point) => <div key={point} className="flex gap-2 text-xs leading-snug"><Check className="mt-0.5 size-3.5 shrink-0 text-blue-500" />{point}</div>)}</div></div>
-                        </div>
-                      )}
-                    </article>
-                  </div>
-                </div>
-              </section>
 
               <section id="dr-solutions" className="bg-background">
                 <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
@@ -1216,6 +1143,79 @@ function OmSolutionsHome() {
                 </div>
               </section>
 
+              <section id="dr-tech" className="border-b border-border">
+                <div className="mx-auto max-w-[1440px] px-5 py-16 lg:px-10 lg:py-20">
+                  <div className="grid gap-6 lg:grid-cols-2 lg:items-end">
+                    <div><SectionLabel index="OM / 05">Technology</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Dual Fuel Kit vs RECD</h2></div>
+                    <p className="max-w-xl text-base leading-relaxed text-muted-foreground">Two different approaches to particulate reduction.</p>
+                  </div>
+
+                  <div className="mt-9 overflow-hidden rounded-[12px] border border-border bg-background shadow-[0_18px_45px_-35px_rgba(10,28,22,0.55)]">
+                    <div role="tablist" aria-label="Technology comparison" className="grid grid-cols-2 border-b border-border bg-secondary/65 p-2">
+                      {(["dualFuel", "recd"] as const).map((view) => {
+                        const active = technologyView === view;
+                        const isDualFuel = view === "dualFuel";
+                        return <button key={view} id={`${view}-tab`} type="button" role="tab" aria-selected={active} aria-controls="technology-panel" onClick={() => setTechnologyView(view)} className={`flex items-center gap-3 rounded-[8px] px-4 py-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${active ? "bg-panel text-background shadow-sm" : "text-muted-foreground hover:bg-background hover:text-primary"}`}>
+                          <span className={`grid size-8 shrink-0 place-items-center rounded-[6px] ${active ? "bg-signal text-panel" : isDualFuel ? "bg-primary/10 text-primary" : "bg-danger/10 text-danger"}`}>{isDualFuel ? <Fuel className="size-4" /> : <ShieldCheck className="size-4" />}</span>
+                          <span><span className="block text-sm font-bold sm:text-base">{isDualFuel ? "Dual Fuel" : "RECD"}</span><span className={`mt-0.5 block font-mono text-[9px] uppercase tracking-[0.1em] ${active ? "text-background/55" : "text-muted-foreground"}`}>{isDualFuel ? "During combustion" : "After generation"}</span></span>
+                        </button>;
+                      })}
+                    </div>
+
+                    <article id="technology-panel" role="tabpanel" aria-labelledby={`${technologyView}-tab`} className="min-h-[332px] bg-background">
+                      {technologyView === "dualFuel" ? (
+                        <div key="dual-fuel" className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
+                          <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6" onClick={() => openImage(systemImage, "OM Solutions dual-fuel kit schematic")} aria-label="Open Dual Fuel schematic"><span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-signal">Air intake system</span><img src={systemImage} alt="Dual Fuel system schematic" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" /></button>
+                          <div className="p-5 sm:p-7"><div className="flex items-start justify-between gap-4"><div><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Dual Fuel</p><h3 className="mt-2 text-2xl font-bold">Reduce In Situ.</h3></div><span className="hidden rounded-full bg-primary-soft px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-primary sm:block">Engine air flow</span></div><p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">Controlled introduction of alternate fuel into the engine air flow to reduce diesel consumption and particulate generation during combustion.</p><div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">{["Reduces particulate generation during combustion", "Uses controlled fuel injection with sensors, valves and actuators", "Can reduce diesel consumption under suitable operating conditions", "Existing diesel operation can be retained"].map((point) => <div key={point} className="flex gap-2 text-xs leading-snug"><Check className="mt-0.5 size-3.5 shrink-0 text-signal" />{point}</div>)}</div></div>
+                        </div>
+                      ) : (
+                        <div key={`${recdType}-recd`} className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
+                          <div className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6"><span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-signal">Exhaust system</span><img src={recdImage} alt="RECD exhaust emission control device diagram" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain opacity-85" /></div>
+                          <div className="p-5 sm:p-7"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-danger">RECD</p><h3 className="mt-2 text-2xl font-bold">RECD <span className="text-muted-foreground">(Retrofit Emission Control Device)</span></h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">Retrofit Emission Control Device added to the diesel engine exhaust to capture particulates.</p><div role="tablist" aria-label="RECD type" className="mt-4 flex gap-2 overflow-x-auto pb-1">{(Object.keys(recdTypes) as RecdType[]).map((type) => <button key={type} type="button" role="tab" aria-selected={recdType === type} onClick={() => setRecdType(type)} className={`shrink-0 rounded-full border px-3 py-2 font-mono text-[10px] uppercase tracking-[0.08em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${recdType === type ? "border-primary bg-primary text-primary-foreground" : "border-border bg-secondary text-muted-foreground hover:border-primary/40"}`}>{recdTypes[type].label}</button>)}</div><div className="mt-4 border-t border-border pt-4"><h4 className="text-sm font-bold">{recdTypes[recdType].heading}</h4><div className="mt-3 grid gap-x-5 gap-y-2 sm:grid-cols-2">{recdTypes[recdType].points.map((point) => <p key={point} className="flex gap-2 text-xs leading-snug text-muted-foreground"><span className="mt-1.5 size-1 shrink-0 rounded-full bg-danger" />{point}</p>)}</div></div></div>
+                        </div>
+                      )}
+                    </article>
+                  </div>
+                </div>
+              </section>
+
+              {/* LPG & PNG Dual Fuel Kits Section */}
+              <section id="dr-fuel-kits" className="border-b border-border">
+                <div className="mx-auto max-w-[1440px] px-5 py-16 lg:px-10 lg:py-20">
+                  <div className="grid gap-6 lg:grid-cols-2 lg:items-end">
+                    <div><SectionLabel index="OM / 06">Fuel Systems</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">LPG & PNG Dual Fuel Kits</h2></div>
+                    <p className="max-w-xl text-base leading-relaxed text-muted-foreground">Dual-fuel solutions for different gas types and applications.</p>
+                  </div>
+
+                  <div className="mt-9 overflow-hidden rounded-[12px] border border-border bg-background shadow-[0_18px_45px_-35px_rgba(10,28,22,0.55)]">
+                    <div role="tablist" aria-label="Fuel kit comparison" className="grid grid-cols-2 border-b border-border bg-secondary/65 p-2">
+                      {(["lpg", "png"] as const).map((view) => {
+                        const active = fuelKitView === view;
+                        const isLpg = view === "lpg";
+                        return <button key={view} id={`${view}-tab`} type="button" role="tab" aria-selected={active} aria-controls="fuel-kit-panel" onClick={() => setFuelKitView(view)} className={`flex items-center gap-3 rounded-[8px] px-4 py-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${active ? "bg-panel text-background shadow-sm" : "text-muted-foreground hover:bg-background hover:text-primary"}`}>
+                          <span className={`grid size-8 shrink-0 place-items-center rounded-[6px] ${active ? "bg-signal text-panel" : isLpg ? "bg-orange-500/10 text-orange-500" : "bg-blue-500/10 text-blue-500"}`}><Zap className="size-4" /></span>
+                          <span><span className="block text-sm font-bold sm:text-base">{isLpg ? "LPG Kit" : "PNG Kit"}</span><span className={`mt-0.5 block font-mono text-[9px] uppercase tracking-[0.1em] ${active ? "text-background/55" : "text-muted-foreground"}`}>{isLpg ? "LPG System" : "PNG System"}</span></span>
+                        </button>;
+                      })}
+                    </div>
+
+                    <article id="fuel-kit-panel" role="tabpanel" aria-labelledby={`${fuelKitView}-tab`} className="min-h-[332px] bg-background">
+                      {fuelKitView === "lpg" ? (
+                        <div key="lpg" className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
+                          <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6" onClick={() => openImage(lpgKitImage, "OM Solutions LPG dual-fuel kit")} aria-label="Open LPG kit image"><span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-orange-500">LPG System</span><img src={lpgKitImage} alt="LPG dual-fuel kit" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" /></button>
+                          <div className="p-5 sm:p-7"><div className="flex items-start justify-between gap-4"><div><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-orange-500">LPG Dual Fuel</p><h3 className="mt-2 text-2xl font-bold">LPG-Powered Efficiency.</h3></div><span className="hidden rounded-full bg-orange-100 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-orange-600 sm:block">Liquefied Petroleum Gas</span></div><p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">LPG dual-fuel systems enable diesel engines to operate with LPG as the alternate fuel, offering cost savings and reduced emissions for stationary and mobile applications.</p><div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">{["Cost-effective fuel alternative with high availability", "Clean combustion with lower particulate emissions", "Suitable for generator sets and industrial applications", "Easy integration with existing diesel engines"].map((point) => <div key={point} className="flex gap-2 text-xs leading-snug"><Check className="mt-0.5 size-3.5 shrink-0 text-orange-500" />{point}</div>)}</div></div>
+                        </div>
+                      ) : (
+                        <div key="png" className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
+                          <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6" onClick={() => openImage(pngKitImage, "OM Solutions PNG dual-fuel kit")} aria-label="Open PNG kit image"><span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-blue-500">PNG System</span><img src={pngKitImage} alt="PNG dual-fuel kit" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" /></button>
+                          <div className="p-5 sm:p-7"><div className="flex items-start justify-between gap-4"><div><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-blue-500">PNG Dual Fuel</p><h3 className="mt-2 text-2xl font-bold">Natural Gas Solution.</h3></div><span className="hidden rounded-full bg-blue-100 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-blue-600 sm:block">Piped Natural Gas</span></div><p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">PNG dual-fuel systems utilize piped natural gas for continuous, reliable operation with consistent fuel supply and lower operating costs for grid-connected facilities.</p><div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">{["Continuous fuel supply via pipeline infrastructure", "Lower fuel cost compared to diesel and LPG", "Clean-burning with minimal environmental impact", "Ideal for facilities with PNG availability"].map((point) => <div key={point} className="flex gap-2 text-xs leading-snug"><Check className="mt-0.5 size-3.5 shrink-0 text-blue-500" />{point}</div>)}</div></div>
+                        </div>
+                      )}
+                    </article>
+                  </div>
+                </div>
+              </section>
+
               <section id="dr-benefits" className="bg-secondary/40">
                 <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><div className="flex flex-wrap items-end justify-between gap-6"><div><SectionLabel index="OM / 06">Why dual fuel</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Benefits of using a Dual Fuel kit</h2></div><p className="max-w-md text-sm leading-relaxed text-muted-foreground">The 70% figure is the maximum gaseous fuel use stated in the profile and depends on engine, application, load and fuel conditions.</p></div><div className="mt-12 grid gap-px overflow-hidden rounded-[12px] border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">{benefits.map((benefit, index) => <div key={benefit} className={`flex gap-4 bg-background p-5 ${index < 4 ? "lg:p-7" : ""}`}><span className={`mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-signal text-panel`}><Check className="size-3.5" /></span><div><p className="text-sm font-semibold leading-snug">{benefit}</p>{index === 2 ? <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.1em] text-muted-foreground">Maximum stated figure</p> : null}</div></div>)}</div></div>
               </section>
@@ -1236,28 +1236,6 @@ function OmSolutionsHome() {
               <section id="dr-compare" className="border-b border-border">
                 <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 09">Technology comparison</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-6"><h2 className="text-4xl font-extrabold tracking-tight lg:text-5xl">Comparison of technology options to comply SPCB notification for PM reduction</h2><p className="max-w-sm text-sm leading-relaxed text-muted-foreground"></p></div><div className="mt-12 overflow-x-auto rounded-[12px] border border-border"><table className="w-full min-w-[980px] border-collapse text-left text-sm"><thead><tr className="bg-panel text-background"><th className="w-[18%] px-5 py-4 font-mono text-[10px] uppercase tracking-[0.12em] text-background/65">Category</th><th className="px-5 py-4 font-semibold">New Gas Genset CPCB-IV+</th><th className="px-5 py-4 font-semibold">New Diesel Genset CPCB-IV+</th><th className="px-5 py-4 font-semibold">Retrofit Emission Control Device</th><th className="bg-primary px-5 py-4 font-semibold text-primary-foreground">Dual Fuel Kit</th></tr></thead><tbody>{comparisonRows.map((row) => <tr key={row[0]} className="border-t border-border"><th className="px-5 py-5 font-semibold">{row[0]}</th><td className="px-5 py-5 text-muted-foreground">{row[1]}</td><td className="px-5 py-5 text-muted-foreground">{row[2]}</td><td className="px-5 py-5 text-muted-foreground">{row[3]}</td><td className="bg-primary-soft px-5 py-5 font-semibold text-primary">{row[4]}</td></tr>)}</tbody></table></div></div>
               </section>
-
-              <section id="dr-apps" className="bg-secondary/40"><div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 15">Other applications</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-5"><h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Applications other than gensets.</h2><p className="max-w-md text-sm leading-relaxed text-muted-foreground">Click any application to view all installation images.</p></div>
-                <div className="mt-12 grid gap-5 md:grid-cols-3">
-                  {([
-                    { title: "Borewell", desc: "Dual-fuel kits for borewell pump sets.", images: [ borewellImg3,borewellImg1, borewellImg2, borewellImg5, borewellImg4, borewellImg6, borewellImg7] },
-                    { title: "Air Compressor", desc: "Field installation for air-compressor applications.", images: [aircomp7,aircomp1, aircomp2, aircomp3, aircomp4, aircomp5, aircomp6] },
-                    { title: "Marine Propulsion", desc: "Marine propulsion with dual-fuel conversion.", images: [marine1, marine2] },
-                  ] as { title: string; desc: string; images: string[] }[]).map((app) => (
-                    <article key={app.title} className="group cursor-pointer overflow-hidden rounded-[11px] border border-border bg-background" onClick={() => setAppGallery({ title: app.title, images: app.images, index: 0 })}>
-                      <div className="relative overflow-hidden aspect-[1.25/1]">
-                        <img src={app.images[0]} alt={app.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
-                        <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/30" />
-                        <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">{app.images.length} photos</span>
-                      </div>
-                      <div className="flex items-end justify-between gap-4 p-5">
-                        <div><h3 className="text-xl font-bold">{app.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{app.desc}</p></div>
-                        <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              </div></section>
 
               {/* Close button at bottom */}
               <div className="flex justify-center bg-panel py-10">
@@ -1378,6 +1356,37 @@ function OmSolutionsHome() {
             </div>
           </div>
         </section>
+
+        {/* Other applications section */}
+        <section id="other-applications" className="bg-secondary/40">
+          <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
+            <SectionLabel index="OM / 15">Other applications</SectionLabel>
+            <div className="mt-5 flex flex-wrap items-end justify-between gap-5">
+              <h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Applications other than gensets.</h2>
+              <p className="max-w-md text-sm leading-relaxed text-muted-foreground">Click any application to view all installation images.</p>
+            </div>
+            <div className="mt-12 grid gap-5 md:grid-cols-3">
+              {([
+                { title: "Borewell", desc: "Dual-fuel kits for borewell pump sets.", images: [ borewellImg3,borewellImg1, borewellImg2, borewellImg5, borewellImg4, borewellImg6, borewellImg7] },
+                { title: "Air Compressor", desc: "Field installation for air-compressor applications.", images: [aircomp7,aircomp1, aircomp2, aircomp3, aircomp4, aircomp5, aircomp6] },
+                { title: "Marine Propulsion", desc: "Marine propulsion with dual-fuel conversion.", images: [marine1, marine2] },
+              ] as { title: string; desc: string; images: string[] }[]).map((app) => (
+                <article key={app.title} className="group cursor-pointer overflow-hidden rounded-[11px] border border-border bg-background" onClick={() => setAppGallery({ title: app.title, images: app.images, index: 0 })}>
+                  <div className="relative overflow-hidden aspect-[1.25/1]">
+                    <img src={app.images[0]} alt={app.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+                    <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/30" />
+                    <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">{app.images.length} photos</span>
+                  </div>
+                  <div className="flex items-end justify-between gap-4 p-5">
+                    <div><h3 className="text-xl font-bold">{app.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{app.desc}</p></div>
+                    <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ── Customer Stories / News ── */}
         <section id="field" className="border-t border-border bg-background">
           <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">

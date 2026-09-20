@@ -769,25 +769,8 @@ function OmSolutionsHome() {
         ].join(" ")}
       >
         <div className="mx-auto flex w-full flex-1 max-w-[1440px] items-center justify-between px-[4.5vw]">
-          {/* Brand */}
-          <a
-            href="#home"
-            onClick={closeMenu}
-            aria-label="OM Solutions home"
-            className="flex shrink-0 items-center gap-2.5 text-white no-underline"
-          >
-            <img
-              src={logoImage}
-              alt="OM Solutions"
-              className="h-9 w-9 rounded-full object-cover ring-1 ring-white/30"
-            />
-            <span className="text-[15px] font-extrabold tracking-[0.08em] uppercase leading-none">
-              OM Solutions
-            </span>
-          </a>
-
           {/* Desktop nav */}
-          <nav className="hidden items-center gap-6 xl:flex">
+          <nav className="hidden items-center gap-6 xl:flex ml-4">
             {navItems.map(([label, id]) => (
               label === "Regulations" ? (
                 <div
@@ -795,7 +778,7 @@ function OmSolutionsHome() {
                   className="relative group/regulations"
                 >
                   <button
-                    className="flex items-center gap-1 whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.11em] text-white/86 transition-colors duration-200 hover:text-[#b6ff72]"
+                    className="flex items-center gap-1 whitespace-nowrap text-[13px] font-extrabold uppercase tracking-[0.11em] text-white/86 transition-colors duration-200 hover:text-[#b6ff72]"
                   >
                     {label}
                     <ChevronDown className="size-3 transition-transform duration-200 group-hover/regulations:rotate-180" />
@@ -805,8 +788,8 @@ function OmSolutionsHome() {
                   <div className="absolute left-0 top-full opacity-0 invisible group-hover/regulations:opacity-100 group-hover/regulations:visible transition-all duration-300">
                     <div className="relative w-[440px] overflow-hidden rounded-xl border border-white/15 bg-[#0a120f]/98 backdrop-blur-md shadow-[0_25px_80px_rgba(0,0,0,0.5)] mt-3">
                       <div className="border-b border-white/12 bg-gradient-to-b from-white/[0.04] to-transparent px-6 py-5">
-                        <p className="text-xs font-bold uppercase tracking-[0.14em] text-white">Pollution Control Board Notifications</p>
-                        <p className="mt-2 text-[11px] leading-relaxed text-white/55">Official notifications and directions related to DG-set emission control and cleaner power generation.</p>
+                        <p className="text-sm font-extrabold uppercase tracking-[0.14em] text-white">Pollution Control Board Notifications</p>
+                        <p className="mt-2 text-xs leading-relaxed text-white/55">Official notifications and directions related to DG-set emission control and cleaner power generation.</p>
                       </div>
                       <div className="grid grid-cols-2 gap-px bg-white/8 p-5">
                         {regulationsData.map((reg) => (
@@ -815,7 +798,7 @@ function OmSolutionsHome() {
                             href={reg.pdf}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group flex items-center justify-between gap-2 rounded-lg bg-[#0a120f] px-4 py-3 text-[10px] font-semibold text-white/75 transition-all duration-200 hover:bg-[#b6ff72]/12 hover:text-[#b6ff72]"
+                            className="group flex items-center justify-between gap-2 rounded-lg bg-[#0a120f] px-4 py-3 text-xs font-semibold text-white/75 transition-all duration-200 hover:bg-[#b6ff72]/12 hover:text-[#b6ff72]"
                           >
                             {reg.name}
                             <ArrowRight className="size-3 opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100" />
@@ -829,69 +812,77 @@ function OmSolutionsHome() {
                 <a
                   key={id}
                   href={`#${id}`}
-                  className="whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.11em] text-white/86 transition-colors duration-200 hover:text-[#b6ff72]"
+                  className="whitespace-nowrap text-[13px] font-extrabold uppercase tracking-[0.11em] text-white/86 transition-colors duration-200 hover:text-[#b6ff72]"
                 >
                   {label}
                 </a>
               )
             ))}
-          </nav>
-
-          {/* CTA + hamburger */}
-          <div className="flex shrink-0 items-center gap-2">
             <button
               onClick={() => setDealershipModalOpen(true)}
-              className="group hidden items-center gap-3 border border-white/55 px-4 py-3 text-[10px] font-extrabold uppercase tracking-[0.1em] text-white transition-all duration-200 hover:bg-white/10 hover:border-white/80 sm:inline-flex"
+              className="group hidden items-center gap-2 whitespace-nowrap rounded-lg bg-[#b6ff72] px-5 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.11em] text-[#0d1f16] transition-all duration-200 hover:bg-[#a3e065] hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b6ff72] sm:inline-flex"
             >
               Dealership
-              <span className="text-[18px] font-normal leading-none transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+              <span className="text-[13px] font-normal leading-none transition-transform duration-200 group-hover:translate-x-0.5">↗</span>
             </button>
-            <a
-              href="#contact"
-              className="hidden items-center gap-3 border border-white/55 px-4 py-3 text-[10px] font-extrabold uppercase tracking-[0.1em] text-white transition-colors duration-200 hover:bg-white/10 sm:inline-flex"
-            >
-              Get in touch
-              <span className="text-[18px] font-normal leading-none">↗</span>
-            </a>
-            <button
-              type="button"
-              aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-              aria-expanded={menuOpen}
-              onClick={() => setMenuOpen((open) => !open)}
-              className="flex h-9 w-9 flex-col items-center justify-center gap-[6px] border-0 bg-transparent p-2 text-white xl:hidden"
-            >
-              <span
-                style={{
-                  display: "block",
-                  height: "1px",
-                  width: "23px",
-                  background: "currentColor",
-                  transition: "transform .25s, opacity .25s",
-                  transform: menuOpen ? "translateY(7px) rotate(45deg)" : "none",
-                }}
-              />
-              <span
-                style={{
-                  display: "block",
-                  height: "1px",
-                  width: "23px",
-                  background: "currentColor",
-                  transition: "opacity .25s",
-                  opacity: menuOpen ? 0 : 1,
-                }}
-              />
-              <span
-                style={{
-                  display: "block",
-                  height: "1px",
-                  width: "23px",
-                  background: "currentColor",
-                  transition: "transform .25s, opacity .25s",
-                  transform: menuOpen ? "translateY(-7px) rotate(-45deg)" : "none",
-                }}
-              />
-            </button>
-          </div>
+          </nav>
+
+          {/* Hamburger */}
+          <button
+            type="button"
+            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((open) => !open)}
+            className="flex h-9 w-9 flex-col items-center justify-center gap-[6px] border-0 bg-transparent p-2 text-white xl:hidden"
+          >
+            <span
+              style={{
+                display: "block",
+                height: "1px",
+                width: "23px",
+                background: "currentColor",
+                transition: "transform .25s, opacity .25s",
+                transform: menuOpen ? "translateY(7px) rotate(45deg)" : "none",
+              }}
+            />
+            <span
+              style={{
+                display: "block",
+                height: "1px",
+                width: "23px",
+                background: "currentColor",
+                transition: "opacity .25s",
+                opacity: menuOpen ? 0 : 1,
+              }}
+            />
+            <span
+              style={{
+                display: "block",
+                height: "1px",
+                width: "23px",
+                background: "currentColor",
+                transition: "transform .25s, opacity .25s",
+                transform: menuOpen ? "translateY(-7px) rotate(-45deg)" : "none",
+              }}
+            />
+          </button>
+
+          {/* Brand */}
+          <a
+            href="#home"
+            onClick={closeMenu}
+            aria-label="OM Solutions home"
+            className="flex shrink-0 items-center gap-2.5 text-white no-underline"
+          >
+            <img
+              src={logoImage}
+              alt="OM Solutions"
+              className="h-9 w-9 rounded-full object-cover ring-1 ring-white/30"
+            />
+            <span className="text-[16px] font-extrabold tracking-[0.08em] uppercase leading-none">
+              OM Solutions
+            </span>
+          </a>
         </div>
 
         {/* Mobile menu */}
@@ -903,14 +894,14 @@ function OmSolutionsHome() {
                   <div key={id}>
                     <button
                       onClick={() => setMobileRegulationsOpen(!mobileRegulationsOpen)}
-                      className="flex w-full items-center justify-between border-b border-white/10 py-3 text-[11px] font-bold uppercase tracking-[0.11em] text-white/80 transition-colors hover:text-[#b6ff72]"
+                      className="flex w-full items-center justify-between border-b border-white/10 py-3 text-[13px] font-extrabold uppercase tracking-[0.11em] text-white/80 transition-colors hover:text-[#b6ff72]"
                     >
                       {label}
                       <ChevronDown className={`size-4 transition-transform duration-200 ${mobileRegulationsOpen ? "rotate-180" : ""}`} />
                     </button>
                     {mobileRegulationsOpen && (
                       <div className="border-b border-white/12 bg-gradient-to-b from-white/[0.03] to-transparent py-5 animate-in slide-in-from-top-2 duration-300">
-                        <p className="mb-4 px-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-white/50">Pollution Control Board Notifications</p>
+                        <p className="mb-4 px-2 text-xs font-semibold uppercase tracking-[0.12em] text-white/50">Pollution Control Board Notifications</p>
                         <div className="flex flex-col gap-1">
                           {regulationsData.map((reg) => (
                             <a
@@ -919,7 +910,7 @@ function OmSolutionsHome() {
                               target="_blank"
                               rel="noopener noreferrer"
                               onClick={closeMenu}
-                              className="group flex items-center justify-between gap-2 rounded-lg px-4 py-3 text-[10px] font-semibold text-white/65 transition-colors hover:bg-[#b6ff72]/10 hover:text-[#b6ff72]"
+                              className="group flex items-center justify-between gap-2 rounded-lg px-4 py-3 text-xs font-semibold text-white/65 transition-colors hover:bg-[#b6ff72]/10 hover:text-[#b6ff72]"
                             >
                               {reg.name}
                               <ArrowRight className="size-3 opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100" />
@@ -934,7 +925,7 @@ function OmSolutionsHome() {
                     key={id}
                     href={`#${id}`}
                     onClick={closeMenu}
-                    className="border-b border-white/10 py-3 text-[11px] font-bold uppercase tracking-[0.11em] text-white/80 transition-colors hover:text-[#b6ff72]"
+                    className="border-b border-white/10 py-3 text-[13px] font-extrabold uppercase tracking-[0.11em] text-white/80 transition-colors hover:text-[#b6ff72]"
                   >
                     {label}
                   </a>
@@ -945,17 +936,10 @@ function OmSolutionsHome() {
                   setDealershipModalOpen(true);
                   closeMenu();
                 }}
-                className="mt-4 inline-flex items-center gap-3 border border-white/40 px-4 py-3 text-[10px] font-extrabold uppercase tracking-[0.1em] text-white hover:bg-white/10"
+                className="group mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#b6ff72] px-5 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.11em] text-[#0d1f16] transition-all duration-200 hover:bg-[#a3e065] hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b6ff72]"
               >
-                Dealership <span className="text-[18px] font-normal leading-none">↗</span>
+                Dealership <span className="text-[13px] font-normal leading-none transition-transform duration-200 group-hover:translate-x-0.5">↗</span>
               </button>
-              <a
-                href="#contact"
-                onClick={closeMenu}
-                className="mt-2 inline-flex items-center gap-3 border border-white/40 px-4 py-3 text-[10px] font-extrabold uppercase tracking-[0.1em] text-white hover:bg-white/10"
-              >
-                Get in touch <span className="text-[18px] font-normal leading-none">↗</span>
-              </a>
             </div>
           </nav>
         )}
@@ -1502,10 +1486,10 @@ function OmSolutionsHome() {
             {/* Header */}
             <div className="flex shrink-0 items-center justify-between px-5 py-4 border-b border-white/10">
               <div>
-                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#b6ff72]">
+                <p className="font-mono text-xs uppercase tracking-[0.14em] text-[#b6ff72]">
                   {selectedComponent ? "Component Detail" : "System Schematic"}
                 </p>
-                <h3 className="text-base font-extrabold text-white leading-tight">
+                <h3 className="text-lg font-extrabold text-white leading-tight">
                   {selectedComponent ? selectedComponent.name : "Dual Fuel Kit"}
                 </h3>
               </div>
@@ -1520,7 +1504,7 @@ function OmSolutionsHome() {
                     >
                       <Minus className="size-4" />
                     </button>
-                    <span className="font-mono text-[11px] text-white/50 w-12 text-center">{Math.round(schematicZoom * 100)}%</span>
+                    <span className="font-mono text-sm text-white/50 w-12 text-center">{Math.round(schematicZoom * 100)}%</span>
                     <button
                       type="button"
                       onClick={() => setSchematicZoom(Math.min(3, schematicZoom + 0.25))}
@@ -1565,7 +1549,7 @@ function OmSolutionsHome() {
                     setSelectedComponent(null);
                     setComponentImageIndex(0);
                   }}
-                  className="absolute left-4 top-4 z-10 flex items-center gap-2 rounded-lg border border-white/15 bg-black/50 px-3 py-2 text-xs font-semibold text-white/80 transition-colors hover:bg-black/70 hover:text-white"
+                  className="absolute left-4 top-4 z-10 flex items-center gap-2 rounded-lg border border-white/15 bg-black/50 px-3 py-2 text-sm font-semibold text-white/80 transition-colors hover:bg-black/70 hover:text-white"
                   aria-label="Back to schematic"
                 >
                   <ArrowLeft className="size-4" />
@@ -1591,7 +1575,7 @@ function OmSolutionsHome() {
                           <button
                             type="button"
                             onClick={() => setComponentImageIndex(0)}
-                            className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
+                            className={`rounded-lg px-3 py-1.5 text-sm font-semibold transition-colors ${
                               componentImageIndex === 0
                                 ? "bg-[#b6ff72] text-[#0d1410]"
                                 : "bg-white/10 text-white/60 hover:bg-white/15"
@@ -1604,7 +1588,7 @@ function OmSolutionsHome() {
                               key={idx}
                               type="button"
                               onClick={() => setComponentImageIndex(idx + 1)}
-                              className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
+                              className={`rounded-lg px-3 py-1.5 text-sm font-semibold transition-colors ${
                                 componentImageIndex === idx + 1
                                   ? "bg-[#b6ff72] text-[#0d1410]"
                                   : "bg-white/10 text-white/60 hover:bg-white/15"
@@ -1622,10 +1606,10 @@ function OmSolutionsHome() {
                       <div className="grid size-16 place-items-center rounded-full border-2 border-dashed border-white/20">
                         <Cog className="size-6 text-white/30" />
                       </div>
-                      <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.14em] text-white/40">
+                      <p className="mt-4 font-mono text-xs uppercase tracking-[0.14em] text-white/40">
                         Component image coming soon
                       </p>
-                      <p className="mt-2 text-sm font-semibold text-white/60">{selectedComponent.name}</p>
+                      <p className="mt-2 text-base font-semibold text-white/60">{selectedComponent.name}</p>
                     </div>
                   )}
                 </div>
@@ -1642,13 +1626,13 @@ function OmSolutionsHome() {
                       }
                     }}
                     disabled={schematicComponents.findIndex(c => c.id === selectedComponent.id) === 0}
-                    className="flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold text-white/60 transition-colors hover:bg-white/10 hover:text-white disabled:opacity-30 disabled:hover:bg-white/5 disabled:hover:text-white/60"
+                    className="flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white/60 transition-colors hover:bg-white/10 hover:text-white disabled:opacity-30 disabled:hover:bg-white/5 disabled:hover:text-white/60"
                     aria-label="Previous component"
                   >
                     <ArrowLeft className="size-4" />
                     Previous
                   </button>
-                  <span className="font-mono text-[10px] text-white/40">
+                  <span className="font-mono text-xs text-white/40">
                     {schematicComponents.findIndex(c => c.id === selectedComponent.id) + 1} / {schematicComponents.length}
                   </span>
                   <button
@@ -1661,7 +1645,7 @@ function OmSolutionsHome() {
                       }
                     }}
                     disabled={schematicComponents.findIndex(c => c.id === selectedComponent.id) === schematicComponents.length - 1}
-                    className="flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold text-white/60 transition-colors hover:bg-white/10 hover:text-white disabled:opacity-30 disabled:hover:bg-white/5 disabled:hover:text-white/60"
+                    className="flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white/60 transition-colors hover:bg-white/10 hover:text-white disabled:opacity-30 disabled:hover:bg-white/5 disabled:hover:text-white/60"
                     aria-label="Next component"
                   >
                     Next
@@ -1706,7 +1690,7 @@ function OmSolutionsHome() {
                     >
                       {/* Tooltip */}
                       {hoveredComponent === component.id && (
-                        <div className="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-[#0d1410] border border-[#b6ff72]/30 px-3 py-1.5 text-xs font-semibold text-white shadow-lg">
+                        <div className="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-[#0d1410] border border-[#b6ff72]/30 px-3 py-1.5 text-sm font-semibold text-white shadow-lg">
                           {component.name}
                         </div>
                       )}

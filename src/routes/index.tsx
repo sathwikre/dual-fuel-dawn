@@ -107,6 +107,12 @@ import nevatiaMg9 from "@/assets/Nevatia Maxgen/WhatsApp Image 2026-08-04 at 4.3
 import engineImage from "@/assets/img-098.jpg";
 import engineDetailImage from "@/assets/img-099.jpg";
 import knockSensorImage from "@/assets/Knock sensor.jpeg";
+
+// Team member images
+import prasadImage from "@/assets/team/Prasad Parulekar.jpg";
+import rahulImage from "@/assets/team/rahul.jpeg";
+import vikramImage from "@/assets/team/Vikram Mane.jpeg";
+import sanjeevImage from "@/assets/team/Sanjeev Magar.png";
 import gasleakdeact from "@/assets/Gas Leak Detector.jpeg"
 import generatorImage from "@/assets/img-103.jpg";
 import controlPanelImage from "@/assets/img-117.jpg";
@@ -324,6 +330,57 @@ const comparisonRows = [
   ["Technology Limitations", "Sensitive technology", "Sensitive technology", "Higher engine back pressure · PM disposal", "Effective between 30 to 80% load · Min 30% diesel required"],
   ["Operating Cost", "Low fuel cost", "Higher fuel cost", "Higher fuel cost", "Lower fuel cost · Very low maintenance cost"],
   ["Service Skillset", "Very high skillset", "Very high skillset", "No special skillset required", "No special skillset required"],
+];
+
+type TeamMember = {
+  id: string;
+  name: string;
+  image: string;
+  expertise: string[];
+};
+
+const teamMembers: TeamMember[] = [
+  {
+    id: "prasad-parulekar",
+    name: "Prasad Parulekar",
+    image: prasadImage,
+    expertise: [
+      "I.C. Engine performance development",
+      "Alternate fuels",
+      "Project Management",
+      "Six Sigma",
+    ],
+  },
+  {
+    id: "rahul-sonawane",
+    name: "Rahul Sonawane",
+    image: rahulImage,
+    expertise: [
+      "CNC & VMC",
+      "Marketing",
+      "Sales & service",
+    ],
+  },
+  {
+    id: "vikram-mane",
+    name: "Vikram Mane",
+    image: vikramImage,
+    expertise: [
+      "PCB development",
+      "Coding",
+      "Circuits",
+    ],
+  },
+  {
+    id: "sanjeev-magar",
+    name: "Sanjeev Magar",
+    image: sanjeevImage,
+    expertise: [
+      "Biogas plant design",
+      "Biogas plant installation",
+      "Compressed Biogas",
+    ],
+  },
 ];
 
 const recdTypes = {
@@ -691,6 +748,10 @@ function OmSolutionsHome() {
   const [hoveredComponent, setHoveredComponent] = useState<string | null>(null);
   const [componentImageIndex, setComponentImageIndex] = useState(0);
 
+  // Team modal state
+  const [teamModalOpen, setTeamModalOpen] = useState(false);
+  const [selectedTeamMember, setSelectedTeamMember] = useState<TeamMember | null>(null);
+
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -700,6 +761,8 @@ function OmSolutionsHome() {
         setDealershipModalOpen(false);
         setSchematicViewerOpen(false);
         setSelectedComponent(null);
+        setTeamModalOpen(false);
+        setSelectedTeamMember(null);
       }
       if (schematicViewerOpen && selectedComponent) {
         const currentIndex = schematicComponents.findIndex(c => c.id === selectedComponent.id);
@@ -1447,28 +1510,47 @@ function OmSolutionsHome() {
           </div>
         </section>
 
-        {/* About section - moved here */}
-        <section id="about" className="border-b border-border">
-          <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10 lg:py-28">
-            <div>
-              <SectionLabel index="OM / 02">About OM Solutions</SectionLabel>
-              <h2 className="mt-5 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight lg:text-6xl">Focused on Alternate Fuels for Internal Combustion Engines</h2>
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">OM Solutions was established in 2021 by <strong className="text-foreground">Prasad Parulekar (IIT Bombay)</strong>, with 20+ years of alternate-fuel-based power generation experience.</p>
-              <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">The company delivers alternate-fuel and dual-fuel solutions across engine and industrial applications from generator sets and commercial vehicles to marine propulsion, tractors, earth movers, producer gas and liquid fuels.</p>
-              <div className="mt-8 flex flex-wrap gap-2">
-                <span className="rounded-[6px] border border-border bg-secondary px-3 py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">IIT Bombay Mtech Energy Science</span>
-                <span className="rounded-[6px] border border-border bg-secondary px-3 py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">Cummins India experience</span>
-              </div>
+        {/* Team section */}
+        <section className="border-b border-border bg-background">
+          <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
+            <div className="mb-12">
+              <SectionLabel index="OM / 03">Team</SectionLabel>
+              <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">TEAM : OM SOLUTIONS</h2>
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">Meet the people behind the technology.</p>
             </div>
-            <div className="grid grid-cols-1 gap-4 sm:gap-5 lg:gap-3">
-              <div className="rounded-[10px] bg-panel p-4 text-background sm:p-5">
-                <p className="font-mono text-3xl leading-none text-signal sm:text-4xl">2021</p>
-                <p className="mt-2 text-sm text-background/60">Company established</p>
-              </div>
-              <div className="rounded-[10px] bg-primary p-4 text-primary-foreground sm:p-5">
-                <p className="font-mono text-[clamp(1.45rem,5vw,2.75rem)] leading-[1.05] tracking-[-0.04em]">20+ Years of Industry Experience</p>
-                <p className="mt-2 text-sm text-primary-foreground/75">Extensive in alternate-fuel-based power generation</p>
-              </div>
+
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {teamMembers.map((member) => (
+                <button
+                  key={member.id}
+                  type="button"
+                  onClick={() => {
+                    setSelectedTeamMember(member);
+                    setTeamModalOpen(true);
+                  }}
+                  className="group relative overflow-hidden rounded-[12px] border border-border bg-secondary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                  aria-label={`View profile of ${member.name}`}
+                >
+                  <div className="relative aspect-[3/4] overflow-hidden">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  </div>
+                  <div className="absolute inset-0 flex items-end p-4">
+                    <div className="w-full text-center">
+                      <p className="text-base font-semibold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                        VIEW PROFILE →
+                      </p>
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <p className="text-sm font-semibold text-foreground">{member.name}</p>
+                  </div>
+                </button>
+              ))}
             </div>
           </div>
         </section>
@@ -1751,6 +1833,106 @@ function OmSolutionsHome() {
                   <img src={img} alt={`${appGallery.title} thumbnail ${i + 1}`} className="h-full w-full object-cover" />
                 </button>
               ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Team Profile Modal */}
+      {teamModalOpen && selectedTeamMember && (
+        <div
+          className="fixed inset-0 z-[65] flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm"
+          onClick={() => {
+            setTeamModalOpen(false);
+            setSelectedTeamMember(null);
+          }}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${selectedTeamMember.name} profile`}
+        >
+          <div
+            className="relative flex flex-col overflow-hidden rounded-[14px] bg-background shadow-2xl w-full max-w-2xl animate-in fade-in slide-in-from-bottom-4 duration-300"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="flex shrink-0 items-center justify-between px-6 py-4 border-b border-border">
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Team Profile</p>
+                <h3 className="text-lg font-extrabold text-foreground leading-tight">{selectedTeamMember.name}</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setTeamModalOpen(false);
+                  setSelectedTeamMember(null);
+                }}
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                aria-label="Close profile"
+              >
+                <X className="size-3.5" />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="flex min-h-0 flex-1 flex-col sm:flex-row">
+              {/* Photo */}
+              <div className="relative flex shrink-0 items-center justify-center bg-secondary/30 sm:w-1/2">
+                <img
+                  src={selectedTeamMember.image}
+                  alt={selectedTeamMember.name}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+
+              {/* Expertise */}
+              <div className="flex flex-1 flex-col p-6">
+                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground mb-4">Expertise</p>
+                <ul className="space-y-3">
+                  {selectedTeamMember.expertise.map((item, index) => (
+                    <li key={index} className="flex items-start gap-3 text-sm leading-relaxed text-foreground">
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-signal" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Navigation */}
+                <div className="mt-auto pt-6 flex items-center justify-between">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const currentIndex = teamMembers.findIndex(m => m.id === selectedTeamMember.id);
+                      if (currentIndex > 0) {
+                        setSelectedTeamMember(teamMembers[currentIndex - 1]);
+                      }
+                    }}
+                    disabled={teamMembers.findIndex(m => m.id === selectedTeamMember.id) === 0}
+                    className="flex items-center gap-2 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground disabled:opacity-30 disabled:hover:text-muted-foreground"
+                    aria-label="Previous team member"
+                  >
+                    <ArrowLeft className="size-4" />
+                    Previous
+                  </button>
+                  <span className="font-mono text-xs text-muted-foreground">
+                    {teamMembers.findIndex(m => m.id === selectedTeamMember.id) + 1} / {teamMembers.length}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const currentIndex = teamMembers.findIndex(m => m.id === selectedTeamMember.id);
+                      if (currentIndex < teamMembers.length - 1) {
+                        setSelectedTeamMember(teamMembers[currentIndex + 1]);
+                      }
+                    }}
+                    disabled={teamMembers.findIndex(m => m.id === selectedTeamMember.id) === teamMembers.length - 1}
+                    className="flex items-center gap-2 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground disabled:opacity-30 disabled:hover:text-muted-foreground"
+                    aria-label="Next team member"
+                  >
+                    Next
+                    <ArrowRight className="size-4" />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -550,40 +550,125 @@ const galleryItems = [
   ["Dual-fuel control panel", controlPanelImage, "Products"],
 ] as const;
 
-function TypewriterText({ text }: { text: string }) {
-  const [displayed, setDisplayed] = useState("");
-  const [started, setStarted] = useState(false);
+const heroQuotes = [
+  "Our purpose is to clean and decarbonise the air.",
+  "Dual fuel kits — reducing CO₂ & PM emissions while lowering diesel consumption",
+  "Fuel flexibility is not a luxury. It is a necessity."
+] as const;
+
+function RotatingQuote() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
+  const phaseRef = useRef<"typing" | "holding" | "deleting">("typing");
+  const charIndexRef = useRef(0);
+  const currentIndexRef = useRef(0);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const currentQuote = heroQuotes[currentIndexRef.current] || heroQuotes[0];
 
   useEffect(() => {
-    // Small delay so the page loads first, then typing begins
-    const startTimer = setTimeout(() => setStarted(true), 400);
-    return () => clearTimeout(startTimer);
-  }, []);
+    if (prefersReducedMotion) {
+      setDisplayedText(currentQuote);
+      const interval = setInterval(() => {
+        currentIndexRef.current = (currentIndexRef.current + 1) % heroQuotes.length;
+        setCurrentIndex(currentIndexRef.current);
+        setDisplayedText(heroQuotes[currentIndexRef.current]);
+      }, 4000);
+      return () => clearInterval(interval);
+    }
 
-  useEffect(() => {
-    if (!started) return;
-    if (displayed.length >= text.length) return;
-    const timer = setTimeout(() => {
-      setDisplayed(text.slice(0, displayed.length + 1));
-    }, 38);
-    return () => clearTimeout(timer);
-  }, [started, displayed, text]);
+    // Initialize
+    phaseRef.current = "typing";
+    charIndexRef.current = 0;
+    currentIndexRef.current = 0;
+    setDisplayedText("");
 
-  // Split at "decarbonise" to preserve the line break
-  const breakIdx = text.indexOf("decarbonise");
-  const line1 = displayed.slice(0, Math.min(displayed.length, breakIdx));
-  const line2 = displayed.length > breakIdx ? displayed.slice(breakIdx) : "";
+    const runAnimation = () => {
+      const phase = phaseRef.current;
+      const charIndex = charIndexRef.current;
+      const idx = currentIndexRef.current;
+      const quote = heroQuotes[idx];
 
+      if (phase === "typing") {
+        if (charIndex < quote.length) {
+          setDisplayedText(quote.slice(0, charIndex + 1));
+          charIndexRef.current = charIndex + 1;
+          timerRef.current = setTimeout(runAnimation, 50);
+        } else {
+          phaseRef.current = "holding";
+          timerRef.current = setTimeout(() => {
+            phaseRef.current = "deleting";
+            runAnimation();
+          }, 3500);
+        }
+      } else if (phase === "deleting") {
+        if (charIndex > 0) {
+          setDisplayedText(quote.slice(0, charIndex - 1));
+          charIndexRef.current = charIndex - 1;
+          timerRef.current = setTimeout(runAnimation, 30);
+        } else {
+          currentIndexRef.current = (idx + 1) % heroQuotes.length;
+          setCurrentIndex(currentIndexRef.current);
+          phaseRef.current = "typing";
+          charIndexRef.current = 0;
+          timerRef.current = setTimeout(runAnimation, 50);
+        }
+      }
+    };
+
+    timerRef.current = setTimeout(runAnimation, 50);
+
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, [prefersReducedMotion]);
+
+  // For Quote 2, make "DUAL FUEL KITS" more prominent
+  if (currentIndexRef.current === 1) {
+    const parts = displayedText.split(" — ");
+    const isComplete = displayedText === currentQuote;
+    return (
+      <span className="inline-block">
+        <span className="font-semibold">{parts[0]}</span>
+        {parts.length > 1 && <span> — {parts[1]}</span>}
+        {!isComplete && !prefersReducedMotion && (
+          <span className="inline-block w-[2px] h-[0.85em] bg-white align-middle ml-1 animate-pulse" />
+        )}
+      </span>
+    );
+  }
+
+  // For Quote 1, preserve the line break at "decarbonise"
+  if (currentIndexRef.current === 0) {
+    const breakIdx = currentQuote!.indexOf("decarbonise");
+    const line1 = displayedText.slice(0, Math.min(displayedText.length, breakIdx));
+    const line2 = displayedText.length > breakIdx ? displayedText.slice(breakIdx) : "";
+    const isComplete = displayedText === currentQuote;
+
+    return (
+      <span className="inline-block">
+        {line1}
+        {displayedText.length >= breakIdx && <br />}
+        {line2}
+        {!isComplete && !prefersReducedMotion && (
+          <span className="inline-block w-[2px] h-[0.85em] bg-white align-middle ml-1 animate-pulse" />
+        )}
+      </span>
+    );
+  }
+
+  // For Quote 3, display as is
+  const isComplete = displayedText === currentQuote;
   return (
-    <>
-      {line1}
-      {displayed.length >= breakIdx && <br />}
-      {line2}
-      {/* blinking cursor while typing */}
-      {displayed.length < text.length && (
+    <span className="inline-block">
+      {displayedText}
+      {!isComplete && !prefersReducedMotion && (
         <span className="inline-block w-[2px] h-[0.85em] bg-white align-middle ml-1 animate-pulse" />
       )}
-    </>
+    </span>
   );
 }
 
@@ -1124,16 +1209,16 @@ function OmSolutionsHome() {
           {/* Dark gradient overlay so text stays readable */}
           <div className="absolute inset-0 z-[2]" style={{ background: "linear-gradient(90deg,rgba(7,18,12,.28) 0%,rgba(8,20,14,.14) 55%,rgba(8,20,14,.05)), linear-gradient(0deg,rgba(7,18,12,.28),transparent 46%)" }} />
           <div className="relative z-[3] mx-auto flex min-h-[100svh] w-full max-w-[1440px] flex-col items-center justify-end px-5 pt-[85px] pb-32 text-center lg:px-16">
-            <div className="max-w-4xl rise-in">
+            <div className="max-w-4xl rise-in min-h-[clamp(80px,12vw,160px)] flex items-center justify-center">
               <h1 className="mt-0 text-[clamp(32px,4.5vw,64px)] font-light leading-[1.1] tracking-[-0.02em] text-white">
-                <TypewriterText text="Our purpose is to clean and decarbonise the air" />
+                <RotatingQuote />
               </h1>
-              <p className="mt-7 inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.18em] text-white sm:text-base"><span className="h-px w-8 bg-[#b6ff72]" />We are OM Solutions<span className="h-px w-8 bg-[#b6ff72]" /></p>
-              <div className="mt-7">
-                <a href="tel:+917387591083" className="inline-flex h-11 items-center border border-white bg-transparent px-7 text-[11px] font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-white hover:text-[#0b1f15]">
-                  Contact Us
-                </a>
-              </div>
+            </div>
+            <p className="mt-7 inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.18em] text-white sm:text-base"><span className="h-px w-8 bg-[#b6ff72]" />We are OM Solutions<span className="h-px w-8 bg-[#b6ff72]" /></p>
+            <div className="mt-7">
+              <a href="tel:+917387591083" className="inline-flex h-11 items-center border border-white bg-transparent px-7 text-[11px] font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-white hover:text-[#0b1f15]">
+                Contact Us
+              </a>
             </div>
           </div>
           <div className="absolute bottom-7 right-5 hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-background/45 lg:flex lg:right-10 z-[3]"><span className="h-px w-10 bg-signal" /> Field-ready conversion systems</div>

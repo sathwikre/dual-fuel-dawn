@@ -1027,7 +1027,7 @@ function OmSolutionsHome() {
             <img
               src={logoImage}
               alt="OM Solutions"
-              className="h-12 w-12 rounded-full object-cover ring-1 ring-white/30"
+              className="h-14 w-14 rounded-full object-cover ring-1 ring-white/30"
             />
             <span className="text-[16px] font-extrabold tracking-[0.08em] uppercase leading-none">
               OM Solutions
@@ -1176,7 +1176,7 @@ function OmSolutionsHome() {
                 className="flex items-center gap-2.5 rounded-sm transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b6ff72]"
                 aria-label="OM Solutions — return to home"
               >
-                <img src={logoImage} alt="OM Solutions" className="h-12 w-12 rounded-full object-cover ring-1 ring-white/20" />
+                <img src={logoImage} alt="OM Solutions" className="h-14 w-14 rounded-full object-cover ring-1 ring-white/20" />
                 <span className="text-[15px] font-extrabold uppercase tracking-[0.08em] text-white">OM Solutions</span>
               </a>
 

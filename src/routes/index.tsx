@@ -1214,7 +1214,7 @@ function OmSolutionsHome() {
                 <RotatingQuote />
               </h1>
             </div>
-            <p className="mt-7 inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.18em] text-white sm:text-base"><span className="h-px w-8 bg-[#b6ff72]" />We are OM Solutions<span className="h-px w-8 bg-[#b6ff72]" /></p>
+            <p className="mt-7 inline-flex items-center gap-3 text-base font-semibold uppercase tracking-[0.18em] text-white sm:text-lg"><span className="h-px w-8 bg-[#b6ff72]" />We are OM Solutions<span className="h-px w-8 bg-[#b6ff72]" /></p>
             <div className="mt-7">
               <a href="tel:+917387591083" className="inline-flex h-11 items-center border border-white bg-transparent px-7 text-[11px] font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-white hover:text-[#0b1f15]">
                 Contact Us

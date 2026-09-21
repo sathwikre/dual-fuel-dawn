@@ -1528,7 +1528,7 @@ function OmSolutionsHome() {
                     setSelectedTeamMember(member);
                     setTeamModalOpen(true);
                   }}
-                  className="group relative overflow-hidden rounded-[12px] border border-border bg-secondary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                  className="group relative rounded-[12px] border border-border bg-secondary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                   aria-label={`View profile of ${member.name}`}
                 >
                   <div className="relative aspect-[3/4] overflow-hidden">
@@ -1538,9 +1538,7 @@ function OmSolutionsHome() {
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  </div>
-                  <div className="absolute inset-0 flex items-end p-4">
-                    <div className="w-full text-center">
+                    <div className="absolute inset-0 flex items-end justify-center p-4">
                       <p className="text-base font-semibold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                         VIEW PROFILE →
                       </p>

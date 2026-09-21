@@ -1574,7 +1574,7 @@ function OmSolutionsHome() {
                     className="group relative rounded-[12px] border border-border bg-secondary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                     aria-label={`View profile of ${member.name}`}
                   >
-                    <div className="relative aspect-[3/4] overflow-hidden">
+                    <div className="relative aspect-[1/1] overflow-hidden">
                       <img
                         src={member.image}
                         alt={member.name}

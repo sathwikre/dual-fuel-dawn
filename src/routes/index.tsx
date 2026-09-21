@@ -278,8 +278,8 @@ const navItems = [
   ["About", "team"],
   ["Regulations", "regulations"],
   ["Gallery", "gallery"],
-  ["News", "field"],
-  ["Contact", "contact"],
+ 
+  ["Get a Quote", "contact"],
 ] as const;
 
 const regulationsData = [
@@ -959,18 +959,29 @@ function OmSolutionsHome() {
                   </div>
                 </div>
               ) : (
-                <a
-                  key={id}
-                  href={`#${id}`}
-                  className="whitespace-nowrap text-[13px] font-extrabold uppercase tracking-[0.11em] text-white/86 transition-colors duration-200 hover:text-[#b6ff72]"
-                >
-                  {label}
-                </a>
+                label === "Get a Quote" ? (
+                  <a
+                    key={id}
+                    href={`#${id}`}
+                    className="group hidden items-center gap-2 whitespace-nowrap rounded-full bg-[#b6ff72] px-5 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.11em] text-[#0d1f16] transition-all duration-200 hover:bg-[#a3e065] hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b6ff72] sm:inline-flex"
+                  >
+                    {label}
+                    <span className="text-[13px] font-normal leading-none transition-transform duration-200 group-hover:translate-x-0.5">↗</span>
+                  </a>
+                ) : (
+                  <a
+                    key={id}
+                    href={`#${id}`}
+                    className="whitespace-nowrap text-[13px] font-extrabold uppercase tracking-[0.11em] text-white/86 transition-colors duration-200 hover:text-[#b6ff72]"
+                  >
+                    {label}
+                  </a>
+                )
               )
             ))}
             <button
               onClick={() => setDealershipModalOpen(true)}
-              className="group hidden items-center gap-2 whitespace-nowrap rounded-lg bg-[#b6ff72] px-5 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.11em] text-[#0d1f16] transition-all duration-200 hover:bg-[#a3e065] hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b6ff72] sm:inline-flex"
+              className="group hidden items-center gap-2 whitespace-nowrap rounded-full bg-[#b6ff72] px-5 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.11em] text-[#0d1f16] transition-all duration-200 hover:bg-[#a3e065] hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b6ff72] sm:inline-flex"
             >
               Dealership
               <span className="text-[13px] font-normal leading-none transition-transform duration-200 group-hover:translate-x-0.5">↗</span>
@@ -1071,14 +1082,25 @@ function OmSolutionsHome() {
                     )}
                   </div>
                 ) : (
-                  <a
-                    key={id}
-                    href={`#${id}`}
-                    onClick={closeMenu}
-                    className="border-b border-white/10 py-3 text-[13px] font-extrabold uppercase tracking-[0.11em] text-white/80 transition-colors hover:text-[#b6ff72]"
-                  >
-                    {label}
-                  </a>
+                  label === "Get a Quote" ? (
+                    <a
+                      key={id}
+                      href={`#${id}`}
+                      onClick={closeMenu}
+                      className="group mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#b6ff72] px-5 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.11em] text-[#0d1f16] transition-all duration-200 hover:bg-[#a3e065] hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b6ff72]"
+                    >
+                      {label} <span className="text-[13px] font-normal leading-none transition-transform duration-200 group-hover:translate-x-0.5">↗</span>
+                    </a>
+                  ) : (
+                    <a
+                      key={id}
+                      href={`#${id}`}
+                      onClick={closeMenu}
+                      className="border-b border-white/10 py-3 text-[13px] font-extrabold uppercase tracking-[0.11em] text-white/80 transition-colors hover:text-[#b6ff72]"
+                    >
+                      {label}
+                    </a>
+                  )
                 )
               ))}
               <button
@@ -1086,7 +1108,7 @@ function OmSolutionsHome() {
                   setDealershipModalOpen(true);
                   closeMenu();
                 }}
-                className="group mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#b6ff72] px-5 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.11em] text-[#0d1f16] transition-all duration-200 hover:bg-[#a3e065] hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b6ff72]"
+                className="group mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#b6ff72] px-5 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.11em] text-[#0d1f16] transition-all duration-200 hover:bg-[#a3e065] hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b6ff72]"
               >
                 Dealership <span className="text-[13px] font-normal leading-none transition-transform duration-200 group-hover:translate-x-0.5">↗</span>
               </button>
@@ -1597,7 +1619,7 @@ function OmSolutionsHome() {
           </div>
         </section>
 
-        <section id="contact" className="relative overflow-hidden bg-panel text-background"><img src={generatorImage} alt="OM Solutions generator installation" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-20" /><div className="absolute inset-0 bg-panel/90" /><div className="relative mx-auto grid max-w-[1440px] gap-12 px-5 py-20 lg:grid-cols-[0.85fr_1.15fr] lg:px-10 lg:py-28"><div><SectionLabel index="OM / 18" dark>Consultation</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Talk to Our Technical Team</h2><p className="mt-6 max-w-md text-base leading-relaxed text-background/70">Share your engine, application and fuel availability for a technical conversation about dual-fuel suitability.</p><div className="mt-10 space-y-5"><a href="mailto:omsolns18@gmail.com" className="flex items-start gap-4 text-sm text-background/80 transition-colors hover:text-signal"><span className="grid size-9 place-items-center rounded-[6px] bg-background/10 text-signal">@</span><span><span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Email</span><span className="mt-1 block">omsolns18@gmail.com</span></span></a><div className="flex items-start gap-4 text-sm text-background/80"><span className="grid size-9 place-items-center rounded-[6px] bg-background/10 text-signal"><Phone className="size-4" /></span><span><span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Contact</span><a href="tel:+917387591083" className="mt-1 block transition-colors hover:text-signal">+91 73875 91083</a></span></div><div className="flex items-start gap-4 text-sm text-background/80"><span className="grid size-9 place-items-center rounded-[6px] bg-background/10 text-signal"><Factory className="size-4" /></span><span><span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Office</span><span className="mt-1 block leading-relaxed">29A, Sairam Park, Near Cipla Foundation,<br />Warje, Pune, Maharashtra, India 411058</span></span></div></div></div><div className="glass-panel rounded-[13px] p-6 sm:p-8"><form onSubmit={submitForm} className="grid gap-4 sm:grid-cols-2"><label className="grid gap-2 text-xs font-medium text-background/70">Name<input required name="name" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="Your name" /></label><label className="grid gap-2 text-xs font-medium text-background/70">Company<input required name="company" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="Company name" /></label><label className="grid gap-2 text-xs font-medium text-background/70">Phone<input name="phone" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="+91" /></label><label className="grid gap-2 text-xs font-medium text-background/70">Email<input required type="email" name="email" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="you@company.com" /></label><label className="grid gap-2 text-xs font-medium text-background/70 sm:col-span-2">Application / Requirement<select name="application" className="h-11 rounded-[6px] border border-background/15 bg-panel px-3 text-sm text-background outline-none focus:border-signal"><option>Choose an application</option><option>Generator set</option><option>Marine engine</option><option>Truck or bus</option><option>Tractor or earth mover</option><option>Other industrial application</option></select></label><label className="grid gap-2 text-xs font-medium text-background/70 sm:col-span-2">Message<textarea required name="message" rows={4} className="rounded-[6px] border border-background/15 bg-background/5 px-3 py-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="Tell us about the engine, load profile and fuel availability." /></label><div className="sm:col-span-2"><Button type="submit" className="h-12 w-full rounded-[7px] bg-primary text-sm font-semibold text-primary-foreground shadow-none hover:bg-primary/90">{formSent ? "Request noted ”” thank you" : "Get a Consultation"} <ArrowRight className="size-4" /></Button><p className="mt-3 font-mono text-[10px] text-background/40"></p></div></form></div></div></section>
+        <section id="contact" className="relative overflow-hidden bg-panel text-background"><img src={generatorImage} alt="OM Solutions generator installation" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-20" /><div className="absolute inset-0 bg-panel/90" /><div className="relative mx-auto grid max-w-[1440px] gap-12 px-5 py-20 lg:grid-cols-[0.85fr_1.15fr] lg:px-10 lg:py-28"><div><SectionLabel index="OM / 18" dark>Get a Quote</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Connect With Our Experts</h2><p className="mt-6 max-w-md text-base leading-relaxed text-background/70">Share your engine, application and fuel availability for a technical conversation about dual-fuel suitability.</p><div className="mt-10 space-y-5"><a href="mailto:omsolns18@gmail.com" className="flex items-start gap-4 text-sm text-background/80 transition-colors hover:text-signal"><span className="grid size-9 place-items-center rounded-[6px] bg-background/10 text-signal">@</span><span><span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Email</span><span className="mt-1 block">omsolns18@gmail.com</span></span></a><div className="flex items-start gap-4 text-sm text-background/80"><span className="grid size-9 place-items-center rounded-[6px] bg-background/10 text-signal"><Phone className="size-4" /></span><span><span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Contact</span><a href="tel:+917387591083" className="mt-1 block transition-colors hover:text-signal">+91 73875 91083</a></span></div><div className="flex items-start gap-4 text-sm text-background/80"><span className="grid size-9 place-items-center rounded-[6px] bg-background/10 text-signal"><Factory className="size-4" /></span><span><span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Office</span><span className="mt-1 block leading-relaxed">29A, Sairam Park, Near Cipla Foundation,<br />Warje, Pune, Maharashtra, India 411058</span></span></div></div></div><div className="glass-panel rounded-[13px] p-6 sm:p-8"><form onSubmit={submitForm} className="grid gap-4 sm:grid-cols-2"><label className="grid gap-2 text-xs font-medium text-background/70">Name<input required name="name" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="Your name" /></label><label className="grid gap-2 text-xs font-medium text-background/70">Company<input required name="company" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="Company name" /></label><label className="grid gap-2 text-xs font-medium text-background/70">Phone<input name="phone" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="+91" /></label><label className="grid gap-2 text-xs font-medium text-background/70">Email<input required type="email" name="email" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="you@company.com" /></label><label className="grid gap-2 text-xs font-medium text-background/70 sm:col-span-2">Application / Requirement<select name="application" className="h-11 rounded-[6px] border border-background/15 bg-panel px-3 text-sm text-background outline-none focus:border-signal"><option>Choose an application</option><option>Generator set</option><option>Marine engine</option><option>Truck or bus</option><option>Tractor or earth mover</option><option>Other industrial application</option></select></label><label className="grid gap-2 text-xs font-medium text-background/70 sm:col-span-2">Message<textarea required name="message" rows={4} className="rounded-[6px] border border-background/15 bg-background/5 px-3 py-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="Tell us about the engine, load profile and fuel availability." /></label><div className="sm:col-span-2"><Button type="submit" className="h-12 w-full rounded-[7px] bg-primary text-sm font-semibold text-primary-foreground shadow-none hover:bg-primary/90">{formSent ? "Request noted ”” thank you" : "Get a Consultation"} <ArrowRight className="size-4" /></Button><p className="mt-3 font-mono text-[10px] text-background/40"></p></div></form></div></div></section>
       </main>
 
       <footer className="border-t border-border bg-background"><div className="mx-auto max-w-[1440px] px-5 py-12 lg:px-10"><div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between"><div className="max-w-sm"><div className="flex items-center gap-3"><img src={logoImage} alt="OM Solutions" className="h-10 w-12 object-contain" /><div><p className="font-extrabold tracking-tight">OM SOLUTIONS</p><p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">Dual Fuel Systems</p></div></div><p className="mt-5 font-mono text-[11px] leading-relaxed text-muted-foreground">Smarter Power ”“ Lower Fuel Cost ”“ Cleaner Performance</p><div className="mt-6 flex items-center gap-3"><a href="https://linkedin.com/company/om-solutions" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="grid h-9 w-9 place-items-center rounded-[7px] border border-border text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"><Linkedin className="size-4" /></a><a href="https://youtube.com/@omsolutions" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="grid h-9 w-9 place-items-center rounded-[7px] border border-border text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"><Youtube className="size-4" /></a><a href="https://twitter.com/omsolutions" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X" className="grid h-9 w-9 place-items-center rounded-[7px] border border-border text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"><Twitter className="size-4" /></a><a href="https://instagram.com/omsolutions" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="grid h-9 w-9 place-items-center rounded-[7px] border border-border text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"><Instagram className="size-4" /></a></div></div><div className="grid gap-10 sm:grid-cols-2"><div><p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Quick links</p><nav className="mt-4 grid grid-cols-2 gap-x-8 gap-y-3 text-sm">{navItems.map(([label, id]) => <a key={id} href={`#${id}`} className="transition-colors hover:text-primary">{label}</a>)}</nav></div><div><p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Contact</p><div className="mt-4 space-y-2 text-sm text-muted-foreground"><a href="mailto:omsolns18@gmail.com" className="block hover:text-primary">omsolns18@gmail.com</a><a href="tel:+917387591083" className="block hover:text-primary">+91 73875 91083</a><p>Warje, Pune, Maharashtra</p></div></div></div></div><div className="mt-10 flex flex-col gap-2 border-t border-border pt-5 font-mono text-[10px] text-muted-foreground sm:flex-row sm:justify-between"><span> 2026 OM Solutions. All Rights Reserved.</span><span>Dual Fuel &amp; RECD Technology</span></div></div></footer>

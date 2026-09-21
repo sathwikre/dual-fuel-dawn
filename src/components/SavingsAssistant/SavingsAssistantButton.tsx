@@ -63,20 +63,20 @@ export function SavingsAssistantButton({ onClick, isOpen }: Props) {
           aria-label={isOpen ? "Close savings calculator" : "Open savings calculator"}
           className="sa-btn relative flex items-center justify-center rounded-full bg-[oklch(0.19_0.045_158)] transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(0.72_0.16_155)] focus-visible:ring-offset-2"
           style={{
-            width: 56,
-            height: 56,
+            width: 80,
+            height: 80,
             border: "1px solid rgba(45,189,110,0.35)",
             flexShrink: 0,
           }}
         >
           {isOpen ? (
             /* Close X when open */
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 20 20" fill="none" aria-hidden="true">
               <path d="M5 5L15 15M15 5L5 15" stroke="oklch(0.72 0.16 155)" strokeWidth="1.8" strokeLinecap="round" />
             </svg>
           ) : (
             /* Custom OM Solutions calculator icon */
-            <img src={buttonIcon} alt="" aria-hidden="true" style={{ width: 56, height: 56, objectFit: "cover", borderRadius: "50%" }} />
+            <img src={buttonIcon} alt="" aria-hidden="true" style={{ width: 80, height: 80, objectFit: "cover", borderRadius: "50%" }} />
           )}
         </button>
       </div>

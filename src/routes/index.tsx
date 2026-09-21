@@ -1940,10 +1940,10 @@ function OmSolutionsHome() {
       <Dialog open={dealershipModalOpen} onOpenChange={setDealershipModalOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-lg font-semibold">Dealership Opportunities</DialogTitle>
+            <DialogTitle className="text-lg font-semibold">Dealership Opportunities:</DialogTitle>
             <DialogDescription className="text-base">
               We are currently processing dealership appointments across India.
-              Please check back soon for more information.
+              Please connect up for more information.
             </DialogDescription>
           </DialogHeader>
           <div className="flex justify-end mt-4">

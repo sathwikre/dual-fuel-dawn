@@ -1687,15 +1687,12 @@ function OmSolutionsHome() {
                       }}
                       onMouseEnter={() => setHoveredComponent(component.id)}
                       onMouseLeave={() => setHoveredComponent(null)}
-                      className="absolute rounded-full border-2 transition-all duration-200"
+                      className="absolute cursor-pointer"
                       style={{
                         left: `${component.hotspot.x}%`,
                         top: `${component.hotspot.y}%`,
                         width: `${component.hotspot.width}%`,
                         height: `${component.hotspot.height}%`,
-                        borderColor: hoveredComponent === component.id ? "rgba(182,255,114,0.8)" : "rgba(182,255,114,0.3)",
-                        backgroundColor: hoveredComponent === component.id ? "rgba(182,255,114,0.15)" : "transparent",
-                        boxShadow: hoveredComponent === component.id ? "0 0 20px rgba(182,255,114,0.4)" : "none",
                       }}
                       aria-label={`View ${component.name}`}
                     >

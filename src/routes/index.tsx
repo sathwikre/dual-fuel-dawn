@@ -27,6 +27,87 @@ import {
   Zap,
 } from "lucide-react";
 
+// Custom hook for scroll reveal animation
+function useScrollReveal(options?: {
+  threshold?: number;
+  rootMargin?: string;
+  once?: boolean;
+}) {
+  const ref = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          if (options?.once) {
+            observer.unobserve(element);
+          }
+        } else if (!options?.once) {
+          setIsVisible(false);
+        }
+      },
+      {
+        threshold: options?.threshold ?? 0.1,
+        rootMargin: options?.rootMargin ?? "0px 0px -50px 0px",
+      }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [options]);
+
+  return { ref, isVisible };
+}
+
+// Reusable ScrollReveal component - non-intrusive wrapper
+function ScrollReveal({
+  children,
+  delay = 0,
+  className = "",
+  scale = false,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+  scale?: boolean;
+}) {
+  const { ref, isVisible } = useScrollReveal({ once: true });
+
+  return (
+    <div
+      ref={ref}
+      className={className}
+      data-reduce-motion="true"
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible
+          ? "translateY(0) scale(1)"
+          : `translateY(30px) scale(${scale ? 0.98 : 1})`,
+        transition: `opacity 0.6s ease ${delay}ms, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms`,
+      }}
+    >
+      <style>{`
+        @media (prefers-reduced-motion: reduce) {
+          [data-reduce-motion="true"] {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+          }
+        }
+      `}</style>
+      {children}
+    </div>
+  );
+}
+
 import { Button } from "@/components/ui/button";
 import { SavingsAssistant } from "@/components/SavingsAssistant/SavingsAssistant";
 import {
@@ -1040,8 +1121,12 @@ function OmSolutionsHome() {
         <section id="kit" className="bg-white">
           <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
             <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
-              <div><SectionLabel index="OM / 04">Primary product</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl text-gray-900">OM Solutions<br />Dual Fuel Kit</h2><p className="mt-6 max-w-xl text-base leading-relaxed text-gray-600 font-sans">A dual-fuel system allows a diesel engine to use diesel together with an alternate gaseous fuel, reducing diesel consumption while maintaining engine operation.</p><div className="mt-8 grid grid-cols-2 gap-3"><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Fuel mode</p><p className="mt-2 text-sm font-semibold text-gray-900">Dual=Diesel+NG</p></div><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Gas usage</p><p className="mt-2 text-sm font-semibold text-gray-900">up to 70%</p></div><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Control</p><p className="mt-2 text-sm font-semibold text-gray-900">Sensors + Actuators</p></div><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Existing genset</p><p className="mt-2 text-sm font-semibold text-gray-900">No replacement needed with Dual Fuel kit installation</p></div></div></div>
-              <div className="rounded-[12px] border border-gray-200 bg-gray-50 p-4 sm:p-6"><div className="flex items-center justify-between"><p className="font-mono text-xs uppercase tracking-[0.18em] text-gray-500">System schematic</p><span className="flex items-center gap-2 font-mono text-[10px] text-[#b6ff72]"><span className="size-2 rounded-full bg-[#b6ff72]" /> Interactive view</span></div><button type="button" className="mt-5 block w-full overflow-hidden rounded-[8px] bg-white" onClick={openSchematicViewer}><img src={schematicImage} alt="Dual fuel kit schematic" className="aspect-[1.75/1] w-full object-contain transition-transform duration-500 hover:scale-[1.02]" /></button><div className="mt-5 grid grid-cols-2 gap-x-5 gap-y-2 font-mono text-[10px] text-gray-600 sm:grid-cols-3"><span>· Air Filter</span><span>· Gas Air Mixer</span><span>· Gas Filter</span><span>· Pressure Regulator</span><span>· Gas Flow Control</span><span>· Knock Sensor</span><span>· EGT Sensor</span><span>· Control Panel</span><span>· Energy Meter</span></div></div>
+              <ScrollReveal>
+                <div><SectionLabel index="OM / 04">Primary product</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl text-gray-900">OM Solutions<br />Dual Fuel Kit</h2><p className="mt-6 max-w-xl text-base leading-relaxed text-gray-600 font-sans">A dual-fuel system allows a diesel engine to use diesel together with an alternate gaseous fuel, reducing diesel consumption while maintaining engine operation.</p><div className="mt-8 grid grid-cols-2 gap-3"><ScrollReveal delay={100}><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4 h-full flex flex-col"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Fuel mode</p><p className="mt-2 text-sm font-semibold text-gray-900">Dual=Diesel+NG</p></div></ScrollReveal><ScrollReveal delay={150}><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4 h-full flex flex-col"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Gas usage</p><p className="mt-2 text-sm font-semibold text-gray-900">up to 70%</p></div></ScrollReveal><ScrollReveal delay={200}><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4 h-full flex flex-col"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Control</p><p className="mt-2 text-sm font-semibold text-gray-900">Sensors + Actuators</p></div></ScrollReveal><ScrollReveal delay={250}><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4 h-full flex flex-col"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Existing genset</p><p className="mt-2 text-sm font-semibold text-gray-900">No replacement needed with Dual Fuel kit installation</p></div></ScrollReveal></div></div>
+              </ScrollReveal>
+              <ScrollReveal delay={300} scale>
+                <div className="rounded-[12px] border border-gray-200 bg-gray-50 p-4 sm:p-6"><div className="flex items-center justify-between"><p className="font-mono text-xs uppercase tracking-[0.18em] text-gray-500">System schematic</p><span className="flex items-center gap-2 font-mono text-[10px] text-[#b6ff72]"><span className="size-2 rounded-full bg-[#b6ff72]" /> Interactive view</span></div><button type="button" className="mt-5 block w-full overflow-hidden rounded-[8px] bg-white" onClick={openSchematicViewer}><img src={schematicImage} alt="Dual fuel kit schematic" className="aspect-[1.75/1] w-full object-contain transition-transform duration-500 hover:scale-[1.02]" /></button><div className="mt-5 grid grid-cols-2 gap-x-5 gap-y-2 font-mono text-[10px] text-gray-600 sm:grid-cols-3"><span>· Air Filter</span><span>· Gas Air Mixer</span><span>· Gas Filter</span><span>· Pressure Regulator</span><span>· Gas Flow Control</span><span>· Knock Sensor</span><span>· EGT Sensor</span><span>· Control Panel</span><span>· Energy Meter</span></div></div>
+              </ScrollReveal>
             </div>
           </div>
         </section>
@@ -1323,104 +1408,114 @@ function OmSolutionsHome() {
 
         <section id="gallery" className="bg-background">
           <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
-            <div className="flex flex-wrap items-end justify-between gap-5">
-              <div>
-                <SectionLabel index="OM / 17">Image gallery</SectionLabel>
-                <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">In the field.</h2>
+            <ScrollReveal>
+              <div className="flex flex-wrap items-end justify-between gap-5">
+                <div>
+                  <SectionLabel index="OM / 17">Image gallery</SectionLabel>
+                  <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">In the field.</h2>
+                </div>
+                <p className="max-w-sm text-sm leading-relaxed text-muted-foreground font-sans">Installations from the field. Click any image to view the full gallery.</p>
               </div>
-              <p className="max-w-sm text-sm leading-relaxed text-muted-foreground font-sans">Installations from the field. Click any image to view the full gallery.</p>
-            </div>
+            </ScrollReveal>
 
             {/* Installation galleries — 2×2 grid */}
             <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
 
               {/* TATA 125 kVA */}
-              <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer"
-                onClick={() => setAppGallery({ title: "Sai Sound Service (Amane Engineers), Waki (B)", images: [tataImage], index: 0 })}>
-                <div className="relative overflow-hidden aspect-[1.25/1]">
-                  <img src={tataImage} alt="TATA 125 kVA LPG installation" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
-                  <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
-                  <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">1 photo</span>
-                </div>
-                <div className="flex items-end justify-between gap-4 p-5">
-                  <div>
-                    <h3 className="text-xl font-bold">Sai Sound Service (Amane Engineers), Waki (B)</h3>
-                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground font-sans">
-                      <li><span className="font-medium text-foreground">Genset:</span> TATA 125 kVA CPCB-II</li>
-                      <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + LPG (LOT)</li>
-                      <li><span className="font-medium text-foreground">Operating load:</span> 60–85%</li>
-                    </ul>
+              <ScrollReveal delay={100} scale>
+                <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer h-full flex flex-col"
+                  onClick={() => setAppGallery({ title: "Sai Sound Service (Amane Engineers), Waki (B)", images: [tataImage], index: 0 })}>
+                  <div className="relative overflow-hidden aspect-[1.25/1]">
+                    <img src={tataImage} alt="TATA 125 kVA LPG installation" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+                    <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
+                    <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">1 photo</span>
                   </div>
-                  <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
-                </div>
-              </article>
+                  <div className="flex items-start justify-between gap-4 p-5 flex-1">
+                    <div>
+                      <h3 className="text-xl font-bold">Sai Sound Service (Amane Engineers), Waki (B)</h3>
+                      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground font-sans">
+                        <li><span className="font-medium text-foreground">Genset:</span> TATA 125 kVA CPCB-II</li>
+                        <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + LPG (LOT)</li>
+                        <li><span className="font-medium text-foreground">Operating load:</span> 60–85%</li>
+                      </ul>
+                    </div>
+                    <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
+                  </div>
+                </article>
+              </ScrollReveal>
 
               {/* KOEL 320 kVA */}
-              <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer"
-                onClick={() => setAppGallery({ title: "Akwel Automotive India Pvt Ltd", images: [koelImg1, koelImg2], index: 0 })}>
-                <div className="relative overflow-hidden aspect-[1.25/1]">
-                  <img src={koelImg1} alt="KOEL 320 kVA PNG installation" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
-                  <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
-                  <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">2 photos</span>
-                </div>
-                <div className="flex items-end justify-between gap-4 p-5">
-                  <div>
-                    <h3 className="text-xl font-bold">Akwel Automotive India Pvt Ltd</h3>
-                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground font-sans">
-                      <li><span className="font-medium text-foreground">Genset:</span> KOEL 320 kVA CPCB-II</li>
-                      <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + PNG (300 bar)</li>
-                      <li><span className="font-medium text-foreground">Operating load:</span> 50–80%</li>
-                      <li><span className="font-medium text-foreground">Annual Fuel Cost Saving:</span> ₹3.96 lakhs</li>
-                      <li><span className="font-medium text-foreground">Annual CO₂ Reduction:</span> 6.13 tonnes</li>
-                    </ul>
+              <ScrollReveal delay={150} scale>
+                <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer h-full flex flex-col"
+                  onClick={() => setAppGallery({ title: "Akwel Automotive India Pvt Ltd", images: [koelImg1, koelImg2], index: 0 })}>
+                  <div className="relative overflow-hidden aspect-[1.25/1]">
+                    <img src={koelImg1} alt="KOEL 320 kVA PNG installation" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+                    <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
+                    <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">2 photos</span>
                   </div>
-                  <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
-                </div>
-              </article>
+                  <div className="flex items-start justify-between gap-4 p-5 flex-1">
+                    <div>
+                      <h3 className="text-xl font-bold">Akwel Automotive India Pvt Ltd</h3>
+                      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground font-sans">
+                        <li><span className="font-medium text-foreground">Genset:</span> KOEL 320 kVA CPCB-II</li>
+                        <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + PNG (300 bar)</li>
+                        <li><span className="font-medium text-foreground">Operating load:</span> 50–80%</li>
+                        <li><span className="font-medium text-foreground">Annual Fuel Cost Saving:</span> ₹3.96 lakhs</li>
+                        <li><span className="font-medium text-foreground">Annual CO₂ Reduction:</span> 6.13 tonnes</li>
+                      </ul>
+                    </div>
+                    <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
+                  </div>
+                </article>
+              </ScrollReveal>
 
               {/* Birla Tisya */}
-              <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer"
-                onClick={() => setAppGallery({ title: "Birla Tisya, Bengaluru", images: [galleryBirla1, galleryBirla2, galleryBirla3, galleryBirla4, galleryBirla5, galleryBirla6, galleryBirla7, galleryBirla8], index: 0 })}>
-                <div className="relative overflow-hidden aspect-[1.25/1]">
-                  <img src={galleryBirla1} alt="Birla Tisya Bengaluru installation" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
-                  <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
-                  <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">8 photos</span>
-                </div>
-                <div className="flex items-end justify-between gap-4 p-5">
-                  <div>
-                    <h3 className="text-xl font-bold">Birla Tisya, Bengaluru</h3>
-                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground font-sans">
-                      <li><span className="font-medium text-foreground">Gensets:</span> FMTU 1010 kVA CPCB-IV+ × 2; Greaves 200 kVA CPCB-IV+</li>
-                      <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + PNG (1 bar)</li>
-                      <li><span className="font-medium text-foreground">Operating load:</span> 50–60%</li>
-                    </ul>
+              <ScrollReveal delay={200} scale>
+                <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer h-full flex flex-col"
+                  onClick={() => setAppGallery({ title: "Birla Tisya, Bengaluru", images: [galleryBirla1, galleryBirla2, galleryBirla3, galleryBirla4, galleryBirla5, galleryBirla6, galleryBirla7, galleryBirla8], index: 0 })}>
+                  <div className="relative overflow-hidden aspect-[1.25/1]">
+                    <img src={galleryBirla1} alt="Birla Tisya Bengaluru installation" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+                    <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
+                    <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">8 photos</span>
                   </div>
-                  <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
-                </div>
-              </article>
+                  <div className="flex items-start justify-between gap-4 p-5 flex-1">
+                    <div>
+                      <h3 className="text-xl font-bold">Birla Tisya, Bengaluru</h3>
+                      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground font-sans">
+                        <li><span className="font-medium text-foreground">Gensets:</span> FMTU 1010 kVA CPCB-IV+ × 2; Greaves 200 kVA CPCB-IV+</li>
+                        <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + PNG (1 bar)</li>
+                        <li><span className="font-medium text-foreground">Operating load:</span> 50–60%</li>
+                      </ul>
+                    </div>
+                    <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
+                  </div>
+                </article>
+              </ScrollReveal>
 
               {/* Nevatia Maxgen */}
-              <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer"
-                onClick={() => setAppGallery({ title: "Nevatia Steels & Alloys, Boisar, Tarapur", images: [nevatiaMg1, nevatiaMg2, nevatiaMg3, nevatiaMg4, nevatiaMg5, nevatiaMg6, nevatiaMg7, nevatiaMg8, nevatiaMg9], index: 0 })}>
-                <div className="relative overflow-hidden aspect-[1.25/1]">
-                  <img src={nevatiaMg1} alt="Nevatia Steel MaxGen Energy dual-fuel installation" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
-                  <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
-                  <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">9 photos</span>
-                </div>
-                <div className="flex items-end justify-between gap-4 p-5">
-                  <div>
-                    <h3 className="text-xl font-bold">Nevatia Steels & Alloys, Boisar, Tarapur</h3>
-                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground font-sans">
-                      <li><span className="font-medium text-foreground">Genset:</span> MTU 1000 kVA CPCB-II</li>
-                      <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + PNG (1 bar)</li>
-                      <li><span className="font-medium text-foreground">Operating load:</span> 60–80%</li>
-                       <li><span className="font-medium text-foreground">Annual Fuel Cost Saving:</span> ₹18.42 lakhs</li>
-                      <li><span className="font-medium text-foreground">Annual CO₂ Reduction:</span> 22.36 tonnes</li>
-                    </ul>
+              <ScrollReveal delay={250} scale>
+                <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer h-full flex flex-col"
+                  onClick={() => setAppGallery({ title: "Nevatia Steels & Alloys, Boisar, Tarapur", images: [nevatiaMg1, nevatiaMg2, nevatiaMg3, nevatiaMg4, nevatiaMg5, nevatiaMg6, nevatiaMg7, nevatiaMg8, nevatiaMg9], index: 0 })}>
+                  <div className="relative overflow-hidden aspect-[1.25/1]">
+                    <img src={nevatiaMg1} alt="Nevatia Steel MaxGen Energy dual-fuel installation" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+                    <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
+                    <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">9 photos</span>
                   </div>
-                  <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
-                </div>
-              </article>
+                  <div className="flex items-start justify-between gap-4 p-5 flex-1">
+                    <div>
+                      <h3 className="text-xl font-bold">Nevatia Steels & Alloys, Boisar, Tarapur</h3>
+                      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground font-sans">
+                        <li><span className="font-medium text-foreground">Genset:</span> MTU 1000 kVA CPCB-II</li>
+                        <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + PNG (1 bar)</li>
+                        <li><span className="font-medium text-foreground">Operating load:</span> 60–80%</li>
+                        <li><span className="font-medium text-foreground">Annual Fuel Cost Saving:</span> ₹18.42 lakhs</li>
+                        <li><span className="font-medium text-foreground">Annual CO₂ Reduction:</span> 22.36 tonnes</li>
+                      </ul>
+                    </div>
+                    <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
+                  </div>
+                </article>
+              </ScrollReveal>
 
             </div>
           </div>
@@ -1459,50 +1554,60 @@ function OmSolutionsHome() {
         {/* ── Customer Stories / News ── */}
         <section id="field" className="border-t border-border bg-background">
           <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
-
-            <h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Memories</h2>
+            <ScrollReveal>
+              <h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Memories</h2>
+            </ScrollReveal>
 
             {/* Category tabs */}
-            <div className="mt-6 flex flex-wrap gap-6 border-b border-border pb-4">
-              {["All", "Installations", "Generator", "Marine"].map((tab, i) => (
-                <span key={tab} className={`cursor-default pb-4 text-sm font-medium transition-colors ${i === 0 ? "-mb-px border-b-2 border-foreground text-foreground" : "text-muted-foreground hover:text-foreground"}`}>{tab}</span>
-              ))}
-            </div>
+            <ScrollReveal delay={100}>
+              <div className="mt-6 flex flex-wrap gap-6 border-b border-border pb-4">
+                {["All", "Installations", "Generator", "Marine"].map((tab, i) => (
+                  <span key={tab} className={`cursor-default pb-4 text-sm font-medium transition-colors ${i === 0 ? "-mb-px border-b-2 border-foreground text-foreground" : "text-muted-foreground hover:text-foreground"}`}>{tab}</span>
+                ))}
+              </div>
+            </ScrollReveal>
 
             {/* News grid */}
             <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
 
-              <article className="group cursor-default">
-                <div className="overflow-hidden">
-                  <img
-                    src={akwelImage}
-                    alt="OM Solutions team with client at Akwel Automotive Pune handover"
-                    className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
-                  />
-                </div>
-                <h3 className="mt-4 text-base font-semibold leading-snug">OM Solutions hands over a successfully commissioned KOEL 320 kVA PNG dual-fuel system to the team at Akwel Automotive, Pune — 65% diesel replaced from day one.</h3>              </article>
+              <ScrollReveal delay={150} scale>
+                <article className="group cursor-default">
+                  <div className="overflow-hidden">
+                    <img
+                      src={akwelImage}
+                      alt="OM Solutions team with client at Akwel Automotive Pune handover"
+                      className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+                    />
+                  </div>
+                  <h3 className="mt-4 text-base font-semibold leading-snug">OM Solutions hands over a successfully commissioned KOEL 320 kVA PNG dual-fuel system to the team at Akwel Automotive, Pune — 65% diesel replaced from day one.</h3>
+                </article>
+              </ScrollReveal>
 
-              <article className="group cursor-default">
-                <div className="overflow-hidden">
-                  <img
-                    src={birlaNewsImage}
-                    alt="Client team at Birla Tisya Bengaluru celebrating dual-fuel conversion"
-                    className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
-                  />
-                </div>
-                <h3 className="mt-4 text-base font-semibold leading-snug">Om Solutions, installed 3 nos of Dual Fuel kits at Birla Tisya, Bengaluru. The gensets total capacity rated 2.2 MVA are ready to run on Dual Fuel with Diesel & Piped Natural Gas.</h3>
-              </article>
+              <ScrollReveal delay={200} scale>
+                <article className="group cursor-default">
+                  <div className="overflow-hidden">
+                    <img
+                      src={birlaNewsImage}
+                      alt="Client team at Birla Tisya Bengaluru celebrating dual-fuel conversion"
+                      className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+                    />
+                  </div>
+                  <h3 className="mt-4 text-base font-semibold leading-snug">Om Solutions, installed 3 nos of Dual Fuel kits at Birla Tisya, Bengaluru. The gensets total capacity rated 2.2 MVA are ready to run on Dual Fuel with Diesel & Piped Natural Gas.</h3>
+                </article>
+              </ScrollReveal>
 
-              <article className="group cursor-default">
-                <div className="overflow-hidden">
-                  <img
-                    src={ammeniEngineImage}
-                    alt="OM Solutions founder with client discussing dual-fuel kit"
-                    className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
-                  />
-                </div>
-                <h3 className="mt-4 text-base font-semibold leading-snug">OM Solutions successfully installs Dual Fuel kit based on LPG for TATA 125 kVA at Amane Engineers — 45% diesel replaced at 75–80% load.</h3>
-              </article>
+              <ScrollReveal delay={250} scale>
+                <article className="group cursor-default">
+                  <div className="overflow-hidden">
+                    <img
+                      src={ammeniEngineImage}
+                      alt="OM Solutions founder with client discussing dual-fuel kit"
+                      className="aspect-[1.5/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+                    />
+                  </div>
+                  <h3 className="mt-4 text-base font-semibold leading-snug">OM Solutions successfully installs Dual Fuel kit based on LPG for TATA 125 kVA at Amane Engineers — 45% diesel replaced at 75–80% load.</h3>
+                </article>
+              </ScrollReveal>
 
             </div>
 
@@ -1513,41 +1618,44 @@ function OmSolutionsHome() {
         {/* Team section */}
         <section id="team" className="border-b border-border bg-background">
           <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
-            <div className="mb-12">
-              <SectionLabel index="OM / 03">Team</SectionLabel>
-              <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">TEAM : OM SOLUTIONS</h2>
-              <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">Meet the people behind the technology.</p>
-            </div>
+            <ScrollReveal>
+              <div className="mb-12">
+                <SectionLabel index="OM / 03">Team</SectionLabel>
+                <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">TEAM : OM SOLUTIONS</h2>
+                <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">Meet the people behind the technology.</p>
+              </div>
+            </ScrollReveal>
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {teamMembers.map((member) => (
-                <button
-                  key={member.id}
-                  type="button"
-                  onClick={() => {
-                    setSelectedTeamMember(member);
-                    setTeamModalOpen(true);
-                  }}
-                  className="group relative rounded-[12px] border border-border bg-secondary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                  aria-label={`View profile of ${member.name}`}
-                >
-                  <div className="relative aspect-[3/4] overflow-hidden">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                    <div className="absolute inset-0 flex items-end justify-center p-4">
-                      <p className="text-base font-semibold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                        VIEW PROFILE →
-                      </p>
+              {teamMembers.map((member, index) => (
+                <ScrollReveal key={member.id} delay={index * 100}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedTeamMember(member);
+                      setTeamModalOpen(true);
+                    }}
+                    className="group relative rounded-[12px] border border-border bg-secondary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                    aria-label={`View profile of ${member.name}`}
+                  >
+                    <div className="relative aspect-[3/4] overflow-hidden">
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                      <div className="absolute inset-0 flex items-end justify-center p-4">
+                        <p className="text-base font-semibold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                          VIEW PROFILE →
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="p-4">
-                    <p className="text-sm font-semibold text-foreground">{member.name}</p>
-                  </div>
-                </button>
+                    <div className="p-4">
+                      <p className="text-sm font-semibold text-foreground">{member.name}</p>
+                    </div>
+                  </button>
+                </ScrollReveal>
               ))}
             </div>
           </div>

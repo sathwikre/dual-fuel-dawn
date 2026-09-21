@@ -225,21 +225,21 @@ const schematicComponents: SchematicComponent[] = [
     id: "gas-air-mixer",
     name: "Gas Air Mixer",
     image: airGasMixerComponent,
-    hotspot: { x: 25, y: 50, width: 14, height: 12 },
+    hotspot: { x: 27, y: 55, width: 14, height: 10 },
   },
   
   {
     id: "gas-pressure-regulator",
     name: "Gas Pressure Regulator",
     image: lpgPressureRegulatorComponent,
-    hotspot: { x: 63, y: 45, width: 12, height: 12 },
+    hotspot: { x: 63, y: 45, width: 12, height: 10 },
   },
  
   {
     id: "gas-pressure-switch",
     name: "Gas Pressure Switch",
     image: gasPressureSwitchComponent,
-    hotspot: { x: 48, y: 45, width: 10, height: 10 },
+    hotspot: { x: 45, y: 45, width: 13, height: 10 },
   },
   {
     id: "gas-leak-detector",
@@ -253,26 +253,33 @@ const schematicComponents: SchematicComponent[] = [
     id: "egt-sensor",
     name: "EGT Sensor",
     image: exhaustTemperatureSensorsComponent,
-    hotspot: { x: 5, y: 70, width: 10, height: 10 },
+    hotspot: { x: 5, y: 70, width: 17, height: 10 },
   },
   {
     id: "knock-sensor",
     name: "Knock Sensor",
     image: knockSensorComponent,
     secondaryImages: [{ label: "Installation View", image: knockSensorMountingComponent }],
-    hotspot: { x: 25, y: 70, width: 10, height: 10 },
+    hotspot: { x: 25, y: 72, width: 12, height: 10 },
+  },
+   {
+    id: "knock-sensor",
+    name: "Knock Sensor",
+    image: knockSensorComponent,
+    secondaryImages: [{ label: "Installation View", image: knockSensorMountingComponent }],
+    hotspot: { x: 27, y: 47, width: 12, height: 10 },
   },
   {
     id: "egt-sensor",
     name: "EGT Sensor",
     image: exhaustTemperatureSensorsComponent,
-    hotspot: { x: 5, y: 45, width: 10, height: 10 },
+    hotspot: { x: 5, y: 45, width: 17, height: 10 },
   },
   {
     id: "control-panel",
     name: "Control Panel",
     image: controlPanelComponent,
-    hotspot: { x: 65, y: 82, width: 18, height: 12 },
+    hotspot: { x: 63, y: 55, width: 18, height: 35 },
   },
   {
     id: "energy-meter",

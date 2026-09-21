@@ -1423,10 +1423,10 @@ function OmSolutionsHome() {
 
               {/* TATA 125 kVA */}
               <ScrollReveal delay={100} scale>
-                <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer h-full flex flex-col"
+                <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer h-full flex flex-col transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.02]"
                   onClick={() => setAppGallery({ title: "Sai Sound Service (Amane Engineers), Waki (B)", images: [tataImage], index: 0 })}>
                   <div className="relative overflow-hidden aspect-[1.25/1]">
-                    <img src={tataImage} alt="TATA 125 kVA LPG installation" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+                    <img src={tataImage} alt="TATA 125 kVA LPG installation" className="h-full w-full object-cover" />
                     <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
                     <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">1 photo</span>
                   </div>
@@ -1446,10 +1446,10 @@ function OmSolutionsHome() {
 
               {/* KOEL 320 kVA */}
               <ScrollReveal delay={150} scale>
-                <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer h-full flex flex-col"
+                <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer h-full flex flex-col transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.02]"
                   onClick={() => setAppGallery({ title: "Akwel Automotive India Pvt Ltd", images: [koelImg1, koelImg2], index: 0 })}>
                   <div className="relative overflow-hidden aspect-[1.25/1]">
-                    <img src={koelImg1} alt="KOEL 320 kVA PNG installation" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+                    <img src={koelImg1} alt="KOEL 320 kVA PNG installation" className="h-full w-full object-cover" />
                     <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
                     <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">2 photos</span>
                   </div>
@@ -1471,10 +1471,10 @@ function OmSolutionsHome() {
 
               {/* Birla Tisya */}
               <ScrollReveal delay={200} scale>
-                <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer h-full flex flex-col"
+                <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer h-full flex flex-col transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.02]"
                   onClick={() => setAppGallery({ title: "Birla Tisya, Bengaluru", images: [galleryBirla1, galleryBirla2, galleryBirla3, galleryBirla4, galleryBirla5, galleryBirla6, galleryBirla7, galleryBirla8], index: 0 })}>
                   <div className="relative overflow-hidden aspect-[1.25/1]">
-                    <img src={galleryBirla1} alt="Birla Tisya Bengaluru installation" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+                    <img src={galleryBirla1} alt="Birla Tisya Bengaluru installation" className="h-full w-full object-cover" />
                     <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
                     <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">8 photos</span>
                   </div>
@@ -1494,10 +1494,10 @@ function OmSolutionsHome() {
 
               {/* Nevatia Maxgen */}
               <ScrollReveal delay={250} scale>
-                <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer h-full flex flex-col"
+                <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer h-full flex flex-col transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.02]"
                   onClick={() => setAppGallery({ title: "Nevatia Steels & Alloys, Boisar, Tarapur", images: [nevatiaMg1, nevatiaMg2, nevatiaMg3, nevatiaMg4, nevatiaMg5, nevatiaMg6, nevatiaMg7, nevatiaMg8, nevatiaMg9], index: 0 })}>
                   <div className="relative overflow-hidden aspect-[1.25/1]">
-                    <img src={nevatiaMg1} alt="Nevatia Steel MaxGen Energy dual-fuel installation" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+                    <img src={nevatiaMg1} alt="Nevatia Steel MaxGen Energy dual-fuel installation" className="h-full w-full object-cover" />
                     <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
                     <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">9 photos</span>
                   </div>
@@ -1535,9 +1535,9 @@ function OmSolutionsHome() {
                 { title: "Air Compressor", desc: "Field installation for air-compressor applications.", images: [aircomp7,aircomp1, aircomp2, aircomp3, aircomp4, aircomp5, aircomp6] },
                 { title: "Marine Propulsion", desc: "Marine propulsion with dual-fuel conversion.", images: [marine1, marine2] },
               ] as { title: string; desc: string; images: string[] }[]).map((app) => (
-                <article key={app.title} className="group cursor-pointer overflow-hidden rounded-[11px] border border-border bg-background" onClick={() => setAppGallery({ title: app.title, images: app.images, index: 0 })}>
+                <article key={app.title} className="group cursor-pointer overflow-hidden rounded-[11px] border border-border bg-background transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.02]" onClick={() => setAppGallery({ title: app.title, images: app.images, index: 0 })}>
                   <div className="relative overflow-hidden aspect-[1.25/1]">
-                    <img src={app.images[0]} alt={app.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+                    <img src={app.images[0]} alt={app.title} className="h-full w-full object-cover" />
                     <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/30" />
                     <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">{app.images.length} photos</span>
                   </div>

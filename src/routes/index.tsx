@@ -194,7 +194,7 @@ export const Route = createFileRoute("/")({
 const navItems = [
   ["Home", "home"],
   ["Technology", "technology"],
-  ["About", "about"],
+  ["About", "team"],
   ["Regulations", "regulations"],
   ["Gallery", "gallery"],
   ["News", "field"],
@@ -1511,7 +1511,7 @@ function OmSolutionsHome() {
         </section>
 
         {/* Team section */}
-        <section className="border-b border-border bg-background">
+        <section id="team" className="border-b border-border bg-background">
           <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
             <div className="mb-12">
               <SectionLabel index="OM / 03">Team</SectionLabel>

@@ -553,9 +553,9 @@ const galleryItems = [
 ] as const;
 
 const heroQuotes = [
-  "Our purpose is to clean and decarbonise the air.",
+  "Our purpose is to clean and decarbonise the air",
   "Dual fuel kits — reducing CO₂ & PM emissions while lowering diesel consumption",
-  "Fuel flexibility is not a luxury. It is a necessity."
+  "Fuel flexibility is not a luxury It is a necessity."
 ] as const;
 
 function RotatingQuote() {

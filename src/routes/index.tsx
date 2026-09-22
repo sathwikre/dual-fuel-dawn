@@ -1207,7 +1207,9 @@ function OmSolutionsHome() {
           {/* Animated hero background */}
           <HeroBackground />
           {/* Dark gradient overlay so text stays readable */}
-          <div className="absolute inset-0 z-[2]" style={{ background: "linear-gradient(90deg,rgba(7,18,12,.28) 0%,rgba(8,20,14,.14) 55%,rgba(8,20,14,.05)), linear-gradient(0deg,rgba(7,18,12,.28),transparent 46%)" }} />
+          <div className="absolute inset-0 z-[2]" style={{ background: "linear-gradient(90deg,rgba(7,18,12,.12) 0%,rgba(8,20,14,.08) 55%,rgba(8,20,14,.05)), linear-gradient(0deg,rgba(7,18,12,.12),transparent 46%)" }} />
+          {/* Subtle green brand tint overlay */}
+          <div className="absolute inset-0 z-[2] bg-[#b6ff72]/10" />
           <div className="relative z-[3] mx-auto flex min-h-[100svh] w-full max-w-[1440px] flex-col items-center justify-end px-5 pt-[85px] pb-32 text-center lg:px-16">
             <div className="max-w-4xl rise-in min-h-[clamp(80px,12vw,160px)] flex items-center justify-center">
               <h1 className="mt-0 text-[clamp(32px,4.5vw,64px)] font-light leading-[1.1] tracking-[-0.02em] text-white">

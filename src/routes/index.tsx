@@ -4,11 +4,13 @@ import {
   ArrowDownRight,
   ArrowRight,
   ArrowLeft,
+  AlertTriangle,
   Check,
   ChevronDown,
   CircleGauge,
   Cog,
   Factory,
+  FileText,
   Fuel,
   Gauge,
   Instagram,
@@ -894,6 +896,7 @@ function ImageButton({ src, alt, caption, onClick, className = "" }: { src: stri
 function OmSolutionsHome() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [tickerVisible, setTickerVisible] = useState(false);
   const [techDrawerOpen, setTechDrawerOpen] = useState(false);
   const [appGallery, setAppGallery] = useState<{ title: string; images: string[]; index: number } | null>(null);
   const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
@@ -947,9 +950,31 @@ function OmSolutionsHome() {
   }, [schematicViewerOpen, selectedComponent]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 28);
+    let animationFrame: number | null = null;
+
+    const updateScrollState = () => {
+      const scrollPosition = window.scrollY;
+      const nextScrolled = scrollPosition > 28;
+      const nextTickerVisible = scrollPosition > 120;
+
+      setScrolled((current) => (current === nextScrolled ? current : nextScrolled));
+      setTickerVisible((current) => (current === nextTickerVisible ? current : nextTickerVisible));
+      animationFrame = null;
+    };
+
+    const onScroll = () => {
+      if (animationFrame === null) {
+        animationFrame = window.requestAnimationFrame(updateScrollState);
+      }
+    };
+
+    updateScrollState();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (animationFrame !== null) window.cancelAnimationFrame(animationFrame);
+    };
   }, []);
 
   useEffect(() => {
@@ -1202,6 +1227,64 @@ function OmSolutionsHome() {
         )}
       </header>
 
+      {/* Announcement ticker */}
+      <div
+        className={`fixed inset-x-0 top-[72px] z-[4] h-[46px] overflow-hidden border-b border-[#b6ff72]/20 bg-[#07170f]/95 shadow-[0_8px_24px_rgba(0,0,0,0.16)] backdrop-blur-md transition-[transform,opacity] duration-[400ms] ease-out sm:h-[54px] ${tickerVisible ? 'translate-y-0 opacity-100' : '-translate-y-full pointer-events-none opacity-0'}`}
+        role="region"
+        aria-label="Latest announcements"
+      >
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-[#07170f] to-transparent sm:w-20" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-[#07170f] to-transparent sm:w-20" />
+        <div className="announcement-track flex h-full w-max items-center whitespace-nowrap">
+          {[0, 1].map((copy) => (
+            <div key={copy} className="flex shrink-0 items-center" aria-hidden={copy === 1}>
+              <div className="flex items-center gap-2 px-5 text-xs text-white/85 sm:gap-3 sm:px-8 sm:text-sm">
+                <span className="grid size-5 place-items-center rounded-full border border-[#b6ff72]/35 bg-[#b6ff72]/10 sm:size-6">
+                  <Leaf className="size-3 text-[#b6ff72] sm:size-3.5" />
+                </span>
+                <span className="font-semibold tracking-[0.02em]">Dual Fuel kits for diesel engines</span>
+              </div>
+              <span className="size-1.5 shrink-0 rounded-full bg-[#b6ff72] shadow-[0_0_10px_#b6ff72]" />
+              <div className="flex items-center gap-2 px-5 text-xs text-white/85 sm:gap-3 sm:px-8 sm:text-sm">
+                <span className="font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-[#b6ff72] sm:text-[10px]">Regulatory update</span>
+                <FileText className="size-3 shrink-0 text-[#b6ff72] sm:size-4" />
+                <span>Diesel gensets are prohibited in the NCR from 1 October 2023 <span className="text-white/50">· CAQM Direction No. 73</span></span>
+              </div>
+              <span className="size-1.5 shrink-0 rounded-full bg-[#b6ff72] shadow-[0_0_10px_#b6ff72]" />
+              <div className="flex items-center gap-2 px-5 text-xs text-white/85 sm:gap-3 sm:px-8 sm:text-sm">
+                <AlertTriangle className="size-3 shrink-0 text-[#b6ff72] sm:size-4" />
+                <span>HSPCB action: 50 diesel gensets sealed in Faridabad for CAQM violations</span>
+              </div>
+              <span className="size-1.5 shrink-0 rounded-full bg-[#b6ff72] shadow-[0_0_10px_#b6ff72]" />
+              <div className="flex items-center gap-2 px-5 text-xs font-bold uppercase tracking-[0.1em] text-[#b6ff72] sm:gap-3 sm:px-8 sm:text-sm">
+                <Zap className="size-3 shrink-0 sm:size-4" />
+                <span>Switch to Dual Fuel</span>
+                <ArrowDownRight className="size-3 sm:size-4" />
+              </div>
+              <span className="size-1.5 shrink-0 rounded-full bg-[#b6ff72] shadow-[0_0_10px_#b6ff72]" />
+            </div>
+          ))}
+        </div>
+        <style>{`
+          .announcement-track {
+            animation: announcement-marquee 52s linear infinite;
+            will-change: transform;
+          }
+          .announcement-track:hover {
+            animation-play-state: paused;
+          }
+          @keyframes announcement-marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .announcement-track {
+              animation: none;
+            }
+          }
+        `}</style>
+      </div>
+
       <main>
         <section id="home" className="relative isolate min-h-[100svh] overflow-hidden bg-panel">
           {/* Animated hero background */}
@@ -1210,7 +1293,7 @@ function OmSolutionsHome() {
           <div className="absolute inset-0 z-[2]" style={{ background: "linear-gradient(90deg,rgba(7,18,12,.12) 0%,rgba(8,20,14,.08) 55%,rgba(8,20,14,.05)), linear-gradient(0deg,rgba(7,18,12,.12),transparent 46%)" }} />
           {/* Subtle green brand tint overlay */}
           <div className="absolute inset-0 z-[2] bg-[#b6ff72]/10" />
-          <div className="relative z-[3] mx-auto flex min-h-[100svh] w-full max-w-[1440px] flex-col items-center justify-end px-5 pt-[85px] pb-32 text-center lg:px-16">
+          <div className={`relative z-[3] mx-auto flex min-h-[100svh] w-full max-w-[1440px] flex-col items-center justify-end px-5 pb-32 text-center lg:px-16 transition-all duration-[350ms] ease ${navScrolled ? 'pt-[116px] lg:pt-[124px]' : 'pt-[129px] lg:pt-[137px]'}`}>
             <div className="max-w-4xl rise-in min-h-[clamp(80px,12vw,160px)] flex items-center justify-center">
               <h1 className="mt-0 text-[clamp(32px,4.5vw,64px)] font-light leading-[1.1] tracking-[-0.02em] text-white">
                 <RotatingQuote />

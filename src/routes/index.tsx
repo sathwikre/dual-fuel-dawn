@@ -566,7 +566,11 @@ function RotatingQuote() {
   const charIndexRef = useRef(0);
   const currentIndexRef = useRef(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    setPrefersReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
 
   const currentQuote = heroQuotes[currentIndexRef.current] || heroQuotes[0];
 
@@ -627,7 +631,7 @@ function RotatingQuote() {
         clearTimeout(timerRef.current);
       }
     };
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, currentQuote]);
 
   // For Quote 2, make "DUAL FUEL KITS" more prominent
   if (currentIndexRef.current === 1) {

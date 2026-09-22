@@ -1775,7 +1775,7 @@ function OmSolutionsHome() {
               </div>
             </ScrollReveal>
 
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-18 sm:grid-cols-3 lg:grid-cols-5">
               {teamMembers.map((member, index) => (
                 <ScrollReveal key={member.id} delay={index * 100}>
                   <button
@@ -1800,8 +1800,8 @@ function OmSolutionsHome() {
                         </p>
                       </div>
                     </div>
-                    <div className="p-4">
-                      <p className="text-sm font-semibold text-foreground">{member.name}</p>
+                    <div className="p-3">
+                      <p className="text-xs font-semibold text-foreground">{member.name}</p>
                     </div>
                   </button>
                 </ScrollReveal>

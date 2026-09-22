@@ -1246,12 +1246,8 @@ function OmSolutionsHome() {
         )}
       </header>
 
-      {/* Announcement ticker */}
-      <div
-        className={`fixed inset-x-0 top-[72px] z-[4] h-[46px] overflow-hidden border-b border-[#b6ff72]/20 bg-[#07170f]/95 shadow-[0_8px_24px_rgba(0,0,0,0.16)] backdrop-blur-md transition-[transform,opacity] duration-[400ms] ease-out sm:h-[54px] ${tickerVisible ? 'translate-y-0 opacity-100' : '-translate-y-full pointer-events-none opacity-0'}`}
-        role="region"
-        aria-label="Latest announcements"
-      >
+      {/* Announcement Ticker */}
+      <div className={`fixed inset-x-0 z-[4] h-[44px] overflow-hidden bg-[#0d1f16] border-b border-[#b6ff72]/20 transition-all duration-[350ms] ease sm:h-[52px] ${navScrolled ? 'top-[72px]' : 'top-[85px]'}`}>
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-[#07170f] to-transparent sm:w-20" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-[#07170f] to-transparent sm:w-20" />
         <div className="announcement-track flex h-full w-max items-center whitespace-nowrap">

@@ -1629,12 +1629,14 @@ function OmSolutionsHome() {
         </section>
 
         {/* Other applications section */}
-        <section id="other-applications" className="bg-secondary/40">
-          <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
-            <SectionLabel index="OM / 15">Other applications</SectionLabel>
+        <section id="other-applications" className="relative overflow-hidden bg-panel text-background">
+          <img src={generatorImage} alt="OM Solutions generator installation" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-20" />
+          <div className="absolute inset-0 bg-panel/90" />
+          <div className="relative mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
+            <SectionLabel index="OM / 15" dark>Other applications</SectionLabel>
             <div className="mt-5 flex flex-wrap items-end justify-between gap-5">
-              <h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl">Applications other than gensets.</h2>
-              <p className="max-w-md text-sm leading-relaxed text-muted-foreground">Click any application to view all installation images.</p>
+              <h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl text-background">Applications other than gensets.</h2>
+              <p className="max-w-md text-sm leading-relaxed text-background/70">Click any application to view all installation images.</p>
             </div>
             <div className="mt-12 grid gap-5 md:grid-cols-3">
               {([
@@ -1642,14 +1644,14 @@ function OmSolutionsHome() {
                 { title: "Air Compressor", desc: "Field installation for air-compressor applications.", images: [aircomp7,aircomp1, aircomp2, aircomp3, aircomp4, aircomp5, aircomp6] },
                 { title: "Marine Propulsion", desc: "Marine propulsion with dual-fuel conversion.", images: [marine1, marine2] },
               ] as { title: string; desc: string; images: string[] }[]).map((app) => (
-                <article key={app.title} className="group cursor-pointer overflow-hidden rounded-[11px] border border-border bg-background transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.02]" onClick={() => setAppGallery({ title: app.title, images: app.images, index: 0 })}>
+                <article key={app.title} className="group cursor-pointer overflow-hidden rounded-[11px] border border-background/15 bg-background/5 backdrop-blur-sm transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.02]" onClick={() => setAppGallery({ title: app.title, images: app.images, index: 0 })}>
                   <div className="relative overflow-hidden aspect-[1.25/1]">
                     <img src={app.images[0]} alt={app.title} className="h-full w-full object-cover" />
                     <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/30" />
                     <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">{app.images.length} photos</span>
                   </div>
                   <div className="flex items-end justify-between gap-4 p-5">
-                    <div><h3 className="text-xl font-bold">{app.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{app.desc}</p></div>
+                    <div><h3 className="text-xl font-bold text-background">{app.title}</h3><p className="mt-2 text-sm leading-relaxed text-background/70">{app.desc}</p></div>
                     <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
                   </div>
                 </article>

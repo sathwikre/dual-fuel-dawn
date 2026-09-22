@@ -555,7 +555,7 @@ const galleryItems = [
 const heroQuotes = [
   "Our purpose is to clean and decarbonise the air",
   "Dual fuel kits — reducing CO₂ & PM emissions while lowering diesel consumption",
-  "Fuel flexibility is not a luxury It is a necessity."
+  "Fuel flexibility is not a luxury It is a necessity"
 ] as const;
 
 function RotatingQuote() {
@@ -662,7 +662,26 @@ function RotatingQuote() {
     );
   }
 
-  // For Quote 3, display as is
+  // For Quote 3, split into two lines
+  if (currentIndexRef.current === 2) {
+    const breakIdx = currentQuote!.indexOf(" It is a necessity");
+    const line1 = displayedText.slice(0, Math.min(displayedText.length, breakIdx));
+    const line2 = displayedText.length > breakIdx ? displayedText.slice(breakIdx) : "";
+    const isComplete = displayedText === currentQuote;
+
+    return (
+      <span className="inline-block">
+        {line1}
+        {displayedText.length >= breakIdx && <br />}
+        {line2}
+        {!isComplete && !prefersReducedMotion && (
+          <span className="inline-block w-[2px] h-[0.85em] bg-white align-middle ml-1 animate-pulse" />
+        )}
+      </span>
+    );
+  }
+
+  // Default display for other quotes
   const isComplete = displayedText === currentQuote;
   return (
     <span className="inline-block">

@@ -1257,24 +1257,22 @@ function OmSolutionsHome() {
                 <span className="grid size-5 place-items-center rounded-full border border-[#b6ff72]/35 bg-[#b6ff72]/10 sm:size-6">
                   <Leaf className="size-3 text-[#b6ff72] sm:size-3.5" />
                 </span>
-                <span className="font-semibold tracking-[0.02em]">Dual Fuel kits for diesel engines</span>
+                <span className="font-semibold tracking-[0.02em]">Dual Fuel — Lower Diesel Consumption. Cleaner Engine Performance.</span>
               </div>
               <span className="size-1.5 shrink-0 rounded-full bg-[#b6ff72] shadow-[0_0_10px_#b6ff72]" />
               <div className="flex items-center gap-2 px-5 text-xs text-white/85 sm:gap-3 sm:px-8 sm:text-sm">
-                <span className="font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-[#b6ff72] sm:text-[10px]">Regulatory update</span>
-                <FileText className="size-3 shrink-0 text-[#b6ff72] sm:size-4" />
-                <span>Diesel gensets are prohibited in the NCR from 1 October 2023 <span className="text-white/50">· CAQM Direction No. 73</span></span>
+                <Zap className="size-3 shrink-0 text-[#b6ff72] sm:size-4" />
+                <span>Upgrade Your Diesel Engine to Dual Fuel Operation</span>
               </div>
               <span className="size-1.5 shrink-0 rounded-full bg-[#b6ff72] shadow-[0_0_10px_#b6ff72]" />
               <div className="flex items-center gap-2 px-5 text-xs text-white/85 sm:gap-3 sm:px-8 sm:text-sm">
-                <AlertTriangle className="size-3 shrink-0 text-[#b6ff72] sm:size-4" />
-                <span>HSPCB action: 50 diesel gensets sealed in Faridabad for CAQM violations</span>
+                <span className="font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-[#b6ff72] sm:text-[10px]">Efficiency</span>
+                <span>Up to 70% gaseous fuel usage with dual-fuel operation</span>
               </div>
               <span className="size-1.5 shrink-0 rounded-full bg-[#b6ff72] shadow-[0_0_10px_#b6ff72]" />
               <div className="flex items-center gap-2 px-5 text-xs font-bold uppercase tracking-[0.1em] text-[#b6ff72] sm:gap-3 sm:px-8 sm:text-sm">
-                <Zap className="size-3 shrink-0 sm:size-4" />
-                <span>Switch to Dual Fuel</span>
-                <ArrowDownRight className="size-3 sm:size-4" />
+                <ArrowDownRight className="size-3 shrink-0 sm:size-4" />
+                <span>Switch to Dual Fuel. Reduce Diesel Dependency.</span>
               </div>
               <span className="size-1.5 shrink-0 rounded-full bg-[#b6ff72] shadow-[0_0_10px_#b6ff72]" />
             </div>

@@ -123,7 +123,7 @@ import {
 
 import logoImage from "@/assets/ChatGPT Image Sep 15, 2026, 06_07_17 PM.png";
 import founderImage from "@/assets/img-006.jpg";
-import schematicImage from "@/assets/WhatsApp Image 2026-09-20 at 6.51.25 PM.jpeg";
+import schematicImage from "@/assets/duelfule.png";
 import systemImage from "@/assets/gg.jpeg";
 import gasHandlingImage from "@/assets/GAS handling system.jpeg";
 import exhaustTemperatureSensorsImage from "@/assets/Exhaust Temperature Sensors.jpeg";
@@ -310,6 +310,12 @@ type SchematicComponent = {
 };
 
 const schematicComponents: SchematicComponent[] = [
+  {
+    id: "gas-handling-system",
+    name: "Gas Handling System",
+    image: gasHandlingImage,
+    hotspot: { x: 27, y: 34, width: 70, height: 10 },
+  },
   
   {
     id: "gas-air-mixer",
@@ -1955,7 +1961,7 @@ function OmSolutionsHome() {
                       }}
                       onMouseEnter={() => setHoveredComponent(component.id)}
                       onMouseLeave={() => setHoveredComponent(null)}
-                      className="absolute cursor-pointer"
+                      className="absolute cursor-pointer focus-visible:outline-none"
                       style={{
                         left: `${component.hotspot.x}%`,
                         top: `${component.hotspot.y}%`,

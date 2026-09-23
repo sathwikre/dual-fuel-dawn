@@ -1315,7 +1315,7 @@ function OmSolutionsHome() {
                 href="#kit"
                 className="inline-flex h-12 items-center gap-2 border border-white/35 bg-white/5 px-7 text-[11px] font-semibold uppercase tracking-[0.12em] text-white backdrop-blur-sm transition-all duration-300 hover:border-signal/50 hover:bg-white/10 hover:text-signal"
               >
-                View Dual Fuel Kit
+                Dual Fuel Kit
                 <ArrowDownRight className="size-3.5" />
               </a>
             </div>

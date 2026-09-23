@@ -179,6 +179,176 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ── Hero atmosphere overlays ── */
+@utility hero-grid-overlay {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--color-signal) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--color-signal) 8%, transparent) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 75%);
+  opacity: 0.35;
+}
+
+@utility hero-scan-lines {
+  opacity: 0.04;
+  background: repeating-linear-gradient(
+    110deg,
+    transparent 0 24px,
+    color-mix(in oklab, var(--color-signal) 60%, white) 25px 26px,
+    transparent 27px 49px
+  );
+  animation: hero-scan 18s linear infinite;
+}
+
+@keyframes hero-scan {
+  to { transform: translate3d(12%, 12%, 0); }
+}
+
+@keyframes scroll-cue-pulse {
+  0%, 100% { transform: scaleY(0.25); transform-origin: top; opacity: 0.35; }
+  50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+}
+
+@utility scroll-cue-line {
+  animation: scroll-cue-pulse 1.7s ease-in-out infinite;
+}
+
+/* ── Kit / product section ── */
+@utility section-dot-grid {
+  background-image: radial-gradient(
+    circle at center,
+    color-mix(in oklab, var(--color-signal) 18%, transparent) 0 1px,
+    transparent 1px
+  );
+  background-size: 20px 20px;
+  mask-image: linear-gradient(to bottom, black 0%, transparent 85%);
+  opacity: 0.55;
+}
+
+@utility kit-stat-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--color-border) 80%, var(--color-signal) 20%);
+  background: linear-gradient(
+    145deg,
+    color-mix(in oklab, var(--color-background) 96%, var(--color-signal) 4%) 0%,
+    var(--color-background) 100%
+  );
+  box-shadow:
+    0 1px 2px color-mix(in oklab, var(--color-foreground) 4%, transparent),
+    0 8px 24px color-mix(in oklab, var(--color-panel) 6%, transparent);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+@utility kit-stat-card-hover {
+  &:hover {
+    border-color: color-mix(in oklab, var(--color-signal) 45%, var(--color-border) 55%);
+    box-shadow:
+      0 2px 4px color-mix(in oklab, var(--color-foreground) 6%, transparent),
+      0 12px 32px color-mix(in oklab, var(--color-signal) 12%, transparent);
+    transform: translateY(-2px);
+  }
+}
+
+@utility schematic-frame {
+  border: 1px solid color-mix(in oklab, var(--color-border) 70%, var(--color-signal) 30%);
+  background:
+    radial-gradient(circle at center, color-mix(in oklab, var(--color-signal) 12%, transparent) 0 1px, transparent 1px) center / 16px 16px,
+    linear-gradient(160deg, color-mix(in oklab, var(--color-muted) 40%, white) 0%, white 55%);
+  box-shadow:
+    0 1px 0 color-mix(in oklab, white 80%, transparent) inset,
+    0 24px 48px color-mix(in oklab, var(--color-panel) 10%, transparent);
+}
+
+@utility field-card {
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--color-border) 80%, var(--color-signal) 20%);
+  background: var(--color-background);
+  box-shadow:
+    0 1px 2px color-mix(in oklab, var(--color-foreground) 4%, transparent),
+    0 10px 28px color-mix(in oklab, var(--color-panel) 6%, transparent);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@utility field-card-hover {
+  &:hover {
+    border-color: color-mix(in oklab, var(--color-signal) 40%, var(--color-border) 60%);
+    box-shadow:
+      0 4px 8px color-mix(in oklab, var(--color-foreground) 6%, transparent),
+      0 18px 40px color-mix(in oklab, var(--color-signal) 12%, transparent);
+    transform: translateY(-4px);
+  }
+}
+
+@utility app-card-dark {
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, white 14%, transparent);
+  background: color-mix(in oklab, white 6%, transparent);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 16px 40px color-mix(in oklab, black 18%, transparent);
+  transition: border-color 0.3s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease;
+}
+
+@utility app-card-dark-hover {
+  &:hover {
+    border-color: color-mix(in oklab, var(--color-signal) 45%, transparent);
+    background: color-mix(in oklab, white 9%, transparent);
+    transform: translateY(-4px);
+  }
+}
+
+@utility team-card {
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--color-border) 80%, var(--color-signal) 20%);
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--color-muted) 50%, white) 0%,
+    var(--color-background) 100%
+  );
+  box-shadow: 0 8px 24px color-mix(in oklab, var(--color-panel) 6%, transparent);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+@utility team-card-hover {
+  &:hover {
+    border-color: color-mix(in oklab, var(--color-signal) 40%, var(--color-border) 60%);
+    box-shadow: 0 16px 36px color-mix(in oklab, var(--color-signal) 12%, transparent);
+    transform: translateY(-4px);
+  }
+}
+
+@utility tech-surface {
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--color-border) 70%, var(--color-signal) 30%);
+  background: var(--color-background);
+  box-shadow:
+    0 1px 2px color-mix(in oklab, var(--color-foreground) 4%, transparent),
+    0 18px 40px color-mix(in oklab, var(--color-panel) 8%, transparent);
+}
+
+@utility benefit-tile {
+  position: relative;
+  transition: background 0.25s ease;
+}
+
+@utility benefit-tile-hover {
+  &:hover {
+    background: color-mix(in oklab, var(--color-signal) 8%, transparent);
+  }
+}
+
+@utility consider-card {
+  border: 1px solid var(--color-border);
+  background: color-mix(in oklab, var(--color-muted) 45%, white);
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+@utility consider-card-active {
+  border-color: color-mix(in oklab, var(--color-signal) 70%, var(--color-border));
+  background: var(--color-background);
+  box-shadow: 0 8px 24px color-mix(in oklab, var(--color-signal) 12%, transparent);
+}
+
 #dr-considerations > div > div:nth-of-type(3) > div:nth-child(2) {
   display: none;
 }

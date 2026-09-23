@@ -840,12 +840,50 @@ function HeroBackground() {
   );
 }
 
-function SectionLabel({ index, children, dark = false }: { index: string; children: string; dark?: boolean }) {
+function SectionLabel({ index, children, dark = false, accent = false }: { index: string; children: string; dark?: boolean; accent?: boolean }) {
   return (
     <div className={`flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] ${dark ? "text-signal" : "text-primary"}`}>
-      <span>{index}</span>
+      {accent && <span className="h-4 w-px bg-signal/70" aria-hidden="true" />}
+      <span className={accent ? "text-signal" : undefined}>{index}</span>
+      <span className={`h-px w-6 ${dark ? "bg-background/25" : accent ? "bg-signal/35" : "bg-border"}`} aria-hidden="true" />
       <span className={dark ? "text-background/55" : "text-muted-foreground"}>{children}</span>
     </div>
+  );
+}
+
+const kitStatCards = [
+  { label: "Fuel mode", value: "Dual=Diesel+NG", icon: Fuel },
+  { label: "Gas usage", value: "up to 70%", icon: CircleGauge },
+  { label: "Control", value: "Sensors + Actuators", icon: Cog },
+  { label: "Existing genset", value: "No replacement needed with Dual Fuel kit installation", icon: ShieldCheck },
+] as const;
+
+const kitSchematicLabels = [
+  "Air Filter",
+  "Gas Air Mixer",
+  "Gas Filter",
+  "Pressure Regulator",
+  "Gas Flow Control",
+  "Knock Sensor",
+  "EGT Sensor",
+  "Control Panel",
+  "Energy Meter",
+] as const;
+
+function KitStatCard({ label, value, icon: Icon, delay }: { label: string; value: string; icon: typeof Fuel; delay: number }) {
+  return (
+    <ScrollReveal delay={delay}>
+      <div className="kit-stat-card kit-stat-card-hover group rounded-xl p-4 h-full flex flex-col">
+        <div className="absolute inset-y-0 left-0 w-[3px] rounded-l-xl bg-signal/0 transition-colors duration-300 group-hover:bg-signal/80" aria-hidden="true" />
+        <div className="flex items-start justify-between gap-3">
+          <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">{label}</p>
+          <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors duration-300 group-hover:bg-signal/15">
+            <Icon className="size-4" strokeWidth={1.75} />
+          </span>
+        </div>
+        <p className="mt-3 text-sm font-semibold leading-snug text-foreground">{value}</p>
+      </div>
+    </ScrollReveal>
   );
 }
 
@@ -1247,63 +1285,178 @@ function OmSolutionsHome() {
 
       <main>
         <section id="home" className="relative isolate min-h-[100svh] overflow-hidden bg-panel">
-          {/* Animated hero background */}
           <HeroBackground />
-          {/* Dark gradient overlay so text stays readable */}
-          <div className="absolute inset-0 z-[2]" style={{ background: "linear-gradient(90deg,rgba(7,18,12,.12) 0%,rgba(8,20,14,.08) 55%,rgba(8,20,14,.05)), linear-gradient(0deg,rgba(7,18,12,.12),transparent 46%)" }} />
-          {/* Subtle green brand tint overlay */}
-          <div className="absolute inset-0 z-[2] bg-[#b6ff72]/10" />
-          <div className={`relative z-[3] mx-auto flex min-h-[100svh] w-full max-w-[1440px] flex-col items-center justify-end px-5 pb-32 text-center lg:px-16 transition-all duration-[350ms] ease ${navScrolled ? 'pt-[116px] lg:pt-[124px]' : 'pt-[129px] lg:pt-[137px]'}`}>
+          <div className="hero-grid-overlay absolute inset-0 z-[1]" aria-hidden="true" />
+          <div className="hero-scan-lines absolute inset-0 z-[1]" aria-hidden="true" />
+          <div className="absolute inset-0 z-[2] bg-gradient-to-r from-panel/88 via-panel/45 to-panel/18" />
+          <div className="absolute inset-0 z-[2] bg-gradient-to-t from-panel/75 via-transparent to-panel/25" />
+          <div className="absolute inset-0 z-[2] bg-signal/[0.07]" />
+          <div className={`relative z-[3] mx-auto flex min-h-[100svh] w-full max-w-[1440px] flex-col items-center justify-end px-5 pb-36 text-center lg:px-16 transition-all duration-[350ms] ease ${navScrolled ? 'pt-[116px] lg:pt-[124px]' : 'pt-[129px] lg:pt-[137px]'}`}>
+            <p className="rise-in mb-6 font-mono text-[10px] uppercase tracking-[0.22em] text-signal sm:text-[11px]">
+              Engineering the transition
+            </p>
             <RotatingQuote />
-            <p className="mt-4 inline-flex items-center gap-3 text-base font-semibold uppercase tracking-[0.18em] text-white sm:text-lg"><span className="h-px w-8 bg-[#b6ff72]" />We are OM Solutions<span className="h-px w-8 bg-[#b6ff72]" /></p>
-            <div className="mt-5">
-              <a href={isMobile ? "tel:+917387591083" : "https://wa.me/917387591083"} target={isMobile ? undefined : "_blank"} rel={isMobile ? undefined : "noopener noreferrer"} className="inline-flex h-11 items-center border border-white bg-transparent px-7 text-[11px] font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-white hover:text-[#0b1f15]">
+            <p className="mt-6 inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.18em] text-white/90 sm:text-base">
+              <span className="h-px w-8 bg-signal sm:w-10" aria-hidden="true" />
+              We are OM Solutions
+              <span className="h-px w-8 bg-signal sm:w-10" aria-hidden="true" />
+            </p>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+              <a
+                href={isMobile ? "tel:+917387591083" : "https://wa.me/917387591083"}
+                target={isMobile ? undefined : "_blank"}
+                rel={isMobile ? undefined : "noopener noreferrer"}
+                className="group inline-flex h-12 items-center gap-2.5 rounded-sm bg-signal px-8 text-[11px] font-extrabold uppercase tracking-[0.12em] text-panel shadow-[0_8px_32px_color-mix(in_oklab,var(--color-signal)_35%,transparent)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-panel hover:shadow-[0_12px_40px_color-mix(in_oklab,white_25%,transparent)]"
+              >
                 Contact Us
+                <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+              </a>
+              <a
+                href="#kit"
+                className="inline-flex h-12 items-center gap-2 border border-white/35 bg-white/5 px-7 text-[11px] font-semibold uppercase tracking-[0.12em] text-white backdrop-blur-sm transition-all duration-300 hover:border-signal/50 hover:bg-white/10 hover:text-signal"
+              >
+                View Dual Fuel Kit
+                <ArrowDownRight className="size-3.5" />
               </a>
             </div>
           </div>
-          <div className="absolute bottom-7 right-5 hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-background/45 lg:flex lg:right-10 z-[3]"><span className="h-px w-10 bg-signal" /> Field-ready conversion systems</div>
+          <a
+            href="#kit"
+            className="absolute bottom-8 left-1/2 z-[3] flex -translate-x-1/2 flex-col items-center gap-2.5 font-mono text-[9px] uppercase tracking-[0.15em] text-white/55 transition-colors hover:text-signal"
+            aria-label="Scroll to Dual Fuel Kit section"
+          >
+            <span className="scroll-cue-line h-7 w-px bg-signal" aria-hidden="true" />
+            Scroll to explore
+          </a>
+          <div className="absolute bottom-8 left-5 z-[3] hidden items-center gap-2.5 font-mono text-[10px] uppercase tracking-[0.16em] text-background/45 lg:flex lg:left-10">
+            <span className="text-signal">01</span>
+            <span className="h-px w-8 bg-background/25" aria-hidden="true" />
+            Home
+          </div>
+          <div className="absolute bottom-8 right-5 z-[3] hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-background/45 lg:flex lg:right-10">
+            <span className="h-px w-10 bg-signal/60" aria-hidden="true" />
+            Field-ready conversion systems
+          </div>
         </section>
 
         {/* OM / 04 Primary product - Dual Fuel Kit */}
-        <section id="kit" className="bg-white">
-          <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
-            <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+        <section id="kit" className="relative overflow-hidden bg-background">
+          <div className="section-dot-grid absolute inset-0" aria-hidden="true" />
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal/25 to-transparent" aria-hidden="true" />
+          <div className="relative mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
+            <div className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-16">
               <ScrollReveal>
-                <div><SectionLabel index="OM / 04">Primary product</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl text-gray-900">OM Solutions<br />Dual Fuel Kit</h2><p className="mt-6 max-w-xl text-base leading-relaxed text-gray-600 font-sans">A dual-fuel system allows a diesel engine to use diesel together with an alternate gaseous fuel, reducing diesel consumption while maintaining engine operation.</p><div className="mt-8 grid grid-cols-2 gap-3"><ScrollReveal delay={100}><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4 h-full flex flex-col"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Fuel mode</p><p className="mt-2 text-sm font-semibold text-gray-900">Dual=Diesel+NG</p></div></ScrollReveal><ScrollReveal delay={150}><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4 h-full flex flex-col"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Gas usage</p><p className="mt-2 text-sm font-semibold text-gray-900">up to 70%</p></div></ScrollReveal><ScrollReveal delay={200}><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4 h-full flex flex-col"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Control</p><p className="mt-2 text-sm font-semibold text-gray-900">Sensors + Actuators</p></div></ScrollReveal><ScrollReveal delay={250}><div className="rounded-[9px] border border-gray-200 bg-gray-50 p-4 h-full flex flex-col"><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gray-500">Existing genset</p><p className="mt-2 text-sm font-semibold text-gray-900">No replacement needed with Dual Fuel kit installation</p></div></ScrollReveal></div></div>
+                <div>
+                  <SectionLabel index="OM / 04" accent>Primary product</SectionLabel>
+                  <h2 className="mt-6 text-4xl font-extrabold tracking-tight text-foreground lg:text-6xl">
+                    OM Solutions
+                    <br />
+                    <span className="bg-gradient-to-r from-foreground via-foreground to-signal bg-clip-text text-transparent">
+                      Dual Fuel Kit
+                    </span>
+                  </h2>
+                  <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground font-sans">
+                    A dual-fuel system allows a diesel engine to use diesel together with an alternate gaseous fuel, reducing diesel consumption while maintaining engine operation.
+                  </p>
+                  <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    {kitStatCards.map((card, index) => (
+                      <KitStatCard
+                        key={card.label}
+                        label={card.label}
+                        value={card.value}
+                        icon={card.icon}
+                        delay={100 + index * 50}
+                      />
+                    ))}
+                  </div>
+                </div>
               </ScrollReveal>
               <ScrollReveal delay={300} scale>
-                <div className="rounded-[12px] border border-gray-200 bg-gray-50 p-4 sm:p-6"><div className="flex items-center justify-between"><p className="font-mono text-xs uppercase tracking-[0.18em] text-gray-500">System schematic</p><span className="flex items-center gap-2 font-mono text-[10px] text-[#b6ff72]"><span className="size-2 rounded-full bg-[#b6ff72]" /> Interactive view</span></div><button type="button" className="mt-5 block w-full overflow-hidden rounded-[8px] bg-white" onClick={openSchematicViewer}><img src={schematicImage} alt="Dual fuel kit schematic" className="aspect-[1.75/1] w-full object-contain transition-transform duration-500 hover:scale-[1.02]" /></button><div className="mt-5 grid grid-cols-2 gap-x-5 gap-y-2 font-mono text-[10px] text-gray-600 sm:grid-cols-3"><span>· Air Filter</span><span>· Gas Air Mixer</span><span>· Gas Filter</span><span>· Pressure Regulator</span><span>· Gas Flow Control</span><span>· Knock Sensor</span><span>· EGT Sensor</span><span>· Control Panel</span><span>· Energy Meter</span></div></div>
+                <div className="schematic-frame rounded-2xl p-4 sm:p-6 lg:p-7">
+                  <div className="flex items-center justify-between gap-4">
+                    <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">System schematic</p>
+                    <span className="inline-flex items-center gap-2 rounded-full border border-signal/25 bg-signal/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-signal">
+                      <span className="relative flex size-2">
+                        <span className="absolute inline-flex size-full animate-ping rounded-full bg-signal opacity-40" aria-hidden="true" />
+                        <span className="relative inline-flex size-2 rounded-full bg-signal" aria-hidden="true" />
+                      </span>
+                      Interactive view
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    className="group mt-5 block w-full overflow-hidden rounded-xl border border-border/60 bg-white shadow-inner"
+                    onClick={openSchematicViewer}
+                    aria-label="Open interactive dual fuel kit schematic"
+                  >
+                    <img
+                      src={schematicImage}
+                      alt="Dual fuel kit schematic"
+                      className="aspect-[1.75/1] w-full object-contain p-3 transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                    <span className="flex items-center justify-center gap-2 border-t border-border/50 bg-muted/30 py-2.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground transition-colors group-hover:bg-signal/10 group-hover:text-signal">
+                      Click to explore components
+                      <ArrowRight className="size-3 transition-transform duration-300 group-hover:translate-x-0.5" />
+                    </span>
+                  </button>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {kitSchematicLabels.map((component) => (
+                      <span
+                        key={component}
+                        className="rounded-md border border-border/70 bg-background/80 px-2.5 py-1 font-mono text-[10px] text-muted-foreground transition-colors hover:border-signal/30 hover:text-foreground"
+                      >
+                        {component}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </ScrollReveal>
             </div>
           </div>
         </section>
 
         {/* ——— Cinematic "Explore Technology" banner —— */}
-        <section id="technology" className="relative isolate min-h-[480px] overflow-hidden">
+        <section id="technology" className="relative isolate min-h-[560px] overflow-hidden lg:min-h-[620px]">
           <img
             src={compressorNightImage}
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 h-full w-full object-cover"
-            style={{ filter: "saturate(0.6) brightness(0.55)" }}
+            className="absolute inset-0 h-full w-full object-cover scale-105"
+            style={{ filter: "saturate(0.55) brightness(0.48)" }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[rgba(7,20,13,0.82)] via-[rgba(7,20,13,0.55)] to-[rgba(7,20,13,0.25)]" />
-          <div className="relative z-10 flex min-h-[480px] flex-col justify-end px-5 pb-16 pt-24 lg:px-10">
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#b6ff72]">OM Solutions · Technology</p>
-            <h2 className="mt-4 max-w-2xl text-4xl font-light leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-             Focused on<br />Alternate Fuels for <br/>I.C. Engines
+          <div className="hero-grid-overlay absolute inset-0 z-[1]" aria-hidden="true" />
+          <div className="hero-scan-lines absolute inset-0 z-[1]" aria-hidden="true" />
+          <div className="absolute inset-0 z-[2] bg-gradient-to-r from-panel/92 via-panel/62 to-panel/25" />
+          <div className="absolute inset-0 z-[2] bg-gradient-to-t from-panel/80 via-transparent to-panel/30" />
+          <div className="absolute inset-x-0 top-0 z-[3] h-px bg-gradient-to-r from-transparent via-signal/35 to-transparent" aria-hidden="true" />
+          <div className="relative z-10 mx-auto flex min-h-[560px] w-full max-w-[1440px] flex-col justify-end px-5 pb-16 pt-24 lg:min-h-[620px] lg:px-10">
+            <p className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-signal sm:text-[11px]">
+              <span className="h-4 w-px bg-signal/70" aria-hidden="true" />
+              OM Solutions · Technology
+            </p>
+            <h2 className="mt-5 max-w-2xl text-4xl font-light leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
+              Focused on
+              <br />
+              Alternate Fuels for
+              <br />
+              <span className="font-semibold text-signal">I.C. Engines</span>
             </h2>
-            <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/70 font-sans">
+            <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/75 font-sans">
               To make engine operation cleaner and more cost-effective, we need to make the shift to intelligent dual-fuel systems.
             </p>
             <button
               type="button"
               onClick={() => setTechDrawerOpen(true)}
-              className="mt-8 inline-flex w-fit items-center gap-3 bg-[#b6ff72] px-6 py-3 text-[11px] font-extrabold uppercase tracking-[0.12em] text-[#0d1f16] transition-colors hover:bg-white"
+              className="group mt-9 inline-flex w-fit items-center gap-3 rounded-sm bg-signal px-7 py-3.5 text-[11px] font-extrabold uppercase tracking-[0.12em] text-panel shadow-[0_8px_32px_color-mix(in_oklab,var(--color-signal)_35%,transparent)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white"
             >
-              Explore Technology <ArrowRight className="size-4" />
+              Explore Technology
+              <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
             </button>
+            <div className="mt-10 hidden items-center gap-2.5 font-mono text-[10px] uppercase tracking-[0.16em] text-white/40 lg:flex">
+              <span className="text-signal">02</span>
+              <span className="h-px w-8 bg-white/20" aria-hidden="true" />
+              Technology
+            </div>
           </div>
         </section>
 
@@ -1315,31 +1468,27 @@ function OmSolutionsHome() {
             aria-modal="true"
             aria-label="OM Solutions Technology"
           >
-            {/* Drawer header — full-width dark nav matching the main site */}
-            <div className="sticky top-0 z-10 flex items-center justify-between bg-panel px-[4.5vw] py-5">
-              {/* Brand */}
+            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-signal/20 bg-panel/95 px-[4.5vw] py-4 backdrop-blur-md">
               <a
                 href="#home"
                 onClick={() => setTechDrawerOpen(false)}
-                className="flex items-center gap-2.5 rounded-sm transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b6ff72]"
+                className="flex items-center gap-2.5 rounded-sm transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal"
                 aria-label="OM Solutions — return to home"
               >
-                <img src={logoImage} alt="OM Solutions" className="h-14 w-14 rounded-full object-cover ring-1 ring-white/20" />
+                <img src={logoImage} alt="OM Solutions" className="h-12 w-12 rounded-full object-cover ring-1 ring-white/20 sm:h-14 sm:w-14" />
                 <span className="text-[15px] font-extrabold uppercase tracking-[0.08em] text-white">OM Solutions</span>
               </a>
 
-              {/* Section links — hidden on mobile */}
-              <nav className="hidden items-center gap-6 xl:flex">
-              {[["Technology Matrix", "dr-solutions"], ["Technology", "dr-tech"], ["Benefits", "dr-benefits"], ["Considerations", "dr-considerations"], ["Comparison", "dr-compare"]].map(([label, id]) => (
-                  <a key={id} href={`#${id}`} className="whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.11em] text-white/75 transition-colors hover:text-[#b6ff72]">{label}</a>
+              <nav className="hidden items-center gap-5 xl:flex">
+              {[["Technology Matrix", "dr-solutions"], ["Technology", "dr-tech"], ["Fuel Systems", "dr-fuel-kits"], ["Benefits", "dr-benefits"], ["Considerations", "dr-considerations"], ["Comparison", "dr-compare"]].map(([label, id]) => (
+                  <a key={id} href={`#${id}`} className="whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.11em] text-white/75 transition-colors hover:text-signal">{label}</a>
                 ))}
               </nav>
 
-              {/* Close */}
               <button
                 type="button"
                 onClick={() => setTechDrawerOpen(false)}
-                className="flex items-center gap-2.5 border border-white/30 px-4 py-3 text-[10px] font-extrabold uppercase tracking-[0.1em] text-white transition-colors hover:bg-white/10"
+                className="flex items-center gap-2.5 rounded-sm border border-white/25 px-4 py-3 text-[10px] font-extrabold uppercase tracking-[0.1em] text-white transition-all hover:border-signal/50 hover:bg-white/10 hover:text-signal"
                 aria-label="Close technology panel"
               >
                 Close <X className="size-3.5" />
@@ -1349,55 +1498,52 @@ function OmSolutionsHome() {
             {/* Scrollable content */}
             <div className="flex-1 overflow-y-auto">
 
-              <section id="dr-solutions" className="bg-background">
-                <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
+              <section id="dr-solutions" className="relative overflow-hidden bg-background">
+                <div className="section-dot-grid absolute inset-0" aria-hidden="true" />
+                <div className="relative mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
                   <div className="flex flex-wrap items-end justify-between gap-6">
                     <div>
-                      <SectionLabel index="OM / 03">Technology matrix</SectionLabel>
+                      <SectionLabel index="OM / 03" accent>Technology matrix</SectionLabel>
                       <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Dual fuel technology architecture</h2>
                     </div>
                     <p className="max-w-md text-sm leading-relaxed text-muted-foreground font-sans">Explore supported alternate-fuel pathways across engine applications.</p>
                   </div>
 
-                  {/* Premium Compatibility Matrix */}
-                  <div className="mt-10 overflow-hidden rounded-[20px] border border-border/60 bg-[#f9faf8] shadow-[0_8px_40px_rgba(11,31,21,0.07)]">
-                    {/* Matrix header bar */}
-                    <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border/50 bg-white px-7 py-5">
+                  <div className="tech-surface mt-10 rounded-2xl">
+                    <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border/60 bg-muted/40 px-5 py-4 sm:px-7 sm:py-5">
                       <p className="text-sm font-bold uppercase tracking-[0.12em] text-foreground">Fuel Compatibility Matrix</p>
-                      <div className="flex items-center gap-2">
-                        <span className="size-2 rounded-full" style={{ background: "oklch(0.72 0.16 155)" }} />
-                        <span className="text-sm font-semibold text-foreground">Supported pathway</span>
+                      <div className="inline-flex items-center gap-2 rounded-full border border-signal/25 bg-signal/10 px-3 py-1">
+                        <span className="relative flex size-2">
+                          <span className="absolute inline-flex size-full animate-ping rounded-full bg-signal opacity-40" aria-hidden="true" />
+                          <span className="relative inline-flex size-2 rounded-full bg-signal" aria-hidden="true" />
+                        </span>
+                        <span className="text-xs font-semibold text-foreground">Supported pathway</span>
                       </div>
                     </div>
 
-                    {/* Scrollable table */}
                     <div className="overflow-x-auto -webkit-overflow-scrolling-touch">
                       <table className="w-full min-w-[680px] border-collapse">
-                        {/* Fuel column headers */}
                         <thead>
                           <tr className="border-b border-border/40">
-                            <th scope="col" className="sticky left-0 z-20 min-w-[160px] sm:min-w-[260px] bg-[#f9faf8] px-3 sm:px-7 py-4 sm:py-6 text-left">
+                            <th scope="col" className="sticky left-0 z-20 min-w-[160px] bg-background px-3 py-4 text-left sm:min-w-[260px] sm:px-7 sm:py-6">
                               <span className="text-[10px] sm:text-sm font-bold uppercase tracking-[0.1em] text-foreground">Application</span>
                             </th>
                             {fuelColumns.map((fuel) => (
-                              <th key={fuel} scope="col" className={`min-w-[62px] sm:min-w-[88px] px-1 sm:px-2 py-4 sm:py-6 text-center transition-colors ${selectedFuel === fuel ? "bg-primary/10" : ""}`}>
-                                <button type="button" onClick={() => setSelectedFuel(selectedFuel === fuel ? null : fuel)} aria-pressed={selectedFuel === fuel} className="flex w-full flex-col items-center gap-1 rounded-[6px] py-1 focus-visible:outline-2 focus-visible:outline-primary">
-                                  <span className={`size-1.5 rounded-full ${selectedFuel === fuel ? "bg-primary" : "bg-border/60"}`} />
-                                  <span className="text-[9px] sm:text-xs font-bold uppercase tracking-[0.06em] sm:tracking-[0.08em] text-foreground">{fuel}</span>
+                              <th key={fuel} scope="col" className={`min-w-[62px] sm:min-w-[88px] px-1 sm:px-2 py-4 sm:py-6 text-center transition-colors ${selectedFuel === fuel ? "bg-signal/10" : ""}`}>
+                                <button type="button" onClick={() => setSelectedFuel(selectedFuel === fuel ? null : fuel)} aria-pressed={selectedFuel === fuel} className="flex w-full flex-col items-center gap-1 rounded-[6px] py-1 focus-visible:outline-2 focus-visible:outline-signal">
+                                  <span className={`size-1.5 rounded-full ${selectedFuel === fuel ? "bg-signal" : "bg-border"}`} />
+                                  <span className={`text-[9px] sm:text-xs font-bold uppercase tracking-[0.06em] sm:tracking-[0.08em] ${selectedFuel === fuel ? "text-signal" : "text-foreground"}`}>{fuel}</span>
                                 </button>
                               </th>
                             ))}
                           </tr>
                         </thead>
-
-                        {/* Application rows */}
                         <tbody>
                           {fuelArchitecture.map(({ application, supported }, index) => (
-                            <tr key={application} className={`group border-b border-border/40 last:border-0 transition-colors hover:bg-primary/[0.04] ${selectedFuelApplication === index ? "bg-primary/[0.06]" : ""}`}>
-                              {/* Application name — sticky */}
-                              <th scope="row" className={`sticky left-0 z-10 px-3 sm:px-7 py-3 sm:py-5 text-left transition-colors ${selectedFuelApplication === index ? "bg-primary-soft" : "bg-[#f9faf8] group-hover:bg-primary/[0.04]"}`}>
-                                <button type="button" onClick={() => setSelectedFuelApplication(index)} className="flex w-full items-center gap-2 sm:gap-3 text-left focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-4">
-                                  <span className={`shrink-0 font-mono text-[9px] sm:text-xs font-bold tracking-[0.1em] transition-all duration-200 ${selectedFuelApplication === index ? "text-primary" : "text-primary/70 group-hover:text-primary"}`}>
+                            <tr key={application} className={`group border-b border-border/40 last:border-0 transition-colors hover:bg-signal/[0.04] ${selectedFuelApplication === index ? "bg-signal/[0.06]" : ""}`}>
+                              <th scope="row" className={`sticky left-0 z-10 px-3 sm:px-7 py-3 sm:py-5 text-left transition-colors ${selectedFuelApplication === index ? "bg-primary-soft" : "bg-background group-hover:bg-signal/[0.04]"}`}>
+                                <button type="button" onClick={() => setSelectedFuelApplication(index)} className="flex w-full items-center gap-2 sm:gap-3 text-left focus-visible:outline-2 focus-visible:outline-signal focus-visible:outline-offset-4">
+                                  <span className={`shrink-0 font-mono text-[9px] sm:text-xs font-bold tracking-[0.1em] ${selectedFuelApplication === index ? "text-signal" : "text-muted-foreground group-hover:text-signal"}`}>
                                     {String(index + 1).padStart(2, "0")}
                                   </span>
                                   <span className="text-[11px] sm:text-base font-semibold sm:font-bold leading-snug text-foreground">
@@ -1405,27 +1551,21 @@ function OmSolutionsHome() {
                                   </span>
                                 </button>
                               </th>
-
-                              {/* Fuel cells */}
                               {fuelColumns.map((fuel) => {
                                 const isSupported = (supported as readonly string[]).includes(fuel);
                                 return (
-                                  <td key={fuel} className={`px-0.5 sm:px-2 py-2 sm:py-4 text-center transition-colors duration-200 ${selectedFuel === fuel ? "bg-primary/[0.06]" : ""}`}>
+                                  <td key={fuel} className={`px-0.5 sm:px-2 py-2 sm:py-4 text-center transition-colors duration-200 ${selectedFuel === fuel ? "bg-signal/[0.06]" : ""}`}>
                                     {isSupported ? (
                                       <button
                                         type="button"
                                         onClick={() => { setSelectedFuelApplication(index); setSelectedFuel(fuel); }}
                                         aria-label={`${application} supports ${fuel}`}
-                                        className={`mx-auto grid size-7 sm:size-10 place-items-center rounded-[5px] sm:rounded-[6px] border text-primary transition-all duration-200 hover:scale-105 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 group-hover:border-primary/50 group-hover:bg-primary/15 ${selectedFuelApplication === index && selectedFuel === fuel ? "ring-2 ring-primary ring-offset-2" : ""}`}
-                                        style={{
-                                          background: "oklch(0.72 0.16 155 / 0.09)",
-                                          borderColor: "oklch(0.72 0.16 155 / 0.28)",
-                                        }}
+                                        className={`mx-auto grid size-7 sm:size-10 place-items-center rounded-md border border-signal/30 bg-signal/10 text-signal transition-all duration-200 hover:scale-105 hover:bg-signal/20 focus-visible:outline-2 focus-visible:outline-signal focus-visible:outline-offset-2 ${selectedFuelApplication === index && selectedFuel === fuel ? "ring-2 ring-signal ring-offset-2" : ""}`}
                                       >
                                         <Check className="size-3 sm:size-4 stroke-[3]" />
                                       </button>
                                     ) : (
-                                      <button type="button" onClick={() => { setSelectedFuelApplication(index); setSelectedFuel(fuel); }} aria-label={`${application} does not support ${fuel}`} className="mx-auto grid size-7 sm:size-10 place-items-center text-sm sm:text-base font-medium text-muted-foreground/40 transition-colors duration-200 group-hover:text-muted-foreground/60 focus-visible:outline-2 focus-visible:outline-primary">
+                                      <button type="button" onClick={() => { setSelectedFuelApplication(index); setSelectedFuel(fuel); }} aria-label={`${application} does not support ${fuel}`} className="mx-auto grid size-7 sm:size-10 place-items-center text-sm sm:text-base font-medium text-muted-foreground/40 transition-colors duration-200 group-hover:text-muted-foreground/60 focus-visible:outline-2 focus-visible:outline-signal">
                                         —
                                       </button>
                                     )}
@@ -1445,35 +1585,88 @@ function OmSolutionsHome() {
                 </div>
               </section>
 
-              <section id="dr-tech" className="border-b border-border">
+              <section id="dr-tech" className="relative border-b border-border bg-muted/30">
                 <div className="mx-auto max-w-[1440px] px-5 py-16 lg:px-10 lg:py-20">
                   <div className="grid gap-6 lg:grid-cols-2 lg:items-end">
-                    <div><SectionLabel index="OM / 05">Technology</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Dual Fuel Kit vs RECD</h2></div>
+                    <div>
+                      <SectionLabel index="OM / 05" accent>Technology</SectionLabel>
+                      <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Dual Fuel Kit vs RECD</h2>
+                    </div>
                     <p className="max-w-xl text-base leading-relaxed text-muted-foreground font-sans">Two different approaches to particulate reduction.</p>
                   </div>
 
-                  <div className="mt-9 overflow-hidden rounded-[12px] border border-border bg-background shadow-[0_18px_45px_-35px_rgba(10,28,22,0.55)]">
-                    <div role="tablist" aria-label="Technology comparison" className="grid grid-cols-2 border-b border-border bg-secondary/65 p-2">
+                  <div className="tech-surface mt-9 rounded-2xl">
+                    <div role="tablist" aria-label="Technology comparison" className="grid grid-cols-2 border-b border-border bg-muted/50 p-2">
                       {(["dualFuel", "recd"] as const).map((view) => {
                         const active = technologyView === view;
                         const isDualFuel = view === "dualFuel";
-                        return <button key={view} id={`${view}-tab`} type="button" role="tab" aria-selected={active} aria-controls="technology-panel" onClick={() => setTechnologyView(view)} className={`flex items-center gap-3 rounded-[8px] px-4 py-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${active ? "bg-panel text-background shadow-sm" : "text-muted-foreground hover:bg-background hover:text-primary"}`}>
-                          <span className={`grid size-8 shrink-0 place-items-center rounded-[6px] ${active ? "bg-signal text-panel" : isDualFuel ? "bg-primary/10 text-primary" : "bg-danger/10 text-danger"}`}>{isDualFuel ? <Fuel className="size-4" /> : <ShieldCheck className="size-4" />}</span>
-                          <span><span className="block text-sm font-bold sm:text-base">{isDualFuel ? "Dual Fuel" : "RECD"}</span><span className={`mt-0.5 block font-mono text-[9px] uppercase tracking-[0.1em] ${active ? "text-background/55" : "text-muted-foreground"}`}>{isDualFuel ? "During combustion" : "After generation"}</span></span>
-                        </button>;
+                        return (
+                          <button key={view} id={`${view}-tab`} type="button" role="tab" aria-selected={active} aria-controls="technology-panel" onClick={() => setTechnologyView(view)} className={`flex items-center gap-3 rounded-xl px-4 py-3 text-left transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${active ? "bg-panel text-background shadow-sm" : "text-muted-foreground hover:bg-background hover:text-primary"}`}>
+                            <span className={`grid size-8 shrink-0 place-items-center rounded-lg ${active ? "bg-signal text-panel" : isDualFuel ? "bg-signal/15 text-signal" : "bg-danger/10 text-danger"}`}>{isDualFuel ? <Fuel className="size-4" /> : <ShieldCheck className="size-4" />}</span>
+                            <span>
+                              <span className="block text-sm font-bold sm:text-base">{isDualFuel ? "Dual Fuel" : "RECD"}</span>
+                              <span className={`mt-0.5 block font-mono text-[9px] uppercase tracking-[0.1em] ${active ? "text-background/55" : "text-muted-foreground"}`}>{isDualFuel ? "During combustion" : "After generation"}</span>
+                            </span>
+                          </button>
+                        );
                       })}
                     </div>
 
                     <article id="technology-panel" role="tabpanel" aria-labelledby={`${technologyView}-tab`} className="min-h-[332px] bg-background">
                       {technologyView === "dualFuel" ? (
                         <div key="dual-fuel" className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
-                          <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6" onClick={() => openImage(systemImage, "OM Solutions dual-fuel kit schematic")} aria-label="Open Dual Fuel schematic"><span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-signal">Air intake system</span><img src={systemImage} alt="Dual Fuel system schematic" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" /></button>
-                          <div className="p-5 sm:p-7"><div className="flex items-start justify-between gap-4"><div><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Dual Fuel</p><h3 className="mt-2 text-2xl font-bold">Reduce In Situ.</h3></div><span className="hidden rounded-full bg-primary-soft px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-primary sm:block">Engine air flow</span></div><p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground font-sans">Controlled introduction of alternate fuel into the engine air flow to reduce diesel consumption and particulate generation during combustion.</p><div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">{["Reduces particulate generation during combustion", "Uses controlled fuel injection with sensors, valves and actuators", "Can reduce diesel consumption under suitable operating conditions", "Existing diesel operation can be retained"].map((point) => <div key={point} className="flex gap-2 text-xs leading-snug font-sans"><Check className="mt-0.5 size-3.5 shrink-0 text-signal" />{point}</div>)}</div></div>
+                          <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6" onClick={() => openImage(systemImage, "OM Solutions dual-fuel kit schematic")} aria-label="Open Dual Fuel schematic">
+                            <span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-signal">Air intake system</span>
+                            <img src={systemImage} alt="Dual Fuel system schematic" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" />
+                          </button>
+                          <div className="p-5 sm:p-7">
+                            <div className="flex items-start justify-between gap-4">
+                              <div>
+                                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-signal">Dual Fuel</p>
+                                <h3 className="mt-2 text-2xl font-bold">Reduce In Situ.</h3>
+                              </div>
+                              <span className="hidden rounded-full border border-signal/25 bg-signal/10 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-signal sm:block">Engine air flow</span>
+                            </div>
+                            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground font-sans">Controlled introduction of alternate fuel into the engine air flow to reduce diesel consumption and particulate generation during combustion.</p>
+                            <div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">
+                              {["Reduces particulate generation during combustion", "Uses controlled fuel injection with sensors, valves and actuators", "Can reduce diesel consumption under suitable operating conditions", "Existing diesel operation can be retained"].map((point) => (
+                                <div key={point} className="flex gap-2 text-xs leading-snug font-sans">
+                                  <span className="mt-0.5 grid size-4 shrink-0 place-items-center rounded-full bg-signal/15 text-signal"><Check className="size-2.5 stroke-[3]" /></span>
+                                  {point}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
                         </div>
                       ) : (
                         <div key={`${recdType}-recd`} className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
-                          <div className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6"><span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-signal">Exhaust system</span><img src={recdImage} alt="RECD exhaust emission control device diagram" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain opacity-85" /></div>
-                          <div className="p-5 sm:p-7"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-danger">RECD</p><h3 className="mt-2 text-2xl font-bold">RECD <span className="text-muted-foreground">(Retrofit Emission Control Device)</span></h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground font-sans">Retrofit Emission Control Device added to the diesel engine exhaust to capture particulates.</p><div role="tablist" aria-label="RECD type" className="mt-4 flex gap-2 overflow-x-auto pb-1">{(Object.keys(recdTypes) as RecdType[]).map((type) => <button key={type} type="button" role="tab" aria-selected={recdType === type} onClick={() => setRecdType(type)} className={`shrink-0 rounded-full border px-3 py-2 font-mono text-[10px] uppercase tracking-[0.08em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${recdType === type ? "border-primary bg-primary text-primary-foreground" : "border-border bg-secondary text-muted-foreground hover:border-primary/40"}`}>{recdTypes[type].label}</button>)}</div><div className="mt-4 border-t border-border pt-4"><h4 className="text-sm font-bold">{recdTypes[recdType].heading}</h4><div className="mt-3 grid gap-x-5 gap-y-2 sm:grid-cols-2">{recdTypes[recdType].points.map((point) => <p key={point} className="flex gap-2 text-xs leading-snug text-muted-foreground font-sans"><span className="mt-1.5 size-1 shrink-0 rounded-full bg-danger" />{point}</p>)}</div></div></div>
+                          <div className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6">
+                            <span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-signal">Exhaust system</span>
+                            <img src={recdImage} alt="RECD exhaust emission control device diagram" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain opacity-85" />
+                          </div>
+                          <div className="p-5 sm:p-7">
+                            <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-danger">RECD</p>
+                            <h3 className="mt-2 text-2xl font-bold">RECD <span className="text-muted-foreground">(Retrofit Emission Control Device)</span></h3>
+                            <p className="mt-3 text-sm leading-relaxed text-muted-foreground font-sans">Retrofit Emission Control Device added to the diesel engine exhaust to capture particulates.</p>
+                            <div role="tablist" aria-label="RECD type" className="mt-4 flex gap-2 overflow-x-auto pb-1">
+                              {(Object.keys(recdTypes) as RecdType[]).map((type) => (
+                                <button key={type} type="button" role="tab" aria-selected={recdType === type} onClick={() => setRecdType(type)} className={`shrink-0 rounded-full border px-3 py-2 font-mono text-[10px] uppercase tracking-[0.08em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${recdType === type ? "border-danger bg-danger text-white" : "border-border bg-secondary text-muted-foreground hover:border-danger/40"}`}>
+                                  {recdTypes[type].label}
+                                </button>
+                              ))}
+                            </div>
+                            <div className="mt-4 border-t border-border pt-4">
+                              <h4 className="text-sm font-bold">{recdTypes[recdType].heading}</h4>
+                              <div className="mt-3 grid gap-x-5 gap-y-2 sm:grid-cols-2">
+                                {recdTypes[recdType].points.map((point) => (
+                                  <p key={point} className="flex gap-2 text-xs leading-snug text-muted-foreground font-sans">
+                                    <span className="mt-1.5 size-1 shrink-0 rounded-full bg-danger" />
+                                    {point}
+                                  </p>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       )}
                     </article>
@@ -1481,36 +1674,83 @@ function OmSolutionsHome() {
                 </div>
               </section>
 
-              {/* LPG & PNG Dual Fuel Kits Section */}
-              <section id="dr-fuel-kits" className="border-b border-border">
+              <section id="dr-fuel-kits" className="border-b border-border bg-background">
                 <div className="mx-auto max-w-[1440px] px-5 py-16 lg:px-10 lg:py-20">
                   <div className="grid gap-6 lg:grid-cols-2 lg:items-end">
-                    <div><SectionLabel index="OM / 06">Fuel Systems</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">LPG & PNG Dual Fuel Kits</h2></div>
+                    <div>
+                      <SectionLabel index="OM / 06" accent>Fuel Systems</SectionLabel>
+                      <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">LPG & PNG Dual Fuel Kits</h2>
+                    </div>
                     <p className="max-w-xl text-base leading-relaxed text-muted-foreground font-sans">Dual-fuel solutions for different gas types and applications.</p>
                   </div>
 
-                  <div className="mt-9 overflow-hidden rounded-[12px] border border-border bg-background shadow-[0_18px_45px_-35px_rgba(10,28,22,0.55)]">
-                    <div role="tablist" aria-label="Fuel kit comparison" className="grid grid-cols-2 border-b border-border bg-secondary/65 p-2">
+                  <div className="tech-surface mt-9 rounded-2xl">
+                    <div role="tablist" aria-label="Fuel kit comparison" className="grid grid-cols-2 border-b border-border bg-muted/50 p-2">
                       {(["png", "lpg"] as const).map((view) => {
                         const active = fuelKitView === view;
                         const isPng = view === "png";
-                        return <button key={view} id={`${view}-tab`} type="button" role="tab" aria-selected={active} aria-controls="fuel-kit-panel" onClick={() => setFuelKitView(view)} className={`flex items-center gap-3 rounded-[8px] px-4 py-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${active ? "bg-panel text-background shadow-sm" : "text-muted-foreground hover:bg-background hover:text-primary"}`}>
-                          <span className={`grid size-8 shrink-0 place-items-center rounded-[6px] ${active ? "bg-signal text-panel" : isPng ? "bg-blue-500/10 text-blue-500" : "bg-orange-500/10 text-orange-500"}`}><Zap className="size-4" /></span>
-                          <span><span className="block text-sm font-bold sm:text-base">{isPng ? "PNG Kit" : "LPG Kit"}</span><span className={`mt-0.5 block font-mono text-[9px] uppercase tracking-[0.1em] ${active ? "text-background/55" : "text-muted-foreground"}`}>{isPng ? "PNG System" : "LPG System"}</span></span>
-                        </button>;
+                        return (
+                          <button key={view} id={`${view}-tab`} type="button" role="tab" aria-selected={active} aria-controls="fuel-kit-panel" onClick={() => setFuelKitView(view)} className={`flex items-center gap-3 rounded-xl px-4 py-3 text-left transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${active ? "bg-panel text-background shadow-sm" : "text-muted-foreground hover:bg-background hover:text-primary"}`}>
+                            <span className={`grid size-8 shrink-0 place-items-center rounded-lg ${active ? "bg-signal text-panel" : isPng ? "bg-blue-500/10 text-blue-500" : "bg-orange-500/10 text-orange-500"}`}><Zap className="size-4" /></span>
+                            <span>
+                              <span className="block text-sm font-bold sm:text-base">{isPng ? "PNG Kit" : "LPG Kit"}</span>
+                              <span className={`mt-0.5 block font-mono text-[9px] uppercase tracking-[0.1em] ${active ? "text-background/55" : "text-muted-foreground"}`}>{isPng ? "PNG System" : "LPG System"}</span>
+                            </span>
+                          </button>
+                        );
                       })}
                     </div>
 
                     <article id="fuel-kit-panel" role="tabpanel" aria-labelledby={`${fuelKitView}-tab`} className="min-h-[332px] bg-background">
                       {fuelKitView === "png" ? (
                         <div key="png" className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
-                          <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6" onClick={() => openImage(pngKitImage, "OM Solutions PNG dual-fuel kit")} aria-label="Open PNG kit image"><span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-blue-500">PNG System</span><img src={pngKitImage} alt="PNG dual-fuel kit" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" /></button>
-                          <div className="p-5 sm:p-7"><div className="flex items-start justify-between gap-4"><div><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-blue-500">PNG Dual Fuel</p><h3 className="mt-2 text-2xl font-bold">Natural Gas Solution.</h3></div><span className="hidden rounded-full bg-blue-100 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-blue-600 sm:block">Piped Natural Gas</span></div><p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground font-sans">PNG dual-fuel systems utilize piped natural gas for continuous, reliable operation with consistent fuel supply and lower operating costs for grid-connected facilities.</p><div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">{["Continuous fuel supply via pipeline infrastructure", "Lower fuel cost compared to diesel and LPG", "Clean-burning with minimal environmental impact", "Ideal for facilities with PNG availability","With PNG, diesel replacement is higher than LPG"].map((point) => <div key={point} className="flex gap-2 text-xs leading-snug font-sans"><Check className="mt-0.5 size-3.5 shrink-0 text-blue-500" />{point}</div>)}</div></div>
+                          <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6" onClick={() => openImage(pngKitImage, "OM Solutions PNG dual-fuel kit")} aria-label="Open PNG kit image">
+                            <span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-blue-400">PNG System</span>
+                            <img src={pngKitImage} alt="PNG dual-fuel kit" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" />
+                          </button>
+                          <div className="p-5 sm:p-7">
+                            <div className="flex items-start justify-between gap-4">
+                              <div>
+                                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-blue-500">PNG Dual Fuel</p>
+                                <h3 className="mt-2 text-2xl font-bold">Natural Gas Solution.</h3>
+                              </div>
+                              <span className="hidden rounded-full bg-blue-100 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-blue-600 sm:block">Piped Natural Gas</span>
+                            </div>
+                            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground font-sans">PNG dual-fuel systems utilize piped natural gas for continuous, reliable operation with consistent fuel supply and lower operating costs for grid-connected facilities.</p>
+                            <div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">
+                              {["Continuous fuel supply via pipeline infrastructure", "Lower fuel cost compared to diesel and LPG", "Clean-burning with minimal environmental impact", "Ideal for facilities with PNG availability", "With PNG, diesel replacement is higher than LPG"].map((point) => (
+                                <div key={point} className="flex gap-2 text-xs leading-snug font-sans">
+                                  <span className="mt-0.5 grid size-4 shrink-0 place-items-center rounded-full bg-blue-500/10 text-blue-500"><Check className="size-2.5 stroke-[3]" /></span>
+                                  {point}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
                         </div>
                       ) : (
                         <div key="lpg" className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
-                          <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6" onClick={() => openImage(lpgKitImage, "OM Solutions LPG dual-fuel kit")} aria-label="Open LPG kit image"><span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-orange-500">LPG System</span><img src={lpgKitImage} alt="LPG dual-fuel kit" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" /></button>
-                          <div className="p-5 sm:p-7"><div className="flex items-start justify-between gap-4"><div><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-orange-500">LPG Dual Fuel</p><h3 className="mt-2 text-2xl font-bold">LPG-Powered Efficiency.</h3></div><span className="hidden rounded-full bg-orange-100 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-orange-600 sm:block">Liquefied Petroleum Gas</span></div><p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground font-sans">LPG dual-fuel systems enable diesel engines to operate with LPG as the alternate fuel, offering cost savings and reduced emissions for stationary and mobile applications.</p><div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">{["Cost-effective fuel alternative with high availability", "Clean combustion with lower particulate emissions", "Suitable for generator sets and industrial applications", "Easy integration with existing diesel engines","with LPG, the diesel replacement is lower than PNG"].map((point) => <div key={point} className="flex gap-2 text-xs leading-snug font-sans"><Check className="mt-0.5 size-3.5 shrink-0 text-orange-500" />{point}</div>)}</div></div>
+                          <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6" onClick={() => openImage(lpgKitImage, "OM Solutions LPG dual-fuel kit")} aria-label="Open LPG kit image">
+                            <span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-orange-400">LPG System</span>
+                            <img src={lpgKitImage} alt="LPG dual-fuel kit" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" />
+                          </button>
+                          <div className="p-5 sm:p-7">
+                            <div className="flex items-start justify-between gap-4">
+                              <div>
+                                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-orange-500">LPG Dual Fuel</p>
+                                <h3 className="mt-2 text-2xl font-bold">LPG-Powered Efficiency.</h3>
+                              </div>
+                              <span className="hidden rounded-full bg-orange-100 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-orange-600 sm:block">Liquefied Petroleum Gas</span>
+                            </div>
+                            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground font-sans">LPG dual-fuel systems enable diesel engines to operate with LPG as the alternate fuel, offering cost savings and reduced emissions for stationary and mobile applications.</p>
+                            <div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">
+                              {["Cost-effective fuel alternative with high availability", "Clean combustion with lower particulate emissions", "Suitable for generator sets and industrial applications", "Easy integration with existing diesel engines", "with LPG, the diesel replacement is lower than PNG"].map((point) => (
+                                <div key={point} className="flex gap-2 text-xs leading-snug font-sans">
+                                  <span className="mt-0.5 grid size-4 shrink-0 place-items-center rounded-full bg-orange-500/10 text-orange-500"><Check className="size-2.5 stroke-[3]" /></span>
+                                  {point}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
                         </div>
                       )}
                     </article>
@@ -1518,33 +1758,119 @@ function OmSolutionsHome() {
                 </div>
               </section>
 
-              <section id="dr-benefits" className="bg-secondary/40">
-                <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><div className="flex flex-wrap items-end justify-between gap-6"><div><SectionLabel index="OM / 06">Why dual fuel</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Benefits of using a Dual Fuel kit</h2></div><p className="max-w-md text-sm leading-relaxed text-muted-foreground font-sans">The 70% figure is the maximum gaseous fuel use stated in the profile and depends on engine, application, load and fuel conditions.</p></div><div className="mt-12 grid gap-px overflow-hidden rounded-[12px] border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">{benefits.map((benefit, index) => <div key={benefit} className={`flex gap-4 bg-background p-5 ${index < 4 ? "lg:p-7" : ""}`}><span className={`mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-signal text-panel`}><Check className="size-3.5" /></span><div><p className="text-sm font-semibold leading-snug font-sans">{benefit}</p>{index === 2 ? <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.1em] text-muted-foreground">Maximum stated figure</p> : null}</div></div>)}</div></div>
+              <section id="dr-benefits" className="relative overflow-hidden bg-panel text-background">
+                <div className="hero-grid-overlay absolute inset-0 opacity-20" aria-hidden="true" />
+                <div className="relative mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
+                  <div className="flex flex-wrap items-end justify-between gap-6">
+                    <div>
+                      <SectionLabel index="OM / 06" dark>Why dual fuel</SectionLabel>
+                      <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Benefits of using a Dual Fuel kit</h2>
+                    </div>
+                    <p className="max-w-md text-sm leading-relaxed text-background/65 font-sans">The 70% figure is the maximum gaseous fuel use stated in the profile and depends on engine, application, load and fuel conditions.</p>
+                  </div>
+                  <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-3">
+                    {benefits.map((benefit, index) => (
+                      <div key={benefit} className={`benefit-tile benefit-tile-hover flex gap-4 bg-panel p-5 ${index < 4 ? "lg:p-7" : ""}`}>
+                        <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full bg-signal text-panel">
+                          <Check className="size-3.5 stroke-[3]" />
+                        </span>
+                        <div>
+                          <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-signal/80">{String(index + 1).padStart(2, "0")}</p>
+                          <p className="mt-1 text-sm font-semibold leading-snug font-sans text-background">{benefit}</p>
+                          {index === 2 ? <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.1em] text-background/50">Maximum stated figure</p> : null}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </section>
 
               <section id="dr-considerations" className="border-b border-border bg-background">
                 <div className="mx-auto max-w-[1440px] px-5 py-16 lg:px-10 lg:py-20">
-                  <div className="flex flex-wrap items-end justify-between gap-5"><div><SectionLabel index="OM / 07">Operating considerations</SectionLabel><h2 className="mt-4 text-3xl font-extrabold tracking-tight lg:text-4xl">Challenges while using a Dual Fuel Kit</h2></div><p className="max-w-md text-sm leading-relaxed text-muted-foreground font-sans">Dual-fuel performance depends on operating conditions. These considerations should be evaluated for the intended engine application.</p></div>
-                  <div className="mt-8 flex flex-wrap items-center justify-between gap-3 rounded-[9px] border border-border bg-secondary/45 px-5 py-4"><div><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Operating range</p><p className="mt-1 text-sm font-semibold">Diesel replacement is effective between 30% to 80% load.</p></div><span className="rounded-full bg-primary px-4 py-2 font-mono text-xs font-bold text-primary-foreground">30–80% LOAD</span></div>
+                  <div className="flex flex-wrap items-end justify-between gap-5">
+                    <div>
+                      <SectionLabel index="OM / 07" accent>Operating considerations</SectionLabel>
+                      <h2 className="mt-4 text-3xl font-extrabold tracking-tight lg:text-4xl">Challenges while using a Dual Fuel Kit</h2>
+                    </div>
+                    <p className="max-w-md text-sm leading-relaxed text-muted-foreground font-sans">Dual-fuel performance depends on operating conditions. These considerations should be evaluated for the intended engine application.</p>
+                  </div>
+                  <div className="mt-8 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-signal/25 bg-signal/8 px-5 py-4">
+                    <div>
+                      <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-signal">Operating range</p>
+                      <p className="mt-1 text-sm font-semibold">Diesel replacement is effective between 30% to 80% load.</p>
+                    </div>
+                    <span className="rounded-full bg-signal px-4 py-2 font-mono text-xs font-bold text-panel">30–80% LOAD</span>
+                  </div>
                   <div className="mt-4 grid gap-3 lg:grid-cols-2 lg:gap-5">
-                    <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">{dualFuelConsiderations.slice(0, 3).map((item, index) => <button key={item.id} type="button" onClick={() => setSelectedConsideration(item.id)} aria-pressed={selectedConsideration === item.id} className={`rounded-[8px] border px-4 py-3 text-left transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${selectedConsideration === item.id ? "border-signal bg-background shadow-sm" : "border-border bg-secondary/45 hover:-translate-y-0.5 hover:border-primary/35 hover:bg-background"}`}><span className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">0{index + 1} · {item.label}</span><span className="mt-1.5 block text-sm leading-snug font-sans">{item.statement}</span></button>)}</div>
-                    <div className="relative flex min-h-[268px] flex-col items-center justify-center overflow-hidden rounded-[12px] bg-panel px-6 text-center text-background"><div className="absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(182,255,114,0.24)_1px,transparent_1px),linear-gradient(90deg,rgba(182,255,114,0.24)_1px,transparent_1px)] [background-size:24px_24px]" /><span className="relative grid size-16 place-items-center rounded-full border border-signal/40 bg-signal/10 font-mono text-lg font-bold text-signal">DF</span><p className="relative mt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-signal">Dual Fuel · Operating Range</p><span className="relative mt-3 rounded-full border border-signal/40 bg-background/10 px-4 py-2 font-mono text-xs font-bold text-signal">30–80% Load</span><p className="relative mt-3 max-w-[210px] text-[10px] leading-relaxed text-background/55">Diesel replacement is effective between 30% to 80% load.</p></div>
-                    <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">{dualFuelConsiderations.slice(3).map((item, index) => <button key={item.id} type="button" onClick={() => setSelectedConsideration(item.id)} aria-pressed={selectedConsideration === item.id} className={`rounded-[8px] border px-4 py-3 text-left transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${selectedConsideration === item.id ? "border-signal bg-background shadow-sm" : "border-border bg-secondary/45 hover:-translate-y-0.5 hover:border-primary/35 hover:bg-background"}`}><span className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">0{index + 4} · {item.label}</span><span className="mt-1.5 block text-sm leading-snug font-sans">{item.statement}</span></button>)}</div>
+                    <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                      {dualFuelConsiderations.slice(0, 3).map((item, index) => (
+                        <button key={item.id} type="button" onClick={() => setSelectedConsideration(item.id)} aria-pressed={selectedConsideration === item.id} className={`consider-card rounded-xl px-4 py-3 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${selectedConsideration === item.id ? "consider-card-active" : "hover:-translate-y-0.5 hover:border-signal/40 hover:bg-background"}`}>
+                          <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-signal">0{index + 1} · {item.label}</span>
+                          <span className="mt-1.5 block text-sm leading-snug font-sans">{item.statement}</span>
+                        </button>
+                      ))}
+                    </div>
+                    <div className="relative flex min-h-[268px] flex-col items-center justify-center overflow-hidden rounded-2xl bg-panel px-6 text-center text-background">
+                      <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(182,255,114,0.24)_1px,transparent_1px),linear-gradient(90deg,rgba(182,255,114,0.24)_1px,transparent_1px)] [background-size:24px_24px]" />
+                      <span className="relative grid size-16 place-items-center rounded-full border border-signal/40 bg-signal/10 font-mono text-lg font-bold text-signal">DF</span>
+                      <p className="relative mt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-signal">Dual Fuel · Operating Range</p>
+                      <span className="relative mt-3 rounded-full border border-signal/40 bg-background/10 px-4 py-2 font-mono text-xs font-bold text-signal">30–80% Load</span>
+                      <p className="relative mt-3 max-w-[210px] text-[10px] leading-relaxed text-background/55">Diesel replacement is effective between 30% to 80% load.</p>
+                    </div>
+                    <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                      {dualFuelConsiderations.slice(3).map((item, index) => (
+                        <button key={item.id} type="button" onClick={() => setSelectedConsideration(item.id)} aria-pressed={selectedConsideration === item.id} className={`consider-card rounded-xl px-4 py-3 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${selectedConsideration === item.id ? "consider-card-active" : "hover:-translate-y-0.5 hover:border-signal/40 hover:bg-background"}`}>
+                          <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-signal">0{index + 4} · {item.label}</span>
+                          <span className="mt-1.5 block text-sm leading-snug font-sans">{item.statement}</span>
+                        </button>
+                      ))}
+                    </div>
                   </div>
                   <p className="mt-4 text-center font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground"></p>
                 </div>
               </section>
 
-              <section id="dr-compare" className="border-b border-border">
-                <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28"><SectionLabel index="OM / 09">Technology comparison</SectionLabel><div className="mt-5 flex flex-wrap items-end justify-between gap-6"><h2 className="text-4xl font-extrabold tracking-tight lg:text-5xl">Comparison of technology options to comply SPCB notification for PM reduction</h2><p className="max-w-sm text-sm leading-relaxed text-muted-foreground"></p></div><div className="mt-12 overflow-x-auto rounded-[12px] border border-border"><table className="w-full min-w-[980px] border-collapse text-left text-sm"><thead><tr className="bg-panel text-background"><th className="w-[18%] px-5 py-4 font-mono text-[10px] uppercase tracking-[0.12em] text-background/65">Category</th><th className="px-5 py-4 font-semibold">New Gas Genset CPCB-IV+</th><th className="px-5 py-4 font-semibold">New Diesel Genset CPCB-IV+</th><th className="px-5 py-4 font-semibold">Retrofit Emission Control Device</th><th className="bg-primary px-5 py-4 font-semibold text-primary-foreground">Dual Fuel Kit</th></tr></thead><tbody>{comparisonRows.map((row) => <tr key={row[0]} className="border-t border-border"><th className="px-5 py-5 font-semibold">{row[0]}</th><td className="px-5 py-5 text-muted-foreground">{row[1]}</td><td className="px-5 py-5 text-muted-foreground">{row[2]}</td><td className="px-5 py-5 text-muted-foreground">{row[3]}</td><td className="bg-primary-soft px-5 py-5 font-semibold text-primary">{row[4]}</td></tr>)}</tbody></table></div></div>
+              <section id="dr-compare" className="relative overflow-hidden border-b border-border bg-muted/25">
+                <div className="section-dot-grid absolute inset-0" aria-hidden="true" />
+                <div className="relative mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
+                  <SectionLabel index="OM / 09" accent>Technology comparison</SectionLabel>
+                  <div className="mt-5 flex flex-wrap items-end justify-between gap-6">
+                    <h2 className="max-w-4xl text-4xl font-extrabold tracking-tight lg:text-5xl">Comparison of technology options to comply SPCB notification for PM reduction</h2>
+                    <p className="max-w-sm text-sm leading-relaxed text-muted-foreground"></p>
+                  </div>
+                  <div className="tech-surface mt-12 overflow-x-auto rounded-2xl">
+                    <table className="w-full min-w-[980px] border-collapse text-left text-sm">
+                      <thead>
+                        <tr className="bg-panel text-background">
+                          <th className="w-[18%] px-5 py-4 font-mono text-[10px] uppercase tracking-[0.12em] text-background/65">Category</th>
+                          <th className="px-5 py-4 font-semibold">New Gas Genset CPCB-IV+</th>
+                          <th className="px-5 py-4 font-semibold">New Diesel Genset CPCB-IV+</th>
+                          <th className="px-5 py-4 font-semibold">Retrofit Emission Control Device</th>
+                          <th className="bg-signal px-5 py-4 font-semibold text-panel">Dual Fuel Kit</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {comparisonRows.map((row) => (
+                          <tr key={row[0]} className="border-t border-border bg-background">
+                            <th className="px-5 py-5 font-semibold">{row[0]}</th>
+                            <td className="px-5 py-5 text-muted-foreground">{row[1]}</td>
+                            <td className="px-5 py-5 text-muted-foreground">{row[2]}</td>
+                            <td className="px-5 py-5 text-muted-foreground">{row[3]}</td>
+                            <td className="bg-signal/10 px-5 py-5 font-semibold text-foreground">{row[4]}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </section>
 
-              {/* Close button at bottom */}
-              <div className="flex justify-center bg-panel py-10">
+              <div className="relative flex justify-center overflow-hidden bg-panel py-12">
+                <div className="hero-grid-overlay absolute inset-0 opacity-25" aria-hidden="true" />
                 <button
                   type="button"
                   onClick={() => setTechDrawerOpen(false)}
-                  className="inline-flex items-center gap-3 border border-white/25 px-7 py-3 text-[10px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-white/10"
+                  className="relative inline-flex items-center gap-3 rounded-sm border border-white/25 px-7 py-3.5 text-[10px] font-extrabold uppercase tracking-[0.12em] text-white transition-all hover:border-signal/50 hover:bg-white/10 hover:text-signal"
                 >
                   <X className="size-3.5" /> Close Technology Panel
                 </button>
@@ -1554,57 +1880,64 @@ function OmSolutionsHome() {
           </div>
         )}
 
-        <section id="gallery" className="bg-background">
-          <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
+        <section id="gallery" className="relative overflow-hidden bg-background">
+          <div className="section-dot-grid absolute inset-0" aria-hidden="true" />
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal/25 to-transparent" aria-hidden="true" />
+          <div className="relative mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
             <ScrollReveal>
               <div className="flex flex-wrap items-end justify-between gap-5">
                 <div>
-                  <SectionLabel index="OM / 17">Image gallery</SectionLabel>
-                  <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">In the field.</h2>
+                  <SectionLabel index="OM / 17" accent>Image gallery</SectionLabel>
+                  <h2 className="mt-6 text-4xl font-extrabold tracking-tight text-foreground lg:text-6xl">
+                    In the{" "}
+                    <span className="bg-gradient-to-r from-foreground via-foreground to-signal bg-clip-text text-transparent">field.</span>
+                  </h2>
                 </div>
                 <p className="max-w-sm text-sm leading-relaxed text-muted-foreground font-sans">Installations from the field. Click any image to view the full gallery.</p>
               </div>
             </ScrollReveal>
 
             {/* Installation galleries — 2×2 grid */}
-            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
 
               {/* TATA 125 kVA */}
               <ScrollReveal delay={100} scale>
-                <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer h-full flex flex-col transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.02]"
+                <article className="field-card field-card-hover group cursor-pointer h-full flex flex-col rounded-2xl"
                   onClick={() => setAppGallery({ title: "Sai Sound Service (Amane Engineers), Waki (B)", images: [tataImage], index: 0 })}>
                   <div className="relative overflow-hidden aspect-[1.25/1]">
-                    <img src={tataImage} alt="TATA 125 kVA LPG installation" className="h-full w-full object-cover" />
-                    <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
-                    <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">1 photo</span>
+                    <img src={tataImage} alt="TATA 125 kVA LPG installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
+                    <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">1 photo</span>
                   </div>
                   <div className="flex items-start justify-between gap-4 p-5 flex-1">
                     <div>
-                      <h3 className="text-xl font-bold">Sai Sound Service (Amane Engineers), Waki (B)</h3>
-                      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground font-sans">
+                      <h3 className="text-xl font-bold leading-snug">Sai Sound Service (Amane Engineers), Waki (B)</h3>
+                      <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground font-sans">
                         <li><span className="font-medium text-foreground">Genset:</span> TATA 125 kVA CPCB-II</li>
                         <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + LPG (LOT)</li>
                         <li><span className="font-medium text-foreground">Operating load:</span> 60–85%</li>
                       </ul>
                     </div>
-                    <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
+                    <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
+                      <ArrowDownRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+                    </span>
                   </div>
                 </article>
               </ScrollReveal>
 
               {/* KOEL 320 kVA */}
               <ScrollReveal delay={150} scale>
-                <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer h-full flex flex-col transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.02]"
+                <article className="field-card field-card-hover group cursor-pointer h-full flex flex-col rounded-2xl"
                   onClick={() => setAppGallery({ title: "Akwel Automotive India Pvt Ltd", images: [koelImg1, koelImg2], index: 0 })}>
                   <div className="relative overflow-hidden aspect-[1.25/1]">
-                    <img src={koelImg1} alt="KOEL 320 kVA PNG installation" className="h-full w-full object-cover" />
-                    <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
-                    <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">2 photos</span>
+                    <img src={koelImg1} alt="KOEL 320 kVA PNG installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
+                    <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">2 photos</span>
                   </div>
                   <div className="flex items-start justify-between gap-4 p-5 flex-1">
                     <div>
-                      <h3 className="text-xl font-bold">Akwel Automotive India Pvt Ltd</h3>
-                      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground font-sans">
+                      <h3 className="text-xl font-bold leading-snug">Akwel Automotive India Pvt Ltd</h3>
+                      <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground font-sans">
                         <li><span className="font-medium text-foreground">Genset:</span> KOEL 320 kVA CPCB-II</li>
                         <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + PNG (300 bar)</li>
                         <li><span className="font-medium text-foreground">Operating load:</span> 50–80%</li>
@@ -1612,47 +1945,51 @@ function OmSolutionsHome() {
                         <li><span className="font-medium text-foreground">Annual CO₂ Reduction:</span> 6.13 tonnes</li>
                       </ul>
                     </div>
-                    <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
+                    <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
+                      <ArrowDownRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+                    </span>
                   </div>
                 </article>
               </ScrollReveal>
 
               {/* Birla Tisya */}
               <ScrollReveal delay={200} scale>
-                <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer h-full flex flex-col transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.02]"
+                <article className="field-card field-card-hover group cursor-pointer h-full flex flex-col rounded-2xl"
                   onClick={() => setAppGallery({ title: "Birla Tisya, Bengaluru", images: [galleryBirla1, galleryBirla2, galleryBirla3, galleryBirla4, galleryBirla5, galleryBirla6, galleryBirla7, galleryBirla8], index: 0 })}>
                   <div className="relative overflow-hidden aspect-[1.25/1]">
-                    <img src={galleryBirla1} alt="Birla Tisya Bengaluru installation" className="h-full w-full object-cover" />
-                    <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
-                    <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">8 photos</span>
+                    <img src={galleryBirla1} alt="Birla Tisya Bengaluru installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
+                    <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">8 photos</span>
                   </div>
                   <div className="flex items-start justify-between gap-4 p-5 flex-1">
                     <div>
-                      <h3 className="text-xl font-bold">Birla Tisya, Bengaluru</h3>
-                      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground font-sans">
+                      <h3 className="text-xl font-bold leading-snug">Birla Tisya, Bengaluru</h3>
+                      <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground font-sans">
                         <li><span className="font-medium text-foreground">Gensets:</span> FMTU 1010 kVA CPCB-IV+ × 2; Greaves 200 kVA CPCB-IV+</li>
                         <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + PNG (1 bar)</li>
                         <li><span className="font-medium text-foreground">Operating load:</span> 50–60%</li>
                       </ul>
                     </div>
-                    <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
+                    <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
+                      <ArrowDownRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+                    </span>
                   </div>
                 </article>
               </ScrollReveal>
 
               {/* Nevatia Maxgen */}
               <ScrollReveal delay={250} scale>
-                <article className="group overflow-hidden rounded-[11px] border border-border bg-background cursor-pointer h-full flex flex-col transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.02]"
+                <article className="field-card field-card-hover group cursor-pointer h-full flex flex-col rounded-2xl"
                   onClick={() => setAppGallery({ title: "Nevatia Steels & Alloys, Boisar, Tarapur", images: [nevatiaMg1, nevatiaMg2, nevatiaMg3, nevatiaMg4, nevatiaMg5, nevatiaMg6, nevatiaMg7, nevatiaMg8, nevatiaMg9], index: 0 })}>
                   <div className="relative overflow-hidden aspect-[1.25/1]">
-                    <img src={nevatiaMg1} alt="Nevatia Steel MaxGen Energy dual-fuel installation" className="h-full w-full object-cover" />
-                    <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/20" />
-                    <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">9 photos</span>
+                    <img src={nevatiaMg1} alt="Nevatia Steel MaxGen Energy dual-fuel installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
+                    <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">9 photos</span>
                   </div>
                   <div className="flex items-start justify-between gap-4 p-5 flex-1">
                     <div>
-                      <h3 className="text-xl font-bold">Nevatia Steels & Alloys, Boisar, Tarapur</h3>
-                      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground font-sans">
+                      <h3 className="text-xl font-bold leading-snug">Nevatia Steels & Alloys, Boisar, Tarapur</h3>
+                      <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground font-sans">
                         <li><span className="font-medium text-foreground">Genset:</span> MTU 1000 kVA CPCB-II</li>
                         <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + PNG (1 bar)</li>
                         <li><span className="font-medium text-foreground">Operating load:</span> 60–80%</li>
@@ -1660,7 +1997,9 @@ function OmSolutionsHome() {
                         <li><span className="font-medium text-foreground">Annual CO₂ Reduction:</span> 22.36 tonnes</li>
                       </ul>
                     </div>
-                    <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
+                    <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
+                      <ArrowDownRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+                    </span>
                   </div>
                 </article>
               </ScrollReveal>
@@ -1673,27 +2012,40 @@ function OmSolutionsHome() {
         <section id="other-applications" className="relative overflow-hidden bg-panel text-background">
           <img src={generatorImage} alt="OM Solutions generator installation" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-20" />
           <div className="absolute inset-0 bg-panel/90" />
+          <div className="hero-grid-overlay absolute inset-0 opacity-25" aria-hidden="true" />
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal/30 to-transparent" aria-hidden="true" />
           <div className="relative mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
-            <SectionLabel index="OM / 15" dark>Other applications</SectionLabel>
-            <div className="mt-5 flex flex-wrap items-end justify-between gap-5">
-              <h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl text-background">Applications other than gensets.</h2>
+            <SectionLabel index="OM / 15" dark accent>Other applications</SectionLabel>
+            <div className="mt-6 flex flex-wrap items-end justify-between gap-5">
+              <h2 className="text-4xl font-extrabold tracking-tight lg:text-6xl text-background">
+                Applications other than{" "}
+                <span className="text-signal">gensets.</span>
+              </h2>
               <p className="max-w-md text-sm leading-relaxed text-background/70">Click any application to view all installation images.</p>
             </div>
             <div className="mt-12 grid gap-5 md:grid-cols-3">
               {([
-                { title: "Borewell", desc: "Dual-fuel kits for borewell pump sets.", images: [ borewellImg3,borewellImg1, borewellImg2, borewellImg5, borewellImg4, borewellImg6, borewellImg7] },
-                { title: "Air Compressor", desc: "Field installation for air-compressor applications.", images: [aircomp7,aircomp1, aircomp2, aircomp3, aircomp4, aircomp5, aircomp6] },
-                { title: "Marine Propulsion", desc: "Marine propulsion with dual-fuel conversion.", images: [marine1, marine2] },
-              ] as { title: string; desc: string; images: string[] }[]).map((app) => (
-                <article key={app.title} className="group cursor-pointer overflow-hidden rounded-[11px] border border-background/15 bg-background/5 backdrop-blur-sm transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.02]" onClick={() => setAppGallery({ title: app.title, images: app.images, index: 0 })}>
+                { title: "Borewell", desc: "Dual-fuel kits for borewell pump sets.", images: [ borewellImg3,borewellImg1, borewellImg2, borewellImg5, borewellImg4, borewellImg6, borewellImg7], icon: Gauge },
+                { title: "Air Compressor", desc: "Field installation for air-compressor applications.", images: [aircomp7,aircomp1, aircomp2, aircomp3, aircomp4, aircomp5, aircomp6], icon: Cog },
+                { title: "Marine Propulsion", desc: "Marine propulsion with dual-fuel conversion.", images: [marine1, marine2], icon: Fuel },
+              ] as { title: string; desc: string; images: string[]; icon: typeof Gauge }[]).map((app) => (
+                <article key={app.title} className="app-card-dark app-card-dark-hover group cursor-pointer rounded-2xl" onClick={() => setAppGallery({ title: app.title, images: app.images, index: 0 })}>
                   <div className="relative overflow-hidden aspect-[1.25/1]">
-                    <img src={app.images[0]} alt={app.title} className="h-full w-full object-cover" />
-                    <div className="absolute inset-0 bg-panel/0 transition-colors group-hover:bg-panel/30" />
-                    <span className="absolute bottom-3 right-3 rounded-full bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white">{app.images.length} photos</span>
+                    <img src={app.images[0]} alt={app.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-panel/70 via-panel/10 to-transparent" />
+                    <span className="absolute left-3 top-3 grid size-8 place-items-center rounded-lg border border-white/15 bg-panel/70 text-signal backdrop-blur-sm">
+                      <app.icon className="size-4" strokeWidth={1.75} />
+                    </span>
+                    <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">{app.images.length} photos</span>
                   </div>
                   <div className="flex items-end justify-between gap-4 p-5">
-                    <div><h3 className="text-xl font-bold text-background">{app.title}</h3><p className="mt-2 text-sm leading-relaxed text-background/70">{app.desc}</p></div>
-                    <ArrowDownRight className="mb-1 size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
+                    <div>
+                      <h3 className="text-xl font-bold text-background">{app.title}</h3>
+                      <p className="mt-2 text-sm leading-relaxed text-background/70">{app.desc}</p>
+                    </div>
+                    <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-signal/15 text-signal">
+                      <ArrowDownRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+                    </span>
                   </div>
                 </article>
               ))}
@@ -1702,17 +2054,22 @@ function OmSolutionsHome() {
         </section>
 
         {/* Team section */}
-        <section id="team" className="border-b border-border bg-background">
-          <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
+        <section id="team" className="relative overflow-hidden border-b border-border bg-background">
+          <div className="section-dot-grid absolute inset-0" aria-hidden="true" />
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal/25 to-transparent" aria-hidden="true" />
+          <div className="relative mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
             <ScrollReveal>
-              <div className="mb-12">
-                <SectionLabel index="OM / 03">Team</SectionLabel>
-                <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">TEAM : OM SOLUTIONS</h2>
+              <div className="mb-14">
+                <SectionLabel index="OM / 03" accent>Team</SectionLabel>
+                <h2 className="mt-6 text-4xl font-extrabold tracking-tight lg:text-6xl">
+                  TEAM :{" "}
+                  <span className="bg-gradient-to-r from-foreground via-foreground to-signal bg-clip-text text-transparent">OM SOLUTIONS</span>
+                </h2>
                 <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">Meet the people behind the technology.</p>
               </div>
             </ScrollReveal>
 
-            <div className="grid gap-18 sm:grid-cols-3 lg:grid-cols-5">
+            <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {teamMembers.map((member, index) => (
                 <ScrollReveal key={member.id} delay={index * 100}>
                   <button
@@ -1721,24 +2078,27 @@ function OmSolutionsHome() {
                       setSelectedTeamMember(member);
                       setTeamModalOpen(true);
                     }}
-                    className="group relative rounded-[12px] border border-border bg-secondary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                    className="team-card team-card-hover group relative w-full rounded-2xl text-left"
                     aria-label={`View profile of ${member.name}`}
                   >
                     <div className="relative aspect-[1/1] overflow-hidden">
                       <img
                         src={member.image}
                         alt={member.name}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                      <div className="absolute inset-0 flex items-end justify-center p-4">
-                        <p className="text-base font-semibold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                      <div className="absolute inset-0 bg-gradient-to-t from-panel/80 via-panel/10 to-transparent opacity-40 transition-opacity duration-300 group-hover:opacity-100" />
+                      <span className="absolute left-3 top-3 font-mono text-[10px] uppercase tracking-[0.16em] text-white/80">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <div className="absolute inset-x-0 bottom-0 flex items-end justify-center p-4">
+                        <p className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-panel/70 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.12em] text-white opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:opacity-100">
                           VIEW PROFILE →
                         </p>
                       </div>
                     </div>
-                    <div className="p-3">
-                      <p className="text-xs font-semibold text-foreground">{member.name}</p>
+                    <div className="border-t border-border/70 px-4 py-3">
+                      <p className="text-sm font-semibold text-foreground">{member.name}</p>
                     </div>
                   </button>
                 </ScrollReveal>
@@ -1747,10 +2107,102 @@ function OmSolutionsHome() {
           </div>
         </section>
 
-        <section id="contact" className="relative overflow-hidden bg-panel text-background"><img src={generatorImage} alt="OM Solutions generator installation" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-20" /><div className="absolute inset-0 bg-panel/90" /><div className="relative mx-auto grid max-w-[1440px] gap-12 px-5 py-20 lg:grid-cols-[0.85fr_1.15fr] lg:px-10 lg:py-28"><div><SectionLabel index="OM / 18" dark>Get a Quote</SectionLabel><h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Connect With Our Experts</h2><p className="mt-6 max-w-md text-base leading-relaxed text-background/70">Share your engine, application and fuel availability for a technical conversation about dual-fuel suitability.</p><div className="mt-10 space-y-5"><a href="mailto:omsolns18@gmail.com" className="flex items-start gap-4 text-sm text-background/80 transition-colors hover:text-signal"><span className="grid size-9 place-items-center rounded-[6px] bg-background/10 text-signal">@</span><span><span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Email</span><span className="mt-1 block">omsolns18@gmail.com</span></span></a><div className="flex items-start gap-4 text-sm text-background/80"><span className="grid size-9 place-items-center rounded-[6px] bg-background/10 text-signal"><Phone className="size-4" /></span><span><span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Contact</span><a href={isMobile ? "tel:+917387591083" : "https://wa.me/917387591083"} target={isMobile ? undefined : "_blank"} rel={isMobile ? undefined : "noopener noreferrer"} className="mt-1 block transition-colors hover:text-signal">+91 73875 91083</a></span></div><div className="flex items-start gap-4 text-sm text-background/80"><span className="grid size-9 place-items-center rounded-[6px] bg-background/10 text-signal"><Factory className="size-4" /></span><span><span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Office</span><span className="mt-1 block leading-relaxed">29A, Sairam Park, Near Cipla Foundation,<br />Warje, Pune, Maharashtra, India 411058</span></span></div></div></div><div className="glass-panel rounded-[13px] p-6 sm:p-8"><form onSubmit={submitForm} className="grid gap-4 sm:grid-cols-2"><label className="grid gap-2 text-xs font-medium text-background/70">Name<input required name="name" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="Your name" /></label><label className="grid gap-2 text-xs font-medium text-background/70">Company<input required name="company" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="Company name" /></label><label className="grid gap-2 text-xs font-medium text-background/70">Phone<input name="phone" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="+91" /></label><label className="grid gap-2 text-xs font-medium text-background/70">Email<input required type="email" name="email" className="h-11 rounded-[6px] border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="you@company.com" /></label><label className="grid gap-2 text-xs font-medium text-background/70 sm:col-span-2">Application / Requirement<select name="application" className="h-11 rounded-[6px] border border-background/15 bg-panel px-3 text-sm text-background outline-none focus:border-signal"><option>Choose an application</option><option>Generator set</option><option>Marine engine</option><option>Truck or bus</option><option>Tractor or earth mover</option><option>Other industrial application</option></select></label><label className="grid gap-2 text-xs font-medium text-background/70 sm:col-span-2">Message<textarea required name="message" rows={4} className="rounded-[6px] border border-background/15 bg-background/5 px-3 py-3 text-sm text-background outline-none placeholder:text-background/35 focus:border-signal" placeholder="Tell us about the engine, load profile and fuel availability." /></label><div className="sm:col-span-2"><Button type="submit" className="h-12 w-full rounded-[7px] bg-primary text-sm font-semibold text-primary-foreground shadow-none hover:bg-primary/90">{formSent ? "Request noted ”” thank you" : "Get a Consultation"} <ArrowRight className="size-4" /></Button><p className="mt-3 font-mono text-[10px] text-background/40"></p></div></form></div></div></section>
+        <section id="contact" className="relative overflow-hidden bg-panel text-background">
+          <img src={generatorImage} alt="OM Solutions generator installation" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-20" />
+          <div className="absolute inset-0 bg-panel/90" />
+          <div className="hero-grid-overlay absolute inset-0 z-[1] opacity-30" aria-hidden="true" />
+          <div className="absolute inset-x-0 top-0 z-[1] h-px bg-gradient-to-r from-transparent via-signal/30 to-transparent" aria-hidden="true" />
+          <div className="relative z-[2] mx-auto grid max-w-[1440px] gap-12 px-5 py-20 lg:grid-cols-[0.85fr_1.15fr] lg:px-10 lg:py-28">
+            <div>
+              <SectionLabel index="OM / 18" dark>Get a Quote</SectionLabel>
+              <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Connect With Our Experts</h2>
+              <p className="mt-6 max-w-md text-base leading-relaxed text-background/70">Share your engine, application and fuel availability for a technical conversation about dual-fuel suitability.</p>
+              <div className="mt-10 space-y-5">
+                <a href="mailto:omsolns18@gmail.com" className="flex items-start gap-4 text-sm text-background/80 transition-colors hover:text-signal">
+                  <span className="grid size-10 place-items-center rounded-lg border border-white/10 bg-background/10 text-signal">@</span>
+                  <span>
+                    <span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Email</span>
+                    <span className="mt-1 block">omsolns18@gmail.com</span>
+                  </span>
+                </a>
+                <div className="flex items-start gap-4 text-sm text-background/80">
+                  <span className="grid size-10 place-items-center rounded-lg border border-white/10 bg-background/10 text-signal"><Phone className="size-4" /></span>
+                  <span>
+                    <span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Contact</span>
+                    <a href={isMobile ? "tel:+917387591083" : "https://wa.me/917387591083"} target={isMobile ? undefined : "_blank"} rel={isMobile ? undefined : "noopener noreferrer"} className="mt-1 block transition-colors hover:text-signal">+91 73875 91083</a>
+                  </span>
+                </div>
+                <div className="flex items-start gap-4 text-sm text-background/80">
+                  <span className="grid size-10 place-items-center rounded-lg border border-white/10 bg-background/10 text-signal"><Factory className="size-4" /></span>
+                  <span>
+                    <span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Office</span>
+                    <span className="mt-1 block leading-relaxed">29A, Sairam Park, Near Cipla Foundation,<br />Warje, Pune, Maharashtra, India 411058</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="rounded-2xl border border-white/12 bg-white/5 p-6 shadow-[0_24px_60px_color-mix(in_oklab,black_25%,transparent)] backdrop-blur-md sm:p-8">
+              <form onSubmit={submitForm} className="grid gap-4 sm:grid-cols-2">
+                <label className="grid gap-2 text-xs font-medium text-background/70">Name<input required name="name" className="h-11 rounded-lg border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 transition-colors focus:border-signal" placeholder="Your name" /></label>
+                <label className="grid gap-2 text-xs font-medium text-background/70">Company<input required name="company" className="h-11 rounded-lg border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 transition-colors focus:border-signal" placeholder="Company name" /></label>
+                <label className="grid gap-2 text-xs font-medium text-background/70">Phone<input name="phone" className="h-11 rounded-lg border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 transition-colors focus:border-signal" placeholder="+91" /></label>
+                <label className="grid gap-2 text-xs font-medium text-background/70">Email<input required type="email" name="email" className="h-11 rounded-lg border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 transition-colors focus:border-signal" placeholder="you@company.com" /></label>
+                <label className="grid gap-2 text-xs font-medium text-background/70 sm:col-span-2">Application / Requirement<select name="application" className="h-11 rounded-lg border border-background/15 bg-panel px-3 text-sm text-background outline-none transition-colors focus:border-signal"><option>Choose an application</option><option>Generator set</option><option>Marine engine</option><option>Truck or bus</option><option>Tractor or earth mover</option><option>Other industrial application</option></select></label>
+                <label className="grid gap-2 text-xs font-medium text-background/70 sm:col-span-2">Message<textarea required name="message" rows={4} className="rounded-lg border border-background/15 bg-background/5 px-3 py-3 text-sm text-background outline-none placeholder:text-background/35 transition-colors focus:border-signal" placeholder="Tell us about the engine, load profile and fuel availability." /></label>
+                <div className="sm:col-span-2">
+                  <Button type="submit" className="h-12 w-full rounded-lg bg-signal text-sm font-semibold text-panel shadow-[0_8px_24px_color-mix(in_oklab,var(--color-signal)_30%,transparent)] hover:bg-white hover:text-panel">
+                    {formSent ? "Request noted ”” thank you" : "Get a Consultation"} <ArrowRight className="size-4" />
+                  </Button>
+                  <p className="mt-3 font-mono text-[10px] text-background/40"></p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
       </main>
 
-      <footer className="border-t border-border bg-background"><div className="mx-auto max-w-[1440px] px-5 py-12 lg:px-10"><div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between"><div className="max-w-sm"><div className="flex items-center gap-3"><img src={logoImage} alt="OM Solutions" className="h-10 w-12 object-contain" /><div><p className="font-extrabold tracking-tight">OM SOLUTIONS</p><p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">Dual Fuel Systems</p></div></div><p className="mt-5 font-mono text-[11px] leading-relaxed text-muted-foreground">Smarter Power ”“ Lower Fuel Cost ”“ Cleaner Performance</p><div className="mt-6 flex items-center gap-3"><a href="https://linkedin.com/company/om-solutions" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="grid h-9 w-9 place-items-center rounded-[7px] border border-border text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"><Linkedin className="size-4" /></a><a href="https://youtube.com/@omsolutions" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="grid h-9 w-9 place-items-center rounded-[7px] border border-border text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"><Youtube className="size-4" /></a><a href="https://twitter.com/omsolutions" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X" className="grid h-9 w-9 place-items-center rounded-[7px] border border-border text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"><Twitter className="size-4" /></a><a href="https://instagram.com/omsolutions" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="grid h-9 w-9 place-items-center rounded-[7px] border border-border text-muted-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"><Instagram className="size-4" /></a></div></div><div className="grid gap-10 sm:grid-cols-2"><div><p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Quick links</p><nav className="mt-4 grid grid-cols-2 gap-x-8 gap-y-3 text-sm">{navItems.map(([label, id]) => <a key={id} href={`#${id}`} className="transition-colors hover:text-primary">{label}</a>)}</nav></div><div><p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Contact</p><div className="mt-4 space-y-2 text-sm text-muted-foreground"><a href="mailto:omsolns18@gmail.com" className="block hover:text-primary">omsolns18@gmail.com</a><a href={isMobile ? "tel:+917387591083" : "https://wa.me/917387591083"} target={isMobile ? undefined : "_blank"} rel={isMobile ? undefined : "noopener noreferrer"} className="block hover:text-primary">+91 73875 91083</a><p>Warje, Pune, Maharashtra</p></div></div></div></div><div className="mt-10 flex flex-col gap-2 border-t border-border pt-5 font-mono text-[10px] text-muted-foreground sm:flex-row sm:justify-between"><span> 2026 OM Solutions. All Rights Reserved.</span><span>Dual Fuel &amp; RECD Technology</span></div></div></footer>
+      <footer className="border-t border-border bg-panel text-background">
+        <div className="mx-auto max-w-[1440px] px-5 py-14 lg:px-10">
+          <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
+            <div className="max-w-sm">
+              <div className="flex items-center gap-3">
+                <img src={logoImage} alt="OM Solutions" className="h-10 w-12 object-contain" />
+                <div>
+                  <p className="font-extrabold tracking-tight">OM SOLUTIONS</p>
+                  <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-background/50">Dual Fuel Systems</p>
+                </div>
+              </div>
+              <p className="mt-5 font-mono text-[11px] leading-relaxed text-background/60">Smarter Power ”“ Lower Fuel Cost ”“ Cleaner Performance</p>
+              <div className="mt-6 flex items-center gap-3">
+                <a href="https://linkedin.com/company/om-solutions" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-background/70 transition-colors hover:border-signal hover:bg-signal hover:text-panel"><Linkedin className="size-4" /></a>
+                <a href="https://youtube.com/@omsolutions" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-background/70 transition-colors hover:border-signal hover:bg-signal hover:text-panel"><Youtube className="size-4" /></a>
+                <a href="https://twitter.com/omsolutions" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X" className="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-background/70 transition-colors hover:border-signal hover:bg-signal hover:text-panel"><Twitter className="size-4" /></a>
+                <a href="https://instagram.com/omsolutions" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-background/70 transition-colors hover:border-signal hover:bg-signal hover:text-panel"><Instagram className="size-4" /></a>
+              </div>
+            </div>
+            <div className="grid gap-10 sm:grid-cols-2">
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-signal">Quick links</p>
+                <nav className="mt-4 grid grid-cols-2 gap-x-8 gap-y-3 text-sm">
+                  {navItems.map(([label, id]) => <a key={id} href={`#${id}`} className="text-background/75 transition-colors hover:text-signal">{label}</a>)}
+                </nav>
+              </div>
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-signal">Contact</p>
+                <div className="mt-4 space-y-2 text-sm text-background/65">
+                  <a href="mailto:omsolns18@gmail.com" className="block hover:text-signal">omsolns18@gmail.com</a>
+                  <a href={isMobile ? "tel:+917387591083" : "https://wa.me/917387591083"} target={isMobile ? undefined : "_blank"} rel={isMobile ? undefined : "noopener noreferrer"} className="block hover:text-signal">+91 73875 91083</a>
+                  <p>Warje, Pune, Maharashtra</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-5 font-mono text-[10px] text-background/45 sm:flex-row sm:justify-between">
+            <span> 2026 OM Solutions. All Rights Reserved.</span>
+            <span>Dual Fuel &amp; RECD Technology</span>
+          </div>
+        </div>
+      </footer>
 
       {selectedImage ? <div className="fixed inset-0 z-[60] flex items-center justify-center bg-panel/90 p-5 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label={selectedImage.alt} onClick={() => setSelectedImage(null)}><div className="relative max-h-[90vh] max-w-5xl overflow-hidden rounded-[10px] border border-background/15 bg-background" onClick={(event) => event.stopPropagation()}><Button type="button" variant="outline" size="icon" className="absolute right-3 top-3 z-10 rounded-[6px] border-border bg-background/85" aria-label="Close image viewer" onClick={() => setSelectedImage(null)}><X /></Button><img src={selectedImage.src} alt={selectedImage.alt} className="max-h-[86vh] max-w-full object-contain" /></div></div> : null}
 

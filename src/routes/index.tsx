@@ -570,8 +570,8 @@ const heroQuoteParts: HeroQuotePart[][] = [
   ],
   [
     { text: "Dual fuel kits", accent: true },
-    { text: " — " },
-    { text: "reducing CO₂ & PM emissions", accent: true },
+    { text: " — reducing " },
+    { text: "CO₂ & PM emissions", accent: true },
     { text: " while lowering diesel consumption" },
   ],
   [

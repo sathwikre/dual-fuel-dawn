@@ -559,11 +559,60 @@ const galleryItems = [
   ["Dual-fuel control panel", controlPanelImage, "Products"],
 ] as const;
 
-const heroQuotes = [
-  "Our purpose is to clean and decarbonise the Air",
-  "Dual fuel kits — reducing CO₂ & PM emissions while lowering diesel consumption",
-  "Fuel flexibility is not a luxury! It is a necessity!"
-] as const;
+type HeroQuotePart = { text: string; accent?: boolean; breakBefore?: boolean };
+
+const heroQuoteParts: HeroQuotePart[][] = [
+  [
+    { text: "Our purpose", accent: true },
+    { text: " is to " },
+    { text: "clean and decarbonise", accent: true },
+    { text: " the Air" },
+  ],
+  [
+    { text: "Dual fuel kits", accent: true },
+    { text: " — " },
+    { text: "reducing CO₂ & PM emissions", accent: true },
+    { text: " while lowering diesel consumption" },
+  ],
+  [
+    { text: "Fuel flexibility", accent: true },
+    { text: " is " },
+    { text: "not a luxury", accent: true },
+    { text: "!" },
+    { text: " It is a ", breakBefore: true },
+    { text: "necessity", accent: true },
+    { text: "!" },
+  ],
+];
+
+const heroQuotes = heroQuoteParts.map((parts) => parts.map((part) => part.text).join(""));
+
+function renderHeroQuote(parts: HeroQuotePart[], visibleCharacterCount: number) {
+  let remaining = visibleCharacterCount;
+  const nodes: React.ReactNode[] = [];
+
+  for (let index = 0; index < parts.length && remaining > 0; index += 1) {
+    const part = parts[index]!;
+    const slice = part.text.slice(0, remaining);
+    remaining -= slice.length;
+    if (!slice) continue;
+
+    nodes.push(
+      <span key={index} className={part.accent ? "font-semibold text-signal" : undefined}>
+        {part.breakBefore ? (
+          <>
+            <br />
+            {slice.trimStart()}
+          </>
+        ) : (
+          slice
+        )}
+      </span>
+    );
+  }
+
+  return nodes;
+}
 
 function RotatingQuote() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -580,7 +629,7 @@ function RotatingQuote() {
   }, []);
 
   useEffect(() => {
-    const currentQuote = heroQuotes[currentIndex];
+    const currentQuote = heroQuotes[currentIndex]!;
 
     if (prefersReducedMotion) {
       setVisibleCharacterCount(currentQuote.length);
@@ -613,17 +662,8 @@ function RotatingQuote() {
             key={`${currentIndex}-${visibleCharacterCount === 0 ? "starting" : "typing"}`}
             className="block animate-[hero-quote-enter_420ms_cubic-bezier(0.16,1,0.3,1)_both] motion-reduce:animate-none"
           >
-            {currentIndex === 1 ? (
-              <><span className="font-semibold">{heroQuotes[currentIndex].slice(0, Math.min(visibleCharacterCount, 14))}</span>{heroQuotes[currentIndex].slice(14, visibleCharacterCount)}</>
-            ) : currentIndex === 2 ? (
-              <>
-                {heroQuotes[currentIndex].slice(0, Math.min(visibleCharacterCount, 33))}
-                {visibleCharacterCount > 33 && <><br />{heroQuotes[currentIndex].slice(33, visibleCharacterCount).trimStart()}</>}
-              </>
-            ) : (
-              heroQuotes[currentIndex].slice(0, visibleCharacterCount)
-            )}
-            {visibleCharacterCount < heroQuotes[currentIndex].length && !prefersReducedMotion && (
+            {renderHeroQuote(heroQuoteParts[currentIndex]!, visibleCharacterCount)}
+            {visibleCharacterCount < heroQuotes[currentIndex]!.length && !prefersReducedMotion && (
               <span className="ml-1 inline-block h-[0.8em] w-px animate-pulse bg-[#b6ff72] align-middle" aria-hidden="true" />
             )}
           </span>

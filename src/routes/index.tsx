@@ -561,140 +561,75 @@ const heroQuotes = [
 
 function RotatingQuote() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState("");
-  const phaseRef = useRef<"typing" | "holding" | "deleting">("typing");
-  const charIndexRef = useRef(0);
-  const currentIndexRef = useRef(0);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const [visibleCharacterCount, setVisibleCharacterCount] = useState(0);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
-    setPrefersReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches);
+
+    updatePreference();
+    mediaQuery.addEventListener("change", updatePreference);
+    return () => mediaQuery.removeEventListener("change", updatePreference);
   }, []);
 
-  const currentQuote = heroQuotes[currentIndexRef.current] || heroQuotes[0];
-
   useEffect(() => {
+    const currentQuote = heroQuotes[currentIndex];
+
     if (prefersReducedMotion) {
-      setDisplayedText(currentQuote);
-      const interval = setInterval(() => {
-        currentIndexRef.current = (currentIndexRef.current + 1) % heroQuotes.length;
-        setCurrentIndex(currentIndexRef.current);
-        setDisplayedText(heroQuotes[currentIndexRef.current]);
-      }, 4000);
-      return () => clearInterval(interval);
+      setVisibleCharacterCount(currentQuote.length);
+      return;
     }
 
-    // Initialize
-    phaseRef.current = "typing";
-    charIndexRef.current = 0;
-    currentIndexRef.current = 0;
-    setDisplayedText("");
+    if (visibleCharacterCount < currentQuote.length) {
+      const typeNextCharacter = window.setTimeout(() => {
+        setVisibleCharacterCount((count) => count + 1);
+      }, 34);
 
-    const runAnimation = () => {
-      const phase = phaseRef.current;
-      const charIndex = charIndexRef.current;
-      const idx = currentIndexRef.current;
-      const quote = heroQuotes[idx];
+      return () => window.clearTimeout(typeNextCharacter);
+    }
 
-      if (phase === "typing") {
-        if (charIndex < quote.length) {
-          setDisplayedText(quote.slice(0, charIndex + 1));
-          charIndexRef.current = charIndex + 1;
-          timerRef.current = setTimeout(runAnimation, 50);
-        } else {
-          phaseRef.current = "holding";
-          timerRef.current = setTimeout(() => {
-            phaseRef.current = "deleting";
-            runAnimation();
-          }, 3500);
-        }
-      } else if (phase === "deleting") {
-        if (charIndex > 0) {
-          setDisplayedText(quote.slice(0, charIndex - 1));
-          charIndexRef.current = charIndex - 1;
-          timerRef.current = setTimeout(runAnimation, 30);
-        } else {
-          currentIndexRef.current = (idx + 1) % heroQuotes.length;
-          setCurrentIndex(currentIndexRef.current);
-          phaseRef.current = "typing";
-          charIndexRef.current = 0;
-          timerRef.current = setTimeout(runAnimation, 50);
-        }
-      }
-    };
+    // Keep the complete message on screen, then replace it as a whole.
+    // This preserves the typewriter feel without a letter-by-letter erase.
+    const showNextQuote = window.setTimeout(() => {
+      setCurrentIndex((index) => (index + 1) % heroQuotes.length);
+      setVisibleCharacterCount(0);
+    }, 3200);
 
-    timerRef.current = setTimeout(runAnimation, 50);
+    return () => window.clearTimeout(showNextQuote);
+  }, [currentIndex, prefersReducedMotion, visibleCharacterCount]);
 
-    return () => {
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-      }
-    };
-  }, [prefersReducedMotion, currentQuote]);
-
-  // For Quote 2, make "DUAL FUEL KITS" more prominent
-  if (currentIndexRef.current === 1) {
-    const parts = displayedText.split(" — ");
-    const isComplete = displayedText === currentQuote;
-    return (
-      <span className="inline-block">
-        <span className="font-semibold">{parts[0]}</span>
-        {parts.length > 1 && <span> — {parts[1]}</span>}
-        {!isComplete && !prefersReducedMotion && (
-          <span className="inline-block w-[2px] h-[0.85em] bg-white align-middle ml-1 animate-pulse" />
-        )}
-      </span>
-    );
-  }
-
-  // For Quote 1, preserve the line break at "decarbonise"
-  if (currentIndexRef.current === 0) {
-    const breakIdx = currentQuote!.indexOf("decarbonise");
-    const line1 = displayedText.slice(0, Math.min(displayedText.length, breakIdx));
-    const line2 = displayedText.length > breakIdx ? displayedText.slice(breakIdx) : "";
-    const isComplete = displayedText === currentQuote;
-
-    return (
-      <span className="inline-block">
-        {line1}
-        {displayedText.length >= breakIdx && <br />}
-        {line2}
-        {!isComplete && !prefersReducedMotion && (
-          <span className="inline-block w-[2px] h-[0.85em] bg-white align-middle ml-1 animate-pulse" />
-        )}
-      </span>
-    );
-  }
-
-  // For Quote 3, split into two lines
-  if (currentIndexRef.current === 2) {
-    const breakIdx = currentQuote!.indexOf(" It is a necessity");
-    const line1 = displayedText.slice(0, Math.min(displayedText.length, breakIdx));
-    const line2 = displayedText.length > breakIdx ? displayedText.slice(breakIdx) : "";
-    const isComplete = displayedText === currentQuote;
-
-    return (
-      <span className="inline-block">
-        {line1}
-        {displayedText.length >= breakIdx && <br />}
-        {line2}
-        {!isComplete && !prefersReducedMotion && (
-          <span className="inline-block w-[2px] h-[0.85em] bg-white align-middle ml-1 animate-pulse" />
-        )}
-      </span>
-    );
-  }
-
-  // Default display for other quotes
-  const isComplete = displayedText === currentQuote;
   return (
-    <span className="inline-block">
-      {displayedText}
-      {!isComplete && !prefersReducedMotion && (
-        <span className="inline-block w-[2px] h-[0.85em] bg-white align-middle ml-1 animate-pulse" />
-      )}
-    </span>
+    <div className="max-w-4xl rise-in">
+      <div className="min-h-[clamp(80px,12vw,160px)] overflow-hidden">
+        <h1 className="mt-0 text-[clamp(32px,4.5vw,64px)] font-light leading-[1.1] tracking-[-0.02em] text-white" aria-live="polite" aria-atomic="true">
+          <span
+            key={`${currentIndex}-${visibleCharacterCount === 0 ? "starting" : "typing"}`}
+            className="block animate-[hero-quote-enter_420ms_cubic-bezier(0.16,1,0.3,1)_both] motion-reduce:animate-none"
+          >
+            {currentIndex === 1 ? (
+              <><span className="font-semibold">{heroQuotes[currentIndex].slice(0, Math.min(visibleCharacterCount, 14))}</span>{heroQuotes[currentIndex].slice(14, visibleCharacterCount)}</>
+            ) : currentIndex === 2 ? (
+              <>
+                {heroQuotes[currentIndex].slice(0, Math.min(visibleCharacterCount, 33))}
+                {visibleCharacterCount > 33 && <><br />{heroQuotes[currentIndex].slice(33, visibleCharacterCount).trimStart()}</>}
+              </>
+            ) : (
+              heroQuotes[currentIndex].slice(0, visibleCharacterCount)
+            )}
+            {visibleCharacterCount < heroQuotes[currentIndex].length && !prefersReducedMotion && (
+              <span className="ml-1 inline-block h-[0.8em] w-px animate-pulse bg-[#b6ff72] align-middle" aria-hidden="true" />
+            )}
+          </span>
+        </h1>
+      </div>
+      <style>{`
+        @keyframes hero-quote-enter {
+          from { opacity: 0; transform: translateY(0.5em); filter: blur(5px); }
+          to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+      `}</style>
+    </div>
   );
 }
 
@@ -1313,13 +1248,9 @@ function OmSolutionsHome() {
           {/* Subtle green brand tint overlay */}
           <div className="absolute inset-0 z-[2] bg-[#b6ff72]/10" />
           <div className={`relative z-[3] mx-auto flex min-h-[100svh] w-full max-w-[1440px] flex-col items-center justify-end px-5 pb-32 text-center lg:px-16 transition-all duration-[350ms] ease ${navScrolled ? 'pt-[116px] lg:pt-[124px]' : 'pt-[129px] lg:pt-[137px]'}`}>
-            <div className="max-w-4xl rise-in min-h-[clamp(80px,12vw,160px)] flex items-center justify-center">
-              <h1 className="mt-0 text-[clamp(32px,4.5vw,64px)] font-light leading-[1.1] tracking-[-0.02em] text-white">
-                <RotatingQuote />
-              </h1>
-            </div>
-            <p className="mt-7 inline-flex items-center gap-3 text-base font-semibold uppercase tracking-[0.18em] text-white sm:text-lg"><span className="h-px w-8 bg-[#b6ff72]" />We are OM Solutions<span className="h-px w-8 bg-[#b6ff72]" /></p>
-            <div className="mt-7">
+            <RotatingQuote />
+            <p className="mt-4 inline-flex items-center gap-3 text-base font-semibold uppercase tracking-[0.18em] text-white sm:text-lg"><span className="h-px w-8 bg-[#b6ff72]" />We are OM Solutions<span className="h-px w-8 bg-[#b6ff72]" /></p>
+            <div className="mt-5">
               <a href={isMobile ? "tel:+917387591083" : "https://wa.me/917387591083"} target={isMobile ? undefined : "_blank"} rel={isMobile ? undefined : "noopener noreferrer"} className="inline-flex h-11 items-center border border-white bg-transparent px-7 text-[11px] font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-white hover:text-[#0b1f15]">
                 Contact Us
               </a>

@@ -427,6 +427,9 @@ type TeamMember = {
   name: string;
   image: string;
   expertise: string[];
+  profileTitle?: string;
+  experience?: string;
+  keyExpertise?: string[];
 };
 
 const teamMembers: TeamMember[] = [
@@ -455,6 +458,20 @@ const teamMembers: TeamMember[] = [
     id: "vikram-mane",
     name: "Vikram Mane",
     image: vikramImage,
+    profileTitle: "Electronics & Telecommunication Engineer",
+    experience: "15+ years of experience in embedded systems, industrial automation, electronics product development, and control systems.",
+    keyExpertise: [
+      "Embedded hardware & firmware",
+      "Microcontroller-based systems",
+      "Industrial automation & control",
+      "PLC, HMI, VFD & Modbus",
+      "Analog & digital electronics",
+      "Sensors & instrumentation",
+      "Custom controllers & machine automation",
+      "Metal detection & sensing systems",
+      "Naval electronics",
+      "Product development & system integration",
+    ],
     expertise: [
       "PCB development",
       "Coding",
@@ -2535,7 +2552,7 @@ function OmSolutionsHome() {
           aria-label={`${selectedTeamMember.name} profile`}
         >
           <div
-            className="relative flex flex-col overflow-hidden rounded-[14px] bg-background shadow-2xl w-full max-w-2xl animate-in fade-in slide-in-from-bottom-4 duration-300"
+            className="relative flex flex-col overflow-hidden rounded-[14px] bg-background shadow-2xl w-full max-w-2xl max-h-[90vh] animate-in fade-in slide-in-from-bottom-4 duration-300"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
@@ -2569,19 +2586,51 @@ function OmSolutionsHome() {
               </div>
 
               {/* Expertise */}
-              <div className="flex flex-1 flex-col p-6">
-                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground mb-4">Expertise</p>
-                <ul className="space-y-3">
-                  {selectedTeamMember.expertise.map((item, index) => (
-                    <li key={index} className="flex items-start gap-3 text-sm leading-relaxed text-foreground">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-signal" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+              <div className="flex flex-1 flex-col min-h-0">
+                <div className="flex-1 overflow-y-auto p-6">
+                  {selectedTeamMember.profileTitle && (
+                    <>
+                      <p className="text-sm font-semibold text-foreground mb-3 leading-relaxed">{selectedTeamMember.profileTitle}</p>
+                    </>
+                  )}
+                  
+                  {selectedTeamMember.experience && (
+                    <>
+                      <p className="text-sm text-foreground mb-4 leading-relaxed">{selectedTeamMember.experience}</p>
+                    </>
+                  )}
+
+                  {selectedTeamMember.keyExpertise && (
+                    <>
+                      <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground mb-3">Expertise</p>
+                      <ul className="space-y-2">
+                        {selectedTeamMember.keyExpertise.map((item, index) => (
+                          <li key={index} className="flex items-start gap-2 text-xs leading-relaxed text-foreground">
+                            <span className="mt-1 size-1 shrink-0 rounded-full bg-signal" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+
+                  {!selectedTeamMember.profileTitle && (
+                    <>
+                      <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground mb-4">Expertise</p>
+                      <ul className="space-y-3">
+                        {selectedTeamMember.expertise.map((item, index) => (
+                          <li key={index} className="flex items-start gap-3 text-sm leading-relaxed text-foreground">
+                            <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-signal" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                </div>
 
                 {/* Navigation */}
-                <div className="mt-auto pt-6 flex items-center justify-between">
+                <div className="shrink-0 px-6 py-4 border-t border-border flex items-center justify-between">
                   <button
                     type="button"
                     onClick={() => {

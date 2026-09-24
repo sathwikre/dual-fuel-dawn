@@ -1969,13 +1969,13 @@ function OmSolutionsHome() {
                   <div className="flex items-start justify-between gap-4 p-5 flex-1 overflow-y-auto">
                     <div className="w-full">
                       <h3 className="text-2xl font-bold leading-snug mb-2">Sai Sound Service (Amane Engineers), Waki (B)</h3>
-                      <div className="space-y-1.5 text-base leading-relaxed text-muted-foreground font-sans">
-                        <div><span className="font-medium text-foreground">Genset:</span> TATA 125 kVA CPCB-II</div>
-                        <div><span className="font-medium text-foreground">Fuel:</span> Diesel + LPG</div>
-                        <div><span className="font-medium text-foreground">Load:</span> 65–85% · Avg 75%</div>
-                        <div><span className="font-medium text-foreground">Hours:</span> 200/mo · 2,000/yr</div>
-                        <div><span className="font-semibold text-signal">Cost saving:</span> ₹159/hr · ₹31,800/mo · ₹3.18L/yr</div>
-                        <div><span className="font-semibold text-signal">CO₂ saving:</span> 3 kg/hr · 600 kg/mo · 6,000 kg/yr</div>
+                      <div className="space-y-1.5 text-base leading-relaxed font-sans">
+                        <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">TATA 125 kVA CPCB-II</span></div>
+                        <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + LPG</span></div>
+                        <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">65–85% · Avg 75%</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">200/mo · 2,000/yr</span></div>
+                        <div><span className="font-bold text-signal">Cost saving:</span> <span className="font-medium text-foreground">₹159/hr · ₹31,800/mo · ₹3.18L/yr</span></div>
+                        <div><span className="font-bold text-signal">CO₂ saving:</span> <span className="font-medium text-foreground">3 kg/hr · 600 kg/mo · 6,000 kg/yr</span></div>
                       </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
@@ -1997,13 +1997,13 @@ function OmSolutionsHome() {
                   <div className="flex items-start justify-between gap-4 p-5 flex-1 overflow-y-auto">
                     <div className="w-full">
                       <h3 className="text-2xl font-bold leading-snug mb-2">Akwel Automotive India Pvt Ltd</h3>
-                      <div className="space-y-1.5 text-base leading-relaxed text-muted-foreground font-sans">
-                        <div><span className="font-medium text-foreground">Genset:</span> KOEL 320 kVA CPCB-II</div>
-                        <div><span className="font-medium text-foreground">Fuel:</span> Diesel + PNG (300 bar)</div>
-                        <div><span className="font-medium text-foreground">Load:</span> 50–75% · Avg 55%</div>
-                        <div><span className="font-medium text-foreground">Hours:</span> 100/mo · 1,000/yr</div>
-                        <div><span className="font-semibold text-signal">Cost saving:</span> ₹783/hr · ₹78,300/mo · ₹7.83L/yr</div>
-                        <div><span className="font-semibold text-signal">CO₂ saving:</span> 10.1 kg/hr · 1009 kg/mo · 10,090 kg/yr</div>
+                      <div className="space-y-1.5 text-base leading-relaxed font-sans">
+                        <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">KOEL 320 kVA CPCB-II</span></div>
+                        <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (300 bar)</span></div>
+                        <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">50–75% · Avg 55%</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">100/mo · 1,000/yr</span></div>
+                        <div><span className="font-bold text-signal">Cost saving:</span> <span className="font-medium text-foreground">₹783/hr · ₹78,300/mo · ₹7.83L/yr</span></div>
+                        <div><span className="font-bold text-signal">CO₂ saving:</span> <span className="font-medium text-foreground">10.1 kg/hr · 1009 kg/mo · 10,090 kg/yr</span></div>
                       </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
@@ -2025,11 +2025,11 @@ function OmSolutionsHome() {
                   <div className="flex items-start justify-between gap-4 p-5 flex-1 overflow-y-auto">
                     <div className="w-full">
                       <h3 className="text-2xl font-bold leading-snug mb-2">Birla Tisya, Bengaluru</h3>
-                      <div className="space-y-1.5 text-base leading-relaxed text-muted-foreground font-sans">
-                        <div><span className="font-medium text-foreground">Gensets:</span> FMTU 1010 kVA + Greaves 200 kVA</div>
-                        <div><span className="font-medium text-foreground">Fuel:</span> Diesel + PNG (1 bar)</div>
-                        <div className="pt-1"><span className="font-medium text-foreground">FMTU:</span> 50–60% load · Avg 55% · ₹2,471/hr · ₹9.884L/yr · 12,620 kg CO₂/yr</div>
-                        <div><span className="font-medium text-foreground">Greaves:</span> 50–60% load · Avg 85% · ₹756/hr · ₹3.024L/yr · 3,900 kg CO₂/yr</div>
+                      <div className="space-y-1.5 text-base leading-relaxed font-sans">
+                        <div><span className="font-bold text-foreground">Gensets:</span> <span className="font-medium text-foreground">FMTU 1010 kVA + Greaves 200 kVA</span></div>
+                        <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (1 bar)</span></div>
+                        <div className="pt-1"><span className="font-bold text-foreground">FMTU:</span> <span className="font-medium text-foreground">50–60% load · Avg 55% · ₹2,471/hr · ₹9.884L/yr · 12,620 kg CO₂/yr</span></div>
+                        <div><span className="font-bold text-foreground">Greaves:</span> <span className="font-medium text-foreground">50–60% load · Avg 85% · ₹756/hr · ₹3.024L/yr · 3,900 kg CO₂/yr</span></div>
                       </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
@@ -2051,13 +2051,13 @@ function OmSolutionsHome() {
                   <div className="flex items-start justify-between gap-4 p-5 flex-1 overflow-y-auto">
                     <div className="w-full">
                       <h3 className="text-2xl font-bold leading-snug mb-2">Nevatia Steels & Alloys, Boisar, Tarapur</h3>
-                      <div className="space-y-1.5 text-base leading-relaxed text-muted-foreground font-sans">
-                        <div><span className="font-medium text-foreground">Genset:</span> MTU 1000 kVA CPCB-II</div>
-                        <div><span className="font-medium text-foreground">Fuel:</span> Diesel + PNG (1 bar)</div>
-                        <div><span className="font-medium text-foreground">Load:</span> 60–80% · Avg 70%</div>
-                        <div><span className="font-medium text-foreground">Hours:</span> 200/mo · 2,000/yr</div>
-                        <div><span className="font-semibold text-signal">Cost saving:</span> ₹3,114/hr · ₹6,22,800/mo · ₹62.28L/yr</div>
-                        <div><span className="font-semibold text-signal">CO₂ saving:</span> 40.15 kg/hr · 8,030 kg/mo · 80,300 kg/yr</div>
+                      <div className="space-y-1.5 text-base leading-relaxed font-sans">
+                        <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">MTU 1000 kVA CPCB-II</span></div>
+                        <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (1 bar)</span></div>
+                        <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">60–80% · Avg 70%</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">200/mo · 2,000/yr</span></div>
+                        <div><span className="font-bold text-signal">Cost saving:</span> <span className="font-medium text-foreground">₹3,114/hr · ₹6,22,800/mo · ₹62.28L/yr</span></div>
+                        <div><span className="font-bold text-signal">CO₂ saving:</span> <span className="font-medium text-foreground">40.15 kg/hr · 8,030 kg/mo · 80,300 kg/yr</span></div>
                       </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">

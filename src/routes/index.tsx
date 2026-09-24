@@ -1966,14 +1966,17 @@ function OmSolutionsHome() {
                     <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
                     <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">1 photo</span>
                   </div>
-                  <div className="flex items-start justify-between gap-4 p-5 flex-1">
-                    <div>
-                      <h3 className="text-xl font-bold leading-snug">Sai Sound Service (Amane Engineers), Waki (B)</h3>
-                      <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground font-sans">
-                        <li><span className="font-medium text-foreground">Genset:</span> TATA 125 kVA CPCB-II</li>
-                        <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + LPG (LOT)</li>
-                        <li><span className="font-medium text-foreground">Operating load:</span> 60–85%</li>
-                      </ul>
+                  <div className="flex items-start justify-between gap-4 p-5 flex-1 overflow-y-auto">
+                    <div className="w-full">
+                      <h3 className="text-2xl font-bold leading-snug mb-2">Sai Sound Service (Amane Engineers), Waki (B)</h3>
+                      <div className="space-y-1.5 text-base leading-relaxed text-muted-foreground font-sans">
+                        <div><span className="font-medium text-foreground">Genset:</span> TATA 125 kVA CPCB-II</div>
+                        <div><span className="font-medium text-foreground">Fuel:</span> Diesel + LPG</div>
+                        <div><span className="font-medium text-foreground">Load:</span> 65–85% · Avg 75%</div>
+                        <div><span className="font-medium text-foreground">Hours:</span> 200/mo · 2,000/yr</div>
+                        <div><span className="font-semibold text-signal">Cost saving:</span> ₹159/hr · ₹31,800/mo · ₹3.18L/yr</div>
+                        <div><span className="font-semibold text-signal">CO₂ saving:</span> 3 kg/hr · 600 kg/mo · 6,000 kg/yr</div>
+                      </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
                       <ArrowDownRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
@@ -1991,16 +1994,17 @@ function OmSolutionsHome() {
                     <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
                     <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">2 photos</span>
                   </div>
-                  <div className="flex items-start justify-between gap-4 p-5 flex-1">
-                    <div>
-                      <h3 className="text-xl font-bold leading-snug">Akwel Automotive India Pvt Ltd</h3>
-                      <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground font-sans">
-                        <li><span className="font-medium text-foreground">Genset:</span> KOEL 320 kVA CPCB-II</li>
-                        <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + PNG (300 bar)</li>
-                        <li><span className="font-medium text-foreground">Operating load:</span> 50–80%</li>
-                        <li><span className="font-medium text-foreground">Annual Fuel Cost Saving:</span> ₹3.96 lakhs</li>
-                        <li><span className="font-medium text-foreground">Annual CO₂ Reduction:</span> 6.13 tonnes</li>
-                      </ul>
+                  <div className="flex items-start justify-between gap-4 p-5 flex-1 overflow-y-auto">
+                    <div className="w-full">
+                      <h3 className="text-2xl font-bold leading-snug mb-2">Akwel Automotive India Pvt Ltd</h3>
+                      <div className="space-y-1.5 text-base leading-relaxed text-muted-foreground font-sans">
+                        <div><span className="font-medium text-foreground">Genset:</span> KOEL 320 kVA CPCB-II</div>
+                        <div><span className="font-medium text-foreground">Fuel:</span> Diesel + PNG (300 bar)</div>
+                        <div><span className="font-medium text-foreground">Load:</span> 50–75% · Avg 55%</div>
+                        <div><span className="font-medium text-foreground">Hours:</span> 100/mo · 1,000/yr</div>
+                        <div><span className="font-semibold text-signal">Cost saving:</span> ₹783/hr · ₹78,300/mo · ₹7.83L/yr</div>
+                        <div><span className="font-semibold text-signal">CO₂ saving:</span> 10.1 kg/hr · 1009 kg/mo · 10,090 kg/yr</div>
+                      </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
                       <ArrowDownRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
@@ -2018,14 +2022,15 @@ function OmSolutionsHome() {
                     <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
                     <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">8 photos</span>
                   </div>
-                  <div className="flex items-start justify-between gap-4 p-5 flex-1">
-                    <div>
-                      <h3 className="text-xl font-bold leading-snug">Birla Tisya, Bengaluru</h3>
-                      <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground font-sans">
-                        <li><span className="font-medium text-foreground">Gensets:</span> FMTU 1010 kVA CPCB-IV+ × 2; Greaves 200 kVA CPCB-IV+</li>
-                        <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + PNG (1 bar)</li>
-                        <li><span className="font-medium text-foreground">Operating load:</span> 50–60%</li>
-                      </ul>
+                  <div className="flex items-start justify-between gap-4 p-5 flex-1 overflow-y-auto">
+                    <div className="w-full">
+                      <h3 className="text-2xl font-bold leading-snug mb-2">Birla Tisya, Bengaluru</h3>
+                      <div className="space-y-1.5 text-base leading-relaxed text-muted-foreground font-sans">
+                        <div><span className="font-medium text-foreground">Gensets:</span> FMTU 1010 kVA + Greaves 200 kVA</div>
+                        <div><span className="font-medium text-foreground">Fuel:</span> Diesel + PNG (1 bar)</div>
+                        <div className="pt-1"><span className="font-medium text-foreground">FMTU:</span> 50–60% load · Avg 55% · ₹2,471/hr · ₹9.884L/yr · 12,620 kg CO₂/yr</div>
+                        <div><span className="font-medium text-foreground">Greaves:</span> 50–60% load · Avg 85% · ₹756/hr · ₹3.024L/yr · 3,900 kg CO₂/yr</div>
+                      </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
                       <ArrowDownRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
@@ -2043,16 +2048,17 @@ function OmSolutionsHome() {
                     <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
                     <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">9 photos</span>
                   </div>
-                  <div className="flex items-start justify-between gap-4 p-5 flex-1">
-                    <div>
-                      <h3 className="text-xl font-bold leading-snug">Nevatia Steels & Alloys, Boisar, Tarapur</h3>
-                      <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-muted-foreground font-sans">
-                        <li><span className="font-medium text-foreground">Genset:</span> MTU 1000 kVA CPCB-II</li>
-                        <li><span className="font-medium text-foreground">Fuel strategy:</span> Diesel + PNG (1 bar)</li>
-                        <li><span className="font-medium text-foreground">Operating load:</span> 60–80%</li>
-                        <li><span className="font-medium text-foreground">Annual Fuel Cost Saving:</span> ₹18.42 lakhs</li>
-                        <li><span className="font-medium text-foreground">Annual CO₂ Reduction:</span> 22.36 tonnes</li>
-                      </ul>
+                  <div className="flex items-start justify-between gap-4 p-5 flex-1 overflow-y-auto">
+                    <div className="w-full">
+                      <h3 className="text-2xl font-bold leading-snug mb-2">Nevatia Steels & Alloys, Boisar, Tarapur</h3>
+                      <div className="space-y-1.5 text-base leading-relaxed text-muted-foreground font-sans">
+                        <div><span className="font-medium text-foreground">Genset:</span> MTU 1000 kVA CPCB-II</div>
+                        <div><span className="font-medium text-foreground">Fuel:</span> Diesel + PNG (1 bar)</div>
+                        <div><span className="font-medium text-foreground">Load:</span> 60–80% · Avg 70%</div>
+                        <div><span className="font-medium text-foreground">Hours:</span> 200/mo · 2,000/yr</div>
+                        <div><span className="font-semibold text-signal">Cost saving:</span> ₹3,114/hr · ₹6,22,800/mo · ₹62.28L/yr</div>
+                        <div><span className="font-semibold text-signal">CO₂ saving:</span> 40.15 kg/hr · 8,030 kg/mo · 80,300 kg/yr</div>
+                      </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
                       <ArrowDownRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />

@@ -1974,8 +1974,8 @@ function OmSolutionsHome() {
                         <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + LPG</span></div>
                         <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">65–85% · Avg 75%</span></div>
                         <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">200/mo · 2,000/yr</span></div>
-                        <div><span className="font-bold text-signal">Cost saving:</span> <span className="font-medium text-foreground">₹159/hr · ₹31,800/mo · ₹3.18L/yr</span></div>
-                        <div><span className="font-bold text-signal">CO₂ saving:</span> <span className="font-medium text-foreground">3 kg/hr · 600 kg/mo · 6,000 kg/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹159/hr · ₹31,800/mo · ₹3.18L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">3 kg/hr · 600 kg/mo · 6,000 kg/yr</span></div>
                       </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
@@ -2002,8 +2002,8 @@ function OmSolutionsHome() {
                         <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (300 bar)</span></div>
                         <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">50–75% · Avg 55%</span></div>
                         <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">100/mo · 1,000/yr</span></div>
-                        <div><span className="font-bold text-signal">Cost saving:</span> <span className="font-medium text-foreground">₹783/hr · ₹78,300/mo · ₹7.83L/yr</span></div>
-                        <div><span className="font-bold text-signal">CO₂ saving:</span> <span className="font-medium text-foreground">10.1 kg/hr · 1009 kg/mo · 10,090 kg/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹783/hr · ₹78,300/mo · ₹7.83L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">10.1 kg/hr · 1009 kg/mo · 10,090 kg/yr</span></div>
                       </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
@@ -2028,8 +2028,10 @@ function OmSolutionsHome() {
                       <div className="space-y-1.5 text-base leading-relaxed font-sans">
                         <div><span className="font-bold text-foreground">Gensets:</span> <span className="font-medium text-foreground">FMTU 1010 kVA + Greaves 200 kVA</span></div>
                         <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (1 bar)</span></div>
-                        <div className="pt-1"><span className="font-bold text-foreground">FMTU:</span> <span className="font-medium text-foreground">50–60% load · Avg 55% · ₹2,471/hr · ₹9.884L/yr · 12,620 kg CO₂/yr</span></div>
-                        <div><span className="font-bold text-foreground">Greaves:</span> <span className="font-medium text-foreground">50–60% load · Avg 85% · ₹756/hr · ₹3.024L/yr · 3,900 kg CO₂/yr</span></div>
+                        <div className="pt-1"><span className="font-bold text-foreground">FMTU:</span> <span className="font-medium text-foreground">50–60% load · Avg 55% · ₹2,471/hr · ₹98,840/mo · ₹9.884L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">31.6 kg/hr · 1,262 kg/mo · 12,620 kg/yr</span></div>
+                        <div className="pt-1"><span className="font-bold text-foreground">Greaves:</span> <span className="font-medium text-foreground">50–60% load · Avg 85% · ₹756/hr · ₹30,240/mo · ₹3.024L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">9.8 kg/hr · 390 kg/mo · 3,900 kg/yr</span></div>
                       </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
@@ -2056,8 +2058,8 @@ function OmSolutionsHome() {
                         <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (1 bar)</span></div>
                         <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">60–80% · Avg 70%</span></div>
                         <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">200/mo · 2,000/yr</span></div>
-                        <div><span className="font-bold text-signal">Cost saving:</span> <span className="font-medium text-foreground">₹3,114/hr · ₹6,22,800/mo · ₹62.28L/yr</span></div>
-                        <div><span className="font-bold text-signal">CO₂ saving:</span> <span className="font-medium text-foreground">40.15 kg/hr · 8,030 kg/mo · 80,300 kg/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹3,114/hr · ₹6,22,800/mo · ₹62.28L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">40.15 kg/hr · 8,030 kg/mo · 80,300 kg/yr</span></div>
                       </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">

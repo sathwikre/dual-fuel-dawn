@@ -2090,9 +2090,9 @@ function OmSolutionsHome() {
             </div>
             <div className="mt-12 grid gap-5 md:grid-cols-3">
               {([
-                { title: "Borewell", desc: "Dual-fuel kits for borewell pump sets.", images: [ borewellImg3,borewellImg1, borewellImg2, borewellImg5, borewellImg4, borewellImg6, borewellImg7], icon: Gauge },
-                { title: "Air Compressor", desc: "Field installation for air-compressor applications.", images: [aircomp7,aircomp1, aircomp2, aircomp3, aircomp4, aircomp5, aircomp6], icon: Cog },
-                { title: "Marine Propulsion", desc: "Marine propulsion with dual-fuel conversion.", images: [marine1, marine2], icon: Fuel },
+                { title: "Borewell", desc: "Dual fuel kits for Borewell Application.", images: [ borewellImg3,borewellImg1, borewellImg2, borewellImg5, borewellImg4, borewellImg6, borewellImg7], icon: Gauge },
+                { title: "Air Compressor", desc: "Dual fuel kits for Air Compressor Application.", images: [aircomp7,aircomp1, aircomp2, aircomp3, aircomp4, aircomp5, aircomp6], icon: Cog },
+                { title: "Marine Propulsion", desc: "Dual Fuel kits for Marine Inboard Engine ( Propulsion ) application.", images: [marine1, marine2], icon: Fuel },
               ] as { title: string; desc: string; images: string[]; icon: typeof Gauge }[]).map((app) => (
                 <article key={app.title} className="app-card-dark app-card-dark-hover group cursor-pointer rounded-2xl" onClick={() => setAppGallery({ title: app.title, images: app.images, index: 0 })}>
                   <div className="relative overflow-hidden aspect-[1.25/1]">

@@ -2389,18 +2389,20 @@ function OmSolutionsHome() {
                     className="team-card team-card-hover group relative w-full rounded-2xl text-left"
                     aria-label={`View profile of ${member.name}`}
                   >
-                    <div className="relative aspect-[1/1] overflow-hidden">
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-panel/80 via-panel/10 to-transparent opacity-40 transition-opacity duration-300 group-hover:opacity-100" />
-                      <span className="absolute left-3 top-3 font-mono text-[10px] uppercase tracking-[0.16em] text-white/80">
+                    <div className="relative flex flex-col items-center justify-center p-3 aspect-[1/0.85]">
+                      <div className="relative w-3/4 aspect-[1/1] overflow-hidden rounded-full">
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-panel/80 via-panel/10 to-transparent opacity-40 transition-opacity duration-300 group-hover:opacity-100" />
+                      </div>
+                      <span className="absolute left-4 top-4 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
                         {String(index + 1).padStart(2, "0")}
                       </span>
-                      <div className="absolute inset-x-0 bottom-0 flex items-end justify-center p-4">
-                        <p className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-panel/70 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.12em] text-white opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:opacity-100">
+                      <div className="absolute inset flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                        <p className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.12em] text-foreground shadow-sm">
                           VIEW PROFILE →
                         </p>
                       </div>

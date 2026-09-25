@@ -2389,7 +2389,7 @@ function OmSolutionsHome() {
                     className="team-card team-card-hover group relative w-full rounded-2xl text-left"
                     aria-label={`View profile of ${member.name}`}
                   >
-                    <div className="relative flex flex-col items-center justify-center p-3 aspect-[1/0.85]">
+                    <div className="relative flex flex-col items-center justify-center p-2 aspect-[1/0.75]">
                       <div className="relative w-3/4 aspect-[1/1] overflow-hidden rounded-full">
                         <img
                           src={member.image}

@@ -230,6 +230,16 @@ import galleryBirla6 from "@/assets/Image gallery/birla_tisya_bangaloore/WhatsAp
 import galleryBirla7 from "@/assets/Image gallery/birla_tisya_bangaloore/WhatsApp Image 2026-05-21 at 4.16.05 PM.jpeg";
 import galleryBirla8 from "@/assets/Image gallery/birla_tisya_bangaloore/WhatsApp Image 2026-05-21 at 4.16.08 PM (1).jpeg";
 
+// Birla Tisya — FMTU 1010 kVA 1
+import birlaFmtu1_1 from "@/assets/FMTU 1010 kVA 1/1.png";
+
+// Birla Tisya — FMTU 1010kVA 2
+import birlaFmtu2_1 from "@/assets/FMTU 1010kVA 2/image.png";
+
+// Birla Tisya — Greaves 200kVA
+import birlaGreaves1 from "@/assets/Greaves 200kVA/2.png";
+import birlaGreaves2 from "@/assets/Greaves 200kVA/image.png";
+
 // Borewell gallery
 import borewellImg1 from "@/assets/borewell/IMG_20251009_125203.jpg";
 import borewellImg2 from "@/assets/borewell/IMG_20251009_131145.jpg";
@@ -978,6 +988,9 @@ function OmSolutionsHome() {
   const [hoveredComponent, setHoveredComponent] = useState<string | null>(null);
   const [componentImageIndex, setComponentImageIndex] = useState(0);
 
+  // Case study carousel state
+  const [caseStudyIndex, setCaseStudyIndex] = useState(0);
+
   // Team modal state
   const [teamModalOpen, setTeamModalOpen] = useState(false);
   const [selectedTeamMember, setSelectedTeamMember] = useState<TeamMember | null>(null);
@@ -1009,6 +1022,45 @@ function OmSolutionsHome() {
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [schematicViewerOpen, selectedComponent]);
+
+  // Carousel track ref for dynamic width calculation
+  const carouselTrackRef = useRef<HTMLDivElement>(null);
+  const [carouselAnimation, setCarouselAnimation] = useState('');
+
+  useEffect(() => {
+    const updateAnimation = () => {
+      if (carouselTrackRef.current) {
+        const trackWidth = carouselTrackRef.current.scrollWidth / 2; // Half because we have 2 copies
+        const duration = Math.max(60, trackWidth / 30); // At least 60s, or 30px per second
+        setCarouselAnimation(`
+          .carousel-track {
+            animation: carousel-marquee ${duration}s linear infinite;
+            will-change: transform;
+          }
+          .carousel-track:hover {
+            animation-play-state: paused;
+          }
+          @keyframes carousel-marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-${trackWidth}px); }
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .carousel-track {
+              animation: none;
+            }
+          }
+        `);
+      }
+    };
+
+    // Delay to ensure DOM is rendered
+    const timer = setTimeout(updateAnimation, 100);
+    window.addEventListener('resize', updateAnimation);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', updateAnimation);
+    };
+  }, []);
 
   useEffect(() => {
     let animationFrame: number | null = null;
@@ -1954,12 +2006,11 @@ function OmSolutionsHome() {
               </div>
             </ScrollReveal>
 
-            {/* Installation galleries — 2×2 grid */}
-            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-
-              {/* TATA 125 kVA */}
-              <ScrollReveal delay={100} scale>
-                <article className="field-card field-card-hover group cursor-pointer h-full flex flex-col rounded-2xl"
+            {/* Installation galleries — Infinite Carousel */}
+            <div className="mt-12 overflow-hidden">
+              <div ref={carouselTrackRef} className="carousel-track flex gap-5">
+                {/* First set of cards */}
+                <article className="field-card field-card-hover group cursor-pointer h-full flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4"
                   onClick={() => setAppGallery({ title: "Sai Sound Service (Amane Engineers), Waki (B)", images: [tataImage], index: 0 })}>
                   <div className="relative overflow-hidden aspect-[1.25/1]">
                     <img src={tataImage} alt="TATA 125 kVA LPG installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
@@ -1983,11 +2034,8 @@ function OmSolutionsHome() {
                     </span>
                   </div>
                 </article>
-              </ScrollReveal>
 
-              {/* KOEL 320 kVA */}
-              <ScrollReveal delay={150} scale>
-                <article className="field-card field-card-hover group cursor-pointer h-full flex flex-col rounded-2xl"
+                <article className="field-card field-card-hover group cursor-pointer h-full flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4"
                   onClick={() => setAppGallery({ title: "Akwel Automotive India Pvt Ltd", images: [koelImg1, koelImg2], index: 0 })}>
                   <div className="relative overflow-hidden aspect-[1.25/1]">
                     <img src={koelImg1} alt="KOEL 320 kVA PNG installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
@@ -2011,26 +2059,73 @@ function OmSolutionsHome() {
                     </span>
                   </div>
                 </article>
-              </ScrollReveal>
 
-              {/* Birla Tisya */}
-              <ScrollReveal delay={200} scale>
-                <article className="field-card field-card-hover group cursor-pointer h-full flex flex-col rounded-2xl"
-                  onClick={() => setAppGallery({ title: "Birla Tisya, Bengaluru", images: [galleryBirla1, galleryBirla2, galleryBirla3, galleryBirla4, galleryBirla5, galleryBirla6, galleryBirla7, galleryBirla8], index: 0 })}>
+                <article className="field-card field-card-hover group cursor-pointer h-full flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4"
+                  onClick={() => setAppGallery({ title: "Birla Tisya – FMTU 1010 kVA", images: [birlaFmtu1_1], index: 0 })}>
                   <div className="relative overflow-hidden aspect-[1.25/1]">
-                    <img src={galleryBirla1} alt="Birla Tisya Bengaluru installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+                    <img src={birlaFmtu1_1} alt="Birla Tisya FMTU 1010 kVA installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
                     <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
-                    <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">8 photos</span>
+                    <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">1 photo</span>
                   </div>
                   <div className="flex items-start justify-between gap-4 p-5 flex-1 overflow-y-auto">
                     <div className="w-full">
-                      <h3 className="text-2xl font-bold leading-snug mb-2">Birla Tisya, Bengaluru</h3>
+                      <h3 className="text-2xl font-bold leading-snug mb-2">Birla Tisya – FMTU 1010 kVA</h3>
                       <div className="space-y-1.5 text-base leading-relaxed font-sans">
-                        <div><span className="font-bold text-foreground">Gensets:</span> <span className="font-medium text-foreground">FMTU 1010 kVA + Greaves 200 kVA</span></div>
+                        <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">FMTU 1010 kVA CPCB-IV+</span></div>
                         <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (1 bar)</span></div>
-                        <div className="pt-1"><span className="font-bold text-foreground">FMTU:</span> <span className="font-medium text-foreground">50–60% load · Avg 55% · ₹2,471/hr · ₹98,840/mo · ₹9.884L/yr</span></div>
+                        <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">50–60% · Avg 55%</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">40/mo · 400/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹2,471/hr · ₹98,840/mo · ₹9.884L/yr</span></div>
                         <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">31.6 kg/hr · 1,262 kg/mo · 12,620 kg/yr</span></div>
-                        <div className="pt-1"><span className="font-bold text-foreground">Greaves:</span> <span className="font-medium text-foreground">50–60% load · Avg 85% · ₹756/hr · ₹30,240/mo · ₹3.024L/yr</span></div>
+                      </div>
+                    </div>
+                    <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
+                      <ArrowDownRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+                    </span>
+                  </div>
+                </article>
+
+                <article className="field-card field-card-hover group cursor-pointer h-full flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4"
+                  onClick={() => setAppGallery({ title: "Birla Tisya – FMTU 1010 kVA (2)", images: [birlaFmtu2_1], index: 0 })}>
+                  <div className="relative overflow-hidden aspect-[1.25/1]">
+                    <img src={birlaFmtu2_1} alt="Birla Tisya FMTU 1010 kVA second installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
+                    <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">1 photo</span>
+                  </div>
+                  <div className="flex items-start justify-between gap-4 p-5 flex-1 overflow-y-auto">
+                    <div className="w-full">
+                      <h3 className="text-2xl font-bold leading-snug mb-2">Birla Tisya – FMTU 1010 kVA (2)</h3>
+                      <div className="space-y-1.5 text-base leading-relaxed font-sans">
+                        <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">FMTU 1010 kVA CPCB-IV+</span></div>
+                        <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (1 bar)</span></div>
+                        <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">50–60% · Avg 55%</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">40/mo · 400/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹2,471/hr · ₹98,840/mo · ₹9.884L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">31.6 kg/hr · 1,262 kg/mo · 12,620 kg/yr</span></div>
+                      </div>
+                    </div>
+                    <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
+                      <ArrowDownRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+                    </span>
+                  </div>
+                </article>
+
+                <article className="field-card field-card-hover group cursor-pointer h-full flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4"
+                  onClick={() => setAppGallery({ title: "Birla Tisya – Greaves 200 kVA", images: [birlaGreaves1, birlaGreaves2], index: 0 })}>
+                  <div className="relative overflow-hidden aspect-[1.25/1]">
+                    <img src={birlaGreaves1} alt="Birla Tisya Greaves 200 kVA installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
+                    <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">2 photos</span>
+                  </div>
+                  <div className="flex items-start justify-between gap-4 p-5 flex-1 overflow-y-auto">
+                    <div className="w-full">
+                      <h3 className="text-2xl font-bold leading-snug mb-2">Birla Tisya – Greaves 200 kVA</h3>
+                      <div className="space-y-1.5 text-base leading-relaxed font-sans">
+                        <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">Greaves 200 kVA CPCB-IV+</span></div>
+                        <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (1 bar)</span></div>
+                        <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">50–60% · Avg 85%</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">40/mo · 400/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹756/hr · ₹30,240/mo · ₹3.024L/yr</span></div>
                         <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">9.8 kg/hr · 390 kg/mo · 3,900 kg/yr</span></div>
                       </div>
                     </div>
@@ -2039,11 +2134,8 @@ function OmSolutionsHome() {
                     </span>
                   </div>
                 </article>
-              </ScrollReveal>
 
-              {/* Nevatia Maxgen */}
-              <ScrollReveal delay={250} scale>
-                <article className="field-card field-card-hover group cursor-pointer h-full flex flex-col rounded-2xl"
+                <article className="field-card field-card-hover group cursor-pointer h-full flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4"
                   onClick={() => setAppGallery({ title: "Nevatia Steels & Alloys, Boisar, Tarapur", images: [nevatiaMg1, nevatiaMg2, nevatiaMg3, nevatiaMg4, nevatiaMg5, nevatiaMg6, nevatiaMg7, nevatiaMg8, nevatiaMg9], index: 0 })}>
                   <div className="relative overflow-hidden aspect-[1.25/1]">
                     <img src={nevatiaMg1} alt="Nevatia Steel MaxGen Energy dual-fuel installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
@@ -2067,8 +2159,159 @@ function OmSolutionsHome() {
                     </span>
                   </div>
                 </article>
-              </ScrollReveal>
 
+                {/* Duplicate set for seamless loop */}
+                <article className="field-card field-card-hover group cursor-pointer h-full flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4"
+                  onClick={() => setAppGallery({ title: "Sai Sound Service (Amane Engineers), Waki (B)", images: [tataImage], index: 0 })}>
+                  <div className="relative overflow-hidden aspect-[1.25/1]">
+                    <img src={tataImage} alt="TATA 125 kVA LPG installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
+                    <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">1 photo</span>
+                  </div>
+                  <div className="flex items-start justify-between gap-4 p-5 flex-1 overflow-y-auto">
+                    <div className="w-full">
+                      <h3 className="text-2xl font-bold leading-snug mb-2">Sai Sound Service (Amane Engineers), Waki (B)</h3>
+                      <div className="space-y-1.5 text-base leading-relaxed font-sans">
+                        <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">TATA 125 kVA CPCB-II</span></div>
+                        <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + LPG</span></div>
+                        <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">65–85% · Avg 75%</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">200/mo · 2,000/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹159/hr · ₹31,800/mo · ₹3.18L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">3 kg/hr · 600 kg/mo · 6,000 kg/yr</span></div>
+                      </div>
+                    </div>
+                    <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
+                      <ArrowDownRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+                    </span>
+                  </div>
+                </article>
+
+                <article className="field-card field-card-hover group cursor-pointer h-full flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4"
+                  onClick={() => setAppGallery({ title: "Akwel Automotive India Pvt Ltd", images: [koelImg1, koelImg2], index: 0 })}>
+                  <div className="relative overflow-hidden aspect-[1.25/1]">
+                    <img src={koelImg1} alt="KOEL 320 kVA PNG installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
+                    <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">2 photos</span>
+                  </div>
+                  <div className="flex items-start justify-between gap-4 p-5 flex-1 overflow-y-auto">
+                    <div className="w-full">
+                      <h3 className="text-2xl font-bold leading-snug mb-2">Akwel Automotive India Pvt Ltd</h3>
+                      <div className="space-y-1.5 text-base leading-relaxed font-sans">
+                        <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">KOEL 320 kVA CPCB-II</span></div>
+                        <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (300 bar)</span></div>
+                        <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">50–75% · Avg 55%</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">100/mo · 1,000/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹783/hr · ₹78,300/mo · ₹7.83L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">10.1 kg/hr · 1009 kg/mo · 10,090 kg/yr</span></div>
+                      </div>
+                    </div>
+                    <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
+                      <ArrowDownRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+                    </span>
+                  </div>
+                </article>
+
+                <article className="field-card field-card-hover group cursor-pointer h-full flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4"
+                  onClick={() => setAppGallery({ title: "Birla Tisya – FMTU 1010 kVA", images: [birlaFmtu1_1], index: 0 })}>
+                  <div className="relative overflow-hidden aspect-[1.25/1]">
+                    <img src={birlaFmtu1_1} alt="Birla Tisya FMTU 1010 kVA installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
+                    <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">1 photo</span>
+                  </div>
+                  <div className="flex items-start justify-between gap-4 p-5 flex-1 overflow-y-auto">
+                    <div className="w-full">
+                      <h3 className="text-2xl font-bold leading-snug mb-2">Birla Tisya – FMTU 1010 kVA</h3>
+                      <div className="space-y-1.5 text-base leading-relaxed font-sans">
+                        <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">FMTU 1010 kVA CPCB-IV+</span></div>
+                        <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (1 bar)</span></div>
+                        <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">50–60% · Avg 55%</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">40/mo · 400/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹2,471/hr · ₹98,840/mo · ₹9.884L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">31.6 kg/hr · 1,262 kg/mo · 12,620 kg/yr</span></div>
+                      </div>
+                    </div>
+                    <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
+                      <ArrowDownRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+                    </span>
+                  </div>
+                </article>
+
+                <article className="field-card field-card-hover group cursor-pointer h-full flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4"
+                  onClick={() => setAppGallery({ title: "Birla Tisya – FMTU 1010 kVA (2)", images: [birlaFmtu2_1], index: 0 })}>
+                  <div className="relative overflow-hidden aspect-[1.25/1]">
+                    <img src={birlaFmtu2_1} alt="Birla Tisya FMTU 1010 kVA second installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
+                    <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">1 photo</span>
+                  </div>
+                  <div className="flex items-start justify-between gap-4 p-5 flex-1 overflow-y-auto">
+                    <div className="w-full">
+                      <h3 className="text-2xl font-bold leading-snug mb-2">Birla Tisya – FMTU 1010 kVA (2)</h3>
+                      <div className="space-y-1.5 text-base leading-relaxed font-sans">
+                        <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">FMTU 1010 kVA CPCB-IV+</span></div>
+                        <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (1 bar)</span></div>
+                        <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">50–60% · Avg 55%</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">40/mo · 400/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹2,471/hr · ₹98,840/mo · ₹9.884L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">31.6 kg/hr · 1,262 kg/mo · 12,620 kg/yr</span></div>
+                      </div>
+                    </div>
+                    <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
+                      <ArrowDownRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+                    </span>
+                  </div>
+                </article>
+
+                <article className="field-card field-card-hover group cursor-pointer h-full flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4"
+                  onClick={() => setAppGallery({ title: "Birla Tisya – Greaves 200 kVA", images: [birlaGreaves1, birlaGreaves2], index: 0 })}>
+                  <div className="relative overflow-hidden aspect-[1.25/1]">
+                    <img src={birlaGreaves1} alt="Birla Tisya Greaves 200 kVA installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
+                    <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">2 photos</span>
+                  </div>
+                  <div className="flex items-start justify-between gap-4 p-5 flex-1 overflow-y-auto">
+                    <div className="w-full">
+                      <h3 className="text-2xl font-bold leading-snug mb-2">Birla Tisya – Greaves 200 kVA</h3>
+                      <div className="space-y-1.5 text-base leading-relaxed font-sans">
+                        <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">Greaves 200 kVA CPCB-IV+</span></div>
+                        <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (1 bar)</span></div>
+                        <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">50–60% · Avg 85%</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">40/mo · 400/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹756/hr · ₹30,240/mo · ₹3.024L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">9.8 kg/hr · 390 kg/mo · 3,900 kg/yr</span></div>
+                      </div>
+                    </div>
+                    <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
+                      <ArrowDownRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+                    </span>
+                  </div>
+                </article>
+
+                <article className="field-card field-card-hover group cursor-pointer h-full flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4"
+                  onClick={() => setAppGallery({ title: "Nevatia Steels & Alloys, Boisar, Tarapur", images: [nevatiaMg1, nevatiaMg2, nevatiaMg3, nevatiaMg4, nevatiaMg5, nevatiaMg6, nevatiaMg7, nevatiaMg8, nevatiaMg9], index: 0 })}>
+                  <div className="relative overflow-hidden aspect-[1.25/1]">
+                    <img src={nevatiaMg1} alt="Nevatia Steel MaxGen Energy dual-fuel installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
+                    <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">9 photos</span>
+                  </div>
+                  <div className="flex items-start justify-between gap-4 p-5 flex-1 overflow-y-auto">
+                    <div className="w-full">
+                      <h3 className="text-2xl font-bold leading-snug mb-2">Nevatia Steels & Alloys, Boisar, Tarapur</h3>
+                      <div className="space-y-1.5 text-base leading-relaxed font-sans">
+                        <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">MTU 1000 kVA CPCB-II</span></div>
+                        <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (1 bar)</span></div>
+                        <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">60–80% · Avg 70%</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">200/mo · 2,000/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹3,114/hr · ₹6,22,800/mo · ₹62.28L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">40.15 kg/hr · 8,030 kg/mo · 80,300 kg/yr</span></div>
+                      </div>
+                    </div>
+                    <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
+                      <ArrowDownRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+                    </span>
+                  </div>
+                </article>
+              </div>
+              <style>{carouselAnimation}</style>
             </div>
           </div>
         </section>

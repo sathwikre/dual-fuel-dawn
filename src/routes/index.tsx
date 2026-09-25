@@ -2012,7 +2012,7 @@ function OmSolutionsHome() {
                 {/* First set of cards */}
                 <article className="field-card field-card-hover group cursor-pointer flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4 h-auto"
                   onClick={() => setAppGallery({ title: "Sai Sound Service (Amane Engineers), Waki (B)", images: [tataImage], index: 0 })}>
-                  <div className="relative overflow-hidden h-[340px] shrink-0">
+                  <div className="relative overflow-hidden aspect-square shrink-0">
                     <img src={tataImage} alt="TATA 125 kVA LPG installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
                     <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
                     <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">1 photo</span>
@@ -2037,7 +2037,7 @@ function OmSolutionsHome() {
 
                 <article className="field-card field-card-hover group cursor-pointer flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4 h-auto"
                   onClick={() => setAppGallery({ title: "Akwel Automotive India Pvt Ltd", images: [koelImg1, koelImg2], index: 0 })}>
-                  <div className="relative overflow-hidden h-[340px] shrink-0">
+                  <div className="relative overflow-hidden aspect-square shrink-0">
                     <img src={koelImg1} alt="KOEL 320 kVA PNG installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
                     <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
                     <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">2 photos</span>
@@ -2062,7 +2062,7 @@ function OmSolutionsHome() {
 
                 <article className="field-card field-card-hover group cursor-pointer flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4 h-auto"
                   onClick={() => setAppGallery({ title: "Birla Tisya – FMTU 1010 kVA", images: [birlaFmtu1_1], index: 0 })}>
-                  <div className="relative overflow-hidden h-[340px] shrink-0">
+                  <div className="relative overflow-hidden aspect-square shrink-0">
                     <img src={birlaFmtu1_1} alt="Birla Tisya FMTU 1010 kVA installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
                     <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
                     <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">1 photo</span>
@@ -2087,7 +2087,7 @@ function OmSolutionsHome() {
 
                 <article className="field-card field-card-hover group cursor-pointer flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4 h-auto"
                   onClick={() => setAppGallery({ title: "Birla Tisya – FMTU 1010 kVA (2)", images: [birlaFmtu2_1], index: 0 })}>
-                  <div className="relative overflow-hidden h-[340px] shrink-0">
+                  <div className="relative overflow-hidden aspect-square shrink-0">
                     <img src={birlaFmtu2_1} alt="Birla Tisya FMTU 1010 kVA second installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
                     <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
                     <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">1 photo</span>
@@ -2112,7 +2112,7 @@ function OmSolutionsHome() {
 
                 <article className="field-card field-card-hover group cursor-pointer flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4 h-auto"
                   onClick={() => setAppGallery({ title: "Birla Tisya – Greaves 200 kVA", images: [birlaGreaves1, birlaGreaves2], index: 0 })}>
-                  <div className="relative overflow-hidden h-[340px] shrink-0">
+                  <div className="relative overflow-hidden aspect-square shrink-0">
                     <img src={birlaGreaves1} alt="Birla Tisya Greaves 200 kVA installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
                     <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
                     <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">2 photos</span>
@@ -2137,7 +2137,7 @@ function OmSolutionsHome() {
 
                 <article className="field-card field-card-hover group cursor-pointer flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4 h-auto"
                   onClick={() => setAppGallery({ title: "Nevatia Steels & Alloys, Boisar, Tarapur", images: [nevatiaMg1, nevatiaMg2, nevatiaMg3, nevatiaMg4, nevatiaMg5, nevatiaMg6, nevatiaMg7, nevatiaMg8, nevatiaMg9], index: 0 })}>
-                  <div className="relative overflow-hidden h-[340px] shrink-0">
+                  <div className="relative overflow-hidden aspect-square shrink-0">
                     <img src={nevatiaMg1} alt="Nevatia Steel MaxGen Energy dual-fuel installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
                     <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
                     <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">9 photos</span>
@@ -2163,7 +2163,7 @@ function OmSolutionsHome() {
                 {/* Duplicate set for seamless loop */}
                 <article className="field-card field-card-hover group cursor-pointer flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4 h-auto"
                   onClick={() => setAppGallery({ title: "Sai Sound Service (Amane Engineers), Waki (B)", images: [tataImage], index: 0 })}>
-                  <div className="relative overflow-hidden h-[340px] shrink-0">
+                  <div className="relative overflow-hidden aspect-square shrink-0">
                     <img src={tataImage} alt="TATA 125 kVA LPG installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
                     <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
                     <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">1 photo</span>
@@ -2188,7 +2188,7 @@ function OmSolutionsHome() {
 
                 <article className="field-card field-card-hover group cursor-pointer flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4 h-auto"
                   onClick={() => setAppGallery({ title: "Akwel Automotive India Pvt Ltd", images: [koelImg1, koelImg2], index: 0 })}>
-                  <div className="relative overflow-hidden h-[340px] shrink-0">
+                  <div className="relative overflow-hidden aspect-square shrink-0">
                     <img src={koelImg1} alt="KOEL 320 kVA PNG installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
                     <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
                     <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">2 photos</span>
@@ -2213,7 +2213,7 @@ function OmSolutionsHome() {
 
                 <article className="field-card field-card-hover group cursor-pointer flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4 h-auto"
                   onClick={() => setAppGallery({ title: "Birla Tisya – FMTU 1010 kVA", images: [birlaFmtu1_1], index: 0 })}>
-                  <div className="relative overflow-hidden h-[340px] shrink-0">
+                  <div className="relative overflow-hidden aspect-square shrink-0">
                     <img src={birlaFmtu1_1} alt="Birla Tisya FMTU 1010 kVA installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
                     <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
                     <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">1 photo</span>
@@ -2238,7 +2238,7 @@ function OmSolutionsHome() {
 
                 <article className="field-card field-card-hover group cursor-pointer flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4 h-auto"
                   onClick={() => setAppGallery({ title: "Birla Tisya – FMTU 1010 kVA (2)", images: [birlaFmtu2_1], index: 0 })}>
-                  <div className="relative overflow-hidden h-[340px] shrink-0">
+                  <div className="relative overflow-hidden aspect-square shrink-0">
                     <img src={birlaFmtu2_1} alt="Birla Tisya FMTU 1010 kVA second installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
                     <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
                     <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">1 photo</span>
@@ -2263,7 +2263,7 @@ function OmSolutionsHome() {
 
                 <article className="field-card field-card-hover group cursor-pointer flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4 h-auto"
                   onClick={() => setAppGallery({ title: "Birla Tisya – Greaves 200 kVA", images: [birlaGreaves1, birlaGreaves2], index: 0 })}>
-                  <div className="relative overflow-hidden h-[340px] shrink-0">
+                  <div className="relative overflow-hidden aspect-square shrink-0">
                     <img src={birlaGreaves1} alt="Birla Tisya Greaves 200 kVA installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
                     <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
                     <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">2 photos</span>
@@ -2288,7 +2288,7 @@ function OmSolutionsHome() {
 
                 <article className="field-card field-card-hover group cursor-pointer flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4 h-auto"
                   onClick={() => setAppGallery({ title: "Nevatia Steels & Alloys, Boisar, Tarapur", images: [nevatiaMg1, nevatiaMg2, nevatiaMg3, nevatiaMg4, nevatiaMg5, nevatiaMg6, nevatiaMg7, nevatiaMg8, nevatiaMg9], index: 0 })}>
-                  <div className="relative overflow-hidden h-[340px] shrink-0">
+                  <div className="relative overflow-hidden aspect-square shrink-0">
                     <img src={nevatiaMg1} alt="Nevatia Steel MaxGen Energy dual-fuel installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
                     <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
                     <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">9 photos</span>
@@ -2338,7 +2338,7 @@ function OmSolutionsHome() {
                 { title: "Marine Propulsion", desc: "Dual Fuel kits for Marine Inboard Engine ( Propulsion ) application.", images: [marine1, marine2], icon: Fuel },
               ] as { title: string; desc: string; images: string[]; icon: typeof Gauge }[]).map((app) => (
                 <article key={app.title} className="app-card-dark app-card-dark-hover group cursor-pointer rounded-2xl" onClick={() => setAppGallery({ title: app.title, images: app.images, index: 0 })}>
-                  <div className="relative overflow-hidden h-[340px] shrink-0">
+                  <div className="relative overflow-hidden aspect-square shrink-0">
                     <img src={app.images[0]} alt={app.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
                     <div className="absolute inset-0 bg-gradient-to-t from-panel/70 via-panel/10 to-transparent" />
                     <span className="absolute left-3 top-3 grid size-8 place-items-center rounded-lg border border-white/15 bg-panel/70 text-signal backdrop-blur-sm">

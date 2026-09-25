@@ -2407,7 +2407,7 @@ function OmSolutionsHome() {
                         </p>
                       </div>
                     </div>
-                    <div className="border-t border-border/70 px-4 py-3">
+                    <div className="border-t border-border/70 px-4 py-3 text-center">
                       <p className="text-sm font-semibold text-foreground">{member.name}</p>
                     </div>
                   </button>

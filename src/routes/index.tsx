@@ -922,7 +922,7 @@ const kitStatCards = [
   { label: "Fuel mode", value: "Dual=Diesel+NG", icon: Fuel },
   { label: "Gas usage", value: "up to 70%", icon: CircleGauge },
   { label: "Control", value: "Sensors + Actuators", icon: Cog },
-  { label: "Existing genset", value: "No replacement needed with Dual Fuel kit installation", icon: ShieldCheck },
+  { label: "Existing genset", value: "Genset replacement/modification not needed", icon: ShieldCheck },
 ] as const;
 
 const kitSchematicLabels = [

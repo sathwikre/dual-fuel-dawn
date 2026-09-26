@@ -1092,10 +1092,10 @@ function OmSolutionsHome() {
 
   useEffect(() => {
     document.querySelectorAll<HTMLAnchorElement>('a[href="mailto:omsolns18@gmail.com"]').forEach((link) => {
-      link.href = "mailto:support.omsolutions@gmail.com";
+      link.href = "mailto:support@omsolns.com";
       const address = link.querySelector("span span:last-child");
-      if (address) address.textContent = "support.omsolutions@gmail.com";
-      else link.textContent = "support.omsolutions@gmail.com";
+      if (address) address.textContent = "support@omsolns.com";
+      else link.textContent = "support@omsolns.com";
     });
   }, []);
 
@@ -2437,11 +2437,11 @@ Message: ${message}`;
               <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Connect With Our Experts</h2>
               <p className="mt-6 max-w-md text-base leading-relaxed text-background/70">Share your engine, application and fuel availability for a technical conversation about dual-fuel suitability.</p>
               <div className="mt-10 space-y-5">
-                <a href="mailto:omsolns18@gmail.com" className="flex items-start gap-4 text-sm text-background/80 transition-colors hover:text-signal">
+                <a href="mailto:support@omsolns.com" className="flex items-start gap-4 text-sm text-background/80 transition-colors hover:text-signal">
                   <span className="grid size-10 place-items-center rounded-lg border border-white/10 bg-background/10 text-signal">@</span>
                   <span>
                     <span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Email</span>
-                    <span className="mt-1 block">omsolns18@gmail.com</span>
+                    <span className="mt-1 block">support@omsolns.com</span>
                   </span>
                 </a>
                 <div className="flex items-start gap-4 text-sm text-background/80">
@@ -2509,7 +2509,7 @@ Message: ${message}`;
               <div>
                 <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-signal">Contact</p>
                 <div className="mt-4 space-y-2 text-sm text-background/65">
-                  <a href="mailto:omsolns18@gmail.com" className="block hover:text-signal">omsolns18@gmail.com</a>
+                  <a href="mailto:support@omsolns.com" className="block hover:text-signal">support@omsolns.com</a>
                   <a href={isMobile ? "tel:+917387591083" : "https://wa.me/917387591083"} target={isMobile ? undefined : "_blank"} rel={isMobile ? undefined : "noopener noreferrer"} className="block hover:text-signal">+91 73875 91083</a>
                   <p>Warje, Pune, Maharashtra</p>
                 </div>

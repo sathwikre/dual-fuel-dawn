@@ -8,6 +8,8 @@ import {
   AlertTriangle,
   Check,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   CircleGauge,
   Cog,
   Factory,
@@ -1035,6 +1037,17 @@ function OmSolutionsHome() {
   // Carousel track ref for dynamic width calculation
   const carouselTrackRef = useRef<HTMLDivElement>(null);
   const [carouselAnimation, setCarouselAnimation] = useState('');
+  const carouselContainerRef = useRef<HTMLDivElement>(null);
+
+  const scrollCarousel = (direction: 'left' | 'right') => {
+    if (carouselContainerRef.current) {
+      const scrollAmount = carouselContainerRef.current.offsetWidth;
+      carouselContainerRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   useEffect(() => {
     const updateAnimation = () => {
@@ -2025,8 +2038,16 @@ Message: ${message}`;
             </ScrollReveal>
 
             {/* Installation galleries — Infinite Carousel */}
-            <div className="mt-12 overflow-hidden">
-              <div ref={carouselTrackRef} className="carousel-track flex gap-5 items-stretch">
+            <div className="mt-12 relative">
+              <button
+                onClick={() => scrollCarousel('left')}
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 -ml-4 lg:-ml-6 grid size-10 place-items-center rounded-full border border-border bg-background/90 text-foreground shadow-lg transition-all hover:bg-signal hover:text-panel hover:scale-110"
+                aria-label="Previous companies"
+              >
+                <ChevronLeft className="size-5" />
+              </button>
+              <div ref={carouselContainerRef} className="overflow-hidden">
+                <div ref={carouselTrackRef} className="carousel-track flex gap-5 items-stretch">
                 {/* First set of cards */}
                 <article className="field-card field-card-hover group cursor-pointer flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4 h-auto"
                   onClick={() => setAppGallery({ title: "Sai Sound Service (Amane Engineers), Waki (B)", images: [tataImage], index: 0 })}>
@@ -2329,6 +2350,14 @@ Message: ${message}`;
                   </div>
                 </article>
               </div>
+              </div>
+              <button
+                onClick={() => scrollCarousel('right')}
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 -mr-4 lg:-mr-6 grid size-10 place-items-center rounded-full border border-border bg-background/90 text-foreground shadow-lg transition-all hover:bg-signal hover:text-panel hover:scale-110"
+                aria-label="Next companies"
+              >
+                <ChevronRight className="size-5" />
+              </button>
               <style>{carouselAnimation}</style>
             </div>
           </div>

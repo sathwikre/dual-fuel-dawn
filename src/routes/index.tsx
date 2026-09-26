@@ -1111,21 +1111,30 @@ function OmSolutionsHome() {
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
-    try {
-      const res = await fetch("https://formspree.io/f/xppznglk", {
-        method: "POST",
-        body: data,
-        headers: { Accept: "application/json" },
-      });
-      if (res.ok) {
-        setFormSent(true);
-        form.reset();
-      } else {
-        alert("Something went wrong. Please email us directly at support.omsolutions@gmail.com");
-      }
-    } catch {
-      alert("Could not send. Please email us directly at support.omsolutions@gmail.com");
-    }
+
+    const name = data.get("name") as string;
+    const company = data.get("company") as string;
+    const phone = data.get("phone") as string;
+    const email = data.get("email") as string;
+    const application = data.get("application") as string;
+    const message = data.get("message") as string;
+
+    const whatsappMessage = `New Consultation Request – OM Solutions
+
+Name: ${name}
+Company: ${company}
+Phone: ${phone}
+Email: ${email}
+Application / Requirement: ${application}
+Message: ${message}`;
+
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    const whatsappUrl = `https://wa.me/919014941863?text=${encodedMessage}`;
+
+    window.open(whatsappUrl, "_blank");
+
+    setFormSent(true);
+    form.reset();
   };
 
   const navScrolled = scrolled || menuOpen;

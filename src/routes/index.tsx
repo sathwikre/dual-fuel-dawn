@@ -447,6 +447,15 @@ const teamMembers: TeamMember[] = [
     id: "prasad-parulekar",
     name: "Prasad Parulekar",
     image: prasadImage,
+    profileTitle: "M.Tech (Energy Science), IIT Bombay",
+    experience: "21+ years of experience in Alternative-Fuel-Based I.C. Engine Development. 14+ years with Cummins India Ltd.",
+    keyExpertise: [
+      "I.C. Engine Performance Development",
+      "Engine System Development & Integration",
+      "Alternative-Fuel Technologies",
+      "Dual-Fuel, Bi-Fuel & Monofuel Engines",
+      "SVO, WVO, Biodiesel, Methanol, Ethanol, DME, Natural Gas, LPG, Biogas, Producer Gas, Syngas",
+    ],
     expertise: [
       "I.C. Engine performance development",
       "Alternate fuels",

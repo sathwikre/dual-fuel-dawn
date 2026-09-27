@@ -442,6 +442,7 @@ type TeamMember = {
   profileTitle?: string;
   experience?: string;
   keyExpertise?: string[];
+  designation?: string;
 };
 
 const teamMembers: TeamMember[] = [
@@ -449,6 +450,7 @@ const teamMembers: TeamMember[] = [
     id: "prasad-parulekar",
     name: "Prasad Parulekar",
     image: prasadImage,
+    designation: "Founder, OM Solutions",
     profileTitle: "M.Tech (Energy Science), IIT Bombay",
     experience: "21+ years of experience in Alternative-Fuel-Based I.C. Engine Development. 14+ years with Cummins India Ltd.",
     keyExpertise: [
@@ -2860,6 +2862,9 @@ Message: ${message}`;
               <div>
                 <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Team Profile</p>
                 <h3 className="text-lg font-extrabold text-foreground leading-tight">{selectedTeamMember.name}</h3>
+                {selectedTeamMember.designation && (
+                  <p className="text-sm font-extrabold text-foreground mt-1">{selectedTeamMember.designation}</p>
+                )}
               </div>
               <button
                 type="button"

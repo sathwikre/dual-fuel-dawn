@@ -2533,10 +2533,10 @@ Message: ${message}`;
               </div>
               <p className="mt-5 font-mono text-[11px] leading-relaxed text-background/60">Smarter Power ”“ Lower Fuel Cost ”“ Cleaner Performance</p>
               <div className="mt-6 flex items-center gap-3">
-                <a href="https://linkedin.com/company/om-solutions" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-background/70 transition-colors hover:border-signal hover:bg-signal hover:text-panel"><Linkedin className="size-4" /></a>
-                <a href="https://youtube.com/@omsolutions" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-background/70 transition-colors hover:border-signal hover:bg-signal hover:text-panel"><Youtube className="size-4" /></a>
-                <a href="https://twitter.com/omsolutions" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X" className="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-background/70 transition-colors hover:border-signal hover:bg-signal hover:text-panel"><Twitter className="size-4" /></a>
-                <a href="https://instagram.com/omsolutions" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-background/70 transition-colors hover:border-signal hover:bg-signal hover:text-panel"><Instagram className="size-4" /></a>
+                <a href="https://www.linkedin.com/company/omsolns18/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-background/70 transition-colors hover:border-signal hover:bg-signal hover:text-panel"><Linkedin className="size-4" /></a>
+                <span className="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-background/70"><Youtube className="size-4" /></span>
+                <span className="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-background/70"><Twitter className="size-4" /></span>
+                <span className="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-background/70"><Instagram className="size-4" /></span>
               </div>
             </div>
             <div className="grid gap-10 sm:grid-cols-2">

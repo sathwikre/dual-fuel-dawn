@@ -2043,7 +2043,7 @@ Message: ${message}`;
             <div className="mt-12 relative">
               <button
                 onClick={() => scrollCarousel('left')}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 -ml-4 lg:-ml-6 grid size-10 place-items-center rounded-full border border-border bg-background/90 text-foreground shadow-lg transition-all hover:bg-signal hover:text-panel hover:scale-110"
+                className="absolute left-0 top-[35%] -translate-y-1/2 z-10 -ml-4 lg:-ml-6 grid size-10 place-items-center rounded-full border border-border bg-background/90 text-foreground shadow-lg transition-all hover:bg-signal hover:text-panel hover:scale-110"
                 aria-label="Previous companies"
               >
                 <ChevronLeft className="size-5" />
@@ -2355,7 +2355,7 @@ Message: ${message}`;
               </div>
               <button
                 onClick={() => scrollCarousel('right')}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 -mr-4 lg:-mr-6 grid size-10 place-items-center rounded-full border border-border bg-background/90 text-foreground shadow-lg transition-all hover:bg-signal hover:text-panel hover:scale-110"
+                className="absolute right-0 top-[35%] -translate-y-1/2 z-10 -mr-4 lg:-mr-6 grid size-10 place-items-center rounded-full border border-border bg-background/90 text-foreground shadow-lg transition-all hover:bg-signal hover:text-panel hover:scale-110"
                 aria-label="Next companies"
               >
                 <ChevronRight className="size-5" />

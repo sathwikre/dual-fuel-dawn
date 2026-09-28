@@ -40,6 +40,9 @@ function useScrollReveal(options?: {
 }) {
   const ref = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const threshold = options?.threshold ?? 0.1;
+  const rootMargin = options?.rootMargin ?? "0px 0px -50px 0px";
+  const once = options?.once ?? false;
 
   useEffect(() => {
     const element = ref.current;
@@ -49,16 +52,16 @@ function useScrollReveal(options?: {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          if (options?.once) {
+          if (once) {
             observer.unobserve(element);
           }
-        } else if (!options?.once) {
+        } else if (!once) {
           setIsVisible(false);
         }
       },
       {
-        threshold: options?.threshold ?? 0.1,
-        rootMargin: options?.rootMargin ?? "0px 0px -50px 0px",
+        threshold,
+        rootMargin,
       }
     );
 
@@ -67,7 +70,7 @@ function useScrollReveal(options?: {
     return () => {
       observer.disconnect();
     };
-  }, [options]);
+  }, [threshold, rootMargin, once]);
 
   return { ref, isVisible };
 }

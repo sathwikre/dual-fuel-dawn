@@ -710,7 +710,7 @@ function HeroBackground() {
       src={heroBackground}
       alt=""
       aria-hidden="true"
-      className="absolute inset-0 z-0 h-full w-full object-cover object-[62%_center]"
+      className="absolute inset-0 z-0 h-full w-full object-cover object-center"
     />
   );
 }

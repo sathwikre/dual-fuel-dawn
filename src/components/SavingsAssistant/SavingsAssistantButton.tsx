@@ -24,7 +24,7 @@ export function SavingsAssistantButton({ onClick, isOpen }: Props) {
                      saGlow 3.5s ease-in-out 1.5s infinite;
         }
         .sa-btn:hover {
-          animation: none;
+          animation-play-state: paused;
           box-shadow: 0 0 0 10px rgba(45,189,110,0.14), 0 8px 28px rgba(0,0,0,0.45);
           transform: scale(1.06);
         }

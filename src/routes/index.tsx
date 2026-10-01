@@ -28,6 +28,7 @@ import {
   RotateCcw,
   ShieldCheck,
   Twitter,
+  Users,
   X,
   Youtube,
   Zap,
@@ -207,6 +208,7 @@ import marineDetailImageTwo from "@/assets/img-181.jpg";
 import marineEngineImage from "@/assets/img-185.jpg";
 import marineEngineImageTwo from "@/assets/img-186.jpg";
 import recdImage from "@/assets/image.png";
+import indiaOutline from "@/assets/india-outline.svg";
 
 // Image Gallery — Birla Tisya, Bengaluru
 import galleryBirla1 from "@/assets/Image gallery/birla_tisya_bangaloore/WhatsApp Image 2026-05-21 at 4.16.09 PM.jpeg";
@@ -1290,13 +1292,39 @@ Message: ${message}`;
           </div>
         </section>
 
-        <section aria-label="Misty green fields at sunrise" className="relative h-48 overflow-hidden sm:h-64 lg:h-80">
+        <section aria-label="Our vision for a cleaner India" className="relative isolate min-h-[420px] overflow-hidden bg-emerald-950 text-white sm:min-h-[360px] lg:min-h-[200px]">
           <img
             src={sunriseFieldsImage}
-            alt="Misty green fields at sunrise"
-            className="h-full w-full object-cover"
+            alt="Green fields at sunrise"
+            className="absolute inset-0 -z-20 h-full w-full object-cover"
             loading="lazy"
           />
+          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#071f18]/90 via-[#0b3023]/75 to-[#06251b]/90" />
+          <div className="mx-auto grid min-h-[420px] max-w-[1440px] items-center gap-6 px-5 py-8 sm:min-h-[360px] lg:min-h-[200px] lg:grid-cols-[1.05fr_2fr] lg:gap-8 lg:px-10 lg:py-5">
+            <div className="border-l-4 border-emerald-400 pl-4 lg:border-l-0 lg:pl-0">
+              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-300">Our Vision</p>
+              <h2 className="mt-1 text-3xl font-black leading-[0.98] tracking-tight sm:text-4xl">Cleaner Air.<br />Stronger India.</h2>
+            </div>
+            <div className="grid gap-5 sm:grid-cols-3 sm:gap-4">
+              <div className="flex items-center gap-3">
+                <span className="grid size-11 shrink-0 place-items-center rounded-full border border-emerald-300/80 bg-emerald-500/20 text-emerald-300"><Leaf className="size-6" /></span>
+                <div><h3 className="text-xs font-extrabold uppercase leading-tight">Cleaner<br className="hidden sm:block" /> Environment</h3><p className="mt-1 text-[10px] leading-snug text-white/80">Reduce harmful emissions from engines and generators.</p></div>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="grid size-11 shrink-0 place-items-center rounded-full border border-emerald-300/80 bg-emerald-500/20 text-emerald-300"><Users className="size-6" /></span>
+                <div><h3 className="text-xs font-extrabold uppercase leading-tight">Healthier<br className="hidden sm:block" /> Communities</h3><p className="mt-1 text-[10px] leading-snug text-white/80">Cleaner air for our people, especially in our cities.</p></div>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="grid size-11 shrink-0 place-items-center rounded-full border border-emerald-300/80 bg-emerald-500/20 text-emerald-300"><img src={indiaOutline} alt="" className="size-6 brightness-0 invert" /></span>
+                <div><h3 className="text-xs font-extrabold uppercase leading-tight">A Stronger<br className="hidden sm:block" /> India</h3><p className="mt-1 text-[10px] leading-snug text-white/80">Sustainable growth through cleaner, smarter energy solutions.</p></div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 rounded-2xl bg-white px-4 py-3 text-slate-900 shadow-xl sm:col-span-3 sm:mx-auto sm:w-full sm:max-w-[700px] lg:col-start-2 lg:mx-0 lg:mt-[-2px] lg:max-w-none">
+              <Leaf className="size-7 shrink-0 text-emerald-700" />
+              <div className="min-w-0 flex-1 border-l border-slate-300 pl-3"><h3 className="text-xs font-extrabold sm:text-sm">Be a Part of the Clean Air Mission</h3><p className="text-[10px] text-slate-600">Let’s work together for a cleaner, greener and healthier India.</p></div>
+              <a href="#contact" className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-emerald-700 px-4 py-2.5 text-[10px] font-bold text-white transition-colors hover:bg-emerald-800 sm:px-5">Contact Us <ArrowRight className="size-3.5" /></a>
+            </div>
+          </div>
         </section>
 
         {/* OM / 04 Primary product - Dual Fuel Kit */}

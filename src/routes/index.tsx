@@ -1305,18 +1305,20 @@ Message: ${message}`;
               <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-emerald-200">Our Vision</p>
               <h2 className="mt-1 text-3xl font-black leading-[0.98] tracking-tight [text-shadow:0_2px_8px_#000] sm:text-4xl">Cleaner Air.<br />Stronger India.</h2>
             </div>
-            <div className="grid gap-5 sm:grid-cols-3 sm:gap-4">
+            <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] sm:items-center sm:gap-3">
               <div className="flex items-center gap-3">
                 <span className="grid size-11 shrink-0 place-items-center rounded-full border-2 border-emerald-300 bg-emerald-500/30 text-emerald-200"><Leaf className="size-6" strokeWidth={3} /></span>
-                <div><h3 className="text-xs font-black uppercase leading-tight [text-shadow:0_1px_5px_#000]">Cleaner<br className="hidden sm:block" /> Environment</h3><p className="mt-1 text-[10px] font-semibold leading-snug text-white">Reduce harmful emissions from engines and generators.</p></div>
+                <div><h3 className="text-xs font-bold uppercase leading-tight [text-shadow:0_1px_5px_#000]">Cleaner<br className="hidden sm:block" /> Environment</h3><p className="mt-1 text-[10px] font-medium leading-snug text-white">Reduce harmful emissions from engines and generators.</p></div>
               </div>
+              <ArrowRight aria-hidden="true" className="mx-auto size-5 rotate-90 text-emerald-300 sm:rotate-0" />
               <div className="flex items-center gap-3">
                 <span className="grid size-11 shrink-0 place-items-center rounded-full border-2 border-emerald-300 bg-emerald-500/30 text-emerald-200"><Users className="size-6" strokeWidth={3} /></span>
-                <div><h3 className="text-xs font-black uppercase leading-tight [text-shadow:0_1px_5px_#000]">Healthier<br className="hidden sm:block" /> Communities</h3><p className="mt-1 text-[10px] font-semibold leading-snug text-white">Cleaner air for our people, especially in our cities.</p></div>
+                <div><h3 className="text-xs font-bold uppercase leading-tight [text-shadow:0_1px_5px_#000]">Healthier<br className="hidden sm:block" /> Communities</h3><p className="mt-1 text-[10px] font-medium leading-snug text-white">Cleaner air for our people, especially in our cities.</p></div>
               </div>
+              <ArrowRight aria-hidden="true" className="mx-auto size-5 rotate-90 text-emerald-300 sm:rotate-0" />
               <div className="flex items-center gap-3">
                 <span className="grid size-11 shrink-0 place-items-center rounded-full border-2 border-emerald-300 bg-emerald-500/30 text-emerald-200"><img src={indiaOutline} alt="" className="size-6 brightness-0 invert" /></span>
-                <div><h3 className="text-xs font-black uppercase leading-tight [text-shadow:0_1px_5px_#000]">A Stronger<br className="hidden sm:block" /> India</h3><p className="mt-1 text-[10px] font-semibold leading-snug text-white">Sustainable growth through cleaner, smarter energy solutions.</p></div>
+                <div><h3 className="text-xs font-bold uppercase leading-tight [text-shadow:0_1px_5px_#000]">A Stronger<br className="hidden sm:block" /> India</h3><p className="mt-1 text-[10px] font-medium leading-snug text-white">Sustainable growth through cleaner, smarter energy solutions.</p></div>
               </div>
             </div>
             <div className="flex items-center gap-3 rounded-2xl bg-white px-4 py-3 text-slate-900 shadow-xl sm:col-span-3 sm:mx-auto sm:w-full sm:max-w-[700px] lg:col-start-2 lg:mx-0 lg:mt-[-2px] lg:max-w-none">

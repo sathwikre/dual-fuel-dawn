@@ -979,7 +979,7 @@ Message: ${message}`;
                   className="relative group/regulations"
                 >
                   <button
-                    className="flex items-center gap-1 whitespace-nowrap text-[13px] font-bold capitalize tracking-normal text-slate-700 transition-colors duration-200 hover:text-emerald-700"
+                    className="flex items-center gap-1 whitespace-nowrap text-[15px] font-bold capitalize tracking-normal text-slate-700 transition-colors duration-200 hover:text-emerald-700"
                   >
                     {label}
                     <ChevronDown className="size-3 transition-transform duration-200 group-hover/regulations:rotate-180" />
@@ -1014,7 +1014,7 @@ Message: ${message}`;
                   <a
                     key={id}
                     href={id === "impact" ? "/impact" : `#${id}`}
-                    className="group hidden items-center gap-2 whitespace-nowrap rounded-full bg-emerald-700 px-5 py-2.5 text-[13px] font-bold capitalize tracking-normal text-white transition-all duration-200 hover:bg-emerald-800 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 sm:inline-flex"
+                    className="group hidden items-center gap-2 whitespace-nowrap rounded-full bg-emerald-700 px-5 py-2.5 text-[15px] font-bold capitalize tracking-normal text-white transition-all duration-200 hover:bg-emerald-800 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 sm:inline-flex"
                   >
                     {label}
                     <span className="text-[13px] font-normal leading-none transition-transform duration-200 group-hover:translate-x-0.5">↗</span>
@@ -1023,7 +1023,7 @@ Message: ${message}`;
                   <a
                     key={id}
                     href={id === "impact" ? "/impact" : `#${id}`}
-                    className="whitespace-nowrap text-[13px] font-bold capitalize tracking-normal text-slate-700 transition-colors duration-200 hover:text-emerald-700"
+                    className="whitespace-nowrap text-[15px] font-bold capitalize tracking-normal text-slate-700 transition-colors duration-200 hover:text-emerald-700"
                   >
                     {label}
                   </a>
@@ -1032,7 +1032,7 @@ Message: ${message}`;
             ))}
             <button
               onClick={() => setDealershipModalOpen(true)}
-              className="group hidden items-center gap-2 whitespace-nowrap rounded-full bg-emerald-700 px-5 py-2.5 text-[13px] font-bold capitalize tracking-normal text-white transition-all duration-200 hover:bg-emerald-800 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 sm:inline-flex"
+              className="group hidden items-center gap-2 whitespace-nowrap rounded-full bg-emerald-700 px-5 py-2.5 text-[15px] font-bold capitalize tracking-normal text-white transition-all duration-200 hover:bg-emerald-800 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 sm:inline-flex"
             >
               Dealership
               <span className="text-[13px] font-normal leading-none transition-transform duration-200 group-hover:translate-x-0.5">↗</span>
@@ -1256,7 +1256,7 @@ Message: ${message}`;
                 href="#kit"
                 className="inline-flex h-12 items-center gap-2 rounded-xl border border-slate-300 bg-white/90 px-7 text-[11px] font-bold uppercase tracking-[0.12em] text-slate-900 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-emerald-700 hover:bg-white hover:text-emerald-800"
               >
-                Learn How It Works <ArrowRight className="size-4" />
+               Dual Fuel Kit<ArrowRight className="size-4" />
               </a>
             </div>
             </div>

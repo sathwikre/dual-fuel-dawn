@@ -11,6 +11,7 @@ import {
   ChevronLeft,
   ChevronRight,
   CircleGauge,
+  Clock3,
   Cog,
   Factory,
   FileText,
@@ -158,27 +159,8 @@ import knockSensorMountingComponent from "@/assets/components/Knock sensor mount
 import knockSensorComponent from "@/assets/components/Knock sensor.jpeg";
 import lpgPressureRegulatorComponent from "@/assets/components/LPG Pressure regulator (LOT capable).jpeg";
 
-// Hero background images
-import heroBg4 from "@/assets/background/bent-van-aeken-0A7YwYhZhWw-unsplash.jpg";
-import heroBg5 from "@/assets/background/dusan-veverkolog-SwRy_vjCbhE-unsplash.jpg";
-import heroBg6 from "@/assets/background/jonny-gios-dxGvEIJDD6Q-unsplash.jpg";
-import heroBg7 from "@/assets/background/jonny-gios-EfdJiKMq1hs-unsplash.jpg";
-import heroBg8 from "@/assets/background/jordan-allen-walters-j8QUs2P-_Rs-unsplash.jpg";
-import heroBg9 from "@/assets/background/jorge-cesar-wZm7-G8G_ec-unsplash.jpg";
-import heroBg10 from "@/assets/background/julia-taubitz-ezegOH-cBFE-unsplash.jpg";
-import heroBg11 from "@/assets/background/karsten-wurth-0w-uTa0Xz7w-unsplash.jpg";
-import heroBg12 from "@/assets/background/matthew-henry-yETqkLnhsUI-unsplash.jpg";
-import heroBg13 from "@/assets/background/paul-einerhand-eysa6RORvl0-unsplash.jpg";
-import heroBg14 from "@/assets/background/the-transport-enthusiast-dc-EvvoBu0nBnc-unsplash.jpg";
-import heroBg15 from "@/assets/background/valentin-Tk7abNpQ3ZI-unsplash.jpg";
-import heroBg16 from "@/assets/background/venti-views-1cqIcrWFQBI-unsplash.jpg";
-import heroBg17 from "@/assets/background/worksite-ltd-MVA-zlTQdSE-unsplash.jpg";
-import heroBg18 from "@/assets/background/Gross picture DFK2.jpeg";
-import heroBg19 from "@/assets/background/IMG_20260206_073508.jpg";
-import heroBg20 from "@/assets/background/WhatsApp Image 2026-05-21 at 4.16.08 PM (2).jpeg";
-import heroBg21 from "@/assets/background/WhatsApp Image 2026-08-28 at 3.55.36 PM.jpeg";
-import heroBg22 from "@/assets/background/image.jpeg";
-import heroBg23 from "@/assets/background/arno-senoner-coEeAHagUEo-unsplash.jpg";
+// Static home hero background
+import heroBackground from "@/assets/Sunrise Industrial Cityscape with Tricolour Swooshes.png";
 import birlaNewsImage from "@/assets/WhatsApp Image 2026-05-21 at 4.16.09 PM.jpeg";
 import akwelImage from "@/assets/aqual.jpeg";
 import ammeniEngineImage from "@/assets/ammeni engine.jpeg";
@@ -297,7 +279,7 @@ const navItems = [
   ["About", "team"],
   ["Regulations", "regulations"],
  
-  ["Get a Quote", "contact"],
+  ["Join this Mission", "contact"],
 ] as const;
 
 const regulationsData = [
@@ -723,203 +705,13 @@ function RotatingQuote() {
 }
 
 function HeroBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imgRef0 = useRef<HTMLImageElement>(null);
-  const imgRef1 = useRef<HTMLImageElement>(null);
-  const imgRef2 = useRef<HTMLImageElement>(null);
-  const imgRef3 = useRef<HTMLImageElement>(null);
-  const imgRef4 = useRef<HTMLImageElement>(null);
-  const imgRef5 = useRef<HTMLImageElement>(null);
-  const imgRef6 = useRef<HTMLImageElement>(null);
-  const imgRef7 = useRef<HTMLImageElement>(null);
-  const imgRef8 = useRef<HTMLImageElement>(null);
-  const imgRef9 = useRef<HTMLImageElement>(null);
-  const imgRef10 = useRef<HTMLImageElement>(null);
-  const imgRef11 = useRef<HTMLImageElement>(null);
-  const imgRef12 = useRef<HTMLImageElement>(null);
-  const imgRef13 = useRef<HTMLImageElement>(null);
-  const imgRef14 = useRef<HTMLImageElement>(null);
-  const imgRef15 = useRef<HTMLImageElement>(null);
-  const imgRef16 = useRef<HTMLImageElement>(null);
-  const imgRef17 = useRef<HTMLImageElement>(null);
-  const imgRef18 = useRef<HTMLImageElement>(null);
-  const imgRef19 = useRef<HTMLImageElement>(null);
-  const imgRef20 = useRef<HTMLImageElement>(null);
-  const imgRef21 = useRef<HTMLImageElement>(null);
-  const imgRef22 = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const imgs = [imgRef0.current, imgRef1.current, imgRef2.current, imgRef3.current, imgRef4.current, imgRef5.current, imgRef6.current, imgRef7.current, imgRef8.current, imgRef9.current, imgRef10.current, imgRef11.current, imgRef12.current, imgRef13.current, imgRef14.current, imgRef15.current, imgRef16.current, imgRef17.current, imgRef18.current, imgRef19.current, imgRef20.current, imgRef21.current, imgRef22.current].filter(Boolean) as HTMLImageElement[];
-
-    let raf: number;
-    let t = 0;
-
-    // Slide state
-    const SLIDE_DURATION = 220;   // frames each slide holds (~7s at 30fps)
-    const FADE_DURATION  = 55;    // crossfade length in frames
-    let current = 0;
-    let frameInSlide = 0;
-
-    // Particles ”” heat-haze style
-    const COUNT = 60;
-    type Particle = { x: number; y: number; vx: number; vy: number; size: number; alpha: number; pulse: number };
-    const particles: Particle[] = Array.from({ length: COUNT }, () => ({
-      x: Math.random(),
-      y: 0.5 + Math.random() * 0.6,
-      vx: (Math.random() - 0.5) * 0.00015,
-      vy: -(Math.random() * 0.00025 + 0.00006),
-      size: Math.random() * 2.4 + 0.5,
-      alpha: Math.random() * 0.45 + 0.08,
-      pulse: Math.random() * Math.PI * 2,
-    }));
-
-    function resize() {
-      if (!canvas) return;
-      canvas.width  = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    }
-    resize();
-    const ro = new ResizeObserver(resize);
-    ro.observe(canvas);
-
-    function drawImage(img: HTMLImageElement, alpha: number, zoom: number, panX: number, panY: number) {
-      if (!canvas || !ctx || !img.naturalWidth) return;
-      const W = canvas.width, H = canvas.height;
-      const iw = img.naturalWidth, ih = img.naturalHeight;
-      const scale = Math.max(W / iw, H / ih) * zoom;
-      const dw = iw * scale, dh = ih * scale;
-      const dx = (W - dw) / 2 + panX * W;
-      const dy = (H - dh) / 2 + panY * H;
-      ctx.globalAlpha = alpha;
-      ctx.filter = "saturate(0.75) brightness(0.88)";
-      ctx.drawImage(img, dx, dy, dw, dh);
-      ctx.filter = "none";
-      ctx.globalAlpha = 1;
-    }
-
-    function draw() {
-      if (!canvas || !ctx || imgs.length === 0) { raf = requestAnimationFrame(draw); return; }
-      const W = canvas.width, H = canvas.height;
-      t += 1;
-      frameInSlide += 1;
-
-      ctx.clearRect(0, 0, W, H);
-
-      // Current slide Ken-Burns params
-      const progress = frameInSlide / SLIDE_DURATION;
-      const zoom    = 1 + progress * 0.07;
-      const panX    = -progress * 0.02;
-      const panY    = -progress * 0.01;
-
-      const next = (current + 1) % imgs.length;
-
-      if (frameInSlide >= SLIDE_DURATION - FADE_DURATION) {
-        // Crossfade phase
-        const fadeProgress = (frameInSlide - (SLIDE_DURATION - FADE_DURATION)) / FADE_DURATION;
-        const alphaA = 1 - fadeProgress;
-        const alphaB = fadeProgress;
-        drawImage(imgs[current]!, alphaA, zoom, panX, panY);
-        drawImage(imgs[next]!, alphaB, 1, 0, 0);
-      } else {
-        drawImage(imgs[current]!, 1, zoom, panX, panY);
-      }
-
-      if (frameInSlide >= SLIDE_DURATION) {
-        current = next;
-        frameInSlide = 0;
-      }
-
-      // â”€â”€ Vignette â”€â”€
-      const vig = ctx.createRadialGradient(W / 2, H / 2, H * 0.1, W / 2, H / 2, H * 0.9);
-      vig.addColorStop(0, "rgba(0,0,0,0)");
-      vig.addColorStop(1, "rgba(5,14,10,0.22)");
-      ctx.fillStyle = vig;
-      ctx.fillRect(0, 0, W, H);
-
-      // â”€â”€ Subtle diagonal light sweep â”€â”€
-      const sweepT = (t * 0.007) % 2.2;
-      if (sweepT < 1.4) {
-        const sx = (sweepT / 1.4) * (W + 500) - 250;
-        const sg = ctx.createLinearGradient(sx - 220, 0, sx + 220, H);
-        sg.addColorStop(0,   "rgba(200,255,180,0)");
-        sg.addColorStop(0.5, "rgba(200,255,180,0.06)");
-        sg.addColorStop(1,   "rgba(200,255,180,0)");
-        ctx.fillStyle = sg;
-        ctx.fillRect(0, 0, W, H);
-      }
-
-      // â”€â”€ Particles â”€â”€
-      for (const p of particles) {
-        p.x     += p.vx;
-        p.y     += p.vy;
-        p.pulse += 0.018;
-        if (p.y < -0.04) { p.y = 1.0; p.x = Math.random(); }
-        if (p.x < -0.04) p.x = 1.04;
-        if (p.x >  1.04) p.x = -0.04;
-        const a = p.alpha * (0.55 + 0.45 * Math.sin(p.pulse));
-        ctx.beginPath();
-        ctx.arc(p.x * W, p.y * H, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(180,255,120,${a})`;
-        ctx.shadowBlur  = 12;
-        ctx.shadowColor = "#9ddf60";
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      }
-
-      raf = requestAnimationFrame(draw);
-    }
-
-    // Wait for at least one image to load before starting
-    let started = false;
-    const onLoad = () => { if (!started) { started = true; draw(); } };
-    imgs.forEach((img: HTMLImageElement) => {
-      if (img.complete && img.naturalWidth > 0) onLoad();
-      else img.addEventListener("load", onLoad, { once: true });
-    });
-    if (imgs.every((i: HTMLImageElement) => i.complete && i.naturalWidth > 0)) { if (!started) { started = true; draw(); } }
-
-    return () => {
-      cancelAnimationFrame(raf);
-      ro.disconnect();
-    };
-  }, []);
-
   return (
-    <>
-      {/* Preload images — hidden off-screen */}
-      <img ref={imgRef0}  src={heroBg4}  alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef1}  src={heroBg5}  alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef2}  src={heroBg6}  alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef3}  src={heroBg7}  alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef4}  src={heroBg8}  alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef5}  src={heroBg9}  alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef6}  src={heroBg10} alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef7}  src={heroBg11} alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef8}  src={heroBg12} alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef9}  src={heroBg13} alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef10} src={heroBg14} alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef11} src={heroBg15} alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef12} src={heroBg16} alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef13} src={heroBg17} alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef14} src={heroBg18} alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef15} src={heroBg19} alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef16} src={heroBg20} alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef17} src={heroBg21} alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef18} src={heroBg22} alt="" aria-hidden="true" className="sr-only" />
-      <img ref={imgRef19} src={heroBg23} alt="" aria-hidden="true" className="sr-only" />
-      {/* Canvas renders everything */}
-      <canvas
-        ref={canvasRef}
-        aria-hidden="true"
-        className="absolute inset-0 z-[0] h-full w-full"
-        style={{ pointerEvents: "none" }}
-      />
-    </>
+    <img
+      src={heroBackground}
+      alt=""
+      aria-hidden="true"
+      className="absolute inset-0 z-0 h-full w-full object-cover object-[62%_center]"
+    />
   );
 }
 
@@ -1173,13 +965,13 @@ Message: ${message}`;
         className={[
           "fixed inset-x-0 top-0 z-50 flex flex-col",
           navScrolled
-            ? "h-[72px] bg-[rgba(13,23,19,0.88)] backdrop-blur-[16px]"
+            ? "h-[72px] bg-white/20 shadow-sm backdrop-blur-[8px]"
             : "h-[85px] bg-transparent",
         ].join(" ")}
       >
         <div className="mx-auto flex w-full flex-1 max-w-[1440px] items-center justify-between px-[4.5vw]">
           {/* Desktop nav */}
-          <nav className="hidden items-center gap-6 xl:flex ml-4">
+          <nav className="order-2 ml-8 hidden flex-1 items-center justify-end gap-8 xl:flex">
             {navItems.map(([label, id]) => (
               label === "Regulations" ? (
                 <div
@@ -1187,7 +979,7 @@ Message: ${message}`;
                   className="relative group/regulations"
                 >
                   <button
-                    className="flex items-center gap-1 whitespace-nowrap text-[13px] font-extrabold uppercase tracking-[0.11em] text-white/86 transition-colors duration-200 hover:text-[#b6ff72]"
+                    className="flex items-center gap-1 whitespace-nowrap text-[13px] font-bold capitalize tracking-normal text-slate-700 transition-colors duration-200 hover:text-emerald-700"
                   >
                     {label}
                     <ChevronDown className="size-3 transition-transform duration-200 group-hover/regulations:rotate-180" />
@@ -1218,11 +1010,11 @@ Message: ${message}`;
                   </div>
                 </div>
               ) : (
-                label === "Get a Quote" ? (
+                label === "Get a Quote" || label === "Join this Mission" ? (
                   <a
                     key={id}
                     href={id === "impact" ? "/impact" : `#${id}`}
-                    className="group hidden items-center gap-2 whitespace-nowrap rounded-full bg-[#b6ff72] px-5 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.11em] text-[#0d1f16] transition-all duration-200 hover:bg-[#a3e065] hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b6ff72] sm:inline-flex"
+                    className="group hidden items-center gap-2 whitespace-nowrap rounded-full bg-emerald-700 px-5 py-2.5 text-[13px] font-bold capitalize tracking-normal text-white transition-all duration-200 hover:bg-emerald-800 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 sm:inline-flex"
                   >
                     {label}
                     <span className="text-[13px] font-normal leading-none transition-transform duration-200 group-hover:translate-x-0.5">↗</span>
@@ -1231,7 +1023,7 @@ Message: ${message}`;
                   <a
                     key={id}
                     href={id === "impact" ? "/impact" : `#${id}`}
-                    className="whitespace-nowrap text-[13px] font-extrabold uppercase tracking-[0.11em] text-white/86 transition-colors duration-200 hover:text-[#b6ff72]"
+                    className="whitespace-nowrap text-[13px] font-bold capitalize tracking-normal text-slate-700 transition-colors duration-200 hover:text-emerald-700"
                   >
                     {label}
                   </a>
@@ -1240,7 +1032,7 @@ Message: ${message}`;
             ))}
             <button
               onClick={() => setDealershipModalOpen(true)}
-              className="group hidden items-center gap-2 whitespace-nowrap rounded-full bg-[#b6ff72] px-5 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.11em] text-[#0d1f16] transition-all duration-200 hover:bg-[#a3e065] hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b6ff72] sm:inline-flex"
+              className="group hidden items-center gap-2 whitespace-nowrap rounded-full bg-emerald-700 px-5 py-2.5 text-[13px] font-bold capitalize tracking-normal text-white transition-all duration-200 hover:bg-emerald-800 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 sm:inline-flex"
             >
               Dealership
               <span className="text-[13px] font-normal leading-none transition-transform duration-200 group-hover:translate-x-0.5">↗</span>
@@ -1253,7 +1045,7 @@ Message: ${message}`;
             aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((open) => !open)}
-            className="flex h-9 w-9 flex-col items-center justify-center gap-[6px] border-0 bg-transparent p-2 text-white xl:hidden"
+            className="order-2 flex h-9 w-9 flex-col items-center justify-center gap-[6px] border-0 bg-transparent p-2 text-slate-800 xl:hidden"
           >
             <span
               style={{
@@ -1292,14 +1084,14 @@ Message: ${message}`;
             href="#home"
             onClick={closeMenu}
             aria-label="OM Solutions home"
-            className="flex shrink-0 items-center gap-2.5 text-white no-underline"
+            className="order-1 flex shrink-0 items-center gap-2.5 text-slate-900 no-underline"
           >
             <img
               src={logoImage}
               alt="OM Solutions"
-              className="h-14 w-14 rounded-full object-cover ring-1 ring-white/30"
+              className="h-12 w-12 rounded-full object-cover ring-2 ring-emerald-700/20"
             />
-            <span className="text-[16px] font-extrabold tracking-[0.08em] uppercase leading-none">
+            <span className="text-[16px] font-extrabold tracking-tight uppercase leading-none">
               OM Solutions
             </span>
           </a>
@@ -1341,7 +1133,7 @@ Message: ${message}`;
                     )}
                   </div>
                 ) : (
-                  label === "Get a Quote" ? (
+                  label === "Get a Quote" || label === "Join this Mission" ? (
                     <a
                       key={id}
                       href={id === "impact" ? "/impact" : `#${id}`}
@@ -1429,58 +1221,45 @@ Message: ${message}`;
       </div>
 
       <main>
-        <section id="home" className="relative isolate min-h-[100svh] overflow-hidden bg-panel">
+        <section id="home" className="relative isolate min-h-[calc(100svh-129px)] overflow-hidden bg-panel lg:min-h-[calc(100svh-160px)]">
           <HeroBackground />
-          <div className="hero-grid-overlay absolute inset-0 z-[1]" aria-hidden="true" />
-          <div className="hero-scan-lines absolute inset-0 z-[1]" aria-hidden="true" />
-          <div className="absolute inset-0 z-[2] bg-gradient-to-r from-panel/88 via-panel/45 to-panel/18" />
-          <div className="absolute inset-0 z-[2] bg-gradient-to-t from-panel/75 via-transparent to-panel/25" />
-          <div className="absolute inset-0 z-[2] bg-signal/[0.07]" />
-          <div className={`relative z-[3] mx-auto flex min-h-[100svh] w-full max-w-[1440px] flex-col items-center justify-end px-5 pb-36 text-center lg:px-16 transition-all duration-[350ms] ease ${navScrolled ? 'pt-[116px] lg:pt-[124px]' : 'pt-[129px] lg:pt-[137px]'}`}>
-            <p className="rise-in mb-6 font-mono text-[10px] uppercase tracking-[0.22em] text-signal sm:text-[11px]">
-              Engineering the transition
-            </p>
-            <RotatingQuote />
-            <p className="mt-6 inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.18em] text-white/90 sm:text-base">
-              <span className="h-px w-8 bg-signal sm:w-10" aria-hidden="true" />
-              We are OM Solutions
-              <span className="h-px w-8 bg-signal sm:w-10" aria-hidden="true" />
-            </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <div className="absolute inset-0 z-[2] bg-gradient-to-r from-white/90 via-white/65 to-transparent" />
+          <div className="absolute inset-0 z-[2] bg-gradient-to-t from-panel/60 via-transparent to-white/10" />
+          <p
+            className="absolute right-[15%] top-[30%] z-[3] hidden max-w-[340px] rotate-[-7deg] text-center text-4xl leading-[0.95] text-slate-900/90 lg:block xl:text-5xl"
+            style={{ fontFamily: '"Segoe Script", "Brush Script MT", cursive' }}
+          >
+            Cleaner air<br />for a healthier<br /><span className="text-6xl xl:text-7xl">India</span>
+          </p>
+          <div className={`relative z-[3] mx-auto flex min-h-[calc(100svh-129px)] w-full max-w-[1440px] flex-col justify-end px-5 pb-28 pt-28 transition-all duration-[350ms] ease lg:min-h-[calc(100svh-160px)] lg:px-12 lg:pb-24 ${navScrolled ? 'lg:pt-[124px]' : 'lg:pt-[137px]'}`}>
+            <div className="max-w-[680px] text-slate-950">
+              <h1 className="rise-in text-5xl font-black leading-[0.98] tracking-[-0.045em] sm:text-6xl lg:text-7xl">
+                India’s<br /><span className="text-emerald-800">Clean Air</span> Mission
+              </h1>
+              <p className="mt-3 text-base font-bold sm:text-lg">Cleaner Engines. Greener Cities. A Healthier Tomorrow.</p>
+              <p className="mt-2 max-w-xl text-sm leading-relaxed text-slate-700 sm:text-base">OM Solutions enables industries, businesses and communities<br className="hidden sm:block" /> to reduce emissions and fuel costs with our proven dual-fuel technology.</p>
+              <div className="mt-6 grid max-w-[560px] grid-cols-3 gap-2 sm:gap-3">
+                <div className="rounded-xl bg-white/90 p-3 shadow-lg ring-1 ring-white/80 sm:p-4"><div className="flex items-center gap-2 text-emerald-700"><Leaf className="size-7 shrink-0"/><strong className="text-xl sm:text-2xl">3,420 t</strong></div><p className="mt-1 text-[10px] font-extrabold uppercase">CO₂ saved</p><p className="mt-1 text-[9px] leading-tight text-slate-600">Equivalent to planting 155,000 trees</p></div>
+                <div className="rounded-xl bg-white/90 p-3 shadow-lg ring-1 ring-white/80 sm:p-4"><div className="flex items-center gap-2 text-emerald-700"><span className="text-3xl font-bold leading-none">₹</span><strong className="text-xl sm:text-2xl">4.72 Cr</strong></div><p className="mt-1 text-[10px] font-extrabold uppercase">Cost saved</p><p className="mt-1 text-[9px] leading-tight text-slate-600">Lower fuel cost for our partners</p></div>
+                <div className="rounded-xl bg-white/90 p-3 shadow-lg ring-1 ring-white/80 sm:p-4"><div className="flex items-center gap-2 text-emerald-700"><Clock3 className="size-7 shrink-0"/><strong className="text-xl sm:text-2xl">1.26 M</strong></div><p className="mt-1 text-[10px] font-extrabold uppercase">Hours run</p><p className="mt-1 text-[9px] leading-tight text-slate-600">Across 20 installations in India</p></div>
+              </div>
+              <div className="mt-5 flex flex-wrap gap-3">
               <a
                 href={isMobile ? "tel:+917387591083" : "https://wa.me/917387591083"}
                 target={isMobile ? undefined : "_blank"}
                 rel={isMobile ? undefined : "noopener noreferrer"}
-                className="group inline-flex h-12 items-center gap-2.5 rounded-sm bg-signal px-8 text-[11px] font-extrabold uppercase tracking-[0.12em] text-panel shadow-[0_8px_32px_color-mix(in_oklab,var(--color-signal)_35%,transparent)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-panel hover:shadow-[0_12px_40px_color-mix(in_oklab,white_25%,transparent)]"
+                className="group inline-flex h-12 items-center gap-2.5 rounded-xl bg-emerald-700 px-8 text-[11px] font-extrabold uppercase tracking-[0.12em] text-white shadow-[0_8px_32px_color-mix(in_oklab,var(--color-signal)_35%,transparent)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-emerald-800"
               >
-                Contact Us
-                <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+                Join the Mission <ArrowRight className="size-4" />
               </a>
               <a
                 href="#kit"
-                className="inline-flex h-12 items-center gap-2 border border-white/35 bg-white/5 px-7 text-[11px] font-semibold uppercase tracking-[0.12em] text-white backdrop-blur-sm transition-all duration-300 hover:border-signal/50 hover:bg-white/10 hover:text-signal"
+                className="inline-flex h-12 items-center gap-2 rounded-xl border border-slate-300 bg-white/90 px-7 text-[11px] font-bold uppercase tracking-[0.12em] text-slate-900 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-emerald-700 hover:bg-white hover:text-emerald-800"
               >
-                Dual Fuel Kit
-                <ArrowDownRight className="size-3.5" />
+                Learn How It Works <ArrowRight className="size-4" />
               </a>
             </div>
-          </div>
-          <a
-            href="#kit"
-            className="absolute bottom-8 left-1/2 z-[3] flex -translate-x-1/2 flex-col items-center gap-2.5 font-mono text-[9px] uppercase tracking-[0.15em] text-white/55 transition-colors hover:text-signal"
-            aria-label="Scroll to Dual Fuel Kit section"
-          >
-            <span className="scroll-cue-line h-7 w-px bg-signal" aria-hidden="true" />
-            Scroll to explore
-          </a>
-          <div className="absolute bottom-8 left-5 z-[3] hidden items-center gap-2.5 font-mono text-[10px] uppercase tracking-[0.16em] text-background/45 lg:flex lg:left-10">
-            <span className="text-signal">01</span>
-            <span className="h-px w-8 bg-background/25" aria-hidden="true" />
-            Home
-          </div>
-          <div className="absolute bottom-8 right-5 z-[3] hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-background/45 lg:flex lg:right-10">
-            <span className="h-px w-10 bg-signal/60" aria-hidden="true" />
-            Field-ready conversion systems
+            </div>
           </div>
         </section>
 

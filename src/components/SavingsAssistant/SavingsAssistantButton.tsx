@@ -86,8 +86,8 @@ export function SavingsAssistantButton({ onClick, isOpen }: Props) {
           aria-label={isOpen ? "Close savings calculator" : "Open savings calculator"}
           className="sa-btn relative flex items-center justify-center rounded-lg bg-[oklch(0.19_0.045_158)] transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(0.72_0.16_155)] focus-visible:ring-offset-2"
           style={{
-            width: 92,
-            height: 68,
+            width: 68,
+            height: 92,
             border: "1px solid rgba(45,189,110,0.35)",
             flexShrink: 0,
           }}
@@ -98,22 +98,22 @@ export function SavingsAssistantButton({ onClick, isOpen }: Props) {
               <path d="M5 5L15 15M15 5L5 15" stroke="oklch(0.72 0.16 155)" strokeWidth="1.8" strokeLinecap="round" />
             </svg>
           ) : (
-            <svg width="54" height="56" viewBox="0 0 60 70" fill="none" aria-hidden="true">
-              <rect x="2" y="1" width="56" height="68" rx="8" fill="#f4fff7" stroke="#2dbd6e" strokeWidth="2" />
-              <rect x="6" y="6" width="48" height="17" rx="3" fill="#0b2819" />
-              <text x="30" y="17.5" textAnchor="middle" fill="#82f3a8" fontSize="6" fontWeight="700" className="sa-calc-readout">CALCULATOR</text>
-              <g className="sa-calc-key"><rect x="6" y="27" width="14" height="8" rx="2" fill="#123b27"/><text x="13" y="33" textAnchor="middle" fill="white" fontSize="6">7</text></g>
-              <g className="sa-calc-key"><rect x="23" y="27" width="14" height="8" rx="2" fill="#123b27"/><text x="30" y="33" textAnchor="middle" fill="white" fontSize="6">8</text></g>
-              <g className="sa-calc-key"><rect x="40" y="27" width="14" height="8" rx="2" fill="#123b27"/><text x="47" y="33" textAnchor="middle" fill="white" fontSize="6">9</text></g>
-              <g className="sa-calc-key"><rect x="6" y="37" width="14" height="8" rx="2" fill="#123b27"/><text x="13" y="43" textAnchor="middle" fill="white" fontSize="6">4</text></g>
-              <g className="sa-calc-key"><rect x="23" y="37" width="14" height="8" rx="2" fill="#123b27"/><text x="30" y="43" textAnchor="middle" fill="white" fontSize="6">5</text></g>
-              <g className="sa-calc-key"><rect x="40" y="37" width="14" height="8" rx="2" fill="#123b27"/><text x="47" y="43" textAnchor="middle" fill="white" fontSize="6">6</text></g>
-              <g className="sa-calc-key"><rect x="6" y="47" width="14" height="8" rx="2" fill="#123b27"/><text x="13" y="53" textAnchor="middle" fill="white" fontSize="6">1</text></g>
-              <g className="sa-calc-key"><rect x="23" y="47" width="14" height="8" rx="2" fill="#123b27"/><text x="30" y="53" textAnchor="middle" fill="white" fontSize="6">2</text></g>
-              <g className="sa-calc-key"><rect x="40" y="47" width="14" height="8" rx="2" fill="#123b27"/><text x="47" y="53" textAnchor="middle" fill="white" fontSize="6">3</text></g>
-              <g className="sa-calc-key"><rect x="6" y="57" width="14" height="8" rx="2" fill="#123b27"/><text x="13" y="63" textAnchor="middle" fill="white" fontSize="6">0</text></g>
-              <g className="sa-calc-key"><rect x="23" y="57" width="14" height="8" rx="2" fill="#123b27"/><text x="30" y="63" textAnchor="middle" fill="white" fontSize="6">.</text></g>
-              <g className="sa-calc-key"><rect x="40" y="57" width="14" height="8" rx="2" fill="#2dbd6e"/><text x="47" y="63" textAnchor="middle" fill="white" fontSize="6">=</text></g>
+            <svg width="62" height="88" viewBox="0 0 70 100" fill="none" aria-hidden="true">
+              <rect x="1" y="1" width="68" height="98" rx="5" fill="#f4fff7" stroke="#2dbd6e" strokeWidth="2" />
+              <rect x="6" y="7" width="58" height="17" rx="2" fill="#0b2819" />
+              <text x="35" y="18" textAnchor="middle" fill="#82f3a8" fontSize="5" fontWeight="700" className="sa-calc-readout">CALCULATOR</text>
+              <g className="sa-calc-key"><rect x="6" y="30" width="16" height="12" rx="2" fill="#123b27"/><text x="14" y="39" textAnchor="middle" fill="white" fontSize="6">7</text></g>
+              <g className="sa-calc-key"><rect x="27" y="30" width="16" height="12" rx="2" fill="#123b27"/><text x="35" y="39" textAnchor="middle" fill="white" fontSize="6">8</text></g>
+              <g className="sa-calc-key"><rect x="48" y="30" width="16" height="12" rx="2" fill="#123b27"/><text x="56" y="39" textAnchor="middle" fill="white" fontSize="6">9</text></g>
+              <g className="sa-calc-key"><rect x="6" y="46" width="16" height="12" rx="2" fill="#123b27"/><text x="14" y="55" textAnchor="middle" fill="white" fontSize="6">4</text></g>
+              <g className="sa-calc-key"><rect x="27" y="46" width="16" height="12" rx="2" fill="#123b27"/><text x="35" y="55" textAnchor="middle" fill="white" fontSize="6">5</text></g>
+              <g className="sa-calc-key"><rect x="48" y="46" width="16" height="12" rx="2" fill="#123b27"/><text x="56" y="55" textAnchor="middle" fill="white" fontSize="6">6</text></g>
+              <g className="sa-calc-key"><rect x="6" y="62" width="16" height="12" rx="2" fill="#123b27"/><text x="14" y="71" textAnchor="middle" fill="white" fontSize="6">1</text></g>
+              <g className="sa-calc-key"><rect x="27" y="62" width="16" height="12" rx="2" fill="#123b27"/><text x="35" y="71" textAnchor="middle" fill="white" fontSize="6">2</text></g>
+              <g className="sa-calc-key"><rect x="48" y="62" width="16" height="12" rx="2" fill="#123b27"/><text x="56" y="71" textAnchor="middle" fill="white" fontSize="6">3</text></g>
+              <g className="sa-calc-key"><rect x="6" y="78" width="16" height="12" rx="2" fill="#123b27"/><text x="14" y="87" textAnchor="middle" fill="white" fontSize="6">0</text></g>
+              <g className="sa-calc-key"><rect x="27" y="78" width="16" height="12" rx="2" fill="#123b27"/><text x="35" y="87" textAnchor="middle" fill="white" fontSize="6">.</text></g>
+              <g className="sa-calc-key"><rect x="48" y="78" width="16" height="12" rx="2" fill="#2dbd6e"/><text x="56" y="87" textAnchor="middle" fill="white" fontSize="6">=</text></g>
             </svg>
           )}
         </button>

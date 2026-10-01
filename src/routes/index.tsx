@@ -1296,31 +1296,31 @@ Message: ${message}`;
           <img
             src={sunriseFieldsImage}
             alt="Green fields at sunrise"
-            className="absolute inset-0 -z-20 h-full w-full object-cover"
+            className="absolute inset-0 z-0 h-full w-full object-cover"
             loading="lazy"
           />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#071f18]/90 via-[#0b3023]/75 to-[#06251b]/90" />
-          <div className="mx-auto grid min-h-[420px] max-w-[1440px] items-center gap-6 px-5 py-8 sm:min-h-[360px] lg:min-h-[200px] lg:grid-cols-[1.05fr_2fr] lg:gap-8 lg:px-10 lg:py-5">
-            <div className="border-l-4 border-emerald-400 pl-4 lg:border-l-0 lg:pl-0">
-              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-300">Our Vision</p>
-              <h2 className="mt-1 text-3xl font-black leading-[0.98] tracking-tight sm:text-4xl">Cleaner Air.<br />Stronger India.</h2>
+          <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#071f18]/55 via-[#0b3023]/40 to-[#06251b]/50" />
+          <div className="relative z-20 mx-auto grid min-h-[420px] max-w-[1440px] items-center gap-6 px-5 py-8 sm:min-h-[360px] lg:min-h-[200px] lg:grid-cols-[1.05fr_2fr] lg:gap-8 lg:px-10 lg:py-5">
+            <div className="border-l-4 border-emerald-300 pl-4 lg:border-l-0 lg:pl-0">
+              <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-emerald-200">Our Vision</p>
+              <h2 className="mt-1 text-3xl font-black leading-[0.98] tracking-tight [text-shadow:0_2px_8px_#000] sm:text-4xl">Cleaner Air.<br />Stronger India.</h2>
             </div>
             <div className="grid gap-5 sm:grid-cols-3 sm:gap-4">
               <div className="flex items-center gap-3">
-                <span className="grid size-11 shrink-0 place-items-center rounded-full border border-emerald-300/80 bg-emerald-500/20 text-emerald-300"><Leaf className="size-6" /></span>
-                <div><h3 className="text-xs font-extrabold uppercase leading-tight">Cleaner<br className="hidden sm:block" /> Environment</h3><p className="mt-1 text-[10px] leading-snug text-white/80">Reduce harmful emissions from engines and generators.</p></div>
+                <span className="grid size-11 shrink-0 place-items-center rounded-full border-2 border-emerald-300 bg-emerald-500/30 text-emerald-200"><Leaf className="size-6" strokeWidth={3} /></span>
+                <div><h3 className="text-xs font-black uppercase leading-tight [text-shadow:0_1px_5px_#000]">Cleaner<br className="hidden sm:block" /> Environment</h3><p className="mt-1 text-[10px] font-semibold leading-snug text-white">Reduce harmful emissions from engines and generators.</p></div>
               </div>
               <div className="flex items-center gap-3">
-                <span className="grid size-11 shrink-0 place-items-center rounded-full border border-emerald-300/80 bg-emerald-500/20 text-emerald-300"><Users className="size-6" /></span>
-                <div><h3 className="text-xs font-extrabold uppercase leading-tight">Healthier<br className="hidden sm:block" /> Communities</h3><p className="mt-1 text-[10px] leading-snug text-white/80">Cleaner air for our people, especially in our cities.</p></div>
+                <span className="grid size-11 shrink-0 place-items-center rounded-full border-2 border-emerald-300 bg-emerald-500/30 text-emerald-200"><Users className="size-6" strokeWidth={3} /></span>
+                <div><h3 className="text-xs font-black uppercase leading-tight [text-shadow:0_1px_5px_#000]">Healthier<br className="hidden sm:block" /> Communities</h3><p className="mt-1 text-[10px] font-semibold leading-snug text-white">Cleaner air for our people, especially in our cities.</p></div>
               </div>
               <div className="flex items-center gap-3">
-                <span className="grid size-11 shrink-0 place-items-center rounded-full border border-emerald-300/80 bg-emerald-500/20 text-emerald-300"><img src={indiaOutline} alt="" className="size-6 brightness-0 invert" /></span>
-                <div><h3 className="text-xs font-extrabold uppercase leading-tight">A Stronger<br className="hidden sm:block" /> India</h3><p className="mt-1 text-[10px] leading-snug text-white/80">Sustainable growth through cleaner, smarter energy solutions.</p></div>
+                <span className="grid size-11 shrink-0 place-items-center rounded-full border-2 border-emerald-300 bg-emerald-500/30 text-emerald-200"><img src={indiaOutline} alt="" className="size-6 brightness-0 invert" /></span>
+                <div><h3 className="text-xs font-black uppercase leading-tight [text-shadow:0_1px_5px_#000]">A Stronger<br className="hidden sm:block" /> India</h3><p className="mt-1 text-[10px] font-semibold leading-snug text-white">Sustainable growth through cleaner, smarter energy solutions.</p></div>
               </div>
             </div>
             <div className="flex items-center gap-3 rounded-2xl bg-white px-4 py-3 text-slate-900 shadow-xl sm:col-span-3 sm:mx-auto sm:w-full sm:max-w-[700px] lg:col-start-2 lg:mx-0 lg:mt-[-2px] lg:max-w-none">
-              <Leaf className="size-7 shrink-0 text-emerald-700" />
+              <Leaf className="size-7 shrink-0 text-emerald-700" strokeWidth={3} />
               <div className="min-w-0 flex-1 border-l border-slate-300 pl-3"><h3 className="text-xs font-extrabold sm:text-sm">Be a Part of the Clean Air Mission</h3><p className="text-[10px] text-slate-600">Let’s work together for a cleaner, greener and healthier India.</p></div>
               <a href="#contact" className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-emerald-700 px-4 py-2.5 text-[10px] font-bold text-white transition-colors hover:bg-emerald-800 sm:px-5">Contact Us <ArrowRight className="size-3.5" /></a>
             </div>

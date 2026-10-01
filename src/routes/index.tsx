@@ -293,9 +293,9 @@ export const Route = createFileRoute("/")({
 const navItems = [
   ["Home", "home"],
   ["Technology", "technology"],
+  ["Impact", "impact"],
   ["About", "team"],
   ["Regulations", "regulations"],
-  ["Gallery", "gallery"],
  
   ["Get a Quote", "contact"],
 ] as const;
@@ -1221,7 +1221,7 @@ Message: ${message}`;
                 label === "Get a Quote" ? (
                   <a
                     key={id}
-                    href={`#${id}`}
+                    href={id === "impact" ? "/impact" : `#${id}`}
                     className="group hidden items-center gap-2 whitespace-nowrap rounded-full bg-[#b6ff72] px-5 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.11em] text-[#0d1f16] transition-all duration-200 hover:bg-[#a3e065] hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b6ff72] sm:inline-flex"
                   >
                     {label}
@@ -1230,7 +1230,7 @@ Message: ${message}`;
                 ) : (
                   <a
                     key={id}
-                    href={`#${id}`}
+                    href={id === "impact" ? "/impact" : `#${id}`}
                     className="whitespace-nowrap text-[13px] font-extrabold uppercase tracking-[0.11em] text-white/86 transition-colors duration-200 hover:text-[#b6ff72]"
                   >
                     {label}
@@ -1344,7 +1344,7 @@ Message: ${message}`;
                   label === "Get a Quote" ? (
                     <a
                       key={id}
-                      href={`#${id}`}
+                      href={id === "impact" ? "/impact" : `#${id}`}
                       onClick={closeMenu}
                       className="group mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#b6ff72] px-5 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.11em] text-[#0d1f16] transition-all duration-200 hover:bg-[#a3e065] hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b6ff72]"
                     >
@@ -2546,7 +2546,7 @@ Message: ${message}`;
               <div>
                 <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-signal">Quick links</p>
                 <nav className="mt-4 grid grid-cols-2 gap-x-8 gap-y-3 text-sm">
-                  {navItems.map(([label, id]) => <a key={id} href={`#${id}`} className="text-background/75 transition-colors hover:text-signal">{label}</a>)}
+                  {navItems.map(([label, id]) => <a key={id} href={id === "impact" ? "/impact" : `#${id}`} className="text-background/75 transition-colors hover:text-signal">{label}</a>)}
                 </nav>
               </div>
               <div>

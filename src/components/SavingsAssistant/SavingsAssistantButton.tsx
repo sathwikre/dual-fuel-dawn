@@ -101,7 +101,7 @@ export function SavingsAssistantButton({ onClick, isOpen }: Props) {
             <svg width="68" height="80" viewBox="0 0 60 70" fill="none" aria-hidden="true">
               <rect x="2" y="1" width="56" height="68" rx="8" fill="#f4fff7" stroke="#2dbd6e" strokeWidth="2" />
               <rect x="6" y="6" width="48" height="17" rx="3" fill="#0b2819" />
-              <text x="30" y="17.5" textAnchor="middle" fill="#82f3a8" fontSize="8" fontWeight="700" className="sa-calc-readout">70% CO2</text>
+              <text x="30" y="17.5" textAnchor="middle" fill="#82f3a8" fontSize="6" fontWeight="700" className="sa-calc-readout">CALCULATOR</text>
               <g className="sa-calc-key"><rect x="6" y="27" width="14" height="8" rx="2" fill="#123b27"/><text x="13" y="33" textAnchor="middle" fill="white" fontSize="6">7</text></g>
               <g className="sa-calc-key"><rect x="23" y="27" width="14" height="8" rx="2" fill="#123b27"/><text x="30" y="33" textAnchor="middle" fill="white" fontSize="6">8</text></g>
               <g className="sa-calc-key"><rect x="40" y="27" width="14" height="8" rx="2" fill="#123b27"/><text x="47" y="33" textAnchor="middle" fill="white" fontSize="6">9</text></g>

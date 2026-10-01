@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Area, AreaChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { Activity, Building2, Clock3, Fuel, IndianRupee, Leaf, MapPin, Pause, Power, Wind } from "lucide-react";
-import logoImage from "@/assets/ChatGPT Image Sep 15, 2026, 06_07_17 PM.png";
+import logoImage from "@/assets/aircompressor/logo.png";
 import indiaOutlineImage from "@/assets/india-outline.svg";
 
 export const Route = createFileRoute("/impact")({ component: ImpactPage });
@@ -29,7 +29,7 @@ function ImpactPage() {
   return <main className="min-h-screen overflow-x-hidden bg-[#0a120f] text-white">
     <header className="sticky top-0 z-30 border-b border-white/10 bg-[#0d1713]/95 backdrop-blur-xl">
       <div className="mx-auto flex h-[62px] max-w-[1600px] items-center justify-between gap-4 px-5 lg:px-8">
-        <Link to="/" aria-label="OM Solutions home" className="flex shrink-0 items-center gap-2.5 text-white"><img src={logoImage} alt="OM Solutions" className="size-11 rounded-full object-cover ring-1 ring-white/30"/><span className="text-[16px] font-extrabold uppercase leading-none tracking-[0.08em]">OM Solutions</span></Link>
+        <Link to="/" aria-label="OM Solutions home" className="flex shrink-0 items-center gap-2.5 text-white"><img src={logoImage} alt="OM Solutions" className="size-11 object-contain"/><span className="text-[16px] font-extrabold uppercase leading-none tracking-[0.08em]">OM Solutions</span></Link>
         <nav className="hidden h-full items-center gap-8 text-sm md:flex"><Link to="/" className="text-white/75 hover:text-white">Home</Link><span className="flex h-full items-center border-b-2 border-[#b6ff72] px-1 font-semibold text-[#b6ff72]">Impact</span><Link to="/#gallery" className="text-white/75 hover:text-white">Installations</Link><Link to="/#team" className="text-white/75 hover:text-white">About</Link></nav>
         <div className="flex items-center gap-3 text-[10px] sm:gap-4"><span className="flex items-center gap-2 font-bold tracking-wide text-[#b6ff72]"><i className="size-2.5 rounded-full bg-[#b6ff72] shadow-[0_0_12px_#b6ff72]"/>LIVE NETWORK</span><span className="hidden h-5 border-l border-white/25 sm:block"/><span className="hidden text-white/65 sm:block">Updated just now</span><Link to="/" className="text-white/60 md:hidden">Home</Link></div>
       </div>

@@ -127,7 +127,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 
-import logoImage from "@/assets/ChatGPT Image Sep 15, 2026, 06_07_17 PM.png";
+import logoImage from "@/assets/aircompressor/logo.png";
 import founderImage from "@/assets/img-006.jpg";
 import schematicImage from "@/assets/duelfule.png";
 import systemImage from "@/assets/gg.jpeg";
@@ -1089,7 +1089,7 @@ Message: ${message}`;
             <img
               src={logoImage}
               alt="OM Solutions"
-              className="h-12 w-12 rounded-full object-cover ring-2 ring-emerald-700/20"
+              className="h-12 w-12 object-contain"
             />
             <span className="text-[16px] font-extrabold tracking-tight uppercase leading-none">
               OM Solutions
@@ -1399,7 +1399,7 @@ Message: ${message}`;
                 className="flex items-center gap-2.5 rounded-sm transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal"
                 aria-label="OM Solutions — return to home"
               >
-                <img src={logoImage} alt="OM Solutions" className="h-12 w-12 rounded-full object-cover ring-1 ring-white/20 sm:h-14 sm:w-14" />
+                <img src={logoImage} alt="OM Solutions" className="h-12 w-12 object-contain sm:h-14 sm:w-14" />
                 <span className="text-[15px] font-extrabold uppercase tracking-[0.08em] text-white">OM Solutions</span>
               </a>
 

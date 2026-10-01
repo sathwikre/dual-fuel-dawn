@@ -161,6 +161,7 @@ import lpgPressureRegulatorComponent from "@/assets/components/LPG Pressure regu
 
 // Static home hero background
 import heroBackground from "@/assets/Sunrise Industrial Cityscape with Tricolour Swooshes.png";
+import sunriseFieldsImage from "@/assets/Misty Green Fields at Sunrise.png";
 import birlaNewsImage from "@/assets/WhatsApp Image 2026-05-21 at 4.16.09 PM.jpeg";
 import akwelImage from "@/assets/aqual.jpeg";
 import ammeniEngineImage from "@/assets/ammeni engine.jpeg";
@@ -1287,6 +1288,15 @@ Message: ${message}`;
             </div>
             </div>
           </div>
+        </section>
+
+        <section aria-label="Misty green fields at sunrise" className="relative h-48 overflow-hidden sm:h-64 lg:h-80">
+          <img
+            src={sunriseFieldsImage}
+            alt="Misty green fields at sunrise"
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
         </section>
 
         {/* OM / 04 Primary product - Dual Fuel Kit */}

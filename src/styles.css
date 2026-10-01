@@ -152,17 +152,28 @@
 @layer base {
   * {
     border-color: var(--color-border);
+    min-width: 0;
+  }
+
+  img,
+  video,
+  canvas,
+  svg {
+    max-width: 100%;
   }
 
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
+    min-width: 320px;
+    overflow-x: clip;
   }
 
   html {
     scroll-behavior: smooth;
     scroll-padding-block-start: 8rem;
+    overflow-x: clip;
   }
 
 }

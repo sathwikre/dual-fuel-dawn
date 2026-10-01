@@ -988,7 +988,9 @@ Message: ${message}`;
         style={{ transition: "height .35s ease, background .35s ease, backdrop-filter .35s ease" }}
         className={[
           "fixed inset-x-0 top-0 z-50 flex flex-col",
-          navScrolled
+          menuOpen
+            ? "max-h-[100dvh] overflow-y-auto bg-white/20 shadow-sm backdrop-blur-[8px]"
+            : navScrolled
             ? "h-[72px] bg-white/20 shadow-sm backdrop-blur-[8px]"
             : "h-[85px] bg-transparent",
         ].join(" ")}
@@ -1123,7 +1125,7 @@ Message: ${message}`;
 
         {/* Mobile menu */}
         {menuOpen && (
-          <nav className="border-t border-white/15 bg-[#0d1713] px-6 pb-7 pt-5 xl:hidden">
+          <nav className="border-t border-white/15 bg-[#0d1713] px-4 pb-7 pt-5 sm:px-6 xl:hidden">
             <div className="flex flex-col gap-1">
               {navItems.map(([label, id]) => (
                 label === "Regulations" ? (

@@ -1259,6 +1259,27 @@ Message: ${message}`;
             style={{ fontFamily: '"Segoe Script", "Brush Script MT", cursive' }}
           >
             Cleaner air<br />for a healthier<br /><span className="text-6xl xl:text-7xl">India</span>
+            <svg
+              aria-hidden="true"
+              className="mx-auto mt-1 block h-3 w-3/4 overflow-visible text-emerald-600"
+              viewBox="0 0 240 18"
+              fill="none"
+            >
+              <path
+                d="M5 12.5 C47 8.5 91 10 128 8.5 C166 7 202 8 235 3.5"
+                stroke="currentColor"
+                strokeWidth="4"
+                strokeLinecap="round"
+                className="drop-shadow-[0_0.5px_0_rgba(16,185,129,0.2)]"
+              />
+              <path
+                d="M24 15 C83 12 151 12.5 216 7"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                opacity="0.7"
+              />
+            </svg>
           </p>
           <div className={`relative z-[3] mx-auto flex min-h-[calc(100svh-129px)] w-full max-w-[1440px] flex-col justify-end px-5 pb-28 pt-[185px] transition-all duration-[350ms] ease lg:min-h-[calc(100svh-160px)] lg:px-12 lg:pb-24 lg:pt-0 ${navScrolled ? 'lg:pt-[124px]' : 'lg:pt-[137px]'}`}>
             <div className="max-w-[680px] text-slate-950">

@@ -84,10 +84,10 @@ export function SavingsAssistantButton({ onClick, isOpen }: Props) {
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
           aria-label={isOpen ? "Close savings calculator" : "Open savings calculator"}
-          className="sa-btn relative flex items-center justify-center rounded-2xl bg-[oklch(0.19_0.045_158)] transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(0.72_0.16_155)] focus-visible:ring-offset-2"
+          className="sa-btn relative flex items-center justify-center rounded-lg bg-[oklch(0.19_0.045_158)] transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(0.72_0.16_155)] focus-visible:ring-offset-2"
           style={{
-            width: 72,
-            height: 84,
+            width: 92,
+            height: 68,
             border: "1px solid rgba(45,189,110,0.35)",
             flexShrink: 0,
           }}
@@ -98,7 +98,7 @@ export function SavingsAssistantButton({ onClick, isOpen }: Props) {
               <path d="M5 5L15 15M15 5L5 15" stroke="oklch(0.72 0.16 155)" strokeWidth="1.8" strokeLinecap="round" />
             </svg>
           ) : (
-            <svg width="68" height="80" viewBox="0 0 60 70" fill="none" aria-hidden="true">
+            <svg width="54" height="56" viewBox="0 0 60 70" fill="none" aria-hidden="true">
               <rect x="2" y="1" width="56" height="68" rx="8" fill="#f4fff7" stroke="#2dbd6e" strokeWidth="2" />
               <rect x="6" y="6" width="48" height="17" rx="3" fill="#0b2819" />
               <text x="30" y="17.5" textAnchor="middle" fill="#82f3a8" fontSize="6" fontWeight="700" className="sa-calc-readout">CALCULATOR</text>

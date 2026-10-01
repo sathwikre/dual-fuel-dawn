@@ -1304,6 +1304,7 @@ Message: ${message}`;
             <div className="border-l-4 border-emerald-300 pl-4 lg:border-l-0 lg:pl-0">
               <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-emerald-200">Our Vision</p>
               <h2 className="mt-1 text-3xl font-black leading-[0.98] tracking-tight [text-shadow:0_2px_8px_#000] sm:text-4xl">Cleaner Air.<br />Stronger India.</h2>
+              <span aria-hidden="true" className="mt-2 block h-0.5 w-16 rounded-full bg-emerald-300" />
             </div>
             <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] sm:items-center sm:gap-3">
               <div className="flex items-center gap-3">

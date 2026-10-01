@@ -427,6 +427,7 @@ type TeamMember = {
   profileTitle?: string;
   experience?: string;
   keyExpertise?: string[];
+  expertiseGroups?: { title: string; items: string[] }[];
   designation?: string;
 };
 
@@ -456,10 +457,33 @@ const teamMembers: TeamMember[] = [
     id: "rahul-sonawane",
     name: "Rahul Sonwane",
     image: rahulImage,
-    expertise: [
-      "CNC & VMC",
-      "Marketing",
-      "Sales & service",
+    profileTitle: "Mechanical Engineer",
+    experience: "10+ years of experience across machining and production processes, supply chain management, sales and business development, and alternative-fuel engine technology.",
+    expertiseGroups: [
+      {
+        title: "Manufacturing & Operations",
+        items: [
+          "Machining Processes & Production Management",
+          "Process Improvement & Operational Coordination",
+          "Supply Chain Management",
+        ],
+      },
+      {
+        title: "Sales & Business Development",
+        items: [
+          "Sales & Service Management",
+          "Marketing & Business Development",
+          "New Customer Acquisition & Development",
+          "Customer Relationship Management",
+        ],
+      },
+      {
+        title: "Engine Technology",
+        items: [
+          "Alternative-Fuel Engine Applications",
+          "Mono-Fuel, Bi-Fuel & Dual-Fuel Engine Technology",
+        ],
+      },
     ],
   },
   {
@@ -2687,7 +2711,25 @@ Message: ${message}`;
                     </>
                   )}
 
-                  {selectedTeamMember.keyExpertise && (
+                  {selectedTeamMember.expertiseGroups && (
+                    <div className="space-y-4">
+                      {selectedTeamMember.expertiseGroups.map((group) => (
+                        <section key={group.title}>
+                          <h3 className="mb-2 text-sm font-bold text-foreground">{group.title}</h3>
+                          <ul className="space-y-2">
+                            {group.items.map((item) => (
+                              <li key={item} className="flex items-start gap-2 text-xs leading-relaxed text-foreground">
+                                <span className="mt-1 size-1 shrink-0 rounded-full bg-signal" />
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </section>
+                      ))}
+                    </div>
+                  )}
+
+                  {selectedTeamMember.keyExpertise && !selectedTeamMember.expertiseGroups && (
                     <>
                       <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground mb-3">Expertise</p>
                       <ul className="space-y-2">

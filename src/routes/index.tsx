@@ -1257,7 +1257,7 @@ Message: ${message}`;
           >
             Cleaner air<br />for a healthier<br /><span className="text-6xl xl:text-7xl">India</span>
           </p>
-          <div className={`relative z-[3] mx-auto flex min-h-[calc(100svh-129px)] w-full max-w-[1440px] flex-col justify-end px-5 pb-28 pt-28 transition-all duration-[350ms] ease lg:min-h-[calc(100svh-160px)] lg:px-12 lg:pb-24 ${navScrolled ? 'lg:pt-[124px]' : 'lg:pt-[137px]'}`}>
+          <div className={`relative z-[3] mx-auto flex min-h-[calc(100svh-129px)] w-full max-w-[1440px] flex-col justify-end px-5 pb-28 pt-[185px] transition-all duration-[350ms] ease lg:min-h-[calc(100svh-160px)] lg:px-12 lg:pb-24 lg:pt-0 ${navScrolled ? 'lg:pt-[124px]' : 'lg:pt-[137px]'}`}>
             <div className="max-w-[680px] text-slate-950">
               <h1 className="rise-in text-5xl font-black leading-[0.98] tracking-[-0.045em] sm:text-6xl lg:text-7xl">
                 India’s<br /><span className="text-emerald-800">Clean Air</span> Mission

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import fallbackImage from "@/assets/img-103.jpg";
 import logoImage from "@/assets/aircompressor/logo.png";
@@ -129,11 +129,14 @@ const navLinks = [
 ] as const;
 
 function RegulationsPage() {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
   useEffect(() => {
     const images = document.querySelectorAll<HTMLImageElement>("[data-regulation-image]");
     const showFallback = (image: HTMLImageElement) => {
-      if (image.dataset.fallbackApplied) return;
-      image.dataset.fallbackApplied = "true";
+      if (image.dataset["fallbackApplied"]) return;
+      image.dataset["fallbackApplied"] = "true";
       image.src = fallbackImage;
     };
     const handleError = (event: Event) => showFallback(event.currentTarget as HTMLImageElement);
@@ -146,68 +149,118 @@ function RegulationsPage() {
     return () => images.forEach((image) => image.removeEventListener("error", handleError));
   }, []);
 
+  useEffect(() => {
+    const updateScrolled = () => setScrolled(window.scrollY > 24);
+    updateScrolled();
+    window.addEventListener("scroll", updateScrolled, { passive: true });
+    return () => window.removeEventListener("scroll", updateScrolled);
+  }, []);
+
   return (
     <main className="min-h-screen bg-[#eef6fb] text-slate-900">
-      <header className="fixed inset-x-0 top-0 z-50 h-10 bg-[#e8f4fb]/95 shadow-sm backdrop-blur-md md:h-[72px] xl:h-[85px]">
-        <div className="mx-auto flex h-full w-full max-w-[1440px] items-center justify-between px-3 sm:px-6 xl:px-[4.5vw]">
+      <header
+        style={{
+          height: menuOpen ? "100dvh" : scrolled ? "72px" : "85px",
+          maxHeight: menuOpen ? "100dvh" : undefined,
+          overflowY: menuOpen ? "auto" : undefined,
+          backgroundColor: menuOpen || scrolled ? "rgba(255, 255, 255, 0.2)" : "transparent",
+          boxShadow: menuOpen || scrolled ? "0 1px 2px rgba(0, 0, 0, 0.08)" : "none",
+          backdropFilter: menuOpen || scrolled ? "blur(8px)" : "none",
+          transition: "height .35s ease, background .35s ease, backdrop-filter .35s ease",
+        }}
+        className="fixed inset-x-0 top-0 z-50 flex flex-col"
+      >
+        <div className="mx-auto flex w-full flex-1 max-w-[1440px] items-center justify-between px-[4.5vw]">
           <a
             href="/#home"
             aria-label="OM Solutions home"
-            className="flex shrink-0 items-center gap-1.5 text-slate-900 no-underline xl:gap-2.5"
+            style={{ color: scrolled ? "#0f172a" : "#fff" }}
+            className="order-1 flex shrink-0 items-center gap-2.5 no-underline transition-colors duration-300"
           >
-            <img src={logoImage} alt="OM Solutions" className="size-7 object-contain xl:size-12" />
-            <span className="text-[11px] font-extrabold uppercase leading-none tracking-tight xl:text-base">
+            <img src={logoImage} alt="OM Solutions" className="h-12 w-12 object-contain" />
+            <span className="text-[16px] font-extrabold uppercase leading-none tracking-tight">
               OM Solutions
             </span>
           </a>
-          <nav aria-label="Page navigation" className="flex items-center gap-1.5 sm:gap-3 xl:hidden">
-            <a
-              href="/regulations"
-              aria-current="page"
-              className="whitespace-nowrap px-1 text-[10px] font-semibold text-slate-800 sm:text-xs"
-            >
-              Regulations
-            </a>
-            <a
-              href="/#contact"
-              className="group inline-flex items-center gap-1 whitespace-nowrap rounded-full bg-emerald-700 px-2.5 py-1.5 text-[9px] font-bold text-white sm:px-3 sm:text-[10px]"
-            >
-              Join This Mission
-              <ArrowUpRight className="size-3" />
-            </a>
-            <a
-              href="/#contact"
-              className="group inline-flex items-center gap-1 whitespace-nowrap rounded-full bg-emerald-700 px-2.5 py-1.5 text-[9px] font-bold text-white sm:px-3 sm:text-[10px]"
-            >
-              Dealership
-              <ArrowUpRight className="size-3" />
-            </a>
-          </nav>
-          <nav aria-label="Main navigation" className="hidden items-center justify-end gap-6 xl:flex 2xl:gap-8">
+          <nav aria-label="Main navigation" className="order-2 ml-8 hidden flex-1 items-center justify-end gap-8 xl:flex">
             {navLinks.map(([label, href]) => (
-              <a
-                key={label}
-                href={href}
-                aria-current={label === "Regulations" ? "page" : undefined}
-                className={`whitespace-nowrap text-[14px] font-bold transition-colors hover:text-emerald-700 2xl:text-[15px] ${
-                  label === "Regulations" ? "text-emerald-700" : "text-slate-700"
-                }`}
-              >
-                {label}
-              </a>
+              label === "Join This Mission" ? (
+                <a
+                  key={label}
+                  href={href}
+                  className="group hidden items-center gap-2 whitespace-nowrap rounded-full bg-emerald-700 px-5 py-2.5 text-[15px] font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-emerald-800 sm:inline-flex"
+                >
+                  {label}
+                  <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                </a>
+              ) : (
+                <a
+                  key={label}
+                  href={href}
+                  aria-current={label === "Regulations" ? "page" : undefined}
+                  style={{
+                    color: scrolled
+                      ? label === "Regulations"
+                        ? "#047857"
+                        : "#334155"
+                      : label === "Regulations"
+                        ? "#b6ff72"
+                        : "#fff",
+                  }}
+                  className="whitespace-nowrap text-[15px] font-bold transition-colors duration-200 hover:text-emerald-700"
+                >
+                  {label}
+                </a>
+              )
             ))}
             <a
               href="/#contact"
-              className="group inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-emerald-700 px-4 py-2.5 text-[14px] font-bold text-white transition hover:-translate-y-0.5 hover:bg-emerald-800 2xl:px-5"
+              className="group hidden items-center gap-2 whitespace-nowrap rounded-full bg-emerald-700 px-5 py-2.5 text-[15px] font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-emerald-800 sm:inline-flex"
             >
               Dealership
-              <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+              <span className="text-[13px] font-normal leading-none transition-transform duration-200 group-hover:translate-x-0.5">↗</span>
             </a>
           </nav>
+          <button
+            type="button"
+            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((open) => !open)}
+            style={{ color: scrolled || menuOpen ? "#1e293b" : "#fff" }}
+            className="order-2 flex h-9 w-9 flex-col items-center justify-center gap-[6px] border-0 bg-transparent p-2 transition-colors xl:hidden"
+          >
+            <span className={`block h-px w-[23px] bg-current transition-transform ${menuOpen ? "translate-y-[7px] rotate-45" : ""}`} />
+            <span className={`block h-px w-[23px] bg-current transition-opacity ${menuOpen ? "opacity-0" : ""}`} />
+            <span className={`block h-px w-[23px] bg-current transition-transform ${menuOpen ? "-translate-y-[7px] -rotate-45" : ""}`} />
+          </button>
         </div>
+        {menuOpen && (
+          <nav aria-label="Mobile navigation" className="border-t border-white/15 bg-[#0d1713] px-4 pb-7 pt-5 sm:px-6 xl:hidden">
+            <div className="flex flex-col gap-1">
+              {navLinks.map(([label, href]) => (
+                <a
+                  key={label}
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  aria-current={label === "Regulations" ? "page" : undefined}
+                  className={`border-b border-white/10 py-3 text-[13px] font-extrabold uppercase tracking-[0.11em] transition-colors hover:text-[#b6ff72] ${label === "Regulations" ? "text-[#b6ff72]" : "text-white/80"}`}
+                >
+                  {label}
+                </a>
+              ))}
+              <a
+                href="/#contact"
+                onClick={() => setMenuOpen(false)}
+                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#b6ff72] px-5 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.11em] text-[#0d1f16]"
+              >
+                Dealership <ArrowUpRight className="size-4" />
+              </a>
+            </div>
+          </nav>
+        )}
       </header>
 
-      <section className="relative isolate overflow-hidden bg-[#0b2a1e] px-4 pb-[62px] pt-[68px] text-center text-white sm:pb-20 sm:pt-36 xl:pb-24 xl:pt-44">
+      <section className="relative isolate overflow-hidden bg-[#0b2a1e] px-4 pb-[62px] pt-[106px] text-center text-white sm:pb-20 sm:pt-36 xl:pb-24 xl:pt-44">
         <svg
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 -z-10 size-full opacity-25"
@@ -244,8 +297,8 @@ function RegulationsPage() {
                   loading="lazy"
                   data-regulation-image
                   onError={(event) => {
-                    if (event.currentTarget.dataset.fallbackApplied) return;
-                    event.currentTarget.dataset.fallbackApplied = "true";
+                    if (event.currentTarget.dataset["fallbackApplied"]) return;
+                    event.currentTarget.dataset["fallbackApplied"] = "true";
                     event.currentTarget.src = fallbackImage;
                   }}
                   className="size-full rounded-[7px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"

@@ -26,7 +26,7 @@ const panel = "rounded-xl border border-border/60 bg-panel-soft shadow-[0_10px_3
 
 function ImpactPage() {
   const [period, setPeriod] = useState("All Sites");
-  return <main className="min-h-screen overflow-x-hidden bg-panel text-white">
+  return <main className="min-h-screen overflow-x-clip bg-panel text-white">
     <header className="sticky top-0 z-30 border-b border-border/60 bg-panel/95 backdrop-blur-xl">
       <div className="mx-auto flex min-h-[62px] max-w-[1600px] items-center justify-between gap-2 px-3 sm:px-5 lg:px-8">
         <Link to="/" aria-label="OM Solutions home" className="flex min-w-0 shrink items-center gap-2 text-white"><img src={logoImage} alt="OM Solutions" className="size-9 shrink-0 object-contain sm:size-11"/><span className="truncate text-xs font-extrabold uppercase leading-none tracking-[0.06em] sm:text-[16px] sm:tracking-[0.08em]">OM Solutions</span></Link>

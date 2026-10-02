@@ -275,7 +275,7 @@ function RegulationsPage() {
           ))}
         </div>
         <p className="mx-auto mt-8 max-w-7xl text-xs leading-5 text-slate-500">
-          Notifications are provided for reference. Confirm current requirements with the relevant pollution control authority.
+
         </p>
       </section>
 

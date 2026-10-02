@@ -6,13 +6,14 @@ import { CalculatorResults } from "./CalculatorResults";
 
 interface Props {
   onClose: () => void;
+  onJoinMission: () => void;
 }
 
 type View = "form" | "results";
 type ResizeEdge = "left" | "right" | "top" | "bottom";
 type PanelBox = { left: number; top: number; width: number; height: number };
 
-export function SavingsCalculator({ onClose }: Props) {
+export function SavingsCalculator({ onClose, onJoinMission }: Props) {
   const [view, setView] = useState<View>("form");
   const [inputs, setInputs] = useState<CalculatorInputs | null>(null);
   const [panelBox, setPanelBox] = useState<PanelBox | null>(null);
@@ -170,7 +171,7 @@ export function SavingsCalculator({ onClose }: Props) {
         <div style={{ flex: 1, minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
           {view === "form" && <CalculatorForm onComplete={handleComplete} />}
           {view === "results" && results && inputs && (
-            <CalculatorResults inputs={inputs} results={results} onReset={handleReset} />
+            <CalculatorResults inputs={inputs} results={results} onReset={handleReset} onJoinMission={onJoinMission} />
           )}
         </div>
       </div>

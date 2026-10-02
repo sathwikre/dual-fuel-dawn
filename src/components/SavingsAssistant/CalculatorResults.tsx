@@ -5,6 +5,7 @@ interface Props {
   inputs: CalculatorInputs;
   results: Results;
   onReset: () => void;
+  onJoinMission: () => void;
 }
 
 type ResultTone = "positive" | "negative" | "neutral";
@@ -38,7 +39,7 @@ function Row({ label, value, accent = false, tone, sub }: {
   );
 }
 
-export function CalculatorResults({ inputs, results, onReset }: Props) {
+export function CalculatorResults({ inputs, results, onReset, onJoinMission }: Props) {
   const {
     dieselConsumptionLPerHr, dfDieselConsumptionLPerHr, ngConsumptionSm3PerHr,
     dieselCostPerHr, dfDieselCostPerHr, ngCostPerHr, totalDualFuelCostPerHr,
@@ -84,7 +85,7 @@ export function CalculatorResults({ inputs, results, onReset }: Props) {
         </div>
         <p className="mt-4 text-xs leading-relaxed text-white/45">Estimates are based on the OM Solutions BMEP calculation model. Actual savings depend on engine condition, load profile, fuel quality and site conditions.</p>
       </div>
-      <div className="shrink-0 border-t border-white/15 px-5 py-4 sm:px-7"><button type="button" onClick={onReset} className="h-11 w-full border-2 border-white/35 text-xs font-extrabold uppercase tracking-[0.1em] text-white transition-colors hover:border-[oklch(0.72_0.16_155)] hover:text-[oklch(0.72_0.16_155)]">Calculate again</button></div>
+      <div className="shrink-0 border-t border-white/15 px-5 py-4 sm:px-7"><div className="grid gap-3 sm:grid-cols-2"><button type="button" onClick={onReset} className="h-11 w-full border-2 border-white/35 text-xs font-extrabold uppercase tracking-[0.1em] text-white transition-colors hover:border-[oklch(0.72_0.16_155)] hover:text-[oklch(0.72_0.16_155)]">Calculate again</button><a href="#contact" onClick={onJoinMission} className="flex h-11 w-full items-center justify-center border-2 border-[oklch(0.72_0.16_155)] bg-[oklch(0.72_0.16_155)] px-3 text-center text-xs font-extrabold uppercase tracking-[0.1em] text-[oklch(0.14_0.04_158)] transition-colors hover:border-white hover:bg-white">Join this Mission</a></div></div>
     </div>
   );
 }

@@ -20,7 +20,7 @@ export function SavingsAssistant() {
         onClick={() => setIsOpen((o) => !o)}
         isOpen={isOpen}
       />
-      {isOpen && <SavingsCalculator onClose={() => setIsOpen(false)} />}
+      {isOpen && <SavingsCalculator onClose={() => setIsOpen(false)} onJoinMission={() => setIsOpen(false)} />}
     </>
   );
 }

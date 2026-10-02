@@ -2365,8 +2365,7 @@ Message: ${message}`;
           <div className="relative z-[2] mx-auto grid max-w-[1440px] gap-12 px-5 py-20 lg:grid-cols-[0.85fr_1.15fr] lg:px-10 lg:py-28">
             <div>
               <SectionLabel index="OM / 18" dark>Get a Quote</SectionLabel>
-              <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Connect With Our Experts</h2>
-              <p className="mt-6 max-w-md text-base leading-relaxed text-background/70">Share your engine, application and fuel availability for a technical conversation about dual-fuel suitability.</p>
+              <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">We appreciate your interest in joining our mission.</h2>
               <div className="mt-10 space-y-5">
                 <a href="mailto:support@omsolns.com" className="flex items-start gap-4 text-sm text-background/80 transition-colors hover:text-signal">
                   <span className="grid size-10 place-items-center rounded-lg border border-white/10 bg-background/10 text-signal">@</span>

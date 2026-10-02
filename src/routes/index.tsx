@@ -1323,7 +1323,7 @@ Message: ${message}`;
                 href="#kit"
                 className="inline-flex h-12 items-center gap-2 rounded-xl border border-slate-300 bg-white/90 px-7 text-[11px] font-bold uppercase tracking-[0.12em] text-slate-900 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-emerald-700 hover:bg-white hover:text-emerald-800"
               >
-               Dual Fuel Kit<ArrowRight className="size-4" />
+               Learn how it works<ArrowRight className="size-4" />
               </a>
             </div>
             </div>

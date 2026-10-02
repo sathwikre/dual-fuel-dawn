@@ -1582,39 +1582,38 @@ Message: ${message}`;
             {/* Scrollable content */}
             <div className="flex-1 overflow-y-auto">
 
-              <section id="dr-solutions" className="relative overflow-hidden bg-background">
+              <section id="dr-compare" className="relative overflow-hidden border-b border-border bg-muted/25">
                 <div className="section-dot-grid absolute inset-0" aria-hidden="true" />
                 <div className="relative mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
-                  <div className="flex flex-wrap items-end justify-between gap-6">
-                    <div>
-                      <SectionLabel index="OM / 03" accent>Technology matrix</SectionLabel>
-                      <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Dual fuel technology architecture</h2>
-                    </div>
-                    <p className="max-w-md text-sm leading-relaxed text-muted-foreground font-sans">Explore supported alternate-fuel pathways across engine applications.</p>
+                  <SectionLabel index="OM / 09" accent>Technology comparison</SectionLabel>
+                  <div className="mt-5 flex flex-wrap items-end justify-between gap-6">
+                    <h2 className="max-w-4xl text-4xl font-extrabold tracking-tight lg:text-5xl">Comparison of technology options to comply SPCB notification for PM reduction</h2>
+                    <p className="max-w-sm text-sm leading-relaxed text-muted-foreground"></p>
                   </div>
-
-                  <div className="mt-10 overflow-hidden rounded-2xl border border-border/60 bg-background shadow-sm">
-                    <div className="grid gap-px bg-border/60 sm:grid-cols-2 xl:grid-cols-4">
-                      {applicationCards.map(({ title, description, image }, index) => (
-                        <article key={title} className="group relative min-h-[250px] overflow-hidden bg-background p-6 transition-colors hover:bg-muted/40 sm:min-h-[275px] sm:p-7">
-                          <div className="flex items-start justify-between">
-                            <button
-                              type="button"
-                              onClick={() => openImage(image, title)}
-                              aria-label={`View ${title} image`}
-                              className="grid size-[76px] cursor-zoom-in place-items-center overflow-hidden rounded-full border border-border/70 bg-white p-1.5 shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal sm:size-[88px]"
-                            >
-                              <img src={image} alt={title} className="size-full rounded-full object-contain" loading="lazy" />
-                            </button>
-                            <span className="font-mono text-xs font-semibold text-muted-foreground/70">{String(index + 1).padStart(2, "0")}</span>
-                          </div>
-                          <h3 className="mt-7 text-lg font-extrabold leading-tight text-foreground sm:text-xl">{title}</h3>
-                          <p className="mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground">{description}</p>
-                        </article>
-                      ))}
-                    </div>
+                  <div className="tech-surface mt-12 overflow-x-auto rounded-2xl">
+                    <table className="w-full min-w-[980px] border-collapse text-left text-sm">
+                      <thead>
+                        <tr className="bg-panel text-background">
+                          <th className="w-[18%] px-5 py-4 font-mono text-[10px] uppercase tracking-[0.12em] text-background/65">Category</th>
+                          <th className="px-5 py-4 font-semibold">New Gas Genset CPCB-IV+</th>
+                          <th className="px-5 py-4 font-semibold">New Diesel Genset CPCB-IV+</th>
+                          <th className="px-5 py-4 font-semibold">Retrofit Emission Control Device</th>
+                          <th className="bg-signal px-5 py-4 font-semibold text-panel">Dual Fuel Kit</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {comparisonRows.map((row) => (
+                          <tr key={row[0]} className="border-t border-border bg-background">
+                            <th className="px-5 py-5 font-semibold">{row[0]}</th>
+                            <td className="px-5 py-5 text-muted-foreground">{row[1]}</td>
+                            <td className="px-5 py-5 text-muted-foreground">{row[2]}</td>
+                            <td className="px-5 py-5 text-muted-foreground">{row[3]}</td>
+                            <td className="bg-signal/10 px-5 py-5 font-semibold text-foreground">{row[4]}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
-
                 </div>
               </section>
 
@@ -1863,38 +1862,39 @@ Message: ${message}`;
                 </div>
               </section>
 
-              <section id="dr-compare" className="relative overflow-hidden border-b border-border bg-muted/25">
+              <section id="dr-solutions" className="relative overflow-hidden bg-background">
                 <div className="section-dot-grid absolute inset-0" aria-hidden="true" />
                 <div className="relative mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
-                  <SectionLabel index="OM / 09" accent>Technology comparison</SectionLabel>
-                  <div className="mt-5 flex flex-wrap items-end justify-between gap-6">
-                    <h2 className="max-w-4xl text-4xl font-extrabold tracking-tight lg:text-5xl">Comparison of technology options to comply SPCB notification for PM reduction</h2>
-                    <p className="max-w-sm text-sm leading-relaxed text-muted-foreground"></p>
+                  <div className="flex flex-wrap items-end justify-between gap-6">
+                    <div>
+                      <SectionLabel index="OM / 03" accent>Technology matrix</SectionLabel>
+                      <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Dual fuel technology architecture</h2>
+                    </div>
+                    <p className="max-w-md text-sm leading-relaxed text-muted-foreground font-sans">Explore supported alternate-fuel pathways across engine applications.</p>
                   </div>
-                  <div className="tech-surface mt-12 overflow-x-auto rounded-2xl">
-                    <table className="w-full min-w-[980px] border-collapse text-left text-sm">
-                      <thead>
-                        <tr className="bg-panel text-background">
-                          <th className="w-[18%] px-5 py-4 font-mono text-[10px] uppercase tracking-[0.12em] text-background/65">Category</th>
-                          <th className="px-5 py-4 font-semibold">New Gas Genset CPCB-IV+</th>
-                          <th className="px-5 py-4 font-semibold">New Diesel Genset CPCB-IV+</th>
-                          <th className="px-5 py-4 font-semibold">Retrofit Emission Control Device</th>
-                          <th className="bg-signal px-5 py-4 font-semibold text-panel">Dual Fuel Kit</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {comparisonRows.map((row) => (
-                          <tr key={row[0]} className="border-t border-border bg-background">
-                            <th className="px-5 py-5 font-semibold">{row[0]}</th>
-                            <td className="px-5 py-5 text-muted-foreground">{row[1]}</td>
-                            <td className="px-5 py-5 text-muted-foreground">{row[2]}</td>
-                            <td className="px-5 py-5 text-muted-foreground">{row[3]}</td>
-                            <td className="bg-signal/10 px-5 py-5 font-semibold text-foreground">{row[4]}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+
+                  <div className="mt-10 overflow-hidden rounded-2xl border border-border/60 bg-background shadow-sm">
+                    <div className="grid gap-px bg-border/60 sm:grid-cols-2 xl:grid-cols-4">
+                      {applicationCards.map(({ title, description, image }, index) => (
+                        <article key={title} className="group relative min-h-[250px] overflow-hidden bg-background p-6 transition-colors hover:bg-muted/40 sm:min-h-[275px] sm:p-7">
+                          <div className="flex items-start justify-between">
+                            <button
+                              type="button"
+                              onClick={() => openImage(image, title)}
+                              aria-label={`View ${title} image`}
+                              className="grid size-[76px] cursor-zoom-in place-items-center overflow-hidden rounded-full border border-border/70 bg-white p-1.5 shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal sm:size-[88px]"
+                            >
+                              <img src={image} alt={title} className="size-full rounded-full object-contain" loading="lazy" />
+                            </button>
+                            <span className="font-mono text-xs font-semibold text-muted-foreground/70">{String(index + 1).padStart(2, "0")}</span>
+                          </div>
+                          <h3 className="mt-7 text-lg font-extrabold leading-tight text-foreground sm:text-xl">{title}</h3>
+                          <p className="mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground">{description}</p>
+                        </article>
+                      ))}
+                    </div>
                   </div>
+
                 </div>
               </section>
 

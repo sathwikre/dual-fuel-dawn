@@ -1402,21 +1402,21 @@ Message: ${message}`;
                   target="_blank"
                   rel="noreferrer"
                   aria-label={`${partner.name} website`}
-                  className="flex h-[58px] min-w-[118px] shrink-0 items-center justify-center rounded-lg px-3 transition-opacity hover:opacity-75 lg:min-w-0 lg:flex-1 lg:px-2"
+                  className="flex min-h-[76px] min-w-[150px] shrink-0 flex-col items-center justify-center gap-1.5 rounded-lg px-3 py-2 transition-opacity hover:opacity-75 lg:min-w-0 lg:flex-1 lg:px-2"
                 >
                   {partner.logo ? (
                     <img
                       src={partner.logo}
                       alt={partner.name}
                       loading="eager"
-                      className="max-h-11 max-w-full object-contain"
+                      className="max-h-9 max-w-full object-contain"
                       onError={(event) => {
                         event.currentTarget.classList.add("hidden");
                         event.currentTarget.nextElementSibling?.classList.remove("hidden");
                       }}
                     />
                   ) : null}
-                  <span className={partner.logo ? "hidden text-center text-sm font-bold tracking-wide text-slate-700" : "text-center text-sm font-bold tracking-wide text-slate-700"}>{partner.name}</span>
+                  <span className="text-center text-xs font-bold tracking-wide text-slate-700">{partner.name}</span>
                 </a>
               ))}
             </div>

@@ -43,7 +43,7 @@ export function CalculatorResults({ inputs, results, onReset, onJoinMission }: P
   const {
     dieselConsumptionLPerHr, dfDieselConsumptionLPerHr, ngConsumptionSm3PerHr,
     dieselCostPerHr, dfDieselCostPerHr, ngCostPerHr, totalDualFuelCostPerHr,
-    savingPerHour, savingPerMonth, savingPerYear, costReductionPct, dieselReplacementPct,
+    savingPerHour, savingPerYear, costReductionPct, dieselReplacementPct,
     dieselCO2KgPerHr, totalDualFuelCO2KgPerHr, co2SavingKgPerHr, annualCO2SavingTonnes,
   } = results;
   const savingTone = toneFor(savingPerHour);
@@ -53,35 +53,23 @@ export function CalculatorResults({ inputs, results, onReset, onJoinMission }: P
       <div className="flex-1 overflow-y-auto px-5 py-5 sm:px-7">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-4 border-b border-white/15 pb-5">
           <div><p className="text-[11px] uppercase tracking-[0.14em] text-[oklch(0.72_0.16_155)]">Dual fuel assessment</p><h3 className="mt-2 text-2xl font-black text-white">Your operating results</h3></div>
-          <p className="text-sm text-white/65">{inputs.gensetRating} kVA · {inputs.load}% load · {inputs.hoursPerMonth} hrs/month</p>
+          <p className="text-sm text-white/65">{inputs.gensetRating} kVA{" \u00b7 "}{inputs.load}% load{" \u00b7 "}{inputs.hoursPerMonth} hrs/month</p>
         </div>
 
         <section className="mb-6 overflow-hidden rounded-[8px] border-2 p-6 sm:p-8" style={{ background: savingTone === "positive" ? "oklch(0.72 0.16 155 / 0.12)" : "rgba(255,255,255,0.05)", borderColor: toneColor[savingTone] }}>
-          <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-white">Your savings with OM Solutions</p>
-          <div className="mt-6 grid gap-6 md:grid-cols-3 md:items-end">
-            <SavingsValue label="Saving / hour" value={formatINR(savingPerHour)} sub="per hour" />
-            <SavingsValue label="Monthly saving" value={formatINR(savingPerMonth, true)} sub="per month" />
+          <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-white sm:text-base">Your savings with OM Solutions</p>
+          <div className="mt-6 grid grid-cols-4 gap-3 border-t border-white/20 pt-5 sm:gap-6">
             <SavingsValue label="Annual saving" value={formatINR(savingPerYear, true)} sub="per year" largest />
-          </div>
-          
-          <div className="mt-8 border-t border-white/20 pt-6">
-            <div className="grid gap-6 md:grid-cols-3 md:items-end">
-              <SavingsValue label="CO₂ saving / hour" value={`${co2SavingKgPerHr.toFixed(2)} kg`} sub="per hour" />
-              <SavingsValue label="Monthly CO₂ saving" value={`${(co2SavingKgPerHr * inputs.hoursPerMonth).toFixed(1)} kg`} sub="per month" />
-              <SavingsValue label="Annual CO₂ saving" value={`${annualCO2SavingTonnes.toFixed(2)} tonnes`} sub="per year" largest />
-            </div>
-          </div>
-
-          <div className="mt-7 grid gap-3 border-t border-white/20 pt-5 sm:grid-cols-2">
+            <SavingsValue label="Annual CO₂ saving" value={`${annualCO2SavingTonnes.toFixed(2)} tonnes`} sub="per year" largest />
             <Metric label="Cost reduction" value={`${costReductionPct.toFixed(1)}%`} />
             <Metric label="Diesel replacement" value={`${dieselReplacementPct.toFixed(1)}%`} />
           </div>
         </section>
 
         <div className="grid gap-4 lg:grid-cols-3">
-          <ResultGroup title="Fuel consumption" rows={[["Diesel consumption", `${dieselConsumptionLPerHr.toFixed(1)} L/hr`], ["DF diesel consumption", `${dfDieselConsumptionLPerHr.toFixed(1)} L/hr`], ["NG consumption", `${ngConsumptionSm3PerHr.toFixed(1)} Sm³/hr`]]} />
+          <ResultGroup title="Fuel consumption" rows={[["Diesel consumption", `${dieselConsumptionLPerHr.toFixed(1)} L/hr`], ["DF diesel consumption", `${dfDieselConsumptionLPerHr.toFixed(1)} L/hr`], ["NG consumption", `${ngConsumptionSm3PerHr.toFixed(1)} SmÂ³/hr`]]} />
           <ResultGroup title="Operating cost" rows={[["Diesel mode cost", `${formatINR(dieselCostPerHr)}/hr`], ["Dual fuel diesel cost", `${formatINR(dfDieselCostPerHr)}/hr`], ["NG cost", `${formatINR(ngCostPerHr)}/hr`], ["Total dual fuel cost", `${formatINR(totalDualFuelCostPerHr)}/hr`]]} />
-          <ResultGroup title="Environmental impact" rows={[["Diesel mode CO₂", `${dieselCO2KgPerHr.toFixed(2)} kg/hr`], ["Dual fuel CO₂", `${totalDualFuelCO2KgPerHr.toFixed(2)} kg/hr`], ["CO₂ saving", `${co2SavingKgPerHr.toFixed(2)} kg/hr`]]} accent />
+          <ResultGroup title="Environmental impact" rows={[["Diesel mode COâ‚‚", `${dieselCO2KgPerHr.toFixed(2)} kg/hr`], ["Dual fuel COâ‚‚", `${totalDualFuelCO2KgPerHr.toFixed(2)} kg/hr`], ["COâ‚‚ saving", `${co2SavingKgPerHr.toFixed(2)} kg/hr`]]} accent />
         </div>
         <p className="mt-4 text-xs leading-relaxed text-white/45">Estimates are based on the OM Solutions BMEP calculation model. Actual savings depend on engine condition, load profile, fuel quality and site conditions.</p>
       </div>
@@ -94,12 +82,12 @@ function ResultGroup({ title, rows, accent = false }: { title: string; rows: [st
   return <section className="rounded-[7px] border border-white/15 bg-white/[0.04] p-5"><p className="text-sm font-extrabold uppercase tracking-[0.12em] text-white">{title}</p><div className="mt-4 space-y-4">{rows.map(([label, value]) => <div key={label} className="flex items-start justify-between gap-4"><span className="text-sm font-semibold leading-snug text-white/80">{label}</span><strong className="text-right text-base text-[oklch(0.78_0.18_155)]">{value}</strong></div>)}</div></section>;
 }
 
-function SavingsValue({ label, value, sub, largest = false }: { label: string; value: string; sub: string; largest?: boolean }) {
-  return <div className={largest ? "md:text-right" : ""}><p className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-white">{label}</p><p className={`mt-2 font-black text-[oklch(0.78_0.18_155)] ${largest ? "text-4xl sm:text-5xl" : "text-3xl sm:text-4xl"}`}>{value}</p><p className="mt-1 text-sm font-extrabold text-white">{sub}</p></div>;
+function SavingsValue({ label, value, sub }: { label: string; value: string; sub: string; largest?: boolean }) {
+  return <div className="min-w-0"><p className="text-[9px] font-extrabold uppercase leading-tight tracking-[0.06em] text-white sm:text-xs sm:tracking-[0.1em]">{label}</p><p className="mt-2 break-words text-base font-black leading-none sm:text-3xl lg:text-4xl" style={{ color: "oklch(0.78 0.18 155)" }}>{value}</p><p className="mt-1 text-[10px] font-extrabold text-white sm:text-xs">{sub}</p></div>;
 }
 
 function Metric({ label, value }: { label: string; value: string }) {
-  return <div><p className="text-sm font-extrabold uppercase tracking-[0.1em] text-white">{label}</p><p className="mt-1 text-2xl font-black text-[oklch(0.78_0.18_155)]">{value}</p></div>;
+  return <div className="min-w-0"><p className="text-[9px] font-extrabold uppercase leading-tight tracking-[0.06em] text-white sm:text-xs sm:tracking-[0.1em]">{label}</p><p className="mt-2 break-words text-base font-black leading-none sm:text-3xl lg:text-4xl" style={{ color: "oklch(0.78 0.18 155)" }}>{value}</p></div>;
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -128,7 +116,6 @@ function LegacyCalculatorResults({ inputs, results, onReset }: Props) {
     ngCostPerHr,
     totalDualFuelCostPerHr,
     savingPerHour,
-    savingPerMonth,
     savingPerYear,
     costReductionPct,
     dieselReplacementPct,
@@ -152,14 +139,14 @@ function LegacyCalculatorResults({ inputs, results, onReset }: Props) {
             Operating Economics
           </p>
           <h3 className="mt-1 text-[17px] font-black text-white leading-tight">
-            {inputs.gensetRating} kVA · {inputs.load}% Load · NG
+            {inputs.gensetRating} kVA Â· {inputs.load}% Load Â· NG
           </h3>
           <p className="mt-1 text-[12px] font-semibold text-white/65">
-            {inputs.hoursPerMonth} hrs/month · ₹{inputs.dieselPrice}/L diesel · ₹{inputs.ngPrice}/Sm³ NG
+            {inputs.hoursPerMonth} hrs/month Â· â‚¹{inputs.dieselPrice}/L diesel Â· â‚¹{inputs.ngPrice}/SmÂ³ NG
           </p>
         </div>
 
-        {/* Hero — Saving Due to DFK */}
+        {/* Hero â€” Saving Due to DFK */}
         <div className="mb-5 rounded-[3px] p-5"
           style={{
             background: savingTone === "positive" ? "oklch(0.72 0.16 155 / 0.12)" : savingTone === "negative" ? "oklch(0.72 0.2 28 / 0.14)" : "rgba(255,255,255,0.05)",
@@ -174,7 +161,6 @@ function LegacyCalculatorResults({ inputs, results, onReset }: Props) {
               <p className="text-[12px] font-bold text-white/70 mt-1">INR / hr</p>
             </div>
             <div className="text-right">
-              <p className="text-[16px] font-extrabold text-white">{formatINR(savingPerMonth, true)}</p>
               <p className="text-[11px] font-semibold text-white/65">/ Month</p>
               <p className="mt-2 text-[16px] font-extrabold text-white">{formatINR(savingPerYear, true)}</p>
               <p className="text-[11px] font-semibold text-white/65">/ Year</p>
@@ -194,19 +180,19 @@ function LegacyCalculatorResults({ inputs, results, onReset }: Props) {
           </div>
         </div>
 
-        {/* Hero — CO₂ Saving */}
+        {/* Hero â€” COâ‚‚ Saving */}
         <div className="mb-5 rounded-[3px] p-5"
           style={{
             background: co2Tone === "positive" ? "oklch(0.72 0.16 155 / 0.12)" : co2Tone === "negative" ? "oklch(0.72 0.2 28 / 0.14)" : "rgba(255,255,255,0.05)",
             border: `2px solid ${toneColor[co2Tone]}`,
           }}>
-          <p className="mb-2 text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/75">CO₂ Saving Due to DFK</p>
+          <p className="mb-2 text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/75">COâ‚‚ Saving Due to DFK</p>
           <div className="flex items-end justify-between">
             <div>
               <p className="text-4xl font-black" style={{ color: toneColor[co2Tone] }}>
                 {co2SavingKgPerHr.toFixed(2)} kg
               </p>
-              <p className="mt-1 text-[12px] font-bold text-white/70">CO₂ / hr</p>
+              <p className="mt-1 text-[12px] font-bold text-white/70">COâ‚‚ / hr</p>
             </div>
             <div className="text-right">
               <p className="text-[16px] font-extrabold text-white">{(monthlyCO2SavingKg / 1000).toFixed(2)} t</p>
@@ -221,7 +207,7 @@ function LegacyCalculatorResults({ inputs, results, onReset }: Props) {
         <Section title="Fuel Consumption">
           <Row label="Diesel (diesel-only mode)" value={`${dieselConsumptionLPerHr.toFixed(1)} L/hr`} />
           <Row label="DF Diesel (dual-fuel mode)" value={`${dfDieselConsumptionLPerHr.toFixed(1)} L/hr`} />
-          <Row label="NG Consumption" value={`${ngConsumptionSm3PerHr.toFixed(1)} Sm³/hr`} accent />
+          <Row label="NG Consumption" value={`${ngConsumptionSm3PerHr.toFixed(1)} SmÂ³/hr`} accent />
         </Section>
 
         {/* Operating Cost */}
@@ -241,16 +227,15 @@ function LegacyCalculatorResults({ inputs, results, onReset }: Props) {
           <Row label="Engine Indicated Power" value={`${engineIndicatedPower.toFixed(1)} kW`} />
         </Section>
 
-        {/* CO₂ Reduction */}
-        <Section title="Environmental Impact (CO₂)">
-          <Row label="CO₂ — Diesel Mode" value={`${dieselCO2KgPerHr.toFixed(2)} kg/hr`} />
-          <Row label="CO₂ — Dual-Fuel Mode" value={`${totalDualFuelCO2KgPerHr.toFixed(2)} kg/hr`} />
-          <Row label="CO₂ Saving / Hour" value={`${co2SavingKgPerHr.toFixed(2)} kg/hr`} tone={co2Tone} />
-          <Row label="CO₂ Saving / Month" value={`${(monthlyCO2SavingKg / 1000).toFixed(2)} tonnes`} tone={toneFor(monthlyCO2SavingKg)} />
-          <Row label="CO₂ Saving / Year" value={`${annualCO2SavingTonnes.toFixed(2)} tonnes`} tone={toneFor(annualCO2SavingTonnes)} />
+        {/* COâ‚‚ Reduction */}
+        <Section title="Environmental Impact (COâ‚‚)">
+          <Row label="COâ‚‚ â€” Diesel Mode" value={`${dieselCO2KgPerHr.toFixed(2)} kg/hr`} />
+          <Row label="COâ‚‚ â€” Dual-Fuel Mode" value={`${totalDualFuelCO2KgPerHr.toFixed(2)} kg/hr`} />
+          <Row label="COâ‚‚ Saving / Month" value={`${(monthlyCO2SavingKg / 1000).toFixed(2)} tonnes`} tone={toneFor(monthlyCO2SavingKg)} />
+          <Row label="COâ‚‚ Saving / Year" value={`${annualCO2SavingTonnes.toFixed(2)} tonnes`} tone={toneFor(annualCO2SavingTonnes)} />
           <div className="py-2">
             <p className="text-[9px] text-white/25 leading-relaxed">
-              Diesel: 32 MJ/L × 70.55 kg CO₂/GJ. NG: 49 MJ/kg × 55.22 kg CO₂/GJ.
+              Diesel: 32 MJ/L Ã— 70.55 kg COâ‚‚/GJ. NG: 49 MJ/kg Ã— 55.22 kg COâ‚‚/GJ.
               Source: OM Solutions Excel calculator.
             </p>
           </div>
@@ -266,7 +251,7 @@ function LegacyCalculatorResults({ inputs, results, onReset }: Props) {
       <div className="shrink-0 border-t border-white/10 px-5 py-4">
         <button type="button" onClick={onReset}
           className="flex h-11 w-full items-center justify-center border-2 border-white/35 text-[12px] font-extrabold uppercase tracking-[0.08em] text-white transition-colors hover:border-white hover:text-white">
-          ← Calculate Again
+          â† Calculate Again
         </button>
       </div>
     </div>

@@ -32,7 +32,7 @@ export const STATE_REGULATIONS = [
     id: "delhi",
     state: "DELHI",
     landmark: "India Gate",
-    description: "Current CPCB emission guidelines summary for NCR (e.g., genset restrictions, stack height requirements, etc.).",
+    description: "Mandates dual-fuel mode or approved RECDs for DG sets from 19 kW to 800 kW to run during GRAP restrictions.",
     image: "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=800&q=80",
     orderUrl: "/documents/regulations/Delhi - Year-2023_CAQM-Direction-No.-76.pdf",
   },
@@ -40,7 +40,7 @@ export const STATE_REGULATIONS = [
     id: "maharashtra",
     state: "MAHARASHTRA",
     landmark: "Gateway of India",
-    description: "Summary of pollution control norms and directions in Maharashtra.",
+    description: "Requires DG sets up to 800 kW (1000 kVA) to achieve ≥70% PM reduction via RECDs or dual-fuel gas conversion.",
     image: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=800&q=80",
     orderUrl: "/documents/regulations/Maharashtra - Year-2023_DG-Set-Circular-02-06-2023.pdf",
   },
@@ -48,7 +48,7 @@ export const STATE_REGULATIONS = [
     id: "gujarat",
     state: "GUJARAT",
     landmark: "Statue of Unity",
-    description: "Emission guideline details for the state of Gujarat, particularly industrial and city areas.",
+    description: "Mandates ≥70% PM reduction or shifting to dual-fuel gas operation for DG sets of 125 kVA and above.",
     image: gujaratImage,
     orderUrl: "/documents/regulations/Gujrat - Year-2023-Gujarat-Circular-26-10-2023.pdf",
   },
@@ -56,7 +56,7 @@ export const STATE_REGULATIONS = [
     id: "tamil-nadu",
     state: "TAMIL NADU",
     landmark: "Meenakshi Temple",
-    description: "Key provisions of the emission guidelines and retrofit requirements for Tamil Nadu.",
+    description: "Mandates DG sets of 61 kW to 800 kW to install certified RECDs or retrofit for dual-fuel gas operation.",
     image: tamilNaduImage,
     orderUrl: "/documents/regulations/Tamil Nadu - Year-2021_Notice_Followup_RECD_DFK-1.pdf",
   },
@@ -64,7 +64,7 @@ export const STATE_REGULATIONS = [
     id: "odisha",
     state: "ODISHA",
     landmark: "Konark Sun Temple",
-    description: "Summary of rules and orders for OSPCB regarding industrial and captive power emissions.",
+    description: "Enforces ≥70% PM capture efficiency or transition to gas-based power for DG sets of 125 kVA and above.",
     image: odishaImage,
     orderUrl: "/documents/regulations/Odisha - 2023-Odisha-Circular-DG-Sets-15730-dtd.-6.10.2023-2.pdf",
   },
@@ -72,7 +72,7 @@ export const STATE_REGULATIONS = [
     id: "karnataka",
     state: "KARNATAKA",
     landmark: "Mysore Palace",
-    description: "Overview of emissions-related guidelines and notifications issued by KSPCB.",
+    description: "Enforces approved RECDs or dual-fuel systems for in-use DG sets from 61 kW to 800 kW older than 5 years.",
     image: karnatakaImage,
     orderUrl: "/documents/regulations/Karnataka - Year-2024-Karnataka-Notification-12-jun-2024.pdf",
   },
@@ -80,7 +80,7 @@ export const STATE_REGULATIONS = [
     id: "andhra-pradesh",
     state: "ANDHRA PRADESH",
     landmark: "Tirumala Venkateswara Temple",
-    description: "APPCB regulations for industrial diesel generator sets and dual-fuel conversion norms.",
+    description: "Enforces ≥70% PM-reduction devices or shifting to gas-based power for DG sets of 125 kVA and above.",
     image: andhraPradeshImage,
     orderUrl: "/documents/regulations/Andhra Pradesh - andhara.pdf",
   },
@@ -88,7 +88,7 @@ export const STATE_REGULATIONS = [
     id: "goa",
     state: "GOA",
     landmark: "Basilica of Bom Jesus",
-    description: "GSPCB environmental protection mandates on DG emission control in coastal & commercial zones.",
+    description: "Requires RECD retrofitting or partial gas conversion for operational DG sets from 125 kVA to 1000 kVA.",
     image: goaImage,
     orderUrl: "/documents/regulations/Goa - Year-2023_Goa-State-Pollution-Control-Board-Dated-28th-March-2023.pdf",
   },
@@ -96,7 +96,7 @@ export const STATE_REGULATIONS = [
     id: "haryana",
     state: "HARYANA",
     landmark: "Brahma Sarovar & Kurukshetra",
-    description: "CAQM and HSPCB notifications regarding seasonal DG bans and dual-fuel conversion timelines.",
+    description: "Mandates ≥70% PM-capturing equipment or dual-fuel gas kits on DG sets of 500 kVA and above.",
     image: haryanaImage,
     orderUrl: "/documents/regulations/Haryana - Year-2020_Haryana_NCR_500_RECD_DFK.pdf",
   },
@@ -104,7 +104,7 @@ export const STATE_REGULATIONS = [
     id: "jammu-kashmir",
     state: "JAMMU & KASHMIR",
     landmark: "Dal Lake, Srinagar",
-    description: "JKPCC pollution guidelines and clean fuel mandates for ecotourism and commercial clusters.",
+    description: "Requires DG sets of 125 kVA and above across J&K to adopt RECDs or convert to gas operation.",
     image: jammuKashmirImage,
     orderUrl: "/documents/regulations/Jammu & Kashmir - Year-2021_JK_NCR_125_RECD_DFK.pdf",
   },
@@ -112,7 +112,7 @@ export const STATE_REGULATIONS = [
     id: "kerala",
     state: "KERALA",
     landmark: "Alleppey Backwaters & Padmanabhaswamy",
-    description: "KSPCB standards for acoustic enclosures, stack height, and dual-fuel operation.",
+    description: "Directs DG sets of 125 kVA and above to install ≥70% PM RECDs or convert to partial gas usage.",
     image: keralaImage,
     orderUrl: "/documents/regulations/Kerala - Kerala-SPCB-Order-Dated-15-05-2023.pdf",
   },
@@ -231,13 +231,13 @@ function RegulationsPage() {
       </section>
 
       <section aria-label="State emission regulations" className="relative z-10 -mt-11 bg-[#eef6fb] px-3 pb-10 sm:px-6 lg:px-8 lg:pb-16">
-        <div className="mx-auto grid max-w-7xl grid-cols-3 gap-2 max-[430px]:grid-cols-2 sm:gap-5">
+        <div className="mx-auto grid max-w-[468px] grid-cols-3 gap-2 max-[430px]:grid-cols-2 sm:gap-5 md:max-w-7xl">
           {STATE_REGULATIONS.map((region) => (
             <article
               key={region.id}
               className="group flex min-w-0 flex-col overflow-hidden rounded-[10px] border border-slate-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md motion-reduce:transition-none sm:rounded-2xl"
             >
-              <div className="relative h-[96px] overflow-hidden bg-slate-200 sm:h-[160px] xl:h-[200px]">
+              <div className="relative mx-[6px] mt-[6px] h-[88px] overflow-hidden rounded-[7px] bg-slate-200 sm:h-[160px] xl:h-[200px]">
                 <img
                   src={region.image}
                   alt={`${region.landmark}, ${region.state}`}
@@ -248,7 +248,7 @@ function RegulationsPage() {
                     event.currentTarget.dataset.fallbackApplied = "true";
                     event.currentTarget.src = fallbackImage;
                   }}
-                  className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  className="size-full rounded-[7px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                 />
               </div>
               <div className="flex min-h-[112px] flex-1 flex-col p-2 sm:min-h-[242px] sm:p-5 lg:p-6">
@@ -263,11 +263,12 @@ function RegulationsPage() {
                 </p>
                 <a
                   href={region.orderUrl}
-                  download
-                  aria-label={`Download ${region.state} regulation order (PDF)`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Explore ${region.state} guidelines (PDF)`}
                   className="mt-2 inline-flex min-h-6 w-full items-center justify-center rounded-full bg-[#09b978] px-1.5 py-1 text-[9px] font-bold text-[#063b2a] transition-colors hover:bg-emerald-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 sm:mt-5 sm:min-h-12 sm:rounded-xl sm:px-4 sm:py-3 sm:text-sm sm:text-white"
                 >
-                  Download Order
+                  Explore Guidelines
                 </a>
               </div>
             </article>

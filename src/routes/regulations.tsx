@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Clock3, Fuel, ShieldCheck } from "lucide-react";
 import fallbackImage from "@/assets/img-103.jpg";
 import logoImage from "@/assets/aircompressor/logo.png";
 import andhraPradeshImage from "@/assets/team/image.png";
@@ -336,9 +336,49 @@ function RegulationsPage() {
             </article>
           ))}
         </div>
-        <p className="mx-auto mt-8 max-w-7xl text-xs leading-5 text-slate-500">
+      </section>
 
-        </p>
+      <section aria-labelledby="compliance-benefits-title" className="bg-[#eef6fb] px-3 pb-12 pt-2 sm:px-6 sm:pb-16">
+        <div className="mx-auto max-w-[468px] md:max-w-6xl">
+          <h2 id="compliance-benefits-title" className="mb-4 text-center text-sm font-bold text-slate-900 sm:mb-6 sm:text-xl md:mb-8 md:text-2xl">
+            How We Help You Achieve Compliance
+          </h2>
+          <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6">
+            <article className="flex min-h-[118px] min-w-0 flex-col items-center rounded-xl border border-slate-200 bg-white px-2 py-2 text-center shadow-sm sm:min-h-[190px] sm:px-4 sm:py-5 md:min-h-[240px] md:rounded-2xl md:px-7 md:py-7">
+              <span className="grid size-7 place-items-center rounded-lg bg-emerald-50 text-emerald-700 sm:size-10 md:size-12">
+                <ShieldCheck aria-hidden="true" className="size-4 sm:size-5 md:size-6" />
+              </span>
+              <h3 className="mt-2 text-[8px] font-extrabold leading-tight text-slate-900 sm:mt-3 sm:text-sm md:mt-4 md:text-lg">
+                CPCB-IV+ Dual-Fuel Retrofit
+              </h3>
+              <p className="mt-1.5 text-[7px] leading-[1.25] text-slate-600 sm:mt-2 sm:text-xs sm:leading-5 md:mt-3 md:text-base md:leading-7">
+                Seamlessly convert your engines to meet CPCB-IV+ standards with our advanced dual-fuel kit.
+              </p>
+            </article>
+            <article className="flex min-h-[118px] min-w-0 flex-col items-center rounded-xl border border-slate-200 bg-white px-2 py-2 text-center shadow-sm sm:min-h-[190px] sm:px-4 sm:py-5 md:min-h-[240px] md:rounded-2xl md:px-7 md:py-7">
+              <span className="grid size-7 place-items-center rounded-lg bg-emerald-50 text-emerald-700 sm:size-10 md:size-12">
+                <Fuel aria-hidden="true" className="size-4 sm:size-5 md:size-6" />
+              </span>
+              <h3 className="mt-2 text-[8px] font-extrabold leading-tight text-slate-900 sm:mt-3 sm:text-sm md:mt-4 md:text-lg">
+                70% Diesel Replacement
+              </h3>
+              <p className="mt-1.5 text-[7px] leading-[1.25] text-slate-600 sm:mt-2 sm:text-xs sm:leading-5 md:mt-3 md:text-base md:leading-7">
+                Achieve substantial reduction in diesel usage and cost.
+              </p>
+            </article>
+            <article className="flex min-h-[118px] min-w-0 flex-col items-center rounded-xl border border-slate-200 bg-white px-2 py-2 text-center shadow-sm sm:min-h-[190px] sm:px-4 sm:py-5 md:min-h-[240px] md:rounded-2xl md:px-7 md:py-7">
+              <span className="grid size-7 place-items-center rounded-lg bg-emerald-50 text-emerald-700 sm:size-10 md:size-12">
+                <Clock3 aria-hidden="true" className="size-4 sm:size-5 md:size-6" />
+              </span>
+              <h3 className="mt-2 text-[8px] font-extrabold leading-tight text-slate-900 sm:mt-3 sm:text-sm md:mt-4 md:text-lg">
+                Zero Engine Downtime
+              </h3>
+              <p className="mt-1.5 text-[7px] leading-[1.25] text-slate-600 sm:mt-2 sm:text-xs sm:leading-5 md:mt-3 md:text-base md:leading-7">
+                Retrofit process with no operational interruption, maintaining your schedule.
+              </p>
+            </article>
+          </div>
+        </div>
       </section>
 
       <footer className="bg-[#07170f] px-[6vw] py-5 text-center font-mono text-[10px] uppercase tracking-[.12em] text-white/40">

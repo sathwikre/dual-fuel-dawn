@@ -163,7 +163,7 @@ function RegulationsPage() {
           height: menuOpen ? "100dvh" : scrolled ? "72px" : "85px",
           maxHeight: menuOpen ? "100dvh" : undefined,
           overflowY: menuOpen ? "auto" : undefined,
-          backgroundColor: menuOpen || scrolled ? "rgba(255, 255, 255, 0.2)" : "transparent",
+          backgroundColor: menuOpen || scrolled ? "rgba(232, 244, 251, 0.96)" : "transparent",
           boxShadow: menuOpen || scrolled ? "0 1px 2px rgba(0, 0, 0, 0.08)" : "none",
           backdropFilter: menuOpen || scrolled ? "blur(8px)" : "none",
           transition: "height .35s ease, background .35s ease, backdrop-filter .35s ease",

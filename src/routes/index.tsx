@@ -1368,6 +1368,46 @@ Message: ${message}`;
           </div>
         </section>
 
+        <section aria-label="Our mission partners" className="border-b border-slate-200 bg-white">
+          <div className="mx-auto grid max-w-[1440px] gap-5 px-5 py-7 sm:px-8 lg:grid-cols-[220px_1fr] lg:items-center lg:gap-8 lg:px-10">
+            <div>
+              <h2 className="text-lg font-extrabold tracking-tight text-slate-900">Our Mission Partners</h2>
+              <p className="mt-1 max-w-[220px] text-xs leading-relaxed text-slate-600">
+                Organizations featured in our cleaner energy installations.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 items-center gap-x-5 gap-y-4 sm:grid-cols-4 lg:gap-x-8">
+              {[
+                { name: "TATA", logo: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Tata_logo.svg", href: "https://www.tata.com/" },
+                { name: "Akwel Automotive India", logo: "https://commons.wikimedia.org/wiki/Special:FilePath/Logo_Akwel.svg", href: "https://akwel-automotive.com/" },
+                { name: "Birla Tisya", logo: "https://img.logokit.com/birlaestates.com", href: "https://www.birlaestates.com/" },
+                { name: "Nevatia Steels & Alloys", logo: "https://img.logokit.com/nevatiasteel.com", href: "https://www.nevatiasteel.com/" },
+              ].map((partner) => (
+                <a
+                  key={partner.name}
+                  href={partner.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${partner.name} website`}
+                  className="flex h-14 items-center justify-center rounded-lg px-2 transition-opacity hover:opacity-75"
+                >
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    loading="eager"
+                    className="max-h-10 max-w-full object-contain"
+                    onError={(event) => {
+                      event.currentTarget.classList.add("hidden");
+                      event.currentTarget.nextElementSibling?.classList.remove("hidden");
+                    }}
+                  />
+                  <span className="hidden text-center text-sm font-bold tracking-wide text-slate-700">{partner.name}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* OM / 04 Primary product - Dual Fuel Kit */}
         <section id="kit" className="relative overflow-hidden bg-background">
           <div className="section-dot-grid absolute inset-0" aria-hidden="true" />

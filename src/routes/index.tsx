@@ -195,6 +195,7 @@ import controlPanelImage from "@/assets/img-117.jpg";
 import economicsImage from "@/assets/img-150.jpg";
 import environmentImage from "@/assets/img-152.jpg";
 import marineImage from "@/assets/img-158.jpg";
+import technologyBackgroundImage from "@/assets/img-162.jpg";
 import marineInboardImage from "@/assets/applications/Marine Inboard Engines.png";
 import generatorSetImage from "@/assets/applications/Generator Sets.png";
 import tractorsEarthMoversImage from "@/assets/applications/Tractors & Earth Movers.png";
@@ -1502,7 +1503,7 @@ Message: ${message}`;
         {/* ——— Cinematic "Explore Technology" banner —— */}
         <section id="technology" className="relative isolate min-h-[560px] overflow-hidden lg:min-h-[620px]">
           <img
-            src={quarryExcavatorImage}
+            src={technologyBackgroundImage}
             alt=""
             aria-hidden="true"
             className="absolute inset-0 h-full w-full object-cover scale-105"

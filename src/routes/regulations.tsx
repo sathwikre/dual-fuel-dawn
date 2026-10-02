@@ -160,13 +160,15 @@ function RegulationsPage() {
     <main className="min-h-screen bg-[#eef6fb] text-slate-900">
       <header
         style={{
-          height: menuOpen ? "100dvh" : scrolled ? "72px" : "85px",
+          height: menuOpen ? "auto" : scrolled ? "72px" : "85px",
           maxHeight: menuOpen ? "100dvh" : undefined,
           overflowY: menuOpen ? "auto" : undefined,
           backgroundColor: menuOpen || scrolled ? "rgba(232, 244, 251, 0.96)" : "transparent",
           boxShadow: menuOpen || scrolled ? "0 1px 2px rgba(0, 0, 0, 0.08)" : "none",
           backdropFilter: menuOpen || scrolled ? "blur(8px)" : "none",
-          transition: "height .35s ease, background .35s ease, backdrop-filter .35s ease",
+          transition: menuOpen
+            ? "background .35s ease, backdrop-filter .35s ease"
+            : "height .35s ease, background .35s ease, backdrop-filter .35s ease",
         }}
         className="fixed inset-x-0 top-0 z-50 flex flex-col"
       >
@@ -174,8 +176,8 @@ function RegulationsPage() {
           <a
             href="/#home"
             aria-label="OM Solutions home"
-            style={{ color: scrolled ? "#0f172a" : "#fff" }}
-            className="order-1 flex shrink-0 items-center gap-2.5 no-underline transition-colors duration-300"
+            style={{ color: scrolled || menuOpen ? "#0f172a" : "#fff" }}
+            className="order-1 flex shrink-0 items-center gap-2.5 no-underline"
           >
             <img src={logoImage} alt="OM Solutions" className="h-12 w-12 object-contain" />
             <span className="text-[16px] font-extrabold uppercase leading-none tracking-tight">
@@ -237,7 +239,7 @@ function RegulationsPage() {
         {menuOpen && (
           <nav aria-label="Mobile navigation" className="border-t border-white/15 bg-[#0d1713] px-4 pb-7 pt-5 sm:px-6 xl:hidden">
             <div className="flex flex-col gap-1">
-              {navLinks.map(([label, href]) => (
+              {navLinks.filter(([label]) => label !== "Join This Mission").map(([label, href]) => (
                 <a
                   key={label}
                   href={href}
@@ -251,9 +253,16 @@ function RegulationsPage() {
               <a
                 href="/#contact"
                 onClick={() => setMenuOpen(false)}
-                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#b6ff72] px-5 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.11em] text-[#0d1f16]"
+                className="group mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#b6ff72] px-5 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.11em] text-[#0d1f16] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#a3e065] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b6ff72]"
               >
-                Dealership <ArrowUpRight className="size-4" />
+                Join This Mission <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
+              <a
+                href="/#contact"
+                onClick={() => setMenuOpen(false)}
+                className="group mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#b6ff72] px-5 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.11em] text-[#0d1f16] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#a3e065] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b6ff72]"
+              >
+                Dealership <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5" />
               </a>
             </div>
           </nav>

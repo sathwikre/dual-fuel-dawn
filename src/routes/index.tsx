@@ -195,16 +195,13 @@ import controlPanelImage from "@/assets/img-117.jpg";
 import economicsImage from "@/assets/img-150.jpg";
 import environmentImage from "@/assets/img-152.jpg";
 import marineImage from "@/assets/img-158.jpg";
-import marineOutboardImage from "@/assets/Marine Outboard Engines .png";
-import marineInboardImage from "@/assets/Marine Inboard Engines.png";
-import busesTrucksImage from "@/assets/Trucks & Buses.png";
-import generatorSetImage from "@/assets/Generator Sets.png";
-import tractorsEarthMoversImage from "@/assets/Tractors & Earth Movers.png";
-import producerGasSyngasImage from "@/assets/Producer Gas & Syngas.png";
-import liquidFuelsImage from "@/assets/Liquid Fuels.png";
-import borewellImage from "@/assets/img-160.jpg";
-import compressorImage from "@/assets/img-161.jpg";
-import compressorNightImage from "@/assets/img-162.jpg";
+import marineInboardImage from "@/assets/applications/Marine Inboard Engines.png";
+import generatorSetImage from "@/assets/applications/Generator Sets.png";
+import tractorsEarthMoversImage from "@/assets/applications/Tractors & Earth Movers.png";
+import quarryExcavatorImage from "@/assets/applications/Quarry Excavator at Work.png";
+import harvesterImage from "@/assets/applications/Harvester.jpg";
+import borewellImage from "@/assets/applications/Diesel Irrigation Pump in Lush Fields.png";
+import compressorImage from "@/assets/applications/Diesel Compressor at Construction Site.png";
 import gasSystemImage from "@/assets/img-169.jpg";
 import marineDetailImage from "@/assets/img-180.jpg";
 import marineDetailImageTwo from "@/assets/img-181.jpg";
@@ -405,6 +402,17 @@ const fuelArchitecture = [
   { application: "Diesel engine based Harvester", supported: ["CNG", "LPG", "LNG", "Ethanol", "Methanol", "Isobutane"] },
   { application: "Diesel engine based Tractor", supported: ["CNG", "LPG", "LNG", "Ethanol", "Methanol", "Isobutane"] },
   { application: "Diesel engine based Earthmover", supported: ["CNG", "LPG", "LNG", "Ethanol", "Methanol", "Isobutane"] },
+] as const;
+
+const applicationCards = [
+  { title: "Diesel Generator set", description: "Dual-fuel operation for diesel generator sets.", image: generatorSetImage },
+  { title: "Marine Propulsion Engine", description: "Dual-fuel pathways for marine propulsion engines.", image: marineInboardImage },
+  { title: "Marine Generator set", description: "Dual-fuel operation for marine generator applications.", image: generatorSetImage },
+  { title: "Diesel engine based Air Compressor", description: "Dual-fuel conversion for diesel engine based air compressors.", image: compressorImage },
+  { title: "Diesel engine based Borewell", description: "Dual-fuel conversion for diesel engine based borewell pumps.", image: borewellImage },
+  { title: "Diesel engine based Harvester", description: "Dual-fuel conversion for diesel engine based harvesters.", image: harvesterImage },
+  { title: "Diesel engine based Tractor", description: "Dual-fuel conversion for diesel engine based tractors.", image: tractorsEarthMoversImage },
+  { title: "Diesel engine based Earthmover", description: "Dual-fuel conversion for diesel engine based earthmovers.", image: quarryExcavatorImage },
 ] as const;
 
 const benefits = [
@@ -1073,6 +1081,7 @@ Message: ${message}`;
                   <a
                     key={id}
                     href={getNavHref(id)}
+                    onClick={id === "technology" ? (event) => { event.preventDefault(); setTechDrawerOpen(true); } : undefined}
                     className="whitespace-nowrap text-[15px] font-bold capitalize tracking-normal text-slate-700 transition-colors duration-200 hover:text-emerald-700"
                   >
                     {label}
@@ -1196,7 +1205,7 @@ Message: ${message}`;
                     <a
                       key={id}
                       href={getNavHref(id)}
-                      onClick={closeMenu}
+                      onClick={id === "technology" ? (event) => { event.preventDefault(); setTechDrawerOpen(true); closeMenu(); } : closeMenu}
                       className="border-b border-white/10 py-3 text-[13px] font-extrabold uppercase tracking-[0.11em] text-white/80 transition-colors hover:text-[#b6ff72]"
                     >
                       {label}
@@ -1493,7 +1502,7 @@ Message: ${message}`;
         {/* ——— Cinematic "Explore Technology" banner —— */}
         <section id="technology" className="relative isolate min-h-[560px] overflow-hidden lg:min-h-[620px]">
           <img
-            src={compressorNightImage}
+            src={quarryExcavatorImage}
             alt=""
             aria-hidden="true"
             className="absolute inset-0 h-full w-full object-cover scale-105"
@@ -1584,79 +1593,28 @@ Message: ${message}`;
                     <p className="max-w-md text-sm leading-relaxed text-muted-foreground font-sans">Explore supported alternate-fuel pathways across engine applications.</p>
                   </div>
 
-                  <div className="tech-surface mt-10 rounded-2xl">
-                    <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border/60 bg-muted/40 px-5 py-4 sm:px-7 sm:py-5">
-                      <p className="text-sm font-bold uppercase tracking-[0.12em] text-foreground">Fuel Compatibility Matrix</p>
-                      <div className="inline-flex items-center gap-2 rounded-full border border-signal/25 bg-signal/10 px-3 py-1">
-                        <span className="relative flex size-2">
-                          <span className="absolute inline-flex size-full animate-ping rounded-full bg-signal opacity-40" aria-hidden="true" />
-                          <span className="relative inline-flex size-2 rounded-full bg-signal" aria-hidden="true" />
-                        </span>
-                        <span className="text-xs font-semibold text-foreground">Supported pathway</span>
-                      </div>
-                    </div>
-
-                    <div className="overflow-x-auto -webkit-overflow-scrolling-touch">
-                      <table className="w-full min-w-[680px] border-collapse">
-                        <thead>
-                          <tr className="border-b border-border/40">
-                            <th scope="col" className="sticky left-0 z-20 min-w-[160px] bg-background px-3 py-4 text-left sm:min-w-[260px] sm:px-7 sm:py-6">
-                              <span className="text-[10px] sm:text-sm font-bold uppercase tracking-[0.1em] text-foreground">Application</span>
-                            </th>
-                            {fuelColumns.map((fuel) => (
-                              <th key={fuel} scope="col" className={`min-w-[62px] sm:min-w-[88px] px-1 sm:px-2 py-4 sm:py-6 text-center transition-colors ${selectedFuel === fuel ? "bg-signal/10" : ""}`}>
-                                <button type="button" onClick={() => setSelectedFuel(selectedFuel === fuel ? null : fuel)} aria-pressed={selectedFuel === fuel} className="flex w-full flex-col items-center gap-1 rounded-[6px] py-1 focus-visible:outline-2 focus-visible:outline-signal">
-                                  <span className={`size-1.5 rounded-full ${selectedFuel === fuel ? "bg-signal" : "bg-border"}`} />
-                                  <span className={`text-[9px] sm:text-xs font-bold uppercase tracking-[0.06em] sm:tracking-[0.08em] ${selectedFuel === fuel ? "text-signal" : "text-foreground"}`}>{fuel}</span>
-                                </button>
-                              </th>
-                            ))}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {fuelArchitecture.map(({ application, supported }, index) => (
-                            <tr key={application} className={`group border-b border-border/40 last:border-0 transition-colors hover:bg-signal/[0.04] ${selectedFuelApplication === index ? "bg-signal/[0.06]" : ""}`}>
-                              <th scope="row" className={`sticky left-0 z-10 px-3 sm:px-7 py-3 sm:py-5 text-left transition-colors ${selectedFuelApplication === index ? "bg-primary-soft" : "bg-background group-hover:bg-signal/[0.04]"}`}>
-                                <button type="button" onClick={() => setSelectedFuelApplication(index)} className="flex w-full items-center gap-2 sm:gap-3 text-left focus-visible:outline-2 focus-visible:outline-signal focus-visible:outline-offset-4">
-                                  <span className={`shrink-0 font-mono text-[9px] sm:text-xs font-bold tracking-[0.1em] ${selectedFuelApplication === index ? "text-signal" : "text-muted-foreground group-hover:text-signal"}`}>
-                                    {String(index + 1).padStart(2, "0")}
-                                  </span>
-                                  <span className="text-[11px] sm:text-base font-semibold sm:font-bold leading-snug text-foreground">
-                                    {application}
-                                  </span>
-                                </button>
-                              </th>
-                              {fuelColumns.map((fuel) => {
-                                const isSupported = (supported as readonly string[]).includes(fuel);
-                                return (
-                                  <td key={fuel} className={`px-0.5 sm:px-2 py-2 sm:py-4 text-center transition-colors duration-200 ${selectedFuel === fuel ? "bg-signal/[0.06]" : ""}`}>
-                                    {isSupported ? (
-                                      <button
-                                        type="button"
-                                        onClick={() => { setSelectedFuelApplication(index); setSelectedFuel(fuel); }}
-                                        aria-label={`${application} supports ${fuel}`}
-                                        className={`mx-auto grid size-7 sm:size-10 place-items-center rounded-md border border-signal/30 bg-signal/10 text-signal transition-all duration-200 hover:scale-105 hover:bg-signal/20 focus-visible:outline-2 focus-visible:outline-signal focus-visible:outline-offset-2 ${selectedFuelApplication === index && selectedFuel === fuel ? "ring-2 ring-signal ring-offset-2" : ""}`}
-                                      >
-                                        <Check className="size-3 sm:size-4 stroke-[3]" />
-                                      </button>
-                                    ) : (
-                                      <button type="button" onClick={() => { setSelectedFuelApplication(index); setSelectedFuel(fuel); }} aria-label={`${application} does not support ${fuel}`} className="mx-auto grid size-7 sm:size-10 place-items-center text-sm sm:text-base font-medium text-muted-foreground/40 transition-colors duration-200 group-hover:text-muted-foreground/60 focus-visible:outline-2 focus-visible:outline-signal">
-                                        —
-                                      </button>
-                                    )}
-                                  </td>
-                                );
-                              })}
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
+                  <div className="mt-10 overflow-hidden rounded-2xl border border-border/60 bg-background shadow-sm">
+                    <div className="grid gap-px bg-border/60 sm:grid-cols-2 xl:grid-cols-4">
+                      {applicationCards.map(({ title, description, image }, index) => (
+                        <article key={title} className="group relative min-h-[250px] overflow-hidden bg-background p-6 transition-colors hover:bg-muted/40 sm:min-h-[275px] sm:p-7">
+                          <div className="flex items-start justify-between">
+                            <button
+                              type="button"
+                              onClick={() => openImage(image, title)}
+                              aria-label={`View ${title} image`}
+                              className="grid size-[76px] cursor-zoom-in place-items-center overflow-hidden rounded-full border border-border/70 bg-white p-1.5 shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal sm:size-[88px]"
+                            >
+                              <img src={image} alt={title} className="size-full rounded-full object-contain" loading="lazy" />
+                            </button>
+                            <span className="font-mono text-xs font-semibold text-muted-foreground/70">{String(index + 1).padStart(2, "0")}</span>
+                          </div>
+                          <h3 className="mt-7 text-lg font-extrabold leading-tight text-foreground sm:text-xl">{title}</h3>
+                          <p className="mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground">{description}</p>
+                        </article>
+                      ))}
                     </div>
                   </div>
 
-                  <p className="mt-5 text-sm leading-relaxed text-muted-foreground font-sans">
-                    Supported pathways are subject to engine configuration, fuel availability and application requirements.
-                  </p>
                 </div>
               </section>
 

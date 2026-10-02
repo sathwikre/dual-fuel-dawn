@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ImpactRouteImport } from './routes/impact'
+import { Route as RegulationsRouteImport } from './routes/regulations'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const ImpactRoute = ImpactRouteImport.update({
   path: '/impact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RegulationsRoute = RegulationsRouteImport.update({
+  id: '/regulations',
+  path: '/regulations',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/impact': typeof ImpactRoute
+  '/regulations': typeof RegulationsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/impact': typeof ImpactRoute
+  '/regulations': typeof RegulationsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/impact': typeof ImpactRoute
+  '/regulations': typeof RegulationsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/impact'
+  fullPaths: '/' | '/impact' | '/regulations'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/impact'
-  id: '__root__' | '/' | '/impact'
+  to: '/' | '/impact' | '/regulations'
+  id: '__root__' | '/' | '/impact' | '/regulations'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ImpactRoute: typeof ImpactRoute
+  RegulationsRoute: typeof RegulationsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ImpactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/regulations': {
+      id: '/regulations'
+      path: '/regulations'
+      fullPath: '/regulations'
+      preLoaderRoute: typeof RegulationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ImpactRoute: ImpactRoute,
+  RegulationsRoute: RegulationsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

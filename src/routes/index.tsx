@@ -7,7 +7,6 @@ import {
   ArrowLeft,
   AlertTriangle,
   Check,
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   CircleGauge,
@@ -290,21 +289,7 @@ const navItems = [
 ] as const;
 
 const getNavHref = (id: (typeof navItems)[number][1]) =>
-  id === "impact" ? "/impact" : `#${id}`;
-
-const regulationsData = [
-  { name: "Andhra Pradesh", pdf: "/documents/regulations/Andhra Pradesh - andhara.pdf" },
-  { name: "Delhi ", pdf: "/documents/regulations/Delhi - Year-2023_CAQM-Direction-No.-76.pdf" },
-  { name: "Goa", pdf: "/documents/regulations/Goa - Year-2023_Goa-State-Pollution-Control-Board-Dated-28th-March-2023.pdf" },
-  { name: "Gujarat", pdf: "/documents/regulations/Gujrat - Year-2023-Gujarat-Circular-26-10-2023.pdf" },
-  { name: "Haryana", pdf: "/documents/regulations/Haryana - Year-2020_Haryana_NCR_500_RECD_DFK.pdf" },
-  { name: "Jammu & Kashmir", pdf: "/documents/regulations/Jammu & Kashmir - Year-2021_JK_NCR_125_RECD_DFK.pdf" },
-  { name: "Karnataka", pdf: "/documents/regulations/Karnataka - Year-2024-Karnataka-Notification-12-jun-2024.pdf" },
-  { name: "Kerala", pdf: "/documents/regulations/Kerala - Kerala-SPCB-Order-Dated-15-05-2023.pdf" },
-  { name: "Maharashtra", pdf: "/documents/regulations/Maharashtra - Year-2023_DG-Set-Circular-02-06-2023.pdf" },
-  { name: "Odisha", pdf: "/documents/regulations/Odisha - 2023-Odisha-Circular-DG-Sets-15730-dtd.-6.10.2023-2.pdf" },
-  { name: "Tamil Nadu", pdf: "/documents/regulations/Tamil Nadu - Year-2021_Notice_Followup_RECD_DFK-1.pdf" },
-] as const;
+  id === "impact" ? "/impact" : id === "regulations" ? "/regulations" : `#${id}`;
 
 // Schematic component configuration for interactive viewer
 type SchematicComponent = {
@@ -838,7 +823,6 @@ function OmSolutionsHome() {
   const [selectedFuelApplication, setSelectedFuelApplication] = useState(0);
   const [selectedFuel, setSelectedFuel] = useState<(typeof fuelColumns)[number] | null>(null);
   const [dealershipModalOpen, setDealershipModalOpen] = useState(false);
-  const [mobileRegulationsOpen, setMobileRegulationsOpen] = useState(false);
   
   // Schematic viewer state
   const [schematicViewerOpen, setSchematicViewerOpen] = useState(false);
@@ -1032,44 +1016,7 @@ Message: ${message}`;
           {/* Desktop nav */}
           <nav className="order-2 ml-8 hidden flex-1 items-center justify-end gap-8 xl:flex">
             {navItems.map(([label, id]) => (
-              label === "Regulations" ? (
-                <div
-                  key={id}
-                  className="relative group/regulations"
-                >
-                  <button
-                    className="flex items-center gap-1 whitespace-nowrap text-[15px] font-bold capitalize tracking-normal text-slate-700 transition-colors duration-200 hover:text-emerald-700"
-                  >
-                    {label}
-                    <ChevronDown className="size-3 transition-transform duration-200 group-hover/regulations:rotate-180" />
-                  </button>
-                  
-                  {/* Dropdown */}
-                  <div className="absolute left-0 top-full opacity-0 invisible group-hover/regulations:opacity-100 group-hover/regulations:visible transition-all duration-300">
-                    <div className="relative w-[440px] overflow-hidden rounded-xl border border-white/15 bg-[#0a120f]/98 backdrop-blur-md shadow-[0_25px_80px_rgba(0,0,0,0.5)] mt-3">
-                      <div className="border-b border-white/12 bg-gradient-to-b from-white/[0.04] to-transparent px-6 py-5">
-                        <p className="text-sm font-extrabold uppercase tracking-[0.14em] text-white">Pollution Control Board Notifications</p>
-                        <p className="mt-2 text-xs leading-relaxed text-white/55">Official notifications and directions related to DG-set emission control and cleaner power generation.</p>
-                      </div>
-                      <div className="grid grid-cols-2 gap-px bg-white/8 p-5">
-                        {regulationsData.map((reg) => (
-                          <a
-                            key={reg.name}
-                            href={reg.pdf}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="group flex items-center justify-between gap-2 rounded-lg bg-[#0a120f] px-4 py-3 text-xs font-semibold text-white/75 transition-all duration-200 hover:bg-[#b6ff72]/12 hover:text-[#b6ff72]"
-                          >
-                            {reg.name}
-                            <ArrowRight className="size-3 opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100" />
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                id === "contact" ? (
+              id === "contact" ? (
                   <a
                     key={id}
                     href={getNavHref(id)}
@@ -1088,7 +1035,6 @@ Message: ${message}`;
                     {label}
                   </a>
                 )
-              )
             ))}
             <button
               onClick={() => setDealershipModalOpen(true)}
@@ -1162,38 +1108,7 @@ Message: ${message}`;
           <nav className="border-t border-white/15 bg-[#0d1713] px-4 pb-7 pt-5 sm:px-6 xl:hidden">
             <div className="flex flex-col gap-1">
               {navItems.map(([label, id]) => (
-                label === "Regulations" ? (
-                  <div key={id}>
-                    <button
-                      onClick={() => setMobileRegulationsOpen(!mobileRegulationsOpen)}
-                      className="flex w-full items-center justify-between border-b border-white/10 py-3 text-[13px] font-extrabold uppercase tracking-[0.11em] text-white/80 transition-colors hover:text-[#b6ff72]"
-                    >
-                      {label}
-                      <ChevronDown className={`size-4 transition-transform duration-200 ${mobileRegulationsOpen ? "rotate-180" : ""}`} />
-                    </button>
-                    {mobileRegulationsOpen && (
-                      <div className="border-b border-white/12 bg-gradient-to-b from-white/[0.03] to-transparent py-5 animate-in slide-in-from-top-2 duration-300">
-                        <p className="mb-4 px-2 text-xs font-semibold uppercase tracking-[0.12em] text-white/50">Pollution Control Board Notifications</p>
-                        <div className="flex flex-col gap-1">
-                          {regulationsData.map((reg) => (
-                            <a
-                              key={reg.name}
-                              href={reg.pdf}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={closeMenu}
-                              className="group flex items-center justify-between gap-2 rounded-lg px-4 py-3 text-xs font-semibold text-white/65 transition-colors hover:bg-[#b6ff72]/10 hover:text-[#b6ff72]"
-                            >
-                              {reg.name}
-                              <ArrowRight className="size-3 opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100" />
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  id === "contact" ? (
+                id === "contact" ? (
                     <a
                       key={id}
                       href={getNavHref(id)}
@@ -1212,7 +1127,6 @@ Message: ${message}`;
                       {label}
                     </a>
                   )
-                )
               ))}
               <button
                 onClick={() => {

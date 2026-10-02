@@ -1390,7 +1390,7 @@ Message: ${message}`;
                 Organizations featured in our cleaner energy installations.
               </p>
             </div>
-            <div className="-mx-5 flex items-center gap-2 overflow-x-auto px-5 pb-1 sm:-mx-8 sm:px-8 lg:mx-0 lg:gap-5 lg:overflow-visible lg:px-0 lg:pb-0">
+            <div className="grid grid-cols-2 items-center gap-x-3 gap-y-2 sm:grid-cols-4 lg:gap-5">
               {[
                 { name: "Sai Sound Service (Amane Engineers)", logo: saiSoundServiceLogo, href: "#gallery" },
                 { name: "Akwel Automotive India", logo: akwelLogo, href: "https://akwel-automotive.com/" },
@@ -1403,7 +1403,7 @@ Message: ${message}`;
                   target="_blank"
                   rel="noreferrer"
                   aria-label={`${partner.name} website`}
-                  className="flex min-h-[76px] min-w-[150px] shrink-0 flex-col items-center justify-center gap-1.5 rounded-lg px-3 py-2 transition-opacity hover:opacity-75 lg:min-w-0 lg:flex-1 lg:px-2"
+                  className="flex min-h-[76px] min-w-0 flex-col items-center justify-center gap-1.5 rounded-lg px-2 py-2 transition-opacity hover:opacity-75"
                 >
                   {partner.logo ? (
                     <img
@@ -1417,7 +1417,7 @@ Message: ${message}`;
                       }}
                     />
                   ) : null}
-                  <span className="text-center text-xs font-bold tracking-wide text-slate-700">{partner.name}</span>
+                  <span className="break-words text-center text-[11px] font-bold leading-tight tracking-wide text-slate-700 sm:text-xs">{partner.name}</span>
                 </a>
               ))}
             </div>

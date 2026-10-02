@@ -212,6 +212,10 @@ import marineEngineImage from "@/assets/img-185.jpg";
 import marineEngineImageTwo from "@/assets/img-186.jpg";
 import recdImage from "@/assets/image.png";
 import indiaOutline from "@/assets/india-outline.svg";
+import nevatiaSteelLogo from "@/assets/logos/Glossy Blue Nevatia Steel Logo.png";
+import akwelLogo from "@/assets/logos/AKWEL Efficient Automotive Solutions.png";
+import saiSoundServiceLogo from "@/assets/logos/Sai Sound Service Engineering Logo.png";
+import birlaTisyaLogo from "@/assets/logos/Birla Tisya Legacy Emblem.png";
 
 // Image Gallery — Birla Tisya, Bengaluru
 import galleryBirla1 from "@/assets/Image gallery/birla_tisya_bangaloore/WhatsApp Image 2026-05-21 at 4.16.09 PM.jpeg";
@@ -1368,20 +1372,20 @@ Message: ${message}`;
           </div>
         </section>
 
-        <section aria-label="Our mission partners" className="border-b border-slate-200 bg-white">
-          <div className="mx-auto grid max-w-[1440px] gap-5 px-5 py-7 sm:px-8 lg:grid-cols-[220px_1fr] lg:items-center lg:gap-8 lg:px-10">
+        <section aria-label="Our mission partners" className="relative z-20 rounded-t-[28px] border-b border-slate-200 bg-white shadow-[0_-10px_35px_rgba(15,23,42,0.08)]">
+          <div className="mx-auto grid max-w-[1440px] gap-3 px-5 py-5 sm:px-8 lg:grid-cols-[250px_minmax(0,1fr)] lg:items-center lg:gap-8 lg:px-10 lg:py-4">
             <div>
               <h2 className="text-lg font-extrabold tracking-tight text-slate-900">Our Mission Partners</h2>
-              <p className="mt-1 max-w-[220px] text-xs leading-relaxed text-slate-600">
+              <p className="mt-0.5 max-w-[250px] text-[11px] leading-snug text-slate-600">
                 Organizations featured in our cleaner energy installations.
               </p>
             </div>
-            <div className="grid grid-cols-2 items-center gap-x-5 gap-y-4 sm:grid-cols-4 lg:gap-x-8">
+            <div className="-mx-5 flex items-center gap-2 overflow-x-auto px-5 pb-1 sm:-mx-8 sm:px-8 lg:mx-0 lg:gap-5 lg:overflow-visible lg:px-0 lg:pb-0">
               {[
-                { name: "TATA", logo: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Tata_logo.svg", href: "https://www.tata.com/" },
-                { name: "Akwel Automotive India", logo: "https://commons.wikimedia.org/wiki/Special:FilePath/Logo_Akwel.svg", href: "https://akwel-automotive.com/" },
-                { name: "Birla Tisya", logo: "https://img.logokit.com/birlaestates.com", href: "https://www.birlaestates.com/" },
-                { name: "Nevatia Steels & Alloys", logo: "https://img.logokit.com/nevatiasteel.com", href: "https://www.nevatiasteel.com/" },
+                { name: "Sai Sound Service (Amane Engineers)", logo: saiSoundServiceLogo, href: "#gallery" },
+                { name: "Akwel Automotive India", logo: akwelLogo, href: "https://akwel-automotive.com/" },
+                { name: "Birla Tisya", logo: birlaTisyaLogo, href: "https://www.birlaestates.com/" },
+                { name: "Nevatia Steels & Alloys", logo: nevatiaSteelLogo, href: "https://www.nevatiasteel.com/" },
               ].map((partner) => (
                 <a
                   key={partner.name}
@@ -1389,19 +1393,21 @@ Message: ${message}`;
                   target="_blank"
                   rel="noreferrer"
                   aria-label={`${partner.name} website`}
-                  className="flex h-14 items-center justify-center rounded-lg px-2 transition-opacity hover:opacity-75"
+                  className="flex h-[58px] min-w-[118px] shrink-0 items-center justify-center rounded-lg px-3 transition-opacity hover:opacity-75 lg:min-w-0 lg:flex-1 lg:px-2"
                 >
-                  <img
-                    src={partner.logo}
-                    alt={partner.name}
-                    loading="eager"
-                    className="max-h-10 max-w-full object-contain"
-                    onError={(event) => {
-                      event.currentTarget.classList.add("hidden");
-                      event.currentTarget.nextElementSibling?.classList.remove("hidden");
-                    }}
-                  />
-                  <span className="hidden text-center text-sm font-bold tracking-wide text-slate-700">{partner.name}</span>
+                  {partner.logo ? (
+                    <img
+                      src={partner.logo}
+                      alt={partner.name}
+                      loading="eager"
+                      className="max-h-11 max-w-full object-contain"
+                      onError={(event) => {
+                        event.currentTarget.classList.add("hidden");
+                        event.currentTarget.nextElementSibling?.classList.remove("hidden");
+                      }}
+                    />
+                  ) : null}
+                  <span className={partner.logo ? "hidden text-center text-sm font-bold tracking-wide text-slate-700" : "text-center text-sm font-bold tracking-wide text-slate-700"}>{partner.name}</span>
                 </a>
               ))}
             </div>

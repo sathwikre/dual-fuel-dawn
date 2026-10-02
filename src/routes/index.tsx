@@ -40,7 +40,7 @@ function useScrollReveal(options?: {
   rootMargin?: string;
   once?: boolean;
 }) {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const threshold = options?.threshold ?? 0.1;
   const rootMargin = options?.rootMargin ?? "0px 0px -50px 0px";
@@ -51,7 +51,10 @@ function useScrollReveal(options?: {
     if (!element) return;
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
+      (entries) => {
+        const [entry] = entries;
+        if (!entry) return;
+
         if (entry.isIntersecting) {
           setIsVisible(true);
           if (once) {
@@ -281,9 +284,11 @@ const navItems = [
   ["Impact", "impact"],
   ["About", "team"],
   ["Regulations", "regulations"],
- 
   ["Join this Mission", "contact"],
 ] as const;
+
+const getNavHref = (id: (typeof navItems)[number][1]) =>
+  id === "impact" ? "/impact" : `#${id}`;
 
 const regulationsData = [
   { name: "Andhra Pradesh", pdf: "/documents/regulations/Andhra Pradesh - andhara.pdf" },
@@ -462,6 +467,12 @@ const teamMembers: TeamMember[] = [
     image: rahulImage,
     profileTitle: "Mechanical Engineer",
     experience: "10+ years of experience across machining and production processes, supply chain management, sales and business development, and alternative-fuel engine technology.",
+    expertise: [
+      "Machining & Production Management",
+      "Supply Chain Operations",
+      "Sales & Business Development",
+      "Alternative-Fuel Engine Applications",
+    ],
     expertiseGroups: [
       {
         title: "Manufacturing & Operations",
@@ -845,12 +856,18 @@ function OmSolutionsHome() {
       if (schematicViewerOpen && selectedComponent) {
         const currentIndex = schematicComponents.findIndex(c => c.id === selectedComponent.id);
         if (event.key === "ArrowLeft" && currentIndex > 0) {
-          setSelectedComponent(schematicComponents[currentIndex - 1]);
-          setComponentImageIndex(0);
+          const previousComponent = schematicComponents[currentIndex - 1];
+          if (previousComponent) {
+            setSelectedComponent(previousComponent);
+            setComponentImageIndex(0);
+          }
         }
         if (event.key === "ArrowRight" && currentIndex < schematicComponents.length - 1) {
-          setSelectedComponent(schematicComponents[currentIndex + 1]);
-          setComponentImageIndex(0);
+          const nextComponent = schematicComponents[currentIndex + 1];
+          if (nextComponent) {
+            setSelectedComponent(nextComponent);
+            setComponentImageIndex(0);
+          }
         }
       }
     };
@@ -1039,10 +1056,10 @@ Message: ${message}`;
                   </div>
                 </div>
               ) : (
-                label === "Get a Quote" || label === "Join this Mission" ? (
+                id === "contact" ? (
                   <a
                     key={id}
-                    href={id === "impact" ? "/impact" : `#${id}`}
+                    href={getNavHref(id)}
                     className="group hidden items-center gap-2 whitespace-nowrap rounded-full bg-emerald-700 px-5 py-2.5 text-[15px] font-bold capitalize tracking-normal text-white transition-all duration-200 hover:bg-emerald-800 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 sm:inline-flex"
                   >
                     {label}
@@ -1051,7 +1068,7 @@ Message: ${message}`;
                 ) : (
                   <a
                     key={id}
-                    href={id === "impact" ? "/impact" : `#${id}`}
+                    href={getNavHref(id)}
                     className="whitespace-nowrap text-[15px] font-bold capitalize tracking-normal text-slate-700 transition-colors duration-200 hover:text-emerald-700"
                   >
                     {label}
@@ -1162,10 +1179,10 @@ Message: ${message}`;
                     )}
                   </div>
                 ) : (
-                  label === "Get a Quote" || label === "Join this Mission" ? (
+                  id === "contact" ? (
                     <a
                       key={id}
-                      href={id === "impact" ? "/impact" : `#${id}`}
+                      href={getNavHref(id)}
                       onClick={closeMenu}
                       className="group mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#b6ff72] px-5 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.11em] text-[#0d1f16] transition-all duration-200 hover:bg-[#a3e065] hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b6ff72]"
                     >
@@ -1174,7 +1191,7 @@ Message: ${message}`;
                   ) : (
                     <a
                       key={id}
-                      href={`#${id}`}
+                      href={getNavHref(id)}
                       onClick={closeMenu}
                       className="border-b border-white/10 py-3 text-[13px] font-extrabold uppercase tracking-[0.11em] text-white/80 transition-colors hover:text-[#b6ff72]"
                     >
@@ -2587,8 +2604,11 @@ Message: ${message}`;
                     onClick={() => {
                       const currentIndex = schematicComponents.findIndex(c => c.id === selectedComponent.id);
                       if (currentIndex > 0) {
-                        setSelectedComponent(schematicComponents[currentIndex - 1]);
-                        setComponentImageIndex(0);
+                        const previousComponent = schematicComponents[currentIndex - 1];
+                        if (previousComponent) {
+                          setSelectedComponent(previousComponent);
+                          setComponentImageIndex(0);
+                        }
                       }
                     }}
                     disabled={schematicComponents.findIndex(c => c.id === selectedComponent.id) === 0}
@@ -2606,8 +2626,11 @@ Message: ${message}`;
                     onClick={() => {
                       const currentIndex = schematicComponents.findIndex(c => c.id === selectedComponent.id);
                       if (currentIndex < schematicComponents.length - 1) {
-                        setSelectedComponent(schematicComponents[currentIndex + 1]);
-                        setComponentImageIndex(0);
+                        const nextComponent = schematicComponents[currentIndex + 1];
+                        if (nextComponent) {
+                          setSelectedComponent(nextComponent);
+                          setComponentImageIndex(0);
+                        }
                       }
                     }}
                     disabled={schematicComponents.findIndex(c => c.id === selectedComponent.id) === schematicComponents.length - 1}
@@ -2829,7 +2852,10 @@ Message: ${message}`;
                     onClick={() => {
                       const currentIndex = teamMembers.findIndex(m => m.id === selectedTeamMember.id);
                       if (currentIndex > 0) {
-                        setSelectedTeamMember(teamMembers[currentIndex - 1]);
+                        const previousMember = teamMembers[currentIndex - 1];
+                        if (previousMember) {
+                          setSelectedTeamMember(previousMember);
+                        }
                       }
                     }}
                     disabled={teamMembers.findIndex(m => m.id === selectedTeamMember.id) === 0}
@@ -2847,7 +2873,10 @@ Message: ${message}`;
                     onClick={() => {
                       const currentIndex = teamMembers.findIndex(m => m.id === selectedTeamMember.id);
                       if (currentIndex < teamMembers.length - 1) {
-                        setSelectedTeamMember(teamMembers[currentIndex + 1]);
+                        const nextMember = teamMembers[currentIndex + 1];
+                        if (nextMember) {
+                          setSelectedTeamMember(nextMember);
+                        }
                       }
                     }}
                     disabled={teamMembers.findIndex(m => m.id === selectedTeamMember.id) === teamMembers.length - 1}

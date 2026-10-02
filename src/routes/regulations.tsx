@@ -122,7 +122,6 @@ const navLinks = [
   ["Home", "/#home"],
   ["Technology", "/#technology"],
   ["Impact", "/impact"],
-  ["Installations", "/#gallery"],
   ["About", "/#team"],
   ["Regulations", "/regulations"],
   ["Join This Mission", "/#contact"],

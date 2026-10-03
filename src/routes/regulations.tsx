@@ -31,7 +31,6 @@ export const STATE_REGULATIONS = [
   {
     id: "delhi",
     state: "DELHI",
-    landmark: "India Gate",
     description: "Mandates dual-fuel mode or approved RECDs for DG sets from 19 kW to 800 kW to run during GRAP restrictions.",
     image: "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=800&q=80",
     orderUrl: "/documents/regulations/Delhi - Year-2023_CAQM-Direction-No.-76.pdf",
@@ -39,7 +38,6 @@ export const STATE_REGULATIONS = [
   {
     id: "maharashtra",
     state: "MAHARASHTRA",
-    landmark: "Gateway of India",
     description: "Requires DG sets up to 800 kW (1000 kVA) to achieve ≥70% PM reduction via RECDs or dual-fuel gas conversion.",
     image: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=800&q=80",
     orderUrl: "/documents/regulations/Maharashtra - Year-2023_DG-Set-Circular-02-06-2023.pdf",
@@ -47,7 +45,6 @@ export const STATE_REGULATIONS = [
   {
     id: "gujarat",
     state: "GUJARAT",
-    landmark: "Statue of Unity",
     description: "Mandates ≥70% PM reduction or shifting to dual-fuel gas operation for DG sets of 125 kVA and above.",
     image: gujaratImage,
     orderUrl: "/documents/regulations/Gujrat - Year-2023-Gujarat-Circular-26-10-2023.pdf",
@@ -55,7 +52,6 @@ export const STATE_REGULATIONS = [
   {
     id: "tamil-nadu",
     state: "TAMIL NADU",
-    landmark: "Meenakshi Temple",
     description: "Mandates DG sets of 61 kW to 800 kW to install certified RECDs or retrofit for dual-fuel gas operation.",
     image: tamilNaduImage,
     orderUrl: "/documents/regulations/Tamil Nadu - Year-2021_Notice_Followup_RECD_DFK-1.pdf",
@@ -63,7 +59,6 @@ export const STATE_REGULATIONS = [
   {
     id: "odisha",
     state: "ODISHA",
-    landmark: "Konark Sun Temple",
     description: "Enforces ≥70% PM capture efficiency or transition to gas-based power for DG sets of 125 kVA and above.",
     image: odishaImage,
     orderUrl: "/documents/regulations/Odisha - 2023-Odisha-Circular-DG-Sets-15730-dtd.-6.10.2023-2.pdf",
@@ -71,7 +66,6 @@ export const STATE_REGULATIONS = [
   {
     id: "karnataka",
     state: "KARNATAKA",
-    landmark: "Mysore Palace",
     description: "Enforces approved RECDs or dual-fuel systems for in-use DG sets from 61 kW to 800 kW older than 5 years.",
     image: karnatakaImage,
     orderUrl: "/documents/regulations/Karnataka - Year-2024-Karnataka-Notification-12-jun-2024.pdf",
@@ -79,7 +73,6 @@ export const STATE_REGULATIONS = [
   {
     id: "andhra-pradesh",
     state: "ANDHRA PRADESH",
-    landmark: "Tirumala Venkateswara Temple",
     description: "Enforces ≥70% PM-reduction devices or shifting to gas-based power for DG sets of 125 kVA and above.",
     image: andhraPradeshImage,
     orderUrl: "/documents/regulations/Andhra Pradesh - andhara.pdf",
@@ -87,7 +80,6 @@ export const STATE_REGULATIONS = [
   {
     id: "goa",
     state: "GOA",
-    landmark: "Basilica of Bom Jesus",
     description: "Requires RECD retrofitting or partial gas conversion for operational DG sets from 125 kVA to 1000 kVA.",
     image: goaImage,
     orderUrl: "/documents/regulations/Goa - Year-2023_Goa-State-Pollution-Control-Board-Dated-28th-March-2023.pdf",
@@ -95,7 +87,6 @@ export const STATE_REGULATIONS = [
   {
     id: "haryana",
     state: "HARYANA",
-    landmark: "Brahma Sarovar & Kurukshetra",
     description: "Mandates ≥70% PM-capturing equipment or dual-fuel gas kits on DG sets of 500 kVA and above.",
     image: haryanaImage,
     orderUrl: "/documents/regulations/Haryana - Year-2020_Haryana_NCR_500_RECD_DFK.pdf",
@@ -103,7 +94,6 @@ export const STATE_REGULATIONS = [
   {
     id: "jammu-kashmir",
     state: "JAMMU & KASHMIR",
-    landmark: "Dal Lake, Srinagar",
     description: "Requires DG sets of 125 kVA and above across J&K to adopt RECDs or convert to gas operation.",
     image: jammuKashmirImage,
     orderUrl: "/documents/regulations/Jammu & Kashmir - Year-2021_JK_NCR_125_RECD_DFK.pdf",
@@ -111,7 +101,6 @@ export const STATE_REGULATIONS = [
   {
     id: "kerala",
     state: "KERALA",
-    landmark: "Alleppey Backwaters & Padmanabhaswamy",
     description: "Directs DG sets of 125 kVA and above to install ≥70% PM RECDs or convert to partial gas usage.",
     image: keralaImage,
     orderUrl: "/documents/regulations/Kerala - Kerala-SPCB-Order-Dated-15-05-2023.pdf",
@@ -316,9 +305,6 @@ function RegulationsPage() {
                 <h2 className="break-words text-[13px] font-extrabold uppercase leading-tight text-slate-900 sm:text-lg sm:tracking-[.04em]">
                   {region.state}
                 </h2>
-                <p className="mt-0.5 text-[10px] font-semibold leading-tight text-slate-800 sm:mt-1 sm:text-sm sm:font-medium sm:text-emerald-800">
-                  {region.landmark}
-                </p>
                 <p className="mt-1.5 flex-1 text-[9px] leading-[1.2] text-slate-700 sm:mt-4 sm:text-sm sm:leading-6 sm:text-slate-600">
                   {region.description}
                 </p>

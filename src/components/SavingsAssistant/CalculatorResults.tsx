@@ -58,12 +58,12 @@ export function CalculatorResults({ inputs, results, onReset, onJoinMission }: P
         <div className="overflow-x-auto rounded-[4px] border border-white/60">
           <table className="w-full min-w-[540px] table-fixed border-collapse text-center text-white">
             <thead>
-              <tr className="text-sm font-extrabold sm:text-base">
+              <tr className="text-sm font-extrabold text-[oklch(0.72_0.16_155)] sm:text-base">
                 <th colSpan={2} className="border border-white/50 px-2 py-2">Fuel Cost Savings</th>
                 <th colSpan={2} className="border border-white/50 px-2 py-2">Diesel Consumption Reduction</th>
                 <th colSpan={2} className="border border-white/50 px-2 py-2">CO₂ Emissions Reduction</th>
               </tr>
-              <tr className="text-xs font-bold sm:text-sm">
+              <tr className="text-xs font-bold text-[oklch(0.72_0.16_155)] sm:text-sm">
                 <th className="border border-white/50 px-2 py-2">INR / Year</th><th className="border border-white/50 px-2 py-2">% Reduction</th>
                 <th className="border border-white/50 px-2 py-2">Litres / Year</th><th className="border border-white/50 px-2 py-2">% Reduction</th>
                 <th className="border border-white/50 px-2 py-2">Tonnes CO₂ / Year</th><th className="border border-white/50 px-2 py-2">% Reduction</th>

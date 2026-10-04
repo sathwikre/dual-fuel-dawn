@@ -208,7 +208,7 @@ import marineDetailImageTwo from "@/assets/img-181.jpg";
 import marineEngineImage from "@/assets/img-185.jpg";
 import marineEngineImageTwo from "@/assets/img-186.jpg";
 import recdImage from "@/assets/image.png";
-import indiaOutline from "@/assets/india-outline.svg";
+import indiaMapBadgeImage from "@/assets/Image gallery/birla_tisya_bangaloore/image.png";
 import nevatiaSteelLogo from "@/assets/logos/Glossy Blue Nevatia Steel Logo.png";
 import akwelLogo from "@/assets/logos/AKWEL Efficient Automotive Solutions.png";
 import saiSoundServiceLogo from "@/assets/logos/image.png";
@@ -1326,7 +1326,7 @@ Message: ${message}`;
               </div>
               <ArrowRight aria-hidden="true" className="mx-auto size-5 rotate-90 text-emerald-300 sm:rotate-0" />
               <div className="flex items-center gap-3">
-                <span className="grid size-11 shrink-0 place-items-center rounded-full border-2 border-emerald-300 bg-emerald-500/30 text-emerald-200"><img src={indiaOutline} alt="" className="size-6 brightness-0 invert" /></span>
+                <span className="grid size-11 shrink-0 place-items-center rounded-full border-2 border-emerald-300 bg-emerald-500/30 text-emerald-200"><img src={indiaMapBadgeImage} alt="" className="size-8 rounded-full object-cover" /></span>
                 <div><h3 className="text-sm font-extrabold uppercase leading-tight [text-shadow:0_1px_5px_#000] sm:text-base">A Stronger<br className="hidden sm:block" /> India</h3><p className="mt-1 text-xs font-semibold leading-snug text-white sm:text-sm">Sustainable growth through cleaner, smarter energy solutions.</p></div>
               </div>
             </div>

@@ -1299,9 +1299,9 @@ Message: ${message}`;
         <section aria-label="Our mission partners" className="relative z-20 rounded-t-[28px] border-b border-slate-200 bg-white shadow-[0_-10px_35px_rgba(15,23,42,0.08)]">
           <div className="mx-auto grid max-w-[1440px] gap-3 px-5 py-5 sm:px-8 lg:grid-cols-[250px_minmax(0,1fr)] lg:items-center lg:gap-8 lg:px-10 lg:py-4">
             <div>
-              <h2 className="text-xl font-black tracking-tight text-slate-900">Our Mission Partners</h2>
+              <h2 className="text-xl font-black tracking-tight text-slate-900">Partners in a Cleaner Future</h2>
               <p className="mt-1 max-w-[250px] text-[13px] font-semibold leading-snug text-slate-900">
-                Organizations featured in our cleaner energy installations.
+               Together with our partners, we are building a cleaner and more sustainable future.
               </p>
             </div>
             <div className="grid grid-cols-2 items-center gap-x-3 gap-y-2 sm:grid-cols-4 lg:gap-5">

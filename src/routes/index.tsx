@@ -2573,33 +2573,51 @@ Message: ${message}`;
                     className="max-h-[60vh] max-w-full object-contain"
                   />
                   {/* Hotspots */}
-                  {schematicComponents.map((component) => (
-                    <button
-                      key={component.id}
-                      type="button"
-                      onClick={() => {
-                        setSelectedComponent(component);
-                        setComponentImageIndex(0);
-                      }}
-                      onMouseEnter={() => setHoveredComponent(component.id)}
-                      onMouseLeave={() => setHoveredComponent(null)}
-                      className="absolute cursor-pointer focus-visible:outline-none"
-                      style={{
-                        left: `${component.hotspot.x}%`,
-                        top: `${component.hotspot.y}%`,
-                        width: `${component.hotspot.width}%`,
-                        height: `${component.hotspot.height}%`,
-                      }}
-                      aria-label={`View ${component.name}`}
-                    >
-                      {/* Tooltip */}
-                      {hoveredComponent === component.id && (
-                        <div className="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-[#0d1410] border border-[#b6ff72]/30 px-3 py-1.5 text-sm font-semibold text-white shadow-lg">
-                          {component.name}
-                        </div>
-                      )}
-                    </button>
-                  ))}
+                  {schematicComponents.map((component) => {
+                    const hotspotKey = `${component.id}-${component.hotspot.x}-${component.hotspot.y}`;
+                    const tooltipPlacement = component.hotspot.y > 52 ? "bottom-full mb-2" : "top-full mt-2";
+                    const tooltipAlignment = component.hotspot.x < 25
+                      ? "left-0"
+                      : component.hotspot.x > 75
+                        ? "right-0"
+                        : "left-1/2 -translate-x-1/2";
+
+                    return (
+                      <button
+                        key={hotspotKey}
+                        type="button"
+                        onClick={() => {
+                          setSelectedComponent(component);
+                          setComponentImageIndex(0);
+                        }}
+                        onMouseEnter={() => setHoveredComponent(hotspotKey)}
+                        onMouseLeave={() => setHoveredComponent(null)}
+                        onFocus={() => setHoveredComponent(hotspotKey)}
+                        onBlur={() => setHoveredComponent(null)}
+                        className={`absolute cursor-pointer focus-visible:outline-none ${hoveredComponent === hotspotKey ? "z-30" : ""}`}
+                        style={{
+                          left: `${component.hotspot.x}%`,
+                          top: `${component.hotspot.y}%`,
+                          width: `${component.hotspot.width}%`,
+                          height: `${component.hotspot.height}%`,
+                        }}
+                        aria-label={`View ${component.name}`}
+                      >
+                        {hoveredComponent === hotspotKey && (
+                          <div className={`pointer-events-none absolute ${tooltipPlacement} ${tooltipAlignment} w-56 max-w-[calc(100vw-2rem)] overflow-hidden rounded-lg border border-[#b6ff72]/30 bg-[#0d1410] text-left text-sm font-semibold text-white shadow-lg`}>
+                            {component.image && (
+                              <img
+                                src={component.image}
+                                alt=""
+                                className="h-36 w-full bg-white object-contain p-1"
+                              />
+                            )}
+                            <span className="block px-3 py-2">{component.name}</span>
+                          </div>
+                        )}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             )}

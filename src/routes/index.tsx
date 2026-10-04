@@ -200,7 +200,7 @@ import generatorSetImage from "@/assets/applications/Generator Sets.png";
 import tractorsEarthMoversImage from "@/assets/applications/Tractors & Earth Movers.png";
 import quarryExcavatorImage from "@/assets/applications/Quarry Excavator at Work.png";
 import harvesterImage from "@/assets/applications/Harvester.jpg";
-import borewellImage from "@/assets/applications/Diesel Irrigation Pump in Lush Fields.png";
+import borewellImage from "@/assets/borewell.jpeg";
 import compressorImage from "@/assets/applications/Diesel Compressor at Construction Site.png";
 import gasSystemImage from "@/assets/img-169.jpg";
 import marineDetailImage from "@/assets/img-180.jpg";

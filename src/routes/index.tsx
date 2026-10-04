@@ -787,12 +787,12 @@ function KitStatCard({ label, value, icon: Icon, delay }: { label: string; value
       <div className="kit-stat-card kit-stat-card-hover group rounded-xl p-4 h-full flex flex-col">
         <div className="absolute inset-y-0 left-0 w-[3px] rounded-l-xl bg-signal/0 transition-colors duration-300 group-hover:bg-signal/80" aria-hidden="true" />
         <div className="flex items-start justify-between gap-3">
-          <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">{label}</p>
+          <p className="font-sans text-xs font-bold uppercase tracking-[0.08em] text-foreground/85">{label}</p>
           <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors duration-300 group-hover:bg-signal/15">
             <Icon className="size-4" strokeWidth={1.75} />
           </span>
         </div>
-        <p className="mt-3 text-sm font-semibold leading-snug text-foreground">{value}</p>
+        <p className="mt-3 font-sans text-base font-bold leading-snug text-foreground">{value}</p>
       </div>
     </ScrollReveal>
   );

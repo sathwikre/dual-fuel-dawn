@@ -211,7 +211,7 @@ import recdImage from "@/assets/image.png";
 import indiaOutline from "@/assets/india-outline.svg";
 import nevatiaSteelLogo from "@/assets/logos/Glossy Blue Nevatia Steel Logo.png";
 import akwelLogo from "@/assets/logos/AKWEL Efficient Automotive Solutions.png";
-import saiSoundServiceLogo from "@/assets/logos/Sai Sound Service Engineering Logo.png";
+import saiSoundServiceLogo from "@/assets/logos/image.png";
 import birlaTisyaLogo from "@/assets/logos/Birla Tisya Legacy Emblem.png";
 
 // Image Gallery — Birla Tisya, Bengaluru
@@ -1234,9 +1234,9 @@ Message: ${message}`;
               <p className="mt-3 text-base font-bold sm:text-lg">Cleaner Engines. Greener Cities. A Healthier Tomorrow.</p>
               <p className="mt-2 max-w-xl text-sm leading-relaxed text-slate-700 sm:text-base">OM Solutions enables industries, businesses and communities<br className="hidden sm:block" /> to reduce emissions and fuel costs with our proven dual-fuel technology.</p>
               <div className="mt-6 grid max-w-[560px] grid-cols-3 gap-2 sm:max-w-[760px] sm:gap-3 lg:max-w-[880px]">
-                <div className="rounded-xl bg-white/90 p-3 shadow-lg ring-1 ring-white/80 sm:p-4"><div className="flex items-center gap-2 text-emerald-700"><Leaf className="size-7 shrink-0"/><strong className="text-xl sm:whitespace-nowrap sm:text-2xl">31.6 tonne</strong></div><p className="mt-1 text-[10px] font-extrabold uppercase">CO₂ saved</p><p className="mt-1 text-[9px] leading-tight text-slate-600">Equivalent to planting 155,000 trees</p></div>
-                <div className="rounded-xl bg-white/90 p-3 shadow-lg ring-1 ring-white/80 sm:p-4"><div className="flex items-center gap-2 text-emerald-700"><span className="text-3xl font-bold leading-none">₹</span><strong className="text-xl sm:whitespace-nowrap sm:text-2xl">50 Lakh</strong></div><p className="mt-1 text-[10px] font-extrabold uppercase">Cost saved</p><p className="mt-1 text-[9px] leading-tight text-slate-600">Lower fuel cost for our partners</p></div>
-                <div className="rounded-xl bg-white/90 p-3 shadow-lg ring-1 ring-white/80 sm:p-4"><div className="flex items-center gap-2 text-emerald-700"><Fuel className="size-7 shrink-0"/><strong className="text-xl sm:whitespace-nowrap sm:text-2xl">58K Ltr</strong></div><p className="mt-1 text-[10px] font-extrabold uppercase">Diesel saved</p><p className="mt-1 text-[9px] leading-tight text-slate-600">Across 20 installations in India</p></div>
+                <div className="rounded-xl bg-white/90 p-3 shadow-lg ring-1 ring-white/80 sm:p-4"><div className="flex items-center gap-2 text-emerald-700"><Leaf className="size-7 shrink-0"/><strong className="text-xl sm:whitespace-nowrap sm:text-2xl">31.6 tonne</strong></div><p className="mt-1 text-sm font-extrabold uppercase">CO₂ saved</p><p className="mt-1 text-xs font-semibold leading-tight text-slate-600">Equivalent to planting 155,000 trees</p></div>
+                <div className="rounded-xl bg-white/90 p-3 shadow-lg ring-1 ring-white/80 sm:p-4"><div className="flex items-center gap-2 text-emerald-700"><span className="text-3xl font-bold leading-none">₹</span><strong className="text-xl sm:whitespace-nowrap sm:text-2xl">50 Lakh</strong></div><p className="mt-1 text-sm font-extrabold uppercase">Cost saved</p><p className="mt-1 text-xs font-semibold leading-tight text-slate-600">Lower fuel cost for our partners</p></div>
+                <div className="rounded-xl bg-white/90 p-3 shadow-lg ring-1 ring-white/80 sm:p-4"><div className="flex items-center gap-2 text-emerald-700"><Fuel className="size-7 shrink-0"/><strong className="text-xl sm:whitespace-nowrap sm:text-2xl">58K Ltr</strong></div><p className="mt-1 text-sm font-extrabold uppercase">Diesel saved</p><p className="mt-1 text-xs font-semibold leading-tight text-slate-600">Across 20 installations in India</p></div>
               </div>
               <div className="mt-5 flex flex-wrap gap-3">
               <a
@@ -1324,7 +1324,7 @@ Message: ${message}`;
                       src={partner.logo}
                       alt={partner.name}
                       loading="eager"
-                      className="max-h-9 max-w-full object-contain"
+                      className={`${partner.name.startsWith("Sai Sound Service") ? "max-h-16" : "max-h-9"} max-w-full object-contain`}
                       onError={(event) => {
                         event.currentTarget.classList.add("hidden");
                         event.currentTarget.nextElementSibling?.classList.remove("hidden");

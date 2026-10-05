@@ -1634,7 +1634,7 @@ Message: ${message}`;
                             </div>
                             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground font-sans">LPG dual-fuel systems enable diesel engines to operate with LPG as the alternate fuel, offering cost savings and reduced emissions for stationary and mobile applications.</p>
                             <div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">
-                              {["Cost-effective fuel alternative with high availability", "Clean combustion with lower particulate emissions", "Suitable for generator sets and industrial applications", "Easy integration with existing diesel engines", "with LPG, the diesel replacement is lower than PNG"].map((point) => (
+                              {["Cost-effective fuel alternative with high availability", "Suitable for generator sets and industrial applications", "Easy integration with existing diesel engines"].map((point) => (
                                 <div key={point} className="flex gap-2 text-xs leading-snug font-sans">
                                   <span className="mt-0.5 grid size-4 shrink-0 place-items-center rounded-full bg-orange-500/10 text-orange-500"><Check className="size-2.5 stroke-[3]" /></span>
                                   {point}

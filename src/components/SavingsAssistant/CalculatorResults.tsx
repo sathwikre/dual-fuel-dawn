@@ -1,5 +1,6 @@
 import type { CalculatorInputs, CalculatorResults as Results } from "./calculatorUtils";
 import { ANNUAL_OPERATING_MONTHS, formatINR } from "./calculatorUtils";
+import { Fuel, IndianRupee, Leaf } from "lucide-react";
 
 interface Props {
   inputs: CalculatorInputs;
@@ -24,10 +25,103 @@ export function CalculatorResults({ inputs, results, onReset, onJoinMission }: P
     inputs.hoursPerMonth *
     ANNUAL_OPERATING_MONTHS;
   const co2ReductionPct = dieselCO2KgPerHr > 0 ? (co2SavingKgPerHr / dieselCO2KgPerHr) * 100 : 0;
+  // Shared top-table figures: lower summary cards must use these exact displayed values.
+  const annualFuelCostSavings = Math.ceil(savingPerYear);
+  const annualDieselReduction = Math.ceil(annualDieselSavingLitres);
+  const annualCO2ReductionTonnes = Math.ceil(annualCO2SavingTonnes);
+  const fuelCostReductionPercent = Math.ceil(costReductionPct);
+  const dieselReductionPercent = Math.ceil(dieselReplacementPct);
+  const co2ReductionPercent = Math.ceil(co2ReductionPct);
+  const summaryCards = [
+    {
+      title: "Fuel Cost Savings",
+      Icon: IndianRupee,
+      percent: fuelCostReductionPercent,
+      values: [
+        {
+          period: "Hourly",
+          value: results.savingPerHour,
+          unit: "/hr",
+          currency: true,
+        },
+        {
+          period: "Monthly",
+          value: results.savingPerMonth,
+          unit: "/month",
+          currency: true,
+        },
+        {
+          period: "Annually",
+          value: annualFuelCostSavings,
+          unit: "/year",
+          currency: true,
+          compact: true,
+        },
+      ],
+    },
+    {
+      title: "Diesel Consumption Reduction",
+      Icon: Fuel,
+      percent: dieselReductionPercent,
+      values: [
+        {
+          period: "Hourly",
+          value: dieselConsumptionLPerHr - dfDieselConsumptionLPerHr,
+          unit: "L/hr",
+          currency: false,
+        },
+        {
+          period: "Monthly",
+          value: (dieselConsumptionLPerHr - dfDieselConsumptionLPerHr) * inputs.hoursPerMonth,
+          unit: "L/month",
+          currency: false,
+        },
+        {
+          period: "Annually",
+          value: annualDieselReduction,
+          unit: "L/year",
+          currency: false,
+        },
+      ],
+    },
+    {
+      title: "CO₂ Emissions Reduction",
+      Icon: Leaf,
+      percent: co2ReductionPercent,
+      values: [
+        {
+          period: "Hourly",
+          value: co2SavingKgPerHr,
+          unit: "kg CO₂/hr",
+          currency: false,
+        },
+        {
+          period: "Monthly",
+          value: results.monthlyCO2SavingKg,
+          unit: "kg CO₂/month",
+          currency: false,
+        },
+        {
+          period: "Annually",
+          value: annualCO2ReductionTonnes,
+          unit: `t CO₂/year · ${(annualCO2ReductionTonnes * 1000).toLocaleString("en-IN")} kg/year`,
+          currency: false,
+        },
+      ],
+    },
+  ];
+
+  const formatSummaryValue = (value: number, currency: boolean, compact = false) => {
+    if (!Number.isFinite(value)) return "—";
+    if (currency) {
+      return compact ? formatINR(value, true).replace(/ L$/, " Lakh") : formatINR(value);
+    }
+    return value.toLocaleString("en-IN", { maximumFractionDigits: 2 });
+  };
 
   return (
     <div className="calc-results flex h-full min-h-0 flex-col">
-      <div className="flex-1 min-h-0 overflow-hidden px-3 py-3 sm:px-7 sm:py-5">
+      <div className="flex-1 min-h-0 overflow-y-auto px-3 py-3 sm:px-7 sm:py-5">
         <div className="mb-3 flex flex-wrap items-end justify-between gap-2 border-b border-white/15 pb-3 sm:mb-6 sm:gap-4 sm:pb-5">
           <div>
             <p className="text-[10px] uppercase tracking-[0.14em] text-[oklch(0.72_0.16_155)] sm:text-[11px]">
@@ -81,22 +175,22 @@ export function CalculatorResults({ inputs, results, onReset, onJoinMission }: P
             <tbody>
               <tr className="bg-white text-[11px] font-extrabold text-slate-900 sm:text-lg">
                 <td className="break-words border border-slate-500 px-0.5 py-2 font-bold sm:px-2">
-                  {formatINR(Math.ceil(savingPerYear), true).replace(/ L$/, " Lakh")}
+                  {formatINR(annualFuelCostSavings, true).replace(/ L$/, " Lakh")}
                 </td>
                 <td className="break-words border border-slate-500 px-0.5 py-2 sm:px-2">
-                  {Math.ceil(costReductionPct)}
+                  {fuelCostReductionPercent}
                 </td>
                 <td className="break-words border border-slate-500 px-0.5 py-2 sm:px-2">
-                  {Math.ceil(annualDieselSavingLitres).toLocaleString("en-IN")}
+                  {annualDieselReduction.toLocaleString("en-IN")}
                 </td>
                 <td className="break-words border border-slate-500 px-0.5 py-2 sm:px-2">
-                  {Math.ceil(dieselReplacementPct)}
+                  {dieselReductionPercent}
                 </td>
                 <td className="break-words border border-slate-500 px-0.5 py-2 sm:px-2">
-                  {Math.ceil(annualCO2SavingTonnes)}
+                  {annualCO2ReductionTonnes}
                 </td>
                 <td className="break-words border border-slate-500 px-0.5 py-2 sm:px-2">
-                  {Math.ceil(co2ReductionPct)}
+                  {co2ReductionPercent}
                 </td>
               </tr>
             </tbody>
@@ -107,20 +201,20 @@ export function CalculatorResults({ inputs, results, onReset, onJoinMission }: P
             {
               title: "Fuel Cost Savings",
               amountLabel: "INR / Year",
-              amount: formatINR(Math.ceil(savingPerYear), true).replace(/ L$/, " Lakh"),
-              percent: Math.ceil(costReductionPct),
+              amount: formatINR(annualFuelCostSavings, true).replace(/ L$/, " Lakh"),
+              percent: fuelCostReductionPercent,
             },
             {
               title: "Diesel Consumption Reduction",
               amountLabel: "Litres / Year",
-              amount: Math.ceil(annualDieselSavingLitres).toLocaleString("en-IN"),
-              percent: Math.ceil(dieselReplacementPct),
+              amount: annualDieselReduction.toLocaleString("en-IN"),
+              percent: dieselReductionPercent,
             },
             {
               title: "CO₂ Emissions Reduction",
               amountLabel: "Tonnes CO₂ / Year",
-              amount: Math.ceil(annualCO2SavingTonnes).toLocaleString("en-IN"),
-              percent: Math.ceil(co2ReductionPct),
+              amount: annualCO2ReductionTonnes.toLocaleString("en-IN"),
+              percent: co2ReductionPercent,
             },
           ].map(({ title, amountLabel, amount, percent }) => (
             <section
@@ -141,6 +235,53 @@ export function CalculatorResults({ inputs, results, onReset, onJoinMission }: P
             </section>
           ))}
         </div>
+        <section
+          className="mt-6 border-t border-white/15 pt-5"
+          aria-label="Hourly, monthly and annual savings"
+        >
+          <h4 className="mb-3 text-sm font-extrabold uppercase tracking-[0.12em] text-[oklch(0.72_0.16_155)]">
+            Savings Summary
+          </h4>
+          <div className="grid gap-3 sm:grid-cols-3">
+            {summaryCards.map(({ title, Icon, percent, values }) => (
+              <article
+                key={title}
+                className="group rounded-lg border border-white/15 bg-white/[0.04] p-4 shadow-[0_8px_22px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[oklch(0.72_0.16_155)/0.55]"
+              >
+                <div className="mb-4 flex items-center gap-2.5">
+                  <span className="grid size-9 shrink-0 place-items-center rounded-md border border-[oklch(0.72_0.16_155/0.35)] bg-[oklch(0.72_0.16_155/0.1)] text-[oklch(0.72_0.16_155)]">
+                    <Icon className="size-4" aria-hidden="true" />
+                  </span>
+                  <h5 className="text-xs font-extrabold uppercase leading-snug tracking-[0.06em] text-white sm:text-sm">
+                    {title}
+                  </h5>
+                </div>
+                <div className="grid grid-cols-3 gap-2">
+                  {values.map((item) => (
+                    <div key={item.period} className="min-w-0">
+                      <p className="text-[9px] font-bold uppercase tracking-wide text-white/55 sm:text-[10px]">
+                        {item.period}
+                      </p>
+                      <p className="mt-1 break-words text-xs font-black leading-tight text-[oklch(0.72_0.16_155)] sm:text-sm">
+                        {formatSummaryValue(
+                          item.value,
+                          item.currency,
+                          "compact" in item && item.compact,
+                        )}
+                      </p>
+                      <p className="mt-1 text-[9px] font-semibold leading-tight text-white/45 sm:text-[10px]">
+                        {item.unit}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-3 border-t border-white/10 pt-2 text-[10px] font-bold text-white/55">
+                  {percent}% reduction
+                </p>
+              </article>
+            ))}
+          </div>
+        </section>
       </div>
       <div className="shrink-0 border-t border-white/15 px-5 py-4 sm:px-7">
         <div className="grid gap-3 sm:grid-cols-2">

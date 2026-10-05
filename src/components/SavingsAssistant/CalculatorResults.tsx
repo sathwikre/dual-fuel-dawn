@@ -173,23 +173,23 @@ export function CalculatorResults({ inputs, results, onReset, onJoinMission }: P
               </tr>
             </thead>
             <tbody>
-              <tr className="bg-white text-[11px] font-extrabold text-slate-900 sm:text-lg">
-                <td className="break-words border border-slate-500 px-0.5 py-2 font-bold sm:px-2">
+              <tr className="bg-transparent text-[11px] font-extrabold text-white sm:text-lg">
+                <td className="break-words border border-white/50 px-0.5 py-2 font-bold sm:px-2">
                   {formatINR(annualFuelCostSavings, true).replace(/ L$/, " Lakh")}
                 </td>
-                <td className="break-words border border-slate-500 px-0.5 py-2 sm:px-2">
+                <td className="break-words border border-white/50 px-0.5 py-2 sm:px-2">
                   {fuelCostReductionPercent}
                 </td>
-                <td className="break-words border border-slate-500 px-0.5 py-2 sm:px-2">
+                <td className="break-words border border-white/50 px-0.5 py-2 sm:px-2">
                   {annualDieselReduction.toLocaleString("en-IN")}
                 </td>
-                <td className="break-words border border-slate-500 px-0.5 py-2 sm:px-2">
+                <td className="break-words border border-white/50 px-0.5 py-2 sm:px-2">
                   {dieselReductionPercent}
                 </td>
-                <td className="break-words border border-slate-500 px-0.5 py-2 sm:px-2">
+                <td className="break-words border border-white/50 px-0.5 py-2 sm:px-2">
                   {annualCO2ReductionTonnes}
                 </td>
-                <td className="break-words border border-slate-500 px-0.5 py-2 sm:px-2">
+                <td className="break-words border border-white/50 px-0.5 py-2 sm:px-2">
                   {co2ReductionPercent}
                 </td>
               </tr>

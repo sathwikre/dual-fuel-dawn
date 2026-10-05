@@ -214,6 +214,8 @@ import nevatiaSteelLogo from "@/assets/logos/Glossy Blue Nevatia Steel Logo.png"
 import akwelLogo from "@/assets/logos/AKWEL Efficient Automotive Solutions.png";
 import saiSoundServiceLogo from "@/assets/logos/image.png";
 import birlaTisyaLogo from "@/assets/logos/Birla Tisya Legacy Emblem.png";
+import maxgenEnergyLogo from "@/assets/logos/maxgen energy.png";
+import ankurAppliancesLogo from "@/assets/logos/ankur appliances.png";
 
 // Image Gallery — Birla Tisya, Bengaluru
 import galleryBirla1 from "@/assets/Image gallery/birla_tisya_bangaloore/WhatsApp Image 2026-05-21 at 4.16.09 PM.jpeg";
@@ -1237,12 +1239,14 @@ Message: ${message}`;
                Together with our partners, we are building a cleaner and more sustainable future.
               </p>
             </div>
-            <div className="grid grid-cols-2 items-center gap-x-3 gap-y-2 sm:grid-cols-4 lg:gap-5">
+            <div className="grid grid-cols-2 items-center gap-x-3 gap-y-2 sm:grid-cols-3 lg:grid-cols-6 lg:gap-5">
               {[
                 { name: "Sai Sound Service (Amane Engineers)", logo: saiSoundServiceLogo },
                 { name: "Akwel Automotive India", logo: akwelLogo },
                 { name: "Birla Tisya", logo: birlaTisyaLogo },
                 { name: "Nevatia Steels & Alloys", logo: nevatiaSteelLogo },
+                { name: "Maxgen Energy", logo: maxgenEnergyLogo },
+                { name: "Ankur Appliances", logo: ankurAppliancesLogo },
               ].map((partner) => (
                 <div
                   key={partner.name}

@@ -70,7 +70,7 @@ export function CalculatorResults({ inputs, results, onReset, onJoinMission }: P
               </tr>
             </thead>
             <tbody><tr className="bg-white text-[11px] font-extrabold text-slate-900 sm:text-lg">
-              <td className="break-words border border-slate-500 px-0.5 py-2 sm:px-2">{formatINR(Math.ceil(savingPerYear), true).slice(1)}</td>
+              <td className="break-words border border-slate-500 px-0.5 py-2 font-bold sm:px-2">{formatINR(Math.ceil(savingPerYear), true).replace(/ L$/, " Lakh")}</td>
               <td className="break-words border border-slate-500 px-0.5 py-2 sm:px-2">{Math.ceil(costReductionPct)}</td>
               <td className="break-words border border-slate-500 px-0.5 py-2 sm:px-2">{Math.ceil(annualDieselSavingLitres).toLocaleString("en-IN")}</td>
               <td className="break-words border border-slate-500 px-0.5 py-2 sm:px-2">{Math.ceil(dieselReplacementPct)}</td>
@@ -81,20 +81,20 @@ export function CalculatorResults({ inputs, results, onReset, onJoinMission }: P
         </div>
         <div className="space-y-2 sm:hidden">
           {[
-            { title: "Fuel Cost Savings", amountLabel: "INR / Year", amount: formatINR(Math.ceil(savingPerYear), true).slice(1), percent: Math.ceil(costReductionPct) },
+            { title: "Fuel Cost Savings", amountLabel: "INR / Year", amount: formatINR(Math.ceil(savingPerYear), true).replace(/ L$/, " Lakh"), percent: Math.ceil(costReductionPct) },
             { title: "Diesel Consumption Reduction", amountLabel: "Litres / Year", amount: Math.ceil(annualDieselSavingLitres).toLocaleString("en-IN"), percent: Math.ceil(dieselReplacementPct) },
             { title: "CO₂ Emissions Reduction", amountLabel: "Tonnes CO₂ / Year", amount: Math.ceil(annualCO2SavingTonnes).toLocaleString("en-IN"), percent: Math.ceil(co2ReductionPct) },
           ].map(({ title, amountLabel, amount, percent }) => (
             <section key={title} className="rounded-md border border-white/50 bg-white/[0.04] px-3 py-2.5">
-              <h4 className="text-xs font-extrabold text-[oklch(0.72_0.16_155)]">{title}</h4>
+              <h4 className="text-xs font-bold text-[oklch(0.72_0.16_155)]">{title}</h4>
               <div className="mt-2 grid grid-cols-2 gap-3">
                 <div>
-                  <p className="text-[10px] font-semibold text-[oklch(0.72_0.16_155)]">{amountLabel}</p>
-                  <p className="text-sm font-extrabold text-white">{amount}</p>
+                  <p className="text-[10px] font-bold text-[oklch(0.72_0.16_155)]">{amountLabel}</p>
+                  <p className="text-sm font-bold text-white">{amount}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-semibold text-[oklch(0.72_0.16_155)]">% Reduction</p>
-                  <p className="text-sm font-extrabold text-white">{percent}%</p>
+                  <p className="text-[10px] font-bold text-[oklch(0.72_0.16_155)]">% Reduction</p>
+                  <p className="text-sm font-bold text-white">{percent}%</p>
                 </div>
               </div>
             </section>

@@ -762,42 +762,6 @@ function SectionLabel({ index, children, dark = false, accent = false }: { index
   );
 }
 
-const kitStatCards = [
-  { label: "Fuel mode", value: "Dual=Diesel+NG", icon: Fuel },
-  { label: "Gas usage", value: "up to 70%", icon: CircleGauge },
-  { label: "Control", value: "Sensors + Actuators", icon: Cog },
-  { label: "Existing genset", value: "Genset replacement/modification not needed", icon: ShieldCheck },
-] as const;
-
-const kitSchematicLabels = [
-  "Air Filter",
-  "Gas Air Mixer",
-  "Gas Filter",
-  "Pressure Regulator",
-  "Gas Flow Control",
-  "Knock Sensor",
-  "EGT Sensor",
-  "Control Panel",
-  "Energy Meter",
-] as const;
-
-function KitStatCard({ label, value, icon: Icon, delay }: { label: string; value: string; icon: typeof Fuel; delay: number }) {
-  return (
-    <ScrollReveal delay={delay}>
-      <div className="kit-stat-card kit-stat-card-hover group rounded-xl p-4 h-full flex flex-col">
-        <div className="absolute inset-y-0 left-0 w-[3px] rounded-l-xl bg-signal/0 transition-colors duration-300 group-hover:bg-signal/80" aria-hidden="true" />
-        <div className="flex items-start justify-between gap-3">
-          <p className="font-sans text-xs font-bold uppercase tracking-[0.08em] text-foreground/85">{label}</p>
-          <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors duration-300 group-hover:bg-signal/15">
-            <Icon className="size-4" strokeWidth={1.75} />
-          </span>
-        </div>
-        <p className="mt-3 font-sans text-base font-bold leading-snug text-foreground">{value}</p>
-      </div>
-    </ScrollReveal>
-  );
-}
-
 function ImageButton({ src, alt, caption, onClick, className = "" }: { src: string; alt: string; caption?: string; onClick: () => void; className?: string }) {
   return (
     <button type="button" onClick={onClick} className={`group relative block w-full overflow-hidden text-left ${className}`} aria-label={`Open ${alt}`}>
@@ -1338,36 +1302,20 @@ Message: ${message}`;
         <section id="kit" className="relative overflow-hidden bg-background">
           <div className="section-dot-grid absolute inset-0" aria-hidden="true" />
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal/25 to-transparent" aria-hidden="true" />
-          <div className="relative mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
-            <div className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-16">
-              <ScrollReveal>
-                <div>
-                  <SectionLabel index="OM / 04" accent>Primary product</SectionLabel>
-                  <h2 className="mt-6 text-4xl font-extrabold tracking-tight text-foreground lg:text-6xl">
-                    OM Solutions
-                    <br />
-                    <span className="bg-gradient-to-r from-foreground via-foreground to-signal bg-clip-text text-transparent">
-                      Dual Fuel Kit
-                    </span>
-                  </h2>
-                  <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground font-sans">
-                   A Dual-fuel kit allows a diesel engine to use alternate fuel (like Natural Gas), maintaining the same power level though reducing diesel consumption as well as PM & CO2 emissions
-                  </p>
-                  <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                    {kitStatCards.map((card, index) => (
-                      <KitStatCard
-                        key={card.label}
-                        label={card.label}
-                        value={card.value}
-                        icon={card.icon}
-                        delay={100 + index * 50}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </ScrollReveal>
-              <ScrollReveal delay={300} scale>
-                <div className="schematic-frame rounded-2xl p-4 sm:p-6 lg:p-7">
+          <div className="relative mx-auto max-w-[1200px] px-5 py-12 sm:py-16 lg:px-10 lg:py-20">
+            <ScrollReveal>
+              <div>
+                <h2 className="flex flex-wrap items-baseline gap-x-3 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+                  <span>OM Solutions</span>
+                  <span className="bg-gradient-to-r from-foreground via-foreground to-signal bg-clip-text text-transparent">Dual Fuel Kit</span>
+                </h2>
+                <p className="mt-3 max-w-[1100px] text-base leading-relaxed text-foreground font-sans sm:text-lg">
+                  A Dual-fuel kit allows a diesel engine to use alternate fuel (like Natural Gas), maintaining the same power level though reducing diesel consumption as well as PM &amp; CO2 emissions
+                </p>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={200} scale>
+              <div className="schematic-frame mx-auto mt-8 max-w-[1100px] rounded-2xl p-3 sm:mt-10 sm:p-5">
                   <div className="flex items-center justify-between gap-4">
                     <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">System schematic</p>
                     <span className="inline-flex items-center gap-2 rounded-full border border-signal/25 bg-signal/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-signal">
@@ -1387,26 +1335,15 @@ Message: ${message}`;
                     <img
                       src={schematicImage}
                       alt="Dual fuel kit schematic"
-                      className="aspect-[1.75/1] w-full object-contain p-3 transition-transform duration-500 group-hover:scale-[1.03]"
+                      className="aspect-[2.30/1] w-full object-contain p-3 transition-transform duration-500 group-hover:scale-[1.03]"
                     />
                     <span className="flex items-center justify-center gap-2 border-t border-border/50 bg-muted/30 py-2.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground transition-colors group-hover:bg-signal/10 group-hover:text-signal">
                       Click to explore components
                       <ArrowRight className="size-3 transition-transform duration-300 group-hover:translate-x-0.5" />
                     </span>
                   </button>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {kitSchematicLabels.map((component) => (
-                      <span
-                        key={component}
-                        className="rounded-md border border-border/70 bg-background/80 px-2.5 py-1 font-mono text-[10px] text-muted-foreground transition-colors hover:border-signal/30 hover:text-foreground"
-                      >
-                        {component}
-                      </span>
-                    ))}
-                  </div>
                 </div>
-              </ScrollReveal>
-            </div>
+            </ScrollReveal>
           </div>
         </section>
 

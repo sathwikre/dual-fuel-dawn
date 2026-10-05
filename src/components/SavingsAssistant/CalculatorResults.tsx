@@ -259,23 +259,23 @@ export function CalculatorResults({ inputs, results, onReset, onJoinMission }: P
                 <div className="grid grid-cols-3 gap-2">
                   {values.map((item) => (
                     <div key={item.period} className="min-w-0">
-                      <p className="text-[9px] font-bold uppercase tracking-wide text-white/55 sm:text-[10px]">
+                      <p className="text-[11px] font-extrabold uppercase tracking-wide text-white/70 sm:text-xs">
                         {item.period}
                       </p>
-                      <p className="mt-1 break-words text-xs font-black leading-tight text-[oklch(0.72_0.16_155)] sm:text-sm">
+                      <p className="mt-1 break-words text-sm font-black leading-tight text-[oklch(0.72_0.16_155)] sm:text-base">
                         {formatSummaryValue(
                           item.value,
                           item.currency,
                           "compact" in item && item.compact,
                         )}
                       </p>
-                      <p className="mt-1 text-[9px] font-semibold leading-tight text-white/45 sm:text-[10px]">
+                      <p className="mt-1 text-[10px] font-bold leading-tight text-white/60 sm:text-xs">
                         {item.unit}
                       </p>
                     </div>
                   ))}
                 </div>
-                <p className="mt-3 border-t border-white/10 pt-2 text-[10px] font-bold text-white/55">
+                <p className="mt-3 border-t border-white/10 pt-2 text-xs font-extrabold text-white/70 sm:text-sm">
                   {percent}% reduction
                 </p>
               </article>

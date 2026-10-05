@@ -1914,7 +1914,7 @@ Message: ${message}`;
                       <div className="space-y-1.5 text-base leading-relaxed font-sans">
                         <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">Greaves 200 kVA CPCB-IV+</span></div>
                         <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (1 bar)</span></div>
-                        <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">60-80% · Avg 85%</span></div>
+                        <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">60-80% · Avg 70%</span></div>
                         <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">40/mo · 400/yr</span></div>
                         <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹756/hr · ₹30,240/mo · ₹3.024L/yr</span></div>
                         <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">9.8 kg/hr · 390 kg/mo · 3,900 kg/yr</span></div>

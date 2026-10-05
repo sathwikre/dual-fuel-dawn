@@ -161,6 +161,7 @@ import gasSystemAssemblyComponent from "@/assets/components/Gas system assembly.
 import knockSensorMountingComponent from "@/assets/components/Knock sensor mounting.jpg";
 import knockSensorComponent from "@/assets/components/Knock sensor.jpeg";
 import lpgPressureRegulatorComponent from "@/assets/components/LPG Pressure regulator (LOT capable).jpeg";
+import rpmSensorComponent from "@/assets/components/rpm sensor.png";
 
 // Static home hero background
 import heroBackground from "@/assets/Sunrise Industrial Cityscape with Tricolour Swooshes.png";
@@ -374,6 +375,12 @@ const schematicComponents: SchematicComponent[] = [
     name: "Energy Meter",
     image: energyMeterComponent,
     hotspot: { x: 50, y: 75, width: 12, height: 10 },
+  },
+  {
+    id: "rpm-sensor",
+    name: "RPM Sensor (Engine Speed Sensor)",
+    image: rpmSensorComponent,
+    hotspot: { x: 37, y: 75, width: 14, height: 10 },
   },
 ];
 

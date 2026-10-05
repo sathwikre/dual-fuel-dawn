@@ -1489,14 +1489,14 @@ Message: ${message}`;
                 </div>
               </section>
 
-              <section id="dr-tech" className="relative border-b border-border bg-muted/30">
+              <section id="dr-tech" className="relative border-b border-border bg-[#031a10] text-[#e8f5ee]">
                 <div className="mx-auto max-w-[1440px] px-5 py-16 lg:px-10 lg:py-20">
                   <div className="grid gap-6 lg:grid-cols-2 lg:items-end">
                     <div>
                       <SectionLabel index="OM / 05" accent>Technology</SectionLabel>
                       <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Dual Fuel Kit vs RECD</h2>
                     </div>
-                    <p className="max-w-xl text-base leading-relaxed text-muted-foreground font-sans">Two different approaches to particulate reduction.</p>
+                    <p className="max-w-xl text-base leading-relaxed text-[#9fc4b0] font-sans">Two different approaches to particulate reduction.</p>
                   </div>
 
                   <div className="tech-surface mt-9 rounded-2xl">
@@ -1516,7 +1516,7 @@ Message: ${message}`;
                       })}
                     </div>
 
-                    <article id="technology-panel" role="tabpanel" aria-labelledby={`${technologyView}-tab`} className="min-h-[332px] bg-background">
+                    <article id="technology-panel" role="tabpanel" aria-labelledby={`${technologyView}-tab`} className="min-h-[332px] bg-background text-foreground">
                       {technologyView === "dualFuel" ? (
                         <div key="dual-fuel" className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
                           <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-muted/40 p-6" onClick={() => openImage(systemImage, "OM Solutions dual-fuel kit schematic")} aria-label="Open Dual Fuel schematic">

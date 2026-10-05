@@ -1351,7 +1351,7 @@ Message: ${message}`;
                     </span>
                   </h2>
                   <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground font-sans">
-                    A dual-fuel system allows a diesel engine to use diesel together with an alternate gaseous fuel, reducing diesel consumption while maintaining engine operation.
+                   A Dual-fuel kit allows a diesel engine to use alternate fuel (like Natural Gas), maintaining the same power level though reducing diesel consumption as well as PM & CO2 emissions
                   </p>
                   <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2">
                     {kitStatCards.map((card, index) => (

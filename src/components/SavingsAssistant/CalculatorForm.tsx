@@ -46,6 +46,9 @@ export function CalculatorForm({ onComplete }: Props) {
   const [step, setStep] = useState(1);
   const [inputs, setInputs] = useState<CalculatorInputs>(defaultInputs);
   const [error, setError] = useState<string | null>(null);
+  const loadError = inputs.load > 0 && (inputs.load < 40 || inputs.load > 75)
+    ? "Load must be between 40 and 75%."
+    : null;
 
   function set<K extends keyof CalculatorInputs>(key: K, value: CalculatorInputs[K]) {
     setInputs((prev) => ({ ...prev, [key]: value }));
@@ -112,16 +115,28 @@ export function CalculatorForm({ onComplete }: Props) {
               <div className={rowClass}>
                 <input
                   type="number"
-                  min={1}
-                  max={100}
+                  min={40}
+                  max={75}
                   placeholder="e.g. 75"
                   value={inputs.load || ""}
-                  onChange={(e) => set("load", parseFloat(e.target.value) || 0)}
+                  onChange={(e) => {
+                    const load = parseFloat(e.target.value) || 0;
+                    set("load", load);
+                    setError(load > 0 && (load < 40 || load > 75)
+                      ? "Load must be between 40 and 75%."
+                      : null);
+                  }}
                   className={inputBase}
+                  aria-invalid={Boolean(loadError)}
                   onKeyDown={(e) => e.key === "Enter" && next()}
                 />
                 <span className={unitBadge}>%</span>
               </div>
+              {loadError && (
+                <p className="mt-2 text-[13px] font-bold text-[oklch(0.82_0.16_28)]" role="alert">
+                  {loadError}
+                </p>
+              )}
             </div>
             <div>
               <label className={labelClass}>Alternative Fuel</label>
@@ -202,7 +217,7 @@ export function CalculatorForm({ onComplete }: Props) {
         )}
 
         {/* Error */}
-        {error && (
+        {error && error !== loadError && (
           <p className="mt-3 border-2 border-[oklch(0.64_0.18_28/0.65)] bg-[oklch(0.64_0.18_28/0.15)] px-3 py-3 text-[13px] font-bold text-[oklch(0.82_0.16_28)]">
             {error}
           </p>

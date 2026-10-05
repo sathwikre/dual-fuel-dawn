@@ -180,8 +180,8 @@ export function validateStep(step: number, inputs: Partial<CalculatorInputs>): s
     case 1:
       if (!inputs.gensetRating || inputs.gensetRating <= 0)
         return "Please enter a valid genset rating.";
-      if (inputs.load === undefined || inputs.load <= 0 || inputs.load > 100)
-        return "Load must be between 1 and 100%.";
+      if (inputs.load === undefined || inputs.load < 40 || inputs.load > 75)
+        return "Load must be between 40 and 75%.";
       break;
     case 2:
       if (!inputs.hoursPerMonth || inputs.hoursPerMonth <= 0)

@@ -410,20 +410,30 @@ const applicationCards = [
   { title: "Diesel engine based Earthmover", description: "Dual-fuel conversion for diesel engine based earthmovers.", image: quarryExcavatorImage },
 ] as const;
 
+// Edit benefit copy in this data array and theme colors in --benefit-* below.
 const benefits = [
-  "Reduces particulate emissions",
-  "Supports Pollution Control Board particulate-matter reduction requirements",
-  "Enables gaseous fuel use up to 70% in diesel engines",
-  "Saves fuel and operating cost",
-  "Same power level as the base diesel engine",
-  "No need to replace the existing diesel genset",
-  "Higher thermal efficiency",
-  "Lesser diesel engine maintenance",
-  "No major modifications to the base diesel engine",
-  "Flexibility between dual-fuel and 100% diesel mode",
-  "Improved engine life",
-  "Quick and easy installation",
+  { id: "particulate", category: "env", title: "Reduces particulate emissions", description: "Supports particulate-matter reduction during combustion.", stat: "Particulate matter", statLabel: "reduction support" },
+  { id: "pcb", category: "env", title: "Supports Pollution Control Board particulate-matter reduction requirements", description: "Designed to support applicable particulate-matter requirements.", stat: "PM requirements", statLabel: "check local requirements" },
+  { id: "gas-share", category: "cost", title: "Enables gaseous fuel use up to 70% in diesel engines", description: "Actual gaseous-fuel share depends on the engine, application, load and fuel conditions.", stat: "70%", statLabel: "max stated figure" },
+  { id: "operating-cost", category: "cost", title: "Saves fuel and operating cost", description: "Potential savings depend on fuel prices and operating conditions.", stat: "Fuel + operating cost", statLabel: "potential savings" },
+  { id: "power-level", category: "engine", title: "Same power level as the base diesel engine", description: "Designed to maintain the base diesel engine's power level during dual-fuel operation.", stat: "Base diesel level", statLabel: "power target" },
+  { id: "existing-genset", category: "install", title: "No need to replace the existing diesel genset", description: "Retain the existing diesel genset for a dual-fuel upgrade.", stat: "Existing genset", statLabel: "replacement not required" },
+  { id: "thermal-efficiency", category: "engine", title: "Higher thermal efficiency", description: "Efficiency can vary with the engine and operating conditions.", stat: "Thermal efficiency", statLabel: "potential improvement" },
+  { id: "maintenance", category: "engine", title: "Lesser diesel engine maintenance", description: "Service needs depend on the engine, installation and use.", stat: "Maintenance needs", statLabel: "may be reduced" },
+  { id: "base-engine", category: "install", title: "No major modifications to the base diesel engine", description: "The system is designed to integrate without major base-engine changes.", stat: "Base engine", statLabel: "major changes not required" },
+  { id: "fuel-mode", category: "install", title: "Flexibility between dual-fuel and 100% diesel mode", description: "Switch between dual-fuel operation and 100% diesel mode.", stat: "Operating modes", statLabel: "dual fuel / diesel" },
+  { id: "engine-life", category: "engine", title: "Improved engine life", description: "Engine life depends on installation, operation and maintenance.", stat: "Engine life", statLabel: "designed to support longevity" },
+  { id: "installation", category: "install", title: "Quick and easy installation", description: "Installation requirements vary by engine and application.", stat: "Installation", statLabel: "designed to be straightforward" },
 ];
+
+const benefitCategories = [
+  { id: "all", label: "All" },
+  { id: "env", label: "Environment" },
+  { id: "cost", label: "Cost savings" },
+  { id: "engine", label: "Engine health" },
+  { id: "install", label: "Installation" },
+] as const;
+type BenefitCategory = (typeof benefitCategories)[number]["id"];
 
 const comparisonRows = [
   ["Capital Investment", "Very High Capital Investment", "Very High Capital Investment", "Medium to High Capital Investment", "Very Low Capital Investment"],
@@ -793,6 +803,9 @@ function OmSolutionsHome() {
   const [fuelKitView, setFuelKitView] = useState<"lpg" | "png">("png");
   const [recdType, setRecdType] = useState<RecdType>("selfCleaning");
   const [selectedConsideration, setSelectedConsideration] = useState<DualFuelConsideration>("gasAvailability");
+  const [benefitFilter, setBenefitFilter] = useState<BenefitCategory>("all");
+  const [selectedBenefitId, setSelectedBenefitId] = useState("pcb");
+  const benefitCardRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const [selectedFuelApplication, setSelectedFuelApplication] = useState(0);
   const [selectedFuel, setSelectedFuel] = useState<(typeof fuelColumns)[number] | null>(null);
   const [dealershipModalOpen, setDealershipModalOpen] = useState(false);
@@ -1649,30 +1662,102 @@ Message: ${message}`;
                 </div>
               </section>
 
-              <section id="dr-benefits" className="relative overflow-hidden bg-panel text-background">
+              <section
+                id="dr-benefits"
+                className="benefits-interactive relative overflow-hidden bg-[var(--benefit-bg)] text-[var(--benefit-text)]"
+                style={{
+                  "--benefit-bg": "#031a10",
+                  "--benefit-surface": "#05261a",
+                  "--benefit-selected": "#0f3a28",
+                  "--benefit-border": "#1f4a35",
+                  "--benefit-accent": "#34d399",
+                  "--benefit-text": "#e8f5ee",
+                  "--benefit-muted": "#9fc4b0",
+                  "--benefit-glow": "rgba(52, 211, 153, 0.22)",
+                } as React.CSSProperties}
+              >
+                <style>{`
+                  .benefits-interactive .benefit-card { transition: opacity 250ms ease, transform 250ms ease, background-color 250ms ease; }
+                  .benefits-interactive .benefit-check { transition: transform 250ms ease; }
+                  .benefits-interactive .benefit-glow { background: radial-gradient(110px circle at var(--glow-x, 50%) var(--glow-y, 50%), var(--benefit-glow), transparent 75%); }
+                  @media (hover: hover) and (min-width: 640px) and (prefers-reduced-motion: no-preference) {
+                    .benefits-interactive .benefit-card:hover { transform: translateY(-2px); }
+                    .benefits-interactive .benefit-card:hover .benefit-check { transform: scale(1.15); }
+                    .benefits-interactive .benefit-card:hover .benefit-glow { opacity: 1; }
+                  }
+                  @media (prefers-reduced-motion: reduce) {
+                    .benefits-interactive .benefit-card, .benefits-interactive .benefit-check { transition: none !important; transform: none !important; }
+                    .benefits-interactive .benefit-glow { display: none !important; }
+                  }
+                `}</style>
                 <div className="hero-grid-overlay absolute inset-0 opacity-20" aria-hidden="true" />
                 <div className="relative mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
                   <div className="flex flex-wrap items-end justify-between gap-6">
                     <div>
-                      <SectionLabel index="OM / 06" dark>Why dual fuel</SectionLabel>
+                      <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--benefit-accent)]">OM / 06 —— WHY DUAL FUEL</p>
                       <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Benefits of using a Dual Fuel kit</h2>
                     </div>
-                    <p className="max-w-md text-sm leading-relaxed text-background/65 font-sans">The 70% figure is the maximum gaseous fuel use stated in the profile and depends on engine, application, load and fuel conditions.</p>
+                    <p className="max-w-md text-sm leading-relaxed text-[var(--benefit-muted)]">The 70% figure is the maximum gaseous fuel use stated in the profile and depends on engine, application, load and fuel conditions.</p>
                   </div>
-                  <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-3">
-                    {benefits.map((benefit, index) => (
-                      <div key={benefit} className={`benefit-tile benefit-tile-hover group flex gap-4 bg-panel p-5 transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg ${index < 4 ? "lg:p-7" : ""}`}>
-                        <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full bg-signal text-panel transition-transform duration-200 group-hover:scale-110">
-                          <Check className="size-3.5 stroke-[3]" />
-                        </span>
-                        <div>
-                          <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-signal/80">{String(index + 1).padStart(2, "0")}</p>
-                          <p className="mt-1 text-base font-semibold leading-snug font-sans text-background transition-colors group-hover:text-signal sm:text-lg">{benefit}</p>
-                          {index === 2 ? <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.1em] text-background/50">Maximum stated figure</p> : null}
-                        </div>
-                      </div>
+
+                  <div role="tablist" aria-label="Filter dual-fuel benefits" className="mt-8 flex gap-2 overflow-x-auto pb-1">
+                    {benefitCategories.map((category) => (
+                      <button
+                        key={category.id}
+                        id={`${category.id}-benefits-tab`}
+                        type="button"
+                        role="tab"
+                        aria-selected={benefitFilter === category.id}
+                        aria-controls="benefits-grid"
+                        onClick={() => setBenefitFilter(category.id)}
+                        className={`shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--benefit-accent)] ${benefitFilter === category.id ? "border-[var(--benefit-accent)] bg-[var(--benefit-accent)] text-[var(--benefit-bg)]" : "border-[var(--benefit-border)] bg-[var(--benefit-surface)] text-[var(--benefit-muted)] hover:text-[var(--benefit-text)]"}`}
+                      >
+                        {category.label}
+                      </button>
                     ))}
                   </div>
+
+                  <div id="benefits-grid" role="tabpanel" aria-labelledby={`${benefitFilter}-benefits-tab`} className="mt-4 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-[var(--benefit-border)] bg-[var(--benefit-border)] sm:grid-cols-2 lg:grid-cols-3">
+                    {benefits.map((benefit, index) => {
+                      const selected = selectedBenefitId === benefit.id;
+                      const matching = benefitFilter === "all" || benefitFilter === benefit.category;
+                      return (
+                        <button
+                          key={benefit.id}
+                          ref={(element) => { benefitCardRefs.current[index] = element; }}
+                          type="button"
+                          aria-pressed={selected}
+                          aria-label={`${String(index + 1).padStart(2, "0")}: ${benefit.title}`}
+                          onClick={() => setSelectedBenefitId(benefit.id)}
+                          onMouseMove={(event) => {
+                            const bounds = event.currentTarget.getBoundingClientRect();
+                            event.currentTarget.style.setProperty("--glow-x", `${event.clientX - bounds.left}px`);
+                            event.currentTarget.style.setProperty("--glow-y", `${event.clientY - bounds.top}px`);
+                          }}
+                          onKeyDown={(event) => {
+                            if (!["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp"].includes(event.key)) return;
+                            event.preventDefault();
+                            const direction = event.key === "ArrowRight" || event.key === "ArrowDown" ? 1 : -1;
+                            const nextIndex = (index + direction + benefits.length) % benefits.length;
+                            benefitCardRefs.current[nextIndex]?.focus();
+                          }}
+                          className={`benefit-card group relative flex min-h-24 w-full items-start gap-3 overflow-hidden p-4 text-left focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-[var(--benefit-accent)] ${selected ? "bg-[var(--benefit-selected)]" : "bg-[var(--benefit-surface)]"}`}
+                          style={{ opacity: matching ? 1 : 0.22 }}
+                        >
+                          <span aria-hidden="true" className="benefit-glow pointer-events-none absolute inset-0 opacity-0" />
+                          <span className={`benefit-check relative mt-1 grid size-8 shrink-0 place-items-center rounded-full bg-[var(--benefit-accent)] text-[var(--benefit-bg)] ${selected ? "scale-110" : ""}`}>
+                            <Check className="size-4 stroke-[3]" />
+                          </span>
+                          <span className="relative min-w-0">
+                            <span className="block font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--benefit-muted)]">{String(index + 1).padStart(2, "0")}</span>
+                            <span className={`mt-1 block text-base font-medium leading-snug ${selected ? "text-[var(--benefit-accent)]" : "text-[var(--benefit-text)]"}`}>{benefit.title}</span>
+                            {benefit.id === "gas-share" && <span className="mt-2 inline-block font-mono text-[10px] uppercase tracking-[0.1em] text-[var(--benefit-accent)]">70% · max stated figure</span>}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+
                 </div>
               </section>
 

@@ -126,22 +126,8 @@ export function CalculatorForm({ onComplete }: Props) {
             <div>
               <label className={labelClass}>Alternative Fuel</label>
               <div className="rounded-[6px] border border-[oklch(0.72_0.16_155)/0.5] bg-[oklch(0.72_0.16_155/0.1)] px-4 py-3 flex items-center justify-between">
-                <div className="flex gap-2" role="group" aria-label="Alternative fuel">
-                  {(["PNG", "LPG"] as const).map((fuel) => (
-                    <button
-                      key={fuel}
-                      type="button"
-                      aria-pressed={inputs.altFuelType === fuel}
-                      onClick={() => set("altFuelType", fuel)}
-                      className={`rounded-[3px] border px-4 py-2 text-sm font-extrabold transition-colors ${inputs.altFuelType === fuel ? "border-[oklch(0.72_0.16_155)] bg-[oklch(0.72_0.16_155)] text-[oklch(0.19_0.045_158)]" : "border-white/25 text-white/65 hover:border-white/60 hover:text-white"}`}
-                    >
-                      {fuel}
-                    </button>
-                  ))}
-                </div>
-                <span className="font-mono text-[9px] text-white/35 uppercase tracking-[0.1em]">
-                  {inputs.altFuelType === "PNG" ? "Piped Natural Gas" : "Liquefied Petroleum Gas"}
-                </span>
+                <span className="text-sm font-bold text-[oklch(0.72_0.16_155)]">PNG</span>
+                <span className="font-mono text-[9px] text-white/35 uppercase tracking-[0.1em]">Piped Natural Gas</span>
               </div>
             </div>
           </div>
@@ -194,9 +180,7 @@ export function CalculatorForm({ onComplete }: Props) {
               </div>
             </div>
             <div>
-              <label className={labelClass}>
-                {inputs.altFuelType === "PNG" ? "PNG Price (₹/Sm³)" : "LPG Price (₹/kg)"}
-              </label>
+              <label className={labelClass}>PNG Price (₹/Sm³)</label>
               <div className={rowClass}>
                 <span className="px-3 py-2.5 font-mono text-[13px] text-white/55 border-r border-white/10 bg-white/5">
                   ₹
@@ -206,20 +190,12 @@ export function CalculatorForm({ onComplete }: Props) {
                   min={1}
                   step={0.5}
                   placeholder="e.g. 85"
-                  value={
-                    inputs.altFuelType === "PNG" ? inputs.pngPrice || "" : inputs.lpgPrice || ""
-                  }
-                  onChange={(e) => {
-                    const price = parseFloat(e.target.value) || 0;
-                    if (inputs.altFuelType === "PNG") set("pngPrice", price);
-                    else set("lpgPrice", price);
-                  }}
+                  value={inputs.pngPrice || ""}
+                  onChange={(e) => set("pngPrice", parseFloat(e.target.value) || 0)}
                   className={inputBase}
                   onKeyDown={(e) => e.key === "Enter" && next()}
                 />
-                <span className={unitBadge}>
-                  {inputs.altFuelType === "PNG" ? "₹ / Sm³" : "₹ / kg"}
-                </span>
+                <span className={unitBadge}>₹ / Sm³</span>
               </div>
             </div>
           </div>

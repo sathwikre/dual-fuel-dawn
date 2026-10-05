@@ -1521,8 +1521,8 @@ Message: ${message}`;
                             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground font-sans">Controlled introduction of alternate fuel into the engine air flow to reduce diesel consumption and particulate generation during combustion.</p>
                             <div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">
                               {["Reduces particulate generation during combustion", "Uses controlled fuel injection with sensors, valves and actuators", "Can reduce diesel consumption under suitable operating conditions", "Existing diesel operation can be retained"].map((point) => (
-                                <div key={point} className="flex gap-2 text-xs leading-snug font-sans">
-                                  <span className="mt-0.5 grid size-4 shrink-0 place-items-center rounded-full bg-signal/15 text-signal"><Check className="size-2.5 stroke-[3]" /></span>
+                                <div key={point} className="flex gap-2.5 text-sm leading-relaxed font-sans sm:text-base">
+                                  <span className="mt-1 grid size-5 shrink-0 place-items-center rounded-full bg-signal/15 text-signal"><Check className="size-3 stroke-[3]" /></span>
                                   {point}
                                 </div>
                               ))}
@@ -1550,7 +1550,7 @@ Message: ${message}`;
                               <h4 className="text-sm font-bold">{recdTypes[recdType].heading}</h4>
                               <div className="mt-3 grid gap-x-5 gap-y-2 sm:grid-cols-2">
                                 {recdTypes[recdType].points.map((point) => (
-                                  <p key={point} className="flex gap-2 text-xs leading-snug text-muted-foreground font-sans">
+                                  <p key={point} className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground font-sans sm:text-base">
                                     <span className="mt-1.5 size-1 shrink-0 rounded-full bg-danger" />
                                     {point}
                                   </p>
@@ -1610,8 +1610,8 @@ Message: ${message}`;
                             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground font-sans">PNG dual-fuel systems utilize piped natural gas for continuous, reliable operation with consistent fuel supply and lower operating costs for grid-connected facilities.</p>
                             <div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">
                               {["Continuous fuel supply via pipeline infrastructure", "Lower fuel cost compared to diesel and LPG", "Clean-burning with minimal environmental impact", "Ideal for facilities with PNG availability", "With PNG, diesel replacement is higher than LPG"].map((point) => (
-                                <div key={point} className="flex gap-2 text-xs leading-snug font-sans">
-                                  <span className="mt-0.5 grid size-4 shrink-0 place-items-center rounded-full bg-blue-500/10 text-blue-500"><Check className="size-2.5 stroke-[3]" /></span>
+                                <div key={point} className="flex gap-2.5 text-sm leading-relaxed font-sans sm:text-base">
+                                  <span className="mt-1 grid size-5 shrink-0 place-items-center rounded-full bg-blue-500/10 text-blue-500"><Check className="size-3 stroke-[3]" /></span>
                                   {point}
                                 </div>
                               ))}
@@ -1635,8 +1635,8 @@ Message: ${message}`;
                             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground font-sans">LPG dual-fuel systems enable diesel engines to operate with LPG as the alternate fuel, offering cost savings and reduced emissions for stationary and mobile applications.</p>
                             <div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">
                               {["Cost-effective fuel alternative with high availability", "Suitable for generator sets and industrial applications", "Easy integration with existing diesel engines"].map((point) => (
-                                <div key={point} className="flex gap-2 text-xs leading-snug font-sans">
-                                  <span className="mt-0.5 grid size-4 shrink-0 place-items-center rounded-full bg-orange-500/10 text-orange-500"><Check className="size-2.5 stroke-[3]" /></span>
+                                <div key={point} className="flex gap-2.5 text-sm leading-relaxed font-sans sm:text-base">
+                                  <span className="mt-1 grid size-5 shrink-0 place-items-center rounded-full bg-orange-500/10 text-orange-500"><Check className="size-3 stroke-[3]" /></span>
                                   {point}
                                 </div>
                               ))}

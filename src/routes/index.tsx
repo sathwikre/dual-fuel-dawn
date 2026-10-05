@@ -1506,7 +1506,7 @@ Message: ${message}`;
                     <article id="technology-panel" role="tabpanel" aria-labelledby={`${technologyView}-tab`} className="min-h-[332px] bg-background">
                       {technologyView === "dualFuel" ? (
                         <div key="dual-fuel" className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
-                          <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6" onClick={() => openImage(systemImage, "OM Solutions dual-fuel kit schematic")} aria-label="Open Dual Fuel schematic">
+                          <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-muted/40 p-6" onClick={() => openImage(systemImage, "OM Solutions dual-fuel kit schematic")} aria-label="Open Dual Fuel schematic">
                             <span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-signal">Air intake system</span>
                             <img src={systemImage} alt="Dual Fuel system schematic" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" />
                           </button>
@@ -1531,7 +1531,7 @@ Message: ${message}`;
                         </div>
                       ) : (
                         <div key={`${recdType}-recd`} className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
-                          <div className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6">
+                          <div className="relative flex min-h-52 items-center justify-center overflow-hidden bg-muted/40 p-6">
                             <span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-signal">Exhaust system</span>
                             <img src={recdImage} alt="RECD exhaust emission control device diagram" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain opacity-85" />
                           </div>
@@ -1595,7 +1595,7 @@ Message: ${message}`;
                     <article id="fuel-kit-panel" role="tabpanel" aria-labelledby={`${fuelKitView}-tab`} className="min-h-[332px] bg-background">
                       {fuelKitView === "png" ? (
                         <div key="png" className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
-                          <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6" onClick={() => openImage(pngKitImage, "OM Solutions PNG dual-fuel kit")} aria-label="Open PNG kit image">
+                          <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-muted/40 p-6" onClick={() => openImage(pngKitImage, "OM Solutions PNG dual-fuel kit")} aria-label="Open PNG kit image">
                             <span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-blue-400">PNG System</span>
                             <img src={pngKitImage} alt="PNG dual-fuel kit" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" />
                           </button>
@@ -1620,7 +1620,7 @@ Message: ${message}`;
                         </div>
                       ) : (
                         <div key="lpg" className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
-                          <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-panel p-6" onClick={() => openImage(lpgKitImage, "OM Solutions LPG dual-fuel kit")} aria-label="Open LPG kit image">
+                          <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-muted/40 p-6" onClick={() => openImage(lpgKitImage, "OM Solutions LPG dual-fuel kit")} aria-label="Open LPG kit image">
                             <span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-orange-400">LPG System</span>
                             <img src={lpgKitImage} alt="LPG dual-fuel kit" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" />
                           </button>

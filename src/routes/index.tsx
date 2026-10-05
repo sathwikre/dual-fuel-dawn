@@ -1655,19 +1655,19 @@ Message: ${message}`;
                   <div className="flex flex-wrap items-end justify-between gap-6">
                     <div>
                       <SectionLabel index="OM / 06" dark>Why dual fuel</SectionLabel>
-                      <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">Benefits of using a Dual Fuel kit</h2>
+                      <h2 className="mt-5 text-5xl font-extrabold tracking-tight lg:text-7xl">Benefits of using a Dual Fuel kit</h2>
                     </div>
                     <p className="max-w-md text-sm leading-relaxed text-background/65 font-sans">The 70% figure is the maximum gaseous fuel use stated in the profile and depends on engine, application, load and fuel conditions.</p>
                   </div>
                   <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-3">
                     {benefits.map((benefit, index) => (
-                      <div key={benefit} className={`benefit-tile benefit-tile-hover flex gap-4 bg-panel p-5 ${index < 4 ? "lg:p-7" : ""}`}>
-                        <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full bg-signal text-panel">
+                      <div key={benefit} className={`benefit-tile benefit-tile-hover group flex gap-4 bg-panel p-5 transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg ${index < 4 ? "lg:p-7" : ""}`}>
+                        <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full bg-signal text-panel transition-transform duration-200 group-hover:scale-110">
                           <Check className="size-3.5 stroke-[3]" />
                         </span>
                         <div>
                           <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-signal/80">{String(index + 1).padStart(2, "0")}</p>
-                          <p className="mt-1 text-sm font-semibold leading-snug font-sans text-background">{benefit}</p>
+                          <p className="mt-1 text-base font-semibold leading-snug font-sans text-background transition-colors group-hover:text-signal sm:text-lg">{benefit}</p>
                           {index === 2 ? <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.1em] text-background/50">Maximum stated figure</p> : null}
                         </div>
                       </div>

@@ -1257,7 +1257,7 @@ Message: ${message}`;
                       src={partner.logo}
                       alt={partner.name}
                       loading="eager"
-                      className={`${partner.name.startsWith("Sai Sound Service") ? "max-h-16" : "max-h-9"} max-w-full object-contain`}
+                      className={`${partner.name.startsWith("Sai Sound Service") ? "max-h-16" : partner.name === "Birla Tisya" ? "max-h-14" : "max-h-9"} max-w-full object-contain`}
                       onError={(event) => {
                         event.currentTarget.classList.add("hidden");
                         event.currentTarget.nextElementSibling?.classList.remove("hidden");

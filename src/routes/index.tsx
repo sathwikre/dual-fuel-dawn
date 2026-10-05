@@ -1306,7 +1306,7 @@ Message: ${message}`;
             <ScrollReveal>
               <div>
                 <h2 className="flex flex-wrap items-baseline gap-x-3 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
-                  <span>OM Solutions</span>
+                  <span>OM Solutions’</span>
                   <span className="bg-gradient-to-r from-foreground via-foreground to-signal bg-clip-text text-transparent">Dual Fuel Kit</span>
                 </h2>
                 <p className="mt-3 max-w-[1100px] text-base leading-relaxed text-foreground font-sans sm:text-lg">

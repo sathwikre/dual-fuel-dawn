@@ -1937,7 +1937,7 @@ Message: ${message}`;
                 </article>
 
                 <article className="field-card field-card-hover group cursor-pointer flex flex-col rounded-2xl shrink-0 w-full sm:w-1/2 lg:w-1/4 h-auto"
-                  onClick={() => setAppGallery({ title: "Birla Tisya – FMTU 1010 kVA", images: [birlaFmtu1_1], index: 0 })}>
+                  onClick={() => setAppGallery({ title: "Birla Tisya – FMTU 1010 kVA (1)", images: [birlaFmtu1_1], index: 0 })}>
                   <div className="relative overflow-hidden aspect-square shrink-0">
                     <img src={birlaFmtu1_1} alt="Birla Tisya FMTU 1010 kVA installation" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
                     <div className="absolute inset-0 bg-gradient-to-t from-panel/55 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
@@ -1945,7 +1945,7 @@ Message: ${message}`;
                   </div>
                   <div className="flex items-start justify-between gap-4 p-5 flex-1">
                     <div className="w-full">
-                      <h3 className="text-2xl font-bold leading-snug mb-2">Birla Tisya – FMTU 1010 kVA</h3>
+                      <h3 className="text-2xl font-bold leading-snug mb-2">Birla Tisya – FMTU 1010 kVA (1)</h3>
                       <div className="space-y-1.5 text-base leading-relaxed font-sans">
                         <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">FMTU 1010 kVA CPCB-IV+</span></div>
                         <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (1 bar)</span></div>

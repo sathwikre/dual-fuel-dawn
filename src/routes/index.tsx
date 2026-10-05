@@ -593,10 +593,10 @@ type RecdType = keyof typeof recdTypes;
 const dualFuelConsiderations = [
   { id: "gasAvailability", label: "Gas Availability", statement: "Dual Fuel mode is possible only with Alternate fuel / Gas availability." },
   { id: "loadDefinition", label: "Load Definition", statement: "Appropriate load definition is VIMP." },
-  { id: "weather", label: "Weather Conditions", statement: "Diesel replacement is sensitive to weather conditions." },
   { id: "loadCycle", label: "Load Cycle", statement: "Diesel replacement is dependent on Engine Application (Load cycle)." },
   { id: "fuelQuality", label: "Fuel Quality", statement: "Diesel replacement is dependent on Fuel Quality." },
   { id: "engineHealth", label: "Engine Health", statement: "Appropriate sensing is needed for engine health monitoring." },
+  { id: "weather", label: "Weather Conditions", statement: "Diesel replacement is sensitive to weather conditions." },
 ] as const;
 
 type DualFuelConsideration = (typeof dualFuelConsiderations)[number]["id"];
@@ -1655,7 +1655,7 @@ Message: ${message}`;
                   <div className="flex flex-wrap items-end justify-between gap-6">
                     <div>
                       <SectionLabel index="OM / 06" dark>Why dual fuel</SectionLabel>
-                      <h2 className="mt-5 text-5xl font-extrabold tracking-tight lg:text-7xl">Benefits of using a Dual Fuel kit</h2>
+                      <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Benefits of using a Dual Fuel kit</h2>
                     </div>
                     <p className="max-w-md text-sm leading-relaxed text-background/65 font-sans">The 70% figure is the maximum gaseous fuel use stated in the profile and depends on engine, application, load and fuel conditions.</p>
                   </div>
@@ -1681,7 +1681,7 @@ Message: ${message}`;
                   <div className="flex flex-wrap items-end justify-between gap-5">
                     <div>
                       <SectionLabel index="OM / 07" accent>Operating considerations</SectionLabel>
-                      <h2 className="mt-4 text-3xl font-extrabold tracking-tight lg:text-4xl">Challenges while using a Dual Fuel Kit</h2>
+                      <h2 className="mt-4 text-5xl font-extrabold tracking-tight lg:text-6xl">Challenges while using a Dual Fuel Kit</h2>
                     </div>
                     <p className="max-w-md text-sm leading-relaxed text-muted-foreground font-sans">Dual-fuel performance depends on operating conditions. These considerations should be evaluated for the intended engine application.</p>
                   </div>
@@ -1696,8 +1696,8 @@ Message: ${message}`;
                     <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
                       {dualFuelConsiderations.slice(0, 3).map((item, index) => (
                         <button key={item.id} type="button" onClick={() => setSelectedConsideration(item.id)} aria-pressed={selectedConsideration === item.id} className={`consider-card rounded-xl px-4 py-3 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${selectedConsideration === item.id ? "consider-card-active" : "hover:-translate-y-0.5 hover:border-signal/40 hover:bg-background"}`}>
-                          <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-signal">0{index + 1} · {item.label}</span>
-                          <span className="mt-1.5 block text-sm leading-snug font-sans">{item.statement}</span>
+                          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-signal sm:text-xs">0{index + 1} · {item.label}</span>
+                          <span className="mt-1.5 block text-base leading-relaxed font-sans sm:text-lg">{item.statement}</span>
                         </button>
                       ))}
                     </div>
@@ -1711,8 +1711,8 @@ Message: ${message}`;
                     <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
                       {dualFuelConsiderations.slice(3).map((item, index) => (
                         <button key={item.id} type="button" onClick={() => setSelectedConsideration(item.id)} aria-pressed={selectedConsideration === item.id} className={`consider-card rounded-xl px-4 py-3 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${selectedConsideration === item.id ? "consider-card-active" : "hover:-translate-y-0.5 hover:border-signal/40 hover:bg-background"}`}>
-                          <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-signal">0{index + 4} · {item.label}</span>
-                          <span className="mt-1.5 block text-sm leading-snug font-sans">{item.statement}</span>
+                          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-signal sm:text-xs">0{index + 4} · {item.label}</span>
+                          <span className="mt-1.5 block text-base leading-relaxed font-sans sm:text-lg">{item.statement}</span>
                         </button>
                       ))}
                     </div>

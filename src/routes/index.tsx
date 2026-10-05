@@ -1697,7 +1697,7 @@ Message: ${message}`;
                       <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--benefit-accent)]">OM / 06 —— WHY DUAL FUEL</p>
                       <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Benefits of using a Dual Fuel kit</h2>
                     </div>
-                    <p className="max-w-md text-sm leading-relaxed text-[var(--benefit-muted)]">The 70% figure is the maximum gaseous fuel use stated in the profile and depends on engine, application, load and fuel conditions.</p>
+                    <p className="max-w-none text-xs leading-relaxed text-[var(--benefit-muted)] xl:whitespace-nowrap xl:text-right">The 70% figure is the maximum gaseous fuel use stated in the profile and depends on engine, application, load and fuel conditions.</p>
                   </div>
 
                   <div role="tablist" aria-label="Filter dual-fuel benefits" className="mt-8 flex gap-2 overflow-x-auto pb-1">

@@ -10,12 +10,13 @@ interface Props {
 const TOTAL_STEPS = 3;
 
 const defaultInputs: CalculatorInputs = {
-  gensetRating:  0,
-  load:          0,
-  altFuelType:   "NG",
+  gensetRating: 0,
+  load: 0,
+  altFuelType: "PNG",
   hoursPerMonth: 40,
-  dieselPrice:   0,
-  ngPrice:       0,
+  dieselPrice: 0,
+  pngPrice: 0,
+  lpgPrice: 0,
 };
 
 const stepMessages: Record<number, { greeting: string; question: string }> = {
@@ -34,9 +35,12 @@ const stepMessages: Record<number, { greeting: string; question: string }> = {
 };
 
 const labelClass = "block mb-2 text-[12px] font-extrabold uppercase tracking-[0.08em] text-white";
-const unitBadge  = "px-3 py-3 text-[12px] font-bold text-white border-l-2 border-white/25 bg-white/10 whitespace-nowrap";
-const inputBase  = "flex-1 bg-white/5 px-4 py-3 text-base font-bold text-white outline-none placeholder:text-white/45";
-const rowClass   = "flex overflow-hidden border-2 border-white/35 focus-within:border-[oklch(0.72_0.16_155)] focus-within:ring-2 focus-within:ring-[oklch(0.72_0.16_155/0.25)] transition-colors";
+const unitBadge =
+  "px-3 py-3 text-[12px] font-bold text-white border-l-2 border-white/25 bg-white/10 whitespace-nowrap";
+const inputBase =
+  "flex-1 bg-white/5 px-4 py-3 text-base font-bold text-white outline-none placeholder:text-white/45";
+const rowClass =
+  "flex overflow-hidden border-2 border-white/35 focus-within:border-[oklch(0.72_0.16_155)] focus-within:ring-2 focus-within:ring-[oklch(0.72_0.16_155/0.25)] transition-colors";
 
 export function CalculatorForm({ onComplete }: Props) {
   const [step, setStep] = useState(1);
@@ -50,7 +54,10 @@ export function CalculatorForm({ onComplete }: Props) {
 
   function next() {
     const err = validateStep(step, inputs);
-    if (err) { setError(err); return; }
+    if (err) {
+      setError(err);
+      return;
+    }
     if (step === TOTAL_STEPS) {
       onComplete(inputs);
     } else {
@@ -60,7 +67,10 @@ export function CalculatorForm({ onComplete }: Props) {
   }
 
   function back() {
-    if (step > 1) { setStep((s) => s - 1); setError(null); }
+    if (step > 1) {
+      setStep((s) => s - 1);
+      setError(null);
+    }
   }
 
   const msg = stepMessages[step];
@@ -72,7 +82,9 @@ export function CalculatorForm({ onComplete }: Props) {
       <div style={{ flex: 1, overflowY: "auto", minHeight: 0 }} className="px-5 py-4">
         {/* Prompt */}
         <div className="mb-5">
-          <p className="text-[15px] font-extrabold text-[oklch(0.72_0.16_155)]">{msg?.greeting ?? ""}</p>
+          <p className="text-[15px] font-extrabold text-[oklch(0.72_0.16_155)]">
+            {msg?.greeting ?? ""}
+          </p>
           <p className="mt-1 text-[16px] font-semibold text-white">{msg?.question ?? ""}</p>
         </div>
 
@@ -82,28 +94,54 @@ export function CalculatorForm({ onComplete }: Props) {
             <div>
               <label className={labelClass}>Genset Rating</label>
               <div className={rowClass}>
-                <input autoFocus type="number" min={1} placeholder="e.g. 500"
+                <input
+                  autoFocus
+                  type="number"
+                  min={1}
+                  placeholder="e.g. 500"
                   value={inputs.gensetRating || ""}
                   onChange={(e) => set("gensetRating", parseFloat(e.target.value) || 0)}
-                  className={inputBase} onKeyDown={(e) => e.key === "Enter" && next()} />
+                  className={inputBase}
+                  onKeyDown={(e) => e.key === "Enter" && next()}
+                />
                 <span className={unitBadge}>kVA</span>
               </div>
             </div>
             <div>
               <label className={labelClass}>Load %</label>
               <div className={rowClass}>
-                <input type="number" min={1} max={100} placeholder="e.g. 75"
+                <input
+                  type="number"
+                  min={1}
+                  max={100}
+                  placeholder="e.g. 75"
                   value={inputs.load || ""}
                   onChange={(e) => set("load", parseFloat(e.target.value) || 0)}
-                  className={inputBase} onKeyDown={(e) => e.key === "Enter" && next()} />
+                  className={inputBase}
+                  onKeyDown={(e) => e.key === "Enter" && next()}
+                />
                 <span className={unitBadge}>%</span>
               </div>
             </div>
             <div>
               <label className={labelClass}>Alternative Fuel</label>
               <div className="rounded-[6px] border border-[oklch(0.72_0.16_155)/0.5] bg-[oklch(0.72_0.16_155/0.1)] px-4 py-3 flex items-center justify-between">
-                <span className="text-sm font-bold text-[oklch(0.72_0.16_155)]">NG</span>
-                <span className="font-mono text-[9px] text-white/35 uppercase tracking-[0.1em]">Natural Gas</span>
+                <div className="flex gap-2" role="group" aria-label="Alternative fuel">
+                  {(["PNG", "LPG"] as const).map((fuel) => (
+                    <button
+                      key={fuel}
+                      type="button"
+                      aria-pressed={inputs.altFuelType === fuel}
+                      onClick={() => set("altFuelType", fuel)}
+                      className={`rounded-[3px] border px-4 py-2 text-sm font-extrabold transition-colors ${inputs.altFuelType === fuel ? "border-[oklch(0.72_0.16_155)] bg-[oklch(0.72_0.16_155)] text-[oklch(0.19_0.045_158)]" : "border-white/25 text-white/65 hover:border-white/60 hover:text-white"}`}
+                    >
+                      {fuel}
+                    </button>
+                  ))}
+                </div>
+                <span className="font-mono text-[9px] text-white/35 uppercase tracking-[0.1em]">
+                  {inputs.altFuelType === "PNG" ? "Piped Natural Gas" : "Liquefied Petroleum Gas"}
+                </span>
               </div>
             </div>
           </div>
@@ -114,10 +152,16 @@ export function CalculatorForm({ onComplete }: Props) {
           <div>
             <label className={labelClass}>Hours of Operation / Month</label>
             <div className={rowClass}>
-              <input autoFocus type="number" min={1} placeholder="e.g. 40"
+              <input
+                autoFocus
+                type="number"
+                min={1}
+                placeholder="e.g. 40"
                 value={inputs.hoursPerMonth || ""}
                 onChange={(e) => set("hoursPerMonth", parseFloat(e.target.value) || 0)}
-                className={inputBase} onKeyDown={(e) => e.key === "Enter" && next()} />
+                className={inputBase}
+                onKeyDown={(e) => e.key === "Enter" && next()}
+              />
               <span className={unitBadge}>hours / month</span>
             </div>
             <p className="mt-2 text-[11px] text-white/35">
@@ -132,23 +176,50 @@ export function CalculatorForm({ onComplete }: Props) {
             <div>
               <label className={labelClass}>Diesel Price</label>
               <div className={rowClass}>
-                <span className="px-3 py-2.5 font-mono text-[13px] text-white/55 border-r border-white/10 bg-white/5">₹</span>
-                <input autoFocus type="number" min={1} step={0.5} placeholder="e.g. 94"
+                <span className="px-3 py-2.5 font-mono text-[13px] text-white/55 border-r border-white/10 bg-white/5">
+                  ₹
+                </span>
+                <input
+                  autoFocus
+                  type="number"
+                  min={1}
+                  step={0.5}
+                  placeholder="e.g. 94"
                   value={inputs.dieselPrice || ""}
                   onChange={(e) => set("dieselPrice", parseFloat(e.target.value) || 0)}
-                  className={inputBase} onKeyDown={(e) => e.key === "Enter" && next()} />
+                  className={inputBase}
+                  onKeyDown={(e) => e.key === "Enter" && next()}
+                />
                 <span className={unitBadge}>₹ / L</span>
               </div>
             </div>
             <div>
-              <label className={labelClass}>NG Price</label>
+              <label className={labelClass}>
+                {inputs.altFuelType === "PNG" ? "PNG Price (₹/Sm³)" : "LPG Price (₹/kg)"}
+              </label>
               <div className={rowClass}>
-                <span className="px-3 py-2.5 font-mono text-[13px] text-white/55 border-r border-white/10 bg-white/5">₹</span>
-                <input type="number" min={1} step={0.5} placeholder="e.g. 85"
-                  value={inputs.ngPrice || ""}
-                  onChange={(e) => set("ngPrice", parseFloat(e.target.value) || 0)}
-                  className={inputBase} onKeyDown={(e) => e.key === "Enter" && next()} />
-                <span className={unitBadge}>₹ / Sm³</span>
+                <span className="px-3 py-2.5 font-mono text-[13px] text-white/55 border-r border-white/10 bg-white/5">
+                  ₹
+                </span>
+                <input
+                  type="number"
+                  min={1}
+                  step={0.5}
+                  placeholder="e.g. 85"
+                  value={
+                    inputs.altFuelType === "PNG" ? inputs.pngPrice || "" : inputs.lpgPrice || ""
+                  }
+                  onChange={(e) => {
+                    const price = parseFloat(e.target.value) || 0;
+                    if (inputs.altFuelType === "PNG") set("pngPrice", price);
+                    else set("lpgPrice", price);
+                  }}
+                  className={inputBase}
+                  onKeyDown={(e) => e.key === "Enter" && next()}
+                />
+                <span className={unitBadge}>
+                  {inputs.altFuelType === "PNG" ? "₹ / Sm³" : "₹ / kg"}
+                </span>
               </div>
             </div>
           </div>
@@ -165,13 +236,19 @@ export function CalculatorForm({ onComplete }: Props) {
       {/* Navigation */}
       <div className="shrink-0 border-t-2 border-white/20 px-5 py-4 flex items-center gap-3">
         {step > 1 && (
-          <button type="button" onClick={back}
-            className="flex h-11 items-center gap-1.5 border-2 border-white/45 px-4 text-[11px] font-extrabold uppercase tracking-[0.08em] text-white transition-colors hover:border-white hover:bg-white/10">
+          <button
+            type="button"
+            onClick={back}
+            className="flex h-11 items-center gap-1.5 border-2 border-white/45 px-4 text-[11px] font-extrabold uppercase tracking-[0.08em] text-white transition-colors hover:border-white hover:bg-white/10"
+          >
             ← Back
           </button>
         )}
-        <button type="button" onClick={next}
-          className="flex-1 h-11 bg-[oklch(0.72_0.16_155)] text-[oklch(0.19_0.045_158)] text-[11px] font-black uppercase tracking-[0.1em] transition-colors hover:bg-white">
+        <button
+          type="button"
+          onClick={next}
+          className="flex-1 h-11 bg-[oklch(0.72_0.16_155)] text-[oklch(0.19_0.045_158)] text-[11px] font-black uppercase tracking-[0.1em] transition-colors hover:bg-white"
+        >
           {step === TOTAL_STEPS ? "Calculate My Savings →" : "Continue →"}
         </button>
       </div>

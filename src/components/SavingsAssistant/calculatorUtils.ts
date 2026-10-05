@@ -1,133 +1,137 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// INTERNAL ENGINEERING CONSTANTS
-// Source: "VIMP BMEP DFK Saving Calculator webpage 16Sep2026.xlsx"
-// These are NOT user inputs. Do not expose them to the UI.
-// ─────────────────────────────────────────────────────────────────────────────
+// Source of truth: "Webpage Calculations" in the OM Solutions workbook.
+// Keep these values separate from the workbook's "DFK Calculator BMEP" model.
+export const POWER_FACTOR = 0.8;
+export const ALTERNATOR_EFFICIENCY_PCT = 96;
+export const PARASITIC_LOAD_PCT = 10; // B8 formula is B7*0.1; cached example confirms 10%.
+export const ENGINE_MECHANICAL_EFFICIENCY_PCT = 90;
+export const ENGINE_THERMAL_EFFICIENCY_PCT = 49;
+export const DIESEL_LHV_MJ_PER_L = 32;
+export const DIESEL_CO2_KG_PER_GJ = 70.55;
+export const ANNUAL_OPERATING_MONTHS = 10; // Webpage Calculations annualizes D30/G30 by multiplying by 10.
 
-export const POWER_FACTOR             = 0.8;       // dimensionless
-export const ALTERNATOR_EFFICIENCY    = 91;         // %
-export const PARASITIC_LOAD_PCT       = 7;          // %
-export const ENGINE_THERMAL_EFF       = 39;         // %
-export const DIESEL_LHV               = 32;         // MJ/L
-export const NG_LHV                   = 49;         // MJ/kg
-export const DIESEL_DENSITY           = 0.78;       // kg/L
-export const NG_DENSITY               = 0.75;       // kg/Sm³
-export const DIESEL_REPLACEMENT_PCT   = 50;         // % (fixed by Excel)
-export const DIESEL_CO2_FACTOR        = 70.55;      // kg CO₂/GJ
-export const NG_CO2_FACTOR            = 55.22;      // kg CO₂/GJ
+export type AlternateFuel = "PNG" | "LPG";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// INPUT / RESULT TYPES
-// ─────────────────────────────────────────────────────────────────────────────
+/** Fuel properties from D33:I35 of "Webpage Calculations". */
+export const ALTERNATE_FUEL_PROPERTIES: Record<
+  AlternateFuel,
+  {
+    lhvMJPerKg: number;
+    densityKgPerSm3?: number;
+    dieselSubstitutionPct: number;
+    co2KgPerGJ: number;
+  }
+> = {
+  PNG: { lhvMJPerKg: 47, densityKgPerSm3: 0.72, dieselSubstitutionPct: 50, co2KgPerGJ: 55.22 },
+  LPG: { lhvMJPerKg: 50, dieselSubstitutionPct: 40, co2KgPerGJ: 63.35 },
+};
 
-/** Only 6 values collected from the user */
 export interface CalculatorInputs {
-  gensetRating:  number;   // kVA
-  load:          number;   // %
-  altFuelType:   "NG";     // always NG — no other options
-  hoursPerMonth: number;   // hours/month
-  dieselPrice:   number;   // ₹/L
-  ngPrice:       number;   // ₹/Sm³
+  gensetRating: number; // kVA
+  load: number; // %
+  altFuelType: AlternateFuel;
+  hoursPerMonth: number;
+  dieselPrice: number; // ₹/L
+  pngPrice: number; // ₹/Sm³
+  lpgPrice: number; // ₹/kg
 }
 
 export interface CalculatorResults {
-  // ── Intermediate engine values (displayed for transparency) ────────────────
-  operatingGensetRating:  number;   // kVA
-  electricalPowerKWe:     number;   // kWe
-  engineBrakePower:       number;   // kW
-  parasiticLoad:          number;   // kW
-  totalEngineBrakePower:  number;   // kW
-  engineIndicatedPower:   number;   // kW
-  indicatedEnergyPerHr:   number;   // MJ/hr
-
-  // ── Fuel consumption ───────────────────────────────────────────────────────
-  dieselConsumptionLPerHr:    number;   // L/hr
-  dfDieselConsumptionLPerHr:  number;   // L/hr
-  ngConsumptionKgPerHr:       number;   // kg/hr
-  ngConsumptionSm3PerHr:      number;   // Sm³/hr
-
-  // ── Cost ───────────────────────────────────────────────────────────────────
-  dieselCostPerHr:        number;   // ₹/hr
-  dfDieselCostPerHr:      number;   // ₹/hr
-  ngCostPerHr:            number;   // ₹/hr
-  totalDualFuelCostPerHr: number;   // ₹/hr
-  savingPerHour:          number;   // ₹/hr
-  savingPerMonth:         number;   // ₹/month
-  savingPerYear:          number;   // ₹/year
-  costReductionPct:       number;   // %
-  dieselReplacementPct:   number;   // %
-
-  // ── CO₂ ────────────────────────────────────────────────────────────────────
-  dieselCO2KgPerHr:           number;   // kg/hr
-  dfDieselCO2KgPerHr:         number;   // kg/hr
-  ngCO2KgPerHr:               number;   // kg/hr
-  totalDualFuelCO2KgPerHr:    number;   // kg/hr
-  co2SavingKgPerHr:           number;   // kg/hr
-  monthlyCO2SavingKg:         number;   // kg/month
-  annualCO2SavingTonnes:      number;   // tonnes/year
+  operatingGensetRating: number;
+  electricalPowerKWe: number;
+  engineBrakePower: number;
+  parasiticLoad: number;
+  totalEngineBrakePower: number;
+  engineIndicatedPower: number;
+  energyInputMJPerHr: number;
+  dieselConsumptionLPerHr: number;
+  dfDieselConsumptionLPerHr: number;
+  alternateFuelConsumptionKgPerHr: number;
+  alternateFuelConsumptionBillingUnitPerHr: number;
+  alternateFuelBillingUnit: "Sm³" | "kg";
+  dieselCostPerHr: number;
+  dfDieselCostPerHr: number;
+  alternateFuelCostPerHr: number;
+  totalDualFuelCostPerHr: number;
+  savingPerHour: number;
+  savingPerMonth: number;
+  savingPerYear: number;
+  costReductionPct: number;
+  dieselReplacementPct: number;
+  dieselCO2KgPerHr: number;
+  dfDieselCO2KgPerHr: number;
+  alternateFuelCO2KgPerHr: number;
+  totalDualFuelCO2KgPerHr: number;
+  co2SavingKgPerHr: number;
+  monthlyCO2SavingKg: number;
+  annualCO2SavingTonnes: number;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// MAIN CALCULATION — follows Excel sequence exactly
-// ─────────────────────────────────────────────────────────────────────────────
-
+/**
+ * Workbook calculation order and equivalent formulas:
+ * B3=B1*B2/100; D1=B3*B4; B7=D1*100/B6; B8=B7*10%; B9=B7+B8;
+ * B11=B9/(B10/100); B13=B11/(B12/100); B14=B13*3.6;
+ * B23=B14/B17; B26=B23*(1-substitution%); B27=(B23-B26)*B17/B18;
+ * PNG bills B27/B20 in Sm³; LPG bills B27 in kg. Costs and CO₂ follow the
+ * selected fuel's own units/properties; workbook B28's Sm³ conversion is not
+ * applied to LPG because its stated price unit is INR/kg.
+ */
 export function calculate(inputs: CalculatorInputs): CalculatorResults {
-  const { gensetRating, load, hoursPerMonth, dieselPrice, ngPrice } = inputs;
+  const { gensetRating, load, altFuelType, hoursPerMonth, dieselPrice, pngPrice, lpgPrice } =
+    inputs;
+  const fuel = ALTERNATE_FUEL_PROPERTIES[altFuelType];
 
-  // Step 1 — Operating Genset Rating
+  // Genset rating → load → electrical power → engine brake power.
   const operatingGensetRating = gensetRating * (load / 100);
-
-  // Step 2 — Electrical Power (kWe)
   const electricalPowerKWe = operatingGensetRating * POWER_FACTOR;
+  const engineBrakePower = electricalPowerKWe / (ALTERNATOR_EFFICIENCY_PCT / 100);
 
-  // Step 3 — Engine Brake Power
-  const engineBrakePower = (electricalPowerKWe * 100) / ALTERNATOR_EFFICIENCY;
-
-  // Step 4 — Parasitic Load
-  const parasiticLoad = (engineBrakePower * PARASITIC_LOAD_PCT) / 100;
-
-  // Step 5 — Total Engine Brake Power
+  // The selected Webpage Calculations formula is B8=B7*0.1 (10%).
+  const parasiticLoad = engineBrakePower * (PARASITIC_LOAD_PCT / 100);
   const totalEngineBrakePower = engineBrakePower + parasiticLoad;
+  const engineIndicatedPower = totalEngineBrakePower / (ENGINE_MECHANICAL_EFFICIENCY_PCT / 100);
+  const indicatedPowerKJPerSec = engineIndicatedPower;
+  const energyInputMJPerHr = (indicatedPowerKJPerSec / (ENGINE_THERMAL_EFFICIENCY_PCT / 100)) * 3.6;
 
-  // Step 6 — Engine Indicated Power (kW = kJ/s)
-  const engineIndicatedPower = (totalEngineBrakePower * 100) / ENGINE_THERMAL_EFF;
+  // Pure diesel consumption → dual-fuel diesel → alternate fuel mass.
+  const dieselConsumptionLPerHr = energyInputMJPerHr / DIESEL_LHV_MJ_PER_L;
+  const dfDieselConsumptionLPerHr =
+    dieselConsumptionLPerHr * (1 - fuel.dieselSubstitutionPct / 100);
+  const alternateFuelConsumptionKgPerHr =
+    ((dieselConsumptionLPerHr - dfDieselConsumptionLPerHr) * DIESEL_LHV_MJ_PER_L) / fuel.lhvMJPerKg;
 
-  // Step 7 — Indicated Energy per Hour (MJ/hr)
-  const indicatedEnergyPerHr = engineIndicatedPower * 3.6;
+  // PNG billing uses Sm³; LPG billing uses kg. Never price LPG by volume.
+  const alternateFuelBillingUnit = altFuelType === "PNG" ? "Sm³" : "kg";
+  const alternateFuelConsumptionBillingUnitPerHr =
+    altFuelType === "PNG"
+      ? alternateFuelConsumptionKgPerHr / fuel.densityKgPerSm3!
+      : alternateFuelConsumptionKgPerHr;
+  const alternateFuelPrice = altFuelType === "PNG" ? pngPrice : lpgPrice;
 
-  // ── Pure Diesel ─────────────────────────────────────────────────────────────
-  const dieselConsumptionLPerHr = indicatedEnergyPerHr / DIESEL_LHV;
-  const dieselCostPerHr         = dieselConsumptionLPerHr * dieselPrice;
-
-  // ── Dual Fuel — NG ──────────────────────────────────────────────────────────
-  const dfDieselConsumptionLPerHr = dieselConsumptionLPerHr * (DIESEL_REPLACEMENT_PCT / 100);
-
-  const ngEnergyPerHr         = indicatedEnergyPerHr * (1 - DIESEL_REPLACEMENT_PCT / 100);
-  const ngConsumptionKgPerHr  = ngEnergyPerHr / NG_LHV;
-  const ngConsumptionSm3PerHr = ngConsumptionKgPerHr / NG_DENSITY;
-
-  const dfDieselCostPerHr        = dfDieselConsumptionLPerHr * dieselPrice;
-  const ngCostPerHr              = ngConsumptionSm3PerHr * ngPrice;
-  const totalDualFuelCostPerHr   = dfDieselCostPerHr + ngCostPerHr;
-
-  // ── Savings ─────────────────────────────────────────────────────────────────
-  const savingPerHour      = dieselCostPerHr - totalDualFuelCostPerHr;
-  const savingPerMonth     = savingPerHour * hoursPerMonth;
-  const savingPerYear      = savingPerMonth * 12;
-  const costReductionPct   = dieselCostPerHr > 0 ? (savingPerHour / dieselCostPerHr) * 100 : 0;
+  // Fuel costs and savings.
+  const dieselCostPerHr = dieselConsumptionLPerHr * dieselPrice;
+  const dfDieselCostPerHr = dfDieselConsumptionLPerHr * dieselPrice;
+  const alternateFuelCostPerHr = alternateFuelConsumptionBillingUnitPerHr * alternateFuelPrice;
+  const totalDualFuelCostPerHr = dfDieselCostPerHr + alternateFuelCostPerHr;
+  const savingPerHour = dieselCostPerHr - totalDualFuelCostPerHr;
+  const savingPerMonth = savingPerHour * hoursPerMonth;
+  const savingPerYear = savingPerMonth * ANNUAL_OPERATING_MONTHS;
+  const costReductionPct = dieselCostPerHr > 0 ? (savingPerHour / dieselCostPerHr) * 100 : 0;
   const dieselReplacementPct =
     dieselConsumptionLPerHr > 0
       ? ((dieselConsumptionLPerHr - dfDieselConsumptionLPerHr) / dieselConsumptionLPerHr) * 100
       : 0;
 
-  // ── CO₂ — using LHV-based GJ methodology from Excel ─────────────────────────
-  const dieselCO2KgPerHr        = (dieselConsumptionLPerHr   * DIESEL_LHV / 1000) * DIESEL_CO2_FACTOR;
-  const dfDieselCO2KgPerHr      = (dfDieselConsumptionLPerHr * DIESEL_LHV / 1000) * DIESEL_CO2_FACTOR;
-  const ngCO2KgPerHr            = (ngConsumptionKgPerHr      * NG_LHV    / 1000) * NG_CO2_FACTOR;
-  const totalDualFuelCO2KgPerHr = dfDieselCO2KgPerHr + ngCO2KgPerHr;
-  const co2SavingKgPerHr        = dieselCO2KgPerHr - totalDualFuelCO2KgPerHr;
-  const monthlyCO2SavingKg      = co2SavingKgPerHr * hoursPerMonth;
-  const annualCO2SavingTonnes   = (monthlyCO2SavingKg * 12) / 1000;
+  // CO₂ uses the selected fuel's LHV and kg/GJ factor from this same sheet.
+  const dieselCO2KgPerHr =
+    ((dieselConsumptionLPerHr * DIESEL_LHV_MJ_PER_L) / 1000) * DIESEL_CO2_KG_PER_GJ;
+  const dfDieselCO2KgPerHr =
+    ((dfDieselConsumptionLPerHr * DIESEL_LHV_MJ_PER_L) / 1000) * DIESEL_CO2_KG_PER_GJ;
+  const alternateFuelCO2KgPerHr =
+    ((alternateFuelConsumptionKgPerHr * fuel.lhvMJPerKg) / 1000) * fuel.co2KgPerGJ;
+  const totalDualFuelCO2KgPerHr = dfDieselCO2KgPerHr + alternateFuelCO2KgPerHr;
+  const co2SavingKgPerHr = dieselCO2KgPerHr - totalDualFuelCO2KgPerHr;
+  const monthlyCO2SavingKg = co2SavingKgPerHr * hoursPerMonth;
+  const annualCO2SavingTonnes = (monthlyCO2SavingKg * ANNUAL_OPERATING_MONTHS) / 1000;
 
   return {
     operatingGensetRating,
@@ -136,14 +140,15 @@ export function calculate(inputs: CalculatorInputs): CalculatorResults {
     parasiticLoad,
     totalEngineBrakePower,
     engineIndicatedPower,
-    indicatedEnergyPerHr,
+    energyInputMJPerHr,
     dieselConsumptionLPerHr,
     dfDieselConsumptionLPerHr,
-    ngConsumptionKgPerHr,
-    ngConsumptionSm3PerHr,
+    alternateFuelConsumptionKgPerHr,
+    alternateFuelConsumptionBillingUnitPerHr,
+    alternateFuelBillingUnit,
     dieselCostPerHr,
     dfDieselCostPerHr,
-    ngCostPerHr,
+    alternateFuelCostPerHr,
     totalDualFuelCostPerHr,
     savingPerHour,
     savingPerMonth,
@@ -152,7 +157,7 @@ export function calculate(inputs: CalculatorInputs): CalculatorResults {
     dieselReplacementPct,
     dieselCO2KgPerHr,
     dfDieselCO2KgPerHr,
-    ngCO2KgPerHr,
+    alternateFuelCO2KgPerHr,
     totalDualFuelCO2KgPerHr,
     co2SavingKgPerHr,
     monthlyCO2SavingKg,
@@ -160,23 +165,15 @@ export function calculate(inputs: CalculatorInputs): CalculatorResults {
   };
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// HELPERS
-// ─────────────────────────────────────────────────────────────────────────────
-
 export function formatINR(amount: number, compact = false): string {
   const rounded = Math.round(amount);
   if (!compact) return "₹" + rounded.toLocaleString("en-IN");
   const abs = Math.abs(amount);
   if (abs >= 1_00_00_000) return "₹" + (amount / 1_00_00_000).toFixed(2) + " Cr";
-  if (abs >= 1_00_000)    return "₹" + (amount / 1_00_000).toFixed(2) + " L";
-  if (abs >= 1_000)       return "₹" + (amount / 1_000).toFixed(1) + "K";
+  if (abs >= 1_00_000) return "₹" + (amount / 1_00_000).toFixed(2) + " L";
+  if (abs >= 1_000) return "₹" + (amount / 1_000).toFixed(1) + "K";
   return "₹" + rounded.toLocaleString("en-IN");
 }
-
-// ─────────────────────────────────────────────────────────────────────────────
-// VALIDATION
-// ─────────────────────────────────────────────────────────────────────────────
 
 export function validateStep(step: number, inputs: Partial<CalculatorInputs>): string | null {
   switch (step) {
@@ -193,8 +190,10 @@ export function validateStep(step: number, inputs: Partial<CalculatorInputs>): s
     case 3:
       if (!inputs.dieselPrice || inputs.dieselPrice <= 0)
         return "Please enter a valid diesel price.";
-      if (!inputs.ngPrice || inputs.ngPrice <= 0)
-        return "Please enter a valid NG price.";
+      if (inputs.altFuelType === "PNG" && (!inputs.pngPrice || inputs.pngPrice <= 0))
+        return "Please enter a valid PNG price.";
+      if (inputs.altFuelType === "LPG" && (!inputs.lpgPrice || inputs.lpgPrice <= 0))
+        return "Please enter a valid LPG price.";
       break;
   }
   return null;

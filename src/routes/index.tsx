@@ -2417,7 +2417,7 @@ Message: ${message}`;
         >
           <div
             className="relative flex flex-col overflow-hidden rounded-[14px] bg-[#0d1410] shadow-2xl w-full"
-            style={{ maxWidth: "90vw", maxHeight: "90vh", border: "1px solid rgba(182,255,114,0.15)" }}
+            style={{ maxWidth: "96vw", maxHeight: "96vh", border: "1px solid rgba(182,255,114,0.15)" }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
@@ -2598,7 +2598,7 @@ Message: ${message}`;
               </div>
             ) : (
               // Schematic View with Hotspots
-              <div className="relative flex min-h-0 flex-1 items-center justify-center bg-black/30 p-6 overflow-hidden">
+              <div className="relative flex min-h-0 flex-1 items-center justify-center bg-black/30 p-2 overflow-hidden">
                 <div
                   className="relative"
                   style={{ transform: `scale(${schematicZoom})`, transformOrigin: "center" }}
@@ -2606,7 +2606,7 @@ Message: ${message}`;
                   <img
                     src={primaryDualFuelKitImage}
                     alt="Dual Fuel Kit Schematic"
-                    className="max-h-[60vh] max-w-full object-contain"
+                    className="max-h-[76vh] w-[92vw] max-w-none object-contain"
                   />
                   {/* Hotspots */}
                   {schematicComponents.map((component) => {

@@ -1823,20 +1823,22 @@ Message: ${message}`;
                   <div className="mt-10 overflow-hidden rounded-2xl border border-border/60 bg-background shadow-sm">
                     <div className="grid gap-px bg-border/60 sm:grid-cols-2 xl:grid-cols-4">
                       {applicationCards.map(({ title, description, image }, index) => (
-                        <article key={title} className="group relative min-h-[250px] overflow-hidden bg-background p-6 transition-colors hover:bg-muted/40 sm:min-h-[275px] sm:p-7">
-                          <div className="flex items-start justify-between">
-                            <button
-                              type="button"
-                              onClick={() => openImage(image, title)}
-                              aria-label={`View ${title} image`}
-                              className="grid size-[76px] cursor-zoom-in place-items-center overflow-hidden rounded-full border border-border/70 bg-white p-1.5 shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal sm:size-[88px]"
-                            >
-                              <img src={image} alt={title} className="size-full rounded-full object-contain" loading="lazy" />
-                            </button>
+                        <article key={title} className="group relative min-h-[370px] overflow-hidden bg-background p-5 transition-colors hover:bg-muted/40 sm:min-h-[390px] sm:p-6">
+                          <div className="mb-5 flex items-center justify-between">
+                            <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-signal">Engine application</span>
                             <span className="font-mono text-xs font-semibold text-muted-foreground/70">{String(index + 1).padStart(2, "0")}</span>
                           </div>
-                          <h3 className="mt-7 text-lg font-extrabold leading-tight text-foreground sm:text-xl">{title}</h3>
-                          <p className="mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground">{description}</p>
+                          <button
+                            type="button"
+                            onClick={() => openImage(image, title)}
+                            aria-label={`View ${title} image`}
+                            className="group/image relative block h-48 w-full cursor-zoom-in overflow-hidden rounded-xl border border-border/60 bg-white p-3 shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal sm:h-52"
+                          >
+                            <img src={image} alt={title} className="size-full object-contain transition-transform duration-300 group-hover/image:scale-105" loading="lazy" />
+                            <span className="absolute bottom-2 right-2 rounded-full bg-panel/85 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white opacity-0 transition-opacity group-hover/image:opacity-100">View image</span>
+                          </button>
+                          <h3 className="mt-5 text-lg font-extrabold leading-tight text-foreground sm:text-xl">{title}</h3>
+                          <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted-foreground">{description}</p>
                         </article>
                       ))}
                     </div>

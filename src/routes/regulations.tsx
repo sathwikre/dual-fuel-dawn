@@ -274,8 +274,7 @@ function RegulationsPage() {
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_50%_0%,rgba(182,255,114,.12),transparent_68%)]" />
         <div className="mx-auto max-w-[900px] animate-[regulations-hero-in_.7s_ease-out_both]">
           <h1 className="text-[25px] font-extrabold leading-[1.08] sm:text-4xl lg:text-5xl">
-            State-Wise Emission Guidelines
-            <br />&amp; Landmark Regulations
+            State wise Particulate Matter Emission reduction guidelines for older Diesel Generator sets
           </h1>
         </div>
       </section>

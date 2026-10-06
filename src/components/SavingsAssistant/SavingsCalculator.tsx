@@ -76,12 +76,9 @@ export function SavingsCalculator({ onClose, onJoinMission }: Props) {
         }
         .calc-panel {
           animation: calcSlideIn 0.3s cubic-bezier(0.34,1.2,0.64,1) both;
-          /* Mobile default: full width with 8px margins */
+          /* Open at full viewport size; resize handles still allow manual resizing. */
           position: fixed;
-          top: 8px;
-          left: 8px;
-          right: 8px;
-          bottom: 88px;
+          inset: 0;
           z-index: 99;
           display: flex;
           flex-direction: column;
@@ -103,18 +100,6 @@ export function SavingsCalculator({ onClose, onJoinMission }: Props) {
         .calc-results, .calc-results * { font-weight: 800 !important; }
         .calc-panel .rounded-\[6px\], .calc-panel .rounded-\[8px\], .calc-panel .rounded-full { border-radius: 3px; }
         .calc-panel .border-white\/10, .calc-panel .border-white\/15, .calc-panel .border-white\/20 { border-width: 2px; }
-        /* Desktop: right-anchored fixed width */
-        @media (min-width: 540px) {
-          .calc-panel {
-            top: 24px;
-            left: auto;
-            right: 24px;
-            width: min(960px, calc(100vw - 48px));
-            min-width: 340px;
-            min-height: 0;
-            max-width: calc(100vw - 48px);
-          }
-        }
       `}</style>
 
       {/* Backdrop */}

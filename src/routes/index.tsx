@@ -133,6 +133,7 @@ import {
 import logoImage from "@/assets/aircompressor/logo.png";
 import founderImage from "@/assets/img-006.jpg";
 import schematicImage from "@/assets/duelfule.png";
+import primaryDualFuelKitImage from "@/assets/duel fuel.jpeg";
 import systemImage from "@/assets/gg.jpeg";
 import gasHandlingImage from "@/assets/GAS handling system.jpeg";
 import exhaustTemperatureSensorsImage from "@/assets/Exhaust Temperature Sensors.jpeg";
@@ -1358,7 +1359,7 @@ Message: ${message}`;
                     aria-label="Open interactive dual fuel kit schematic"
                   >
                     <img
-                      src={schematicImage}
+                      src={primaryDualFuelKitImage}
                       alt="Dual fuel kit schematic"
                       className="aspect-[2.30/1] w-full object-contain p-3 transition-transform duration-500 group-hover:scale-[1.03]"
                     />
@@ -2597,7 +2598,7 @@ Message: ${message}`;
                   style={{ transform: `scale(${schematicZoom})`, transformOrigin: "center" }}
                 >
                   <img
-                    src={schematicImage}
+                    src={primaryDualFuelKitImage}
                     alt="Dual Fuel Kit Schematic"
                     className="max-h-[60vh] max-w-full object-contain"
                   />

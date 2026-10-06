@@ -292,7 +292,7 @@ const navItems = [
 ] as const;
 
 const getNavHref = (id: (typeof navItems)[number][1]) =>
-  id === "impact" ? "/impact" : id === "regulations" ? "/regulations" : `#${id}`;
+  id === "impact" ? "/impact" : id === "regulations" ? "/regulations" : id === "technology" ? "/technology" : `#${id}`;
 
 // Schematic component configuration for interactive viewer
 type SchematicComponent = {
@@ -790,12 +790,12 @@ function ImageButton({ src, alt, caption, onClick, className = "" }: { src: stri
   );
 }
 
-function OmSolutionsHome() {
+export function OmSolutionsHome({ technologyOnly = false }: { technologyOnly?: boolean } = {}) {
   const isMobile = useIsMobile();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [tickerVisible, setTickerVisible] = useState(false);
-  const [techDrawerOpen, setTechDrawerOpen] = useState(false);
+  const [techDrawerOpen, setTechDrawerOpen] = useState(technologyOnly);
   const [appGallery, setAppGallery] = useState<{ title: string; images: string[]; index: number } | null>(null);
   const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
   const [formSent, setFormSent] = useState(false);
@@ -828,7 +828,8 @@ function OmSolutionsHome() {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setSelectedImage(null);
-        setTechDrawerOpen(false);
+        if (technologyOnly) window.location.href = "/";
+        else setTechDrawerOpen(false);
         setAppGallery(null);
         setDealershipModalOpen(false);
         setSchematicViewerOpen(false);
@@ -856,7 +857,7 @@ function OmSolutionsHome() {
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [schematicViewerOpen, selectedComponent]);
+  }, [schematicViewerOpen, selectedComponent, technologyOnly]);
 
   // Carousel track ref for dynamic width calculation
   const carouselTrackRef = useRef<HTMLDivElement>(null);
@@ -986,7 +987,8 @@ Message: ${message}`;
   const navScrolled = scrolled || menuOpen;
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
+    <div className={`min-h-screen overflow-x-hidden bg-background text-foreground ${technologyOnly ? "technology-standalone" : ""}`}>
+      {technologyOnly && <style>{`.technology-standalone>header,.technology-standalone>footer,.technology-standalone> :not(main){display:none}.technology-standalone main> :not(.technology-route-panel){display:none}`}</style>}
       <header
         style={{ transition: "height .35s ease, background .35s ease, backdrop-filter .35s ease" }}
         className={[
@@ -1015,7 +1017,6 @@ Message: ${message}`;
                   <a
                     key={id}
                     href={getNavHref(id)}
-                    onClick={id === "technology" ? (event) => { event.preventDefault(); setTechDrawerOpen(true); } : undefined}
                     className="whitespace-nowrap text-[15px] font-bold capitalize tracking-normal text-slate-700 transition-colors duration-200 hover:text-emerald-700"
                   >
                     {label}
@@ -1107,7 +1108,7 @@ Message: ${message}`;
                     <a
                       key={id}
                       href={getNavHref(id)}
-                      onClick={id === "technology" ? (event) => { event.preventDefault(); setTechDrawerOpen(true); closeMenu(); } : closeMenu}
+                      onClick={closeMenu}
                       className="border-b border-white/10 py-3 text-[13px] font-extrabold uppercase tracking-[0.11em] text-white/80 transition-colors hover:text-[#b6ff72]"
                     >
                       {label}
@@ -1180,7 +1181,7 @@ Message: ${message}`;
         `}</style>
       </div>
 
-      <main>
+      <main className={technologyOnly ? "technology-standalone-main" : undefined}>
         <section id="home" className="relative isolate min-h-[calc(100svh-129px)] overflow-hidden bg-panel lg:min-h-[calc(100svh-160px)]">
           <HeroBackground />
           <div className="absolute inset-0 z-[2] bg-gradient-to-r from-white/90 via-white/65 to-transparent" />
@@ -1400,14 +1401,13 @@ Message: ${message}`;
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/75 font-sans">
               To make engine operation cleaner and more cost-effective, we need to make the shift to intelligent dual-fuel systems.
             </p>
-            <button
-              type="button"
-              onClick={() => setTechDrawerOpen(true)}
+            <a
+              href="/technology"
               className="group mt-9 inline-flex w-fit items-center gap-3 rounded-sm bg-signal px-7 py-3.5 text-[11px] font-extrabold uppercase tracking-[0.12em] text-panel shadow-[0_8px_32px_color-mix(in_oklab,var(--color-signal)_35%,transparent)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white"
             >
               Explore Technology
               <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-            </button>
+            </a>
             <div className="mt-10 hidden items-center gap-2.5 font-mono text-[10px] uppercase tracking-[0.16em] text-white/40 lg:flex">
               <span className="text-signal">02</span>
               <span className="h-px w-8 bg-white/20" aria-hidden="true" />
@@ -1419,15 +1419,15 @@ Message: ${message}`;
         {/* â”€â”€ Tech Drawer â”€â”€ */}
         {techDrawerOpen && (
           <div
-            className="fixed inset-0 z-[55] flex flex-col bg-background"
+            className={`technology-route-panel fixed inset-0 z-[55] flex flex-col bg-background`}
             role="dialog"
             aria-modal="true"
             aria-label="OM Solutions Technology"
           >
             <div className="sticky top-0 z-10 flex items-center justify-between border-b border-signal/20 bg-panel/95 px-[4.5vw] py-4 backdrop-blur-md">
               <a
-                href="#home"
-                onClick={() => setTechDrawerOpen(false)}
+                href={technologyOnly ? "/#home" : "#home"}
+                onClick={technologyOnly ? undefined : () => setTechDrawerOpen(false)}
                 className="flex items-center gap-2.5 rounded-sm transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal"
                 aria-label="OM Solutions — return to home"
               >
@@ -1443,7 +1443,7 @@ Message: ${message}`;
 
               <button
                 type="button"
-                onClick={() => setTechDrawerOpen(false)}
+                onClick={() => technologyOnly ? (window.location.href = "/") : setTechDrawerOpen(false)}
                 className="flex items-center gap-2.5 rounded-sm border border-white/25 px-4 py-3 text-[10px] font-extrabold uppercase tracking-[0.1em] text-white transition-all hover:border-signal/50 hover:bg-white/10 hover:text-signal"
                 aria-label="Close technology panel"
               >
@@ -1846,7 +1846,7 @@ Message: ${message}`;
                 <div className="hero-grid-overlay absolute inset-0 opacity-25" aria-hidden="true" />
                 <button
                   type="button"
-                  onClick={() => setTechDrawerOpen(false)}
+                  onClick={() => technologyOnly ? (window.location.href = "/") : setTechDrawerOpen(false)}
                   className="relative inline-flex items-center gap-3 rounded-sm border border-white/25 px-7 py-3.5 text-[10px] font-extrabold uppercase tracking-[0.12em] text-white transition-all hover:border-signal/50 hover:bg-white/10 hover:text-signal"
                 >
                   <X className="size-3.5" /> Close Technology Panel
@@ -2882,4 +2882,8 @@ Message: ${message}`;
       <SavingsAssistant />
     </div>
   );
+}
+
+export function TechnologyStandalone() {
+  return <OmSolutionsHome technologyOnly />;
 }

@@ -109,7 +109,7 @@ export const STATE_REGULATIONS = [
 
 const navLinks = [
   ["Home", "/#home"],
-  ["Technology", "/#technology"],
+  ["Technology", "/technology"],
   ["Impact", "/impact"],
   ["About", "/#team"],
   ["Regulations", "/regulations"],

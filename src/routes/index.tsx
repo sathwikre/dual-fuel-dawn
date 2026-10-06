@@ -1825,7 +1825,6 @@ Message: ${message}`;
                       {applicationCards.map(({ title, description, image }, index) => (
                         <article key={title} className="group relative min-h-[370px] overflow-hidden bg-background p-5 transition-colors hover:bg-muted/40 sm:min-h-[390px] sm:p-6">
                           <div className="mb-5 flex items-center justify-between">
-                            <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-signal">Engine application</span>
                             <span className="font-mono text-xs font-semibold text-muted-foreground/70">{String(index + 1).padStart(2, "0")}</span>
                           </div>
                           <button

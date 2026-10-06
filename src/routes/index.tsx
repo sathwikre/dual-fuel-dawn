@@ -1563,7 +1563,7 @@ Message: ${message}`;
                               <h4 className="text-sm font-bold">{recdTypes[recdType].heading}</h4>
                               <div className="mt-3 grid gap-x-5 gap-y-2 sm:grid-cols-2">
                                 {recdTypes[recdType].points.map((point) => (
-                                  <p key={point} className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground font-sans sm:text-base">
+                                  <p key={point} className="flex gap-2.5 text-sm leading-relaxed text-foreground font-sans sm:text-base">
                                     <span className="mt-1.5 size-1 shrink-0 rounded-full bg-danger" />
                                     {point}
                                   </p>

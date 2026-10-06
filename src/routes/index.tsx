@@ -1816,7 +1816,7 @@ Message: ${message}`;
                 <div className="relative mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
                   <div className="flex flex-wrap items-end justify-between gap-6">
                     <div>
-                      <SectionLabel index="OM / 03" accent>Technology matrix</SectionLabel>
+                     
                       <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Dual fuel technology architecture</h2>
                     </div>
                     <p className="max-w-md text-sm leading-relaxed text-muted-foreground font-sans">Explore supported alternate-fuel pathways across engine applications.</p>

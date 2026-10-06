@@ -333,18 +333,17 @@ function RegulationsPage() {
                 <ShieldCheck aria-hidden="true" className="size-4 sm:size-5 md:size-6" />
               </span>
               <h3 className="mt-2 text-[8px] font-extrabold leading-tight text-slate-900 sm:mt-3 sm:text-sm md:mt-4 md:text-lg">
-                CPCB-IV+ Dual-Fuel Retrofit
+               Dual fuel kit retro-fitment on older Diesel Gensets
               </h3>
               <p className="mt-1.5 text-[7px] leading-[1.25] text-slate-600 sm:mt-2 sm:text-xs sm:leading-5 md:mt-3 md:text-base md:leading-7">
-                Seamlessly convert your engines to meet CPCB-IV+ standards with our advanced dual-fuel kit.
-              </p>
+               Compliance to State Pollution Control Board notifications for PM reduction        </p>
             </article>
             <article className="flex min-h-[118px] min-w-0 flex-col items-center rounded-xl border border-slate-200 bg-white px-2 py-2 text-center shadow-sm sm:min-h-[190px] sm:px-4 sm:py-5 md:min-h-[240px] md:rounded-2xl md:px-7 md:py-7">
               <span className="grid size-7 place-items-center rounded-lg bg-emerald-50 text-emerald-700 sm:size-10 md:size-12">
                 <Fuel aria-hidden="true" className="size-4 sm:size-5 md:size-6" />
               </span>
               <h3 className="mt-2 text-[8px] font-extrabold leading-tight text-slate-900 sm:mt-3 sm:text-sm md:mt-4 md:text-lg">
-                70% Diesel Replacement
+                Up to 70% Diesel Replacement
               </h3>
               <p className="mt-1.5 text-[7px] leading-[1.25] text-slate-600 sm:mt-2 sm:text-xs sm:leading-5 md:mt-3 md:text-base md:leading-7">
                 Achieve substantial reduction in diesel usage and cost.
@@ -355,10 +354,10 @@ function RegulationsPage() {
                 <Clock3 aria-hidden="true" className="size-4 sm:size-5 md:size-6" />
               </span>
               <h3 className="mt-2 text-[8px] font-extrabold leading-tight text-slate-900 sm:mt-3 sm:text-sm md:mt-4 md:text-lg">
-                Zero Engine Downtime
+               Quick installation
               </h3>
               <p className="mt-1.5 text-[7px] leading-[1.25] text-slate-600 sm:mt-2 sm:text-xs sm:leading-5 md:mt-3 md:text-base md:leading-7">
-                Retrofit process with no operational interruption, maintaining your schedule.
+               Retrofit process with no very less modifications to base diesel engine with minimal interruption
               </p>
             </article>
           </div>

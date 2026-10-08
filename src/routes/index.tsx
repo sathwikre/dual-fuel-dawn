@@ -1907,9 +1907,9 @@ Message: ${message}`;
                         <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">TATA 125 kVA CPCB-II</span></div>
                         <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + LPG</span></div>
                         <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">65–85% · Avg 75%</span></div>
-                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">200/mo · 2,000/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹159/hr · ₹31,800/mo · ₹3.18L/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">3 kg/hr · 600 kg/mo · 6,000 kg/yr</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">200/month · 2,000/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹159/hr · ₹31,800/month · ₹3.18L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">3 kg/hr · 600 kg/month · 6,000 kg/yr</span></div>
                       </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
@@ -1932,9 +1932,9 @@ Message: ${message}`;
                         <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">KOEL 320 kVA CPCB-II</span></div>
                         <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (300 bar)</span></div>
                         <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">50–75% · Avg 55%</span></div>
-                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">100/mo · 1,000/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹783/hr · ₹78,300/mo · ₹7.83L/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">10.1 kg/hr · 1009 kg/mo · 10,090 kg/yr</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">100/month · 1,000/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹783/hr · ₹78,300/month · ₹7.83L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">10.1 kg/hr · 1009 kg/month · 10,090 kg/yr</span></div>
                       </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
@@ -1957,9 +1957,9 @@ Message: ${message}`;
                         <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">FMTU 1010 kVA CPCB-IV+</span></div>
                         <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (1 bar)</span></div>
                         <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">50–60% · Avg 55%</span></div>
-                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">40/mo · 400/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹2,471/hr · ₹98,840/mo · ₹9.884L/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">31.6 kg/hr · 1,262 kg/mo · 12,620 kg/yr</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">40/month · 400/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹2,471/hr · ₹98,840/month · ₹9.884L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">31.6 kg/hr · 1,262 kg/month · 12,620 kg/yr</span></div>
                       </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
@@ -1982,9 +1982,9 @@ Message: ${message}`;
                         <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">FMTU 1010 kVA CPCB-IV+</span></div>
                         <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (1 bar)</span></div>
                         <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">50–60% · Avg 55%</span></div>
-                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">40/mo · 400/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹2,471/hr · ₹98,840/mo · ₹9.884L/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">31.6 kg/hr · 1,262 kg/mo · 12,620 kg/yr</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">40/month · 400/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹2,471/hr · ₹98,840/month · ₹9.884L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">31.6 kg/hr · 1,262 kg/month · 12,620 kg/yr</span></div>
                       </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
@@ -2007,9 +2007,9 @@ Message: ${message}`;
                         <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">Greaves 200 kVA CPCB-IV+</span></div>
                         <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (1 bar)</span></div>
                         <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">60-80% · Avg 70%</span></div>
-                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">40/mo · 400/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹756/hr · ₹30,240/mo · ₹3.024L/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">9.8 kg/hr · 390 kg/mo · 3,900 kg/yr</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">40/month · 400/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹756/hr · ₹30,240/month · ₹3.024L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">9.8 kg/hr · 390 kg/month · 3,900 kg/yr</span></div>
                       </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
@@ -2032,9 +2032,9 @@ Message: ${message}`;
                         <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">MTU 1000 kVA CPCB-II</span></div>
                         <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (1 bar)</span></div>
                         <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">60–80% · Avg 70%</span></div>
-                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">200/mo · 2,000/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹3,114/hr · ₹6,22,800/mo · ₹62.28L/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">40.15 kg/hr · 8,030 kg/mo · 80,300 kg/yr</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">200/month · 2,000/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹3,114/hr · ₹6,22,800/month · ₹62.28L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">40.15 kg/hr · 8,030 kg/month · 80,300 kg/yr</span></div>
                       </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
@@ -2058,9 +2058,9 @@ Message: ${message}`;
                         <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">TATA 125 kVA CPCB-II</span></div>
                         <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + LPG</span></div>
                         <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">65–85% · Avg 75%</span></div>
-                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">200/mo · 2,000/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹159/hr · ₹31,800/mo · ₹3.18L/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">3 kg/hr · 600 kg/mo · 6,000 kg/yr</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">200/month · 2,000/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹159/hr · ₹31,800/month · ₹3.18L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">3 kg/hr · 600 kg/month · 6,000 kg/yr</span></div>
                       </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
@@ -2083,9 +2083,9 @@ Message: ${message}`;
                         <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">KOEL 320 kVA CPCB-II</span></div>
                         <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (300 bar)</span></div>
                         <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">50–75% · Avg 55%</span></div>
-                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">100/mo · 1,000/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹783/hr · ₹78,300/mo · ₹7.83L/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">10.1 kg/hr · 1009 kg/mo · 10,090 kg/yr</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">100/month · 1,000/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹783/hr · ₹78,300/month · ₹7.83L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">10.1 kg/hr · 1009 kg/month · 10,090 kg/yr</span></div>
                       </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
@@ -2108,9 +2108,9 @@ Message: ${message}`;
                         <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">FMTU 1010 kVA CPCB-IV+</span></div>
                         <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (1 bar)</span></div>
                         <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">50–60% · Avg 55%</span></div>
-                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">40/mo · 400/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹2,471/hr · ₹98,840/mo · ₹9.884L/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">31.6 kg/hr · 1,262 kg/mo · 12,620 kg/yr</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">40/month · 400/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹2,471/hr · ₹98,840/month · ₹9.884L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">31.6 kg/hr · 1,262 kg/month · 12,620 kg/yr</span></div>
                       </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
@@ -2133,9 +2133,9 @@ Message: ${message}`;
                         <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">FMTU 1010 kVA CPCB-IV+</span></div>
                         <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (1 bar)</span></div>
                         <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">50–60% · Avg 55%</span></div>
-                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">40/mo · 400/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹2,471/hr · ₹98,840/mo · ₹9.884L/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">31.6 kg/hr · 1,262 kg/mo · 12,620 kg/yr</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">40/month · 400/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹2,471/hr · ₹98,840/month · ₹9.884L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">31.6 kg/hr · 1,262 kg/month · 12,620 kg/yr</span></div>
                       </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
@@ -2158,9 +2158,9 @@ Message: ${message}`;
                         <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">Greaves 200 kVA CPCB-IV+</span></div>
                         <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (1 bar)</span></div>
                         <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">50–60% · Avg 85%</span></div>
-                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">40/mo · 400/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹756/hr · ₹30,240/mo · ₹3.024L/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">9.8 kg/hr · 390 kg/mo · 3,900 kg/yr</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">40/month · 400/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹756/hr · ₹30,240/month · ₹3.024L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">9.8 kg/hr · 390 kg/month · 3,900 kg/yr</span></div>
                       </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">
@@ -2183,9 +2183,9 @@ Message: ${message}`;
                         <div><span className="font-bold text-foreground">Genset:</span> <span className="font-medium text-foreground">MTU 1000 kVA CPCB-II</span></div>
                         <div><span className="font-bold text-foreground">Fuel:</span> <span className="font-medium text-foreground">Diesel + PNG (1 bar)</span></div>
                         <div><span className="font-bold text-foreground">Load:</span> <span className="font-medium text-foreground">60–80% · Avg 70%</span></div>
-                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">200/mo · 2,000/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹3,114/hr · ₹6,22,800/mo · ₹62.28L/yr</span></div>
-                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">40.15 kg/hr · 8,030 kg/mo · 80,300 kg/yr</span></div>
+                        <div><span className="font-bold text-foreground">Hours:</span> <span className="font-medium text-foreground">200/month · 2,000/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated cost saving:</span> <span className="font-medium text-foreground">₹3,114/hr · ₹6,22,800/month · ₹62.28L/yr</span></div>
+                        <div><span className="font-bold text-signal">Estimated CO₂ saving potential:</span> <span className="font-medium text-foreground">40.15 kg/hr · 8,030 kg/month · 80,300 kg/yr</span></div>
                       </div>
                     </div>
                     <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary-soft text-signal transition-colors group-hover:bg-signal/15">

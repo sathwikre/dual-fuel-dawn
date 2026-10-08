@@ -320,6 +320,29 @@ function RegulationsPage() {
             </article>
           ))}
         </div>
+
+        <div className="mx-auto mt-8 max-w-3xl px-2 sm:mt-10">
+          <div className="rounded-[28px] border border-emerald-200 bg-gradient-to-r from-[#0b2a1e] via-[#123d2d] to-[#0f3e32] p-[1px] shadow-[0_20px_50px_rgba(11,42,30,0.18)]">
+            <div className="flex flex-col items-center justify-between gap-4 rounded-[27px] bg-[#0b2a1e]/95 px-5 py-6 text-center sm:flex-row sm:px-7 sm:py-6 sm:text-left">
+              <div className="max-w-xl">
+                <p className="mb-2 text-[10px] font-extrabold uppercase tracking-[0.18em] text-emerald-300/90">
+                  Discover the solution
+                </p>
+                <h3 className="text-xl font-black text-white sm:text-2xl">
+                  See how our dual-fuel technology reduces fuel costs and emissions.
+                </h3>
+              </div>
+
+              <a
+                href="/technology"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#b6ff72] px-5 py-3 text-xs font-extrabold uppercase tracking-[0.14em] text-[#0d1f16] shadow-[0_12px_24px_rgba(182,255,114,0.28)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#c8ff8f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b6ff72]"
+              >
+                Explore Technology
+                <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+            </div>
+          </div>
+        </div>
       </section>
 
       <footer className="bg-[#07170f] px-[6vw] py-5 text-center font-mono text-[10px] uppercase tracking-[.12em] text-white/40">

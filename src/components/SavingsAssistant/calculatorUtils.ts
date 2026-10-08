@@ -7,7 +7,7 @@ export const ENGINE_MECHANICAL_EFFICIENCY_PCT = 90;
 export const ENGINE_THERMAL_EFFICIENCY_PCT = 49;
 export const DIESEL_LHV_MJ_PER_L = 32;
 export const DIESEL_CO2_KG_PER_GJ = 70.55;
-export const ANNUAL_OPERATING_MONTHS = 10; // Webpage Calculations annualizes D30/G30 by multiplying by 10.
+export const ANNUAL_OPERATING_MONTHS = 12; // Annual savings are calculated across a full 12-month year.
 
 export type AlternateFuel = "PNG" | "LPG";
 

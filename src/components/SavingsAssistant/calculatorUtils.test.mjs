@@ -40,12 +40,12 @@ test("matches the Webpage Calculations PNG example inputs and cached Excel outpu
   closeTo(result.alternateFuelCostPerHr, 5286.3565639021572);
   closeTo(result.savingPerHour, 1093.1874411998833);
   closeTo(result.savingPerMonth, 43727.497647995333);
-  closeTo(result.savingPerYear, 437274.97647995333);
+  closeTo(result.savingPerYear, 524729.971775944);
   closeTo(result.dieselCO2KgPerHr, 296.9579081632653);
   closeTo(result.totalDualFuelCO2KgPerHr, 264.69451530612247);
   closeTo(result.co2SavingKgPerHr, 32.263392857142833);
   closeTo(result.monthlyCO2SavingKg, 1290.5357142857133);
-  closeTo(result.annualCO2SavingTonnes, 12.905357142857134);
+  closeTo(result.annualCO2SavingTonnes, 15.48642857142856);
 });
 
 test("bills LPG by kg and uses the Webpage Calculations LPG properties", () => {
@@ -79,4 +79,16 @@ test("recalculates fuel costs from current selected-fuel prices", () => {
   assert.equal(changedHours.savingPerHour, baseline.savingPerHour);
   assert.notEqual(changedHours.savingPerMonth, baseline.savingPerMonth);
   assert.notEqual(changedHours.annualCO2SavingTonnes, baseline.annualCO2SavingTonnes);
+});
+
+test("annualizes savings over a full 12-month year", () => {
+  const result = calculate(webpagePngInputs);
+
+  closeTo(result.savingPerYear, result.savingPerMonth * 12);
+  closeTo(result.annualCO2SavingTonnes, (result.monthlyCO2SavingKg * 12) / 1000);
+  closeTo(
+    (result.dieselConsumptionLPerHr - result.dfDieselConsumptionLPerHr) * webpagePngInputs.hoursPerMonth * 12,
+    31568.878,
+    1,
+  );
 });

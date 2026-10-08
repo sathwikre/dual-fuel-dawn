@@ -27,7 +27,7 @@ export function CalculatorResults({ inputs, results, onReset, onJoinMission }: P
   const co2ReductionPct = dieselCO2KgPerHr > 0 ? (co2SavingKgPerHr / dieselCO2KgPerHr) * 100 : 0;
   // Shared top-table figures: lower summary cards must use these exact displayed values.
   const annualFuelCostSavings = Math.ceil(savingPerYear);
-  const annualDieselReduction = Math.ceil(annualDieselSavingLitres);
+  const annualDieselReduction = Math.round(annualDieselSavingLitres);
   const annualCO2ReductionTonnes = Math.ceil(annualCO2SavingTonnes);
   const fuelCostReductionPercent = Math.ceil(costReductionPct);
   const dieselReductionPercent = Math.ceil(dieselReplacementPct);
@@ -252,14 +252,14 @@ export function CalculatorResults({ inputs, results, onReset, onJoinMission }: P
                   <span className="grid size-9 shrink-0 place-items-center rounded-md border border-[oklch(0.72_0.16_155/0.35)] bg-[oklch(0.72_0.16_155/0.1)] text-[oklch(0.72_0.16_155)]">
                     <Icon className="size-4" aria-hidden="true" />
                   </span>
-                  <h5 className="text-xs font-extrabold uppercase leading-snug tracking-[0.06em] text-white sm:text-sm">
+                  <h5 className="text-xs font-black uppercase leading-snug tracking-[0.06em] text-white sm:text-sm">
                     {title}
                   </h5>
                 </div>
                 <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
                   {values.map((item) => (
                     <div key={item.period} className="min-w-0">
-                      <p className="text-[9px] font-extrabold uppercase tracking-wide text-white/70 sm:text-xs">
+                      <p className="text-[9px] font-black uppercase tracking-[0.08em] text-white sm:text-xs">
                         {item.period}
                       </p>
                       <p className="mt-1 break-words text-[11px] font-black leading-tight text-[oklch(0.72_0.16_155)] sm:text-base">
@@ -269,13 +269,13 @@ export function CalculatorResults({ inputs, results, onReset, onJoinMission }: P
                           "compact" in item && item.compact,
                         )}
                       </p>
-                      <p className="mt-1 break-words text-[9px] font-bold leading-tight text-white/60 sm:text-xs">
+                      <p className="mt-1 break-words text-[9px] font-extrabold leading-tight text-white sm:text-xs">
                         {item.unit}
                       </p>
                     </div>
                   ))}
                 </div>
-                <p className="mt-3 border-t border-white/10 pt-2 text-[11px] font-extrabold text-white/70 sm:text-sm">
+                <p className="mt-3 border-t border-white/10 pt-2 text-[11px] font-black text-white sm:text-sm">
                   {percent}% reduction
                 </p>
               </article>

@@ -357,7 +357,7 @@ function RegulationsPage() {
                Quick installation
               </h3>
               <p className="mt-1.5 text-[7px] leading-[1.25] text-slate-600 sm:mt-2 sm:text-xs sm:leading-5 md:mt-3 md:text-base md:leading-7">
-               Retrofit process with no very less modifications to base diesel engine with minimal interruption
+              Quick Installation & commissioning process with no modifications to base diesel engine
               </p>
             </article>
           </div>

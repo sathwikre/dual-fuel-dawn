@@ -198,7 +198,6 @@ import environmentImage from "@/assets/img-152.jpg";
 import marineImage from "@/assets/img-158.jpg";
 import technologyBackgroundImage from "@/assets/img-162.jpg";
 import marineInboardImage from "@/assets/applications/Marine Inboard Engines.png";
-import marineOutboardImage from "@/assets/applications/Marine Outboard Engines .png";
 import marineGeneratorImage from "@/assets/applications/Marine Generator set.png";
 import generatorSetImage from "@/assets/applications/Generator Sets.png";
 import tractorsEarthMoversImage from "@/assets/applications/Tractors & Earth Movers.png";
@@ -406,7 +405,6 @@ const fuelArchitecture = [
 const applicationCards = [
   { title: "Diesel Generator set", description: "Dual-fuel operation for diesel generator sets.", image: generatorSetImage },
   { title: "Marine Propulsion Engine", description: "Dual-fuel pathways for marine propulsion engines.", image: marineInboardImage },
-  { title: "Marine Outboard Engine", description: "Dual-fuel pathways for marine outboard engines.", image: marineOutboardImage },
   { title: "Marine Generator set", description: "Dual-fuel operation for marine generator applications.", image: marineGeneratorImage },
   { title: "Diesel engine based Air Compressor", description: "Dual-fuel conversion for diesel engine based air compressors.", image: compressorImage },
   { title: "Diesel engine based Borewell", description: "Dual-fuel conversion for diesel engine based borewell pumps.", image: borewellImage },
@@ -1442,7 +1440,7 @@ Message: ${message}`;
               </a>
 
               <nav className="hidden items-center gap-5 xl:flex">
-              {[["Technology Matrix", "dr-solutions"], ["Technology", "dr-tech"], ["Fuel Systems", "dr-fuel-kits"], ["Benefits", "dr-benefits"], ["Considerations", "dr-considerations"], ["Comparison", "dr-compare"]].map(([label, id]) => (
+              {[["Technology Matrix", "dr-solutions"], ["Technology", "dr-tech"], ["Comparison", "dr-fuel-kits"], ["Benefits", "dr-benefits"], ["Considerations", "dr-considerations"], ["Comparison", "dr-compare"]].map(([label, id]) => (
                   <a key={id} href={`#${id}`} className="whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.11em] text-white/75 transition-colors hover:text-signal">{label}</a>
                 ))}
               </nav>

@@ -1517,7 +1517,7 @@ Message: ${message}`;
               </a>
 
               <nav className="hidden items-center gap-5 xl:flex">
-              {[["Technology Matrix", "dr-solutions"], ["Technology", "dr-tech"], ["Comparison", "dr-fuel-kits"], ["Benefits", "dr-benefits"], ["Considerations", "dr-considerations"], ["Comparison", "dr-compare"]].map(([label, id]) => (
+              {[["Comparison", "dr-compare"], ["Dual Fuel vs RECD", "dr-tech"], ["Fuel Kits", "dr-fuel-kits"], ["Benefits", "dr-benefits"], ["Considerations", "dr-considerations"], ["Architecture", "dr-solutions"]].map(([label, id]) => (
                   <a key={id} href={`#${id}`} className="whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.11em] text-white/75 transition-colors hover:text-signal">{label}</a>
                 ))}
               </nav>
@@ -1906,7 +1906,7 @@ Message: ${message}`;
                     <div>
                       <h2 className="text-4xl font-extrabold tracking-tight lg:text-5xl">Dual fuel technology architecture</h2>
                     </div>
-                    <p className="max-w-md text-sm font-medium leading-relaxed text-foreground/80 font-sans">Explore supported alternate-fuel pathways across engine applications.</p>
+                    <p className="text-sm font-medium leading-relaxed text-foreground/80 font-sans sm:whitespace-nowrap">Explore supported alternate-fuel pathways across engine applications.</p>
                   </div>
 
                   <div className="mt-10 overflow-hidden rounded-2xl border border-border/60 bg-background shadow-sm">

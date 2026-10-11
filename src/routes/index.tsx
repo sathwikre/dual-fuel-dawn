@@ -1860,41 +1860,42 @@ Message: ${message}`;
                       <SectionLabel index="OM / 07" accent>Operating considerations</SectionLabel>
                       <h2 className="mt-4 text-5xl font-extrabold tracking-tight lg:text-6xl">Challenges while using a Dual Fuel Kit</h2>
                     </div>
-                    <p className="max-w-md text-sm leading-relaxed text-muted-foreground font-sans">Dual-fuel performance depends on operating conditions. These considerations should be evaluated for the intended engine application.</p>
+                    <p className="text-sm font-medium leading-relaxed text-foreground/80 font-sans lg:whitespace-nowrap">Dual-fuel performance depends on operating conditions. These considerations should be evaluated for the intended engine application.</p>
                   </div>
-                  <div className="mt-8 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-signal/25 bg-signal/8 px-5 py-4">
-                    <div>
-                      <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-signal">Operating range</p>
-                      <p className="mt-1 text-sm font-semibold">Diesel replacement is effective between 30% to 80% load.</p>
+                  <div className="mt-8 rounded-xl border border-signal/30 bg-signal/8 px-5 py-4">
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <div>
+                        <p className="font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-[oklch(0.45_0.13_155)]">Operating range</p>
+                        <p className="mt-1 text-sm font-semibold text-foreground">Diesel replacement is effective between 30% to 80% load.</p>
+                      </div>
+                      <span className="rounded-full bg-signal px-4 py-2 font-mono text-xs font-bold text-panel">30–80% LOAD</span>
                     </div>
-                    <span className="rounded-full bg-signal px-4 py-2 font-mono text-xs font-bold text-panel">30–80% LOAD</span>
+                    <div className="mt-4" aria-hidden="true">
+                      <div className="relative h-2.5 overflow-hidden rounded-full bg-foreground/10">
+                        <div className="absolute inset-y-0 left-[30%] w-1/2 rounded-full bg-signal" />
+                      </div>
+                      <div className="relative mt-1.5 h-4 font-mono text-[10px] font-bold text-foreground/70">
+                        <span className="absolute left-0">0%</span>
+                        <span className="absolute left-[30%] -translate-x-1/2">30%</span>
+                        <span className="absolute left-[80%] -translate-x-1/2">80%</span>
+                        <span className="absolute right-0">100%</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="mt-4 grid gap-3 lg:grid-cols-2 lg:gap-5">
-                    <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-                      {dualFuelConsiderations.slice(0, 3).map((item, index) => (
-                        <button key={item.id} type="button" onClick={() => setSelectedConsideration(item.id)} aria-pressed={selectedConsideration === item.id} className={`consider-card rounded-xl px-4 py-3 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${selectedConsideration === item.id ? "consider-card-active" : "hover:-translate-y-0.5 hover:border-signal/40 hover:bg-background"}`}>
-                          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-signal sm:text-xs">0{index + 1} · {item.label}</span>
-                          <span className="mt-1.5 block text-base leading-relaxed font-sans sm:text-lg">{item.statement}</span>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 lg:gap-4">
+                    {dualFuelConsiderations.map((item, index) => {
+                      const active = selectedConsideration === item.id;
+                      return (
+                        <button key={item.id} type="button" onClick={() => setSelectedConsideration(item.id)} aria-pressed={active} className={`consider-card flex items-start gap-3.5 rounded-xl px-4 py-4 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${active ? "consider-card-active" : "hover:-translate-y-0.5 hover:border-signal/40 hover:bg-background"}`}>
+                          <span className={`grid size-9 shrink-0 place-items-center rounded-lg font-mono text-xs font-bold transition-colors ${active ? "bg-signal text-panel" : "bg-signal/15 text-[oklch(0.45_0.13_155)]"}`}>0{index + 1}</span>
+                          <span className="min-w-0">
+                            <span className="block font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-[oklch(0.45_0.13_155)] sm:text-xs">{item.label}</span>
+                            <span className="mt-1 block text-base font-medium leading-relaxed text-foreground font-sans sm:text-lg">{item.statement}</span>
+                          </span>
                         </button>
-                      ))}
-                    </div>
-                    <div className="relative flex min-h-[268px] flex-col items-center justify-center overflow-hidden rounded-2xl bg-panel px-6 text-center text-background">
-                      <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(182,255,114,0.24)_1px,transparent_1px),linear-gradient(90deg,rgba(182,255,114,0.24)_1px,transparent_1px)] [background-size:24px_24px]" />
-                      <span className="relative grid size-16 place-items-center rounded-full border border-signal/40 bg-signal/10 font-mono text-lg font-bold text-signal">DF</span>
-                      <p className="relative mt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-signal">Dual Fuel · Operating Range</p>
-                      <span className="relative mt-3 rounded-full border border-signal/40 bg-background/10 px-4 py-2 font-mono text-xs font-bold text-signal">30–80% Load</span>
-                      <p className="relative mt-3 max-w-[210px] text-[10px] leading-relaxed text-background/55">Diesel replacement is effective between 30% to 80% load.</p>
-                    </div>
-                    <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-                      {dualFuelConsiderations.slice(3).map((item, index) => (
-                        <button key={item.id} type="button" onClick={() => setSelectedConsideration(item.id)} aria-pressed={selectedConsideration === item.id} className={`consider-card rounded-xl px-4 py-3 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${selectedConsideration === item.id ? "consider-card-active" : "hover:-translate-y-0.5 hover:border-signal/40 hover:bg-background"}`}>
-                          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-signal sm:text-xs">0{index + 4} · {item.label}</span>
-                          <span className="mt-1.5 block text-base leading-relaxed font-sans sm:text-lg">{item.statement}</span>
-                        </button>
-                      ))}
-                    </div>
+                      );
+                    })}
                   </div>
-                  <p className="mt-4 text-center font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground"></p>
                 </div>
               </section>
 

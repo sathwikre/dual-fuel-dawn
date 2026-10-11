@@ -364,10 +364,6 @@
   box-shadow: 0 8px 24px color-mix(in oklab, var(--color-signal) 12%, transparent);
 }
 
-#dr-considerations > div > div:nth-of-type(3) > div:nth-child(2) {
-  display: none;
-}
-
 /* ── Infinite carousel animation ── */
 @keyframes scroll {
   0% { transform: translateX(0); }

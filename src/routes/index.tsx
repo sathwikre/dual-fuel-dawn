@@ -1761,7 +1761,7 @@ Message: ${message}`;
                   "--benefit-border": "#1f4a35",
                   "--benefit-accent": "#34d399",
                   "--benefit-text": "#e8f5ee",
-                  "--benefit-muted": "#9fc4b0",
+                  "--benefit-muted": "#c4ddd0",
                   "--benefit-glow": "rgba(52, 211, 153, 0.22)",
                 } as React.CSSProperties}
               >
@@ -1781,12 +1781,12 @@ Message: ${message}`;
                 `}</style>
                 <div className="hero-grid-overlay absolute inset-0 opacity-20" aria-hidden="true" />
                 <div className="relative mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
-                  <div className="flex flex-wrap items-end justify-between gap-6">
+                  <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
                     <div>
-                      <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--benefit-accent)]">OM / 06 —— WHY DUAL FUEL</p>
+                      <SectionLabel index="OM / 06" dark accent>Why Dual Fuel</SectionLabel>
                       <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Benefits of using a Dual Fuel kit</h2>
                     </div>
-                    <p className="max-w-none text-xs leading-relaxed text-[var(--benefit-muted)] xl:whitespace-nowrap xl:text-right">The 70% figure is the maximum gaseous fuel use stated in the profile and depends on engine, application, load and fuel conditions.</p>
+                    <p className="flex max-w-md gap-2 rounded-lg border border-[var(--benefit-border)] bg-[var(--benefit-surface)] px-3.5 py-2.5 text-xs font-medium leading-relaxed text-[var(--benefit-muted)]"><span aria-hidden="true" className="mt-px grid size-4 shrink-0 place-items-center rounded-full border border-[var(--benefit-accent)] font-mono text-[9px] font-bold text-[var(--benefit-accent)]">i</span><span>The 70% figure is the maximum gaseous fuel use stated in the profile and depends on engine, application, load and fuel conditions.</span></p>
                   </div>
 
                   <div role="tablist" aria-label="Filter dual-fuel benefits" className="mt-8 flex gap-2 overflow-x-auto pb-1">
@@ -1799,9 +1799,12 @@ Message: ${message}`;
                         aria-selected={benefitFilter === category.id}
                         aria-controls="benefits-grid"
                         onClick={() => setBenefitFilter(category.id)}
-                        className={`shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--benefit-accent)] ${benefitFilter === category.id ? "border-[var(--benefit-accent)] bg-[var(--benefit-accent)] text-[var(--benefit-bg)]" : "border-[var(--benefit-border)] bg-[var(--benefit-surface)] text-[var(--benefit-muted)] hover:text-[var(--benefit-text)]"}`}
+                        className={`inline-flex shrink-0 items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--benefit-accent)] ${benefitFilter === category.id ? "border-[var(--benefit-accent)] bg-[var(--benefit-accent)] text-[var(--benefit-bg)]" : "border-[var(--benefit-border)] bg-[var(--benefit-surface)] text-[var(--benefit-muted)] hover:text-[var(--benefit-text)]"}`}
                       >
                         {category.label}
+                        <span className={`rounded-full px-1.5 font-mono text-[10px] ${benefitFilter === category.id ? "bg-[var(--benefit-bg)]/15" : "bg-[var(--benefit-border)]"}`}>
+                          {category.id === "all" ? benefits.length : benefits.filter((benefit) => benefit.category === category.id).length}
+                        </span>
                       </button>
                     ))}
                   </div>
@@ -1831,16 +1834,16 @@ Message: ${message}`;
                             benefitCardRefs.current[nextIndex]?.focus();
                           }}
                           className={`benefit-card group relative flex min-h-24 w-full items-start gap-3 overflow-hidden p-4 text-left focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-[var(--benefit-accent)] ${selected ? "bg-[var(--benefit-selected)]" : "bg-[var(--benefit-surface)]"}`}
-                          style={{ opacity: matching ? 1 : 0.22 }}
+                          style={{ opacity: matching ? 1 : 0.3 }}
                         >
                           <span aria-hidden="true" className="benefit-glow pointer-events-none absolute inset-0 opacity-0" />
                           <span className={`benefit-check relative mt-1 grid size-8 shrink-0 place-items-center rounded-full bg-[var(--benefit-accent)] text-[var(--benefit-bg)] ${selected ? "scale-110" : ""}`}>
                             <Check className="size-4 stroke-[3]" />
                           </span>
                           <span className="relative min-w-0">
-                            <span className="block font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--benefit-muted)]">{String(index + 1).padStart(2, "0")}</span>
-                            <span className={`mt-1 block text-base font-medium leading-snug ${selected ? "text-[var(--benefit-accent)]" : "text-[var(--benefit-text)]"}`}>{benefit.title}</span>
-                            {benefit.id === "gas-share" && <span className="mt-2 inline-block font-mono text-[10px] uppercase tracking-[0.1em] text-[var(--benefit-accent)]">70% · max stated figure</span>}
+                            <span className="block font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--benefit-muted)]">{String(index + 1).padStart(2, "0")}</span>
+                            <span className={`mt-1 block text-base font-semibold leading-snug ${selected ? "text-[var(--benefit-accent)]" : "text-[var(--benefit-text)]"}`}>{benefit.title}</span>
+                            {benefit.id === "gas-share" && <span className="mt-2 inline-block rounded-full border border-[var(--benefit-accent)]/40 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--benefit-accent)]">70% · max stated figure</span>}
                           </span>
                         </button>
                       );

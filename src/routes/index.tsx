@@ -14,6 +14,8 @@ import {
   Clock3,
   Cog,
   Factory,
+  Mail,
+  MapPin,
   FileText,
   Fuel,
   Gauge,
@@ -2159,44 +2161,43 @@ Message: ${message}`;
           <div className="relative z-[2] mx-auto grid max-w-[1440px] gap-12 px-5 py-20 lg:grid-cols-[0.85fr_1.15fr] lg:px-10 lg:py-28">
             <div>
               <SectionLabel index="OM / 18" dark>Get a Quote</SectionLabel>
-              <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-6xl">We appreciate your interest in joining our mission.</h2>
-              <div className="mt-10 space-y-5">
-                <a href="mailto:support@omsolns.com" className="flex items-start gap-4 text-sm text-background/80 transition-colors hover:text-signal">
-                  <span className="grid size-10 place-items-center rounded-lg border border-white/10 bg-background/10 text-signal">@</span>
+              <h2 className="mt-5 text-4xl font-extrabold leading-tight tracking-tight lg:text-6xl">We appreciate your interest in joining our mission.</h2>
+              <div className="mt-10 space-y-6">
+                <a href="mailto:support@omsolns.com" className="flex items-start gap-4 text-base font-semibold text-background transition-colors hover:text-signal">
+                  <span className="grid size-12 shrink-0 place-items-center rounded-xl border border-signal/25 bg-signal/10 text-signal"><Mail className="size-5" /></span>
                   <span>
-                    <span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Email</span>
+                    <span className="block font-mono text-xs font-bold uppercase tracking-[0.12em] text-signal">Email</span>
                     <span className="mt-1 block">support@omsolns.com</span>
                   </span>
                 </a>
-                <div className="flex items-start gap-4 text-sm text-background/80">
-                  <span className="grid size-10 place-items-center rounded-lg border border-white/10 bg-background/10 text-signal"><Phone className="size-4" /></span>
+                <div className="flex items-start gap-4 text-base font-semibold text-background">
+                  <span className="grid size-12 shrink-0 place-items-center rounded-xl border border-signal/25 bg-signal/10 text-signal"><Phone className="size-5" /></span>
                   <span>
-                    <span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Contact</span>
+                    <span className="block font-mono text-xs font-bold uppercase tracking-[0.12em] text-signal">Contact</span>
                     <a href={isMobile ? "tel:+917387591083" : "https://wa.me/917387591083"} target={isMobile ? undefined : "_blank"} rel={isMobile ? undefined : "noopener noreferrer"} className="mt-1 block transition-colors hover:text-signal">+91 73875 91083</a>
                   </span>
                 </div>
-                <div className="flex items-start gap-4 text-sm text-background/80">
-                  <span className="grid size-10 place-items-center rounded-lg border border-white/10 bg-background/10 text-signal"><Factory className="size-4" /></span>
+                <div className="flex items-start gap-4 text-base font-semibold text-background">
+                  <span className="grid size-12 shrink-0 place-items-center rounded-xl border border-signal/25 bg-signal/10 text-signal"><MapPin className="size-5" /></span>
                   <span>
-                    <span className="block font-mono text-[10px] uppercase tracking-[0.13em] text-background/45">Office</span>
-                    <span className="mt-1 block leading-relaxed">29A, Sairam Park, Near Cipla Foundation,<br />Warje, Pune, Maharashtra, India 411058</span>
+                    <span className="block font-mono text-xs font-bold uppercase tracking-[0.12em] text-signal">Office</span>
+                    <span className="mt-1 block font-medium leading-relaxed text-background/90">29A, Sairam Park, Near Cipla Foundation,<br />Warje, Pune, Maharashtra, India 411058</span>
                   </span>
                 </div>
               </div>
             </div>
-            <div className="rounded-2xl border border-white/12 bg-white/5 p-6 shadow-[0_24px_60px_color-mix(in_oklab,black_25%,transparent)] backdrop-blur-md sm:p-8">
+            <div className="rounded-2xl border border-white/15 bg-white/[0.07] p-6 shadow-[0_24px_60px_color-mix(in_oklab,black_25%,transparent)] backdrop-blur-md sm:p-8">
               <form onSubmit={submitForm} className="grid gap-4 sm:grid-cols-2">
-                <label className="grid gap-2 text-xs font-medium text-background/70">Name<input required name="name" className="h-11 rounded-lg border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 transition-colors focus:border-signal" placeholder="Your name" /></label>
-                <label className="grid gap-2 text-xs font-medium text-background/70">Company<input required name="company" className="h-11 rounded-lg border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 transition-colors focus:border-signal" placeholder="Company name" /></label>
-                <label className="grid gap-2 text-xs font-medium text-background/70">Phone<input name="phone" className="h-11 rounded-lg border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 transition-colors focus:border-signal" placeholder="+91" /></label>
-                <label className="grid gap-2 text-xs font-medium text-background/70">Email<input required type="email" name="email" className="h-11 rounded-lg border border-background/15 bg-background/5 px-3 text-sm text-background outline-none placeholder:text-background/35 transition-colors focus:border-signal" placeholder="you@company.com" /></label>
-                <label className="grid gap-2 text-xs font-medium text-background/70 sm:col-span-2">Application / Requirement<select name="application" className="h-11 rounded-lg border border-background/15 bg-panel px-3 text-sm text-background outline-none transition-colors focus:border-signal"><option>Choose an application</option><option>Generator set</option><option>Marine engine</option><option>Truck or bus</option><option>Tractor or earth mover</option><option>Other industrial application</option></select></label>
-                <label className="grid gap-2 text-xs font-medium text-background/70 sm:col-span-2">Message<textarea required name="message" rows={4} className="rounded-lg border border-background/15 bg-background/5 px-3 py-3 text-sm text-background outline-none placeholder:text-background/35 transition-colors focus:border-signal" placeholder="Tell us about the engine, load profile and fuel availability." /></label>
+                <label className="grid gap-2 text-sm font-semibold text-background/90">Name<input required name="name" className="h-12 rounded-lg border border-background/25 bg-background/10 px-3.5 text-base text-background outline-none placeholder:text-background/55 transition-colors focus:border-signal focus:ring-2 focus:ring-signal/30" placeholder="Your name" /></label>
+                <label className="grid gap-2 text-sm font-semibold text-background/90">Company<input required name="company" className="h-12 rounded-lg border border-background/25 bg-background/10 px-3.5 text-base text-background outline-none placeholder:text-background/55 transition-colors focus:border-signal focus:ring-2 focus:ring-signal/30" placeholder="Company name" /></label>
+                <label className="grid gap-2 text-sm font-semibold text-background/90">Phone<input name="phone" className="h-12 rounded-lg border border-background/25 bg-background/10 px-3.5 text-base text-background outline-none placeholder:text-background/55 transition-colors focus:border-signal focus:ring-2 focus:ring-signal/30" placeholder="+91" /></label>
+                <label className="grid gap-2 text-sm font-semibold text-background/90">Email<input required type="email" name="email" className="h-12 rounded-lg border border-background/25 bg-background/10 px-3.5 text-base text-background outline-none placeholder:text-background/55 transition-colors focus:border-signal focus:ring-2 focus:ring-signal/30" placeholder="you@company.com" /></label>
+                <label className="grid gap-2 text-sm font-semibold text-background/90 sm:col-span-2">Application / Requirement<select name="application" className="h-12 rounded-lg border border-background/25 bg-panel px-3.5 text-base text-background outline-none transition-colors focus:border-signal focus:ring-2 focus:ring-signal/30"><option>Choose an application</option><option>Generator set</option><option>Marine engine</option><option>Truck or bus</option><option>Tractor or earth mover</option><option>Other industrial application</option></select></label>
+                <label className="grid gap-2 text-sm font-semibold text-background/90 sm:col-span-2">Message<textarea required name="message" rows={4} className="rounded-lg border border-background/25 bg-background/10 px-3.5 py-3 text-base text-background outline-none placeholder:text-background/55 transition-colors focus:border-signal focus:ring-2 focus:ring-signal/30" placeholder="Tell us about the engine, load profile and fuel availability." /></label>
                 <div className="sm:col-span-2">
-                  <Button type="submit" className="h-12 w-full rounded-lg bg-signal text-sm font-semibold text-panel shadow-[0_8px_24px_color-mix(in_oklab,var(--color-signal)_30%,transparent)] hover:bg-white hover:text-panel">
-                    {formSent ? "Request noted ”” thank you" : "Get a Consultation"} <ArrowRight className="size-4" />
+                  <Button type="submit" className="h-13 min-h-[52px] w-full rounded-xl bg-signal text-base font-extrabold text-panel shadow-[0_8px_24px_color-mix(in_oklab,var(--color-signal)_30%,transparent)] hover:bg-white hover:text-panel">
+                    {formSent ? "Request noted — thank you" : "Get a Consultation"} <ArrowRight className="size-4" />
                   </Button>
-                  <p className="mt-3 font-mono text-[10px] text-background/40"></p>
                 </div>
               </form>
             </div>
@@ -2212,10 +2213,10 @@ Message: ${message}`;
                 <img src={logoImage} alt="OM Solutions" className="h-10 w-12 object-contain" />
                 <div>
                   <p className="font-extrabold tracking-tight">OM SOLUTIONS</p>
-                  <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-background/50">Dual Fuel Systems</p>
+                  <p className="mt-1 font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-background/75">Dual Fuel Systems</p>
                 </div>
               </div>
-              <p className="mt-5 font-mono text-[11px] leading-relaxed text-background/60">Smarter Power ”“ Lower Fuel Cost ”“ Cleaner Performance</p>
+              <p className="mt-5 text-sm font-medium leading-relaxed text-background/80">Smarter Power – Lower Fuel Cost – Cleaner Performance</p>
               <div className="mt-6 flex items-center gap-3">
                 <a href="https://www.linkedin.com/company/omsolns18/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-background/70 transition-colors hover:border-signal hover:bg-signal hover:text-panel"><Linkedin className="size-4" /></a>
                 <span className="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-background/70"><Youtube className="size-4" /></span>
@@ -2225,14 +2226,14 @@ Message: ${message}`;
             </div>
             <div className="grid gap-10 sm:grid-cols-2">
               <div>
-                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-signal">Quick links</p>
-                <nav className="mt-4 grid grid-cols-2 gap-x-8 gap-y-3 text-sm">
-                  {navItems.map(([label, id]) => <a key={id} href={id === "impact" ? "/impact" : `#${id}`} className="text-background/75 transition-colors hover:text-signal">{label}</a>)}
+                <p className="font-mono text-xs font-bold uppercase tracking-[0.16em] text-signal">Quick links</p>
+                <nav className="mt-4 grid grid-cols-2 gap-x-8 gap-y-3 text-[15px] font-medium">
+                  {navItems.map(([label, id]) => <a key={id} href={id === "impact" ? "/impact" : `#${id}`} className="text-background/90 transition-colors hover:text-signal">{label}</a>)}
                 </nav>
               </div>
               <div>
-                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-signal">Contact</p>
-                <div className="mt-4 space-y-2 text-sm text-background/65">
+                <p className="font-mono text-xs font-bold uppercase tracking-[0.16em] text-signal">Contact</p>
+                <div className="mt-4 space-y-3 text-[15px] font-medium text-background/90">
                   <a href="mailto:support@omsolns.com" className="block hover:text-signal">support@omsolns.com</a>
                   <a href={isMobile ? "tel:+917387591083" : "https://wa.me/917387591083"} target={isMobile ? undefined : "_blank"} rel={isMobile ? undefined : "noopener noreferrer"} className="block hover:text-signal">+91 73875 91083</a>
                   <p>Warje, Pune, Maharashtra</p>
@@ -2240,8 +2241,8 @@ Message: ${message}`;
               </div>
             </div>
           </div>
-          <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-5 font-mono text-[10px] text-background/45 sm:flex-row sm:justify-between">
-            <span> 2026 OM Solutions. All Rights Reserved.</span>
+          <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-5 font-mono text-xs text-background/70 sm:flex-row sm:justify-between">
+            <span>© 2026 OM Solutions. All Rights Reserved.</span>
             <span>Dual Fuel &amp; RECD Technology</span>
           </div>
         </div>

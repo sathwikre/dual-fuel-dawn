@@ -1408,14 +1408,15 @@ Message: ${message}`;
         <section id="kit" className="relative overflow-hidden bg-background">
           <div className="section-dot-grid absolute inset-0" aria-hidden="true" />
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal/25 to-transparent" aria-hidden="true" />
-          <div className="relative mx-auto max-w-[1200px] px-5 py-12 sm:py-16 lg:px-10 lg:py-20">
+          <div className="relative mx-auto max-w-[1200px] px-5 py-14 sm:py-16 lg:px-10 lg:py-20">
             <ScrollReveal>
-              <div>
+              <div className="mx-auto max-w-[1100px]">
+                <span aria-hidden="true" className="mb-4 block h-1 w-12 rounded-full bg-emerald-600" />
                 <h2 className="flex flex-wrap items-baseline gap-x-3 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
                   <span>OM Solutions’</span>
                   <span className="bg-gradient-to-r from-foreground via-foreground to-signal bg-clip-text text-transparent">Dual Fuel Kit</span>
                 </h2>
-                <p className="mt-3 max-w-[1100px] text-base leading-relaxed text-foreground font-sans sm:text-lg">
+                <p className="mt-4 max-w-[900px] border-l-4 border-emerald-600/70 pl-4 text-base font-medium leading-relaxed text-foreground/90 font-sans sm:text-lg">
                   A Dual-fuel kit allows a diesel engine to use alternate fuel (like Natural Gas), maintaining the same power level though reducing diesel consumption as well as PM &amp; CO2 emissions
                 </p>
               </div>
@@ -1423,8 +1424,8 @@ Message: ${message}`;
             <ScrollReveal delay={200} scale>
               <div className="schematic-frame mx-auto mt-8 max-w-[1100px] rounded-2xl p-3 sm:mt-10 sm:p-5">
                   <div className="flex items-center justify-between gap-4">
-                    <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">System schematic</p>
-                    <span className="inline-flex items-center gap-2 rounded-full border border-signal/25 bg-signal/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-signal">
+                    <p className="font-mono text-xs font-bold uppercase tracking-[0.16em] text-foreground/75">System schematic</p>
+                    <span className="inline-flex items-center gap-2 rounded-full border border-signal/25 bg-signal/10 px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-emerald-700">
                       <span className="relative flex size-2">
                         <span className="absolute inline-flex size-full animate-ping rounded-full bg-signal opacity-40" aria-hidden="true" />
                         <span className="relative inline-flex size-2 rounded-full bg-signal" aria-hidden="true" />
@@ -1434,7 +1435,7 @@ Message: ${message}`;
                   </div>
                   <button
                     type="button"
-                    className="group mt-5 block w-full overflow-hidden rounded-xl border border-border/60 bg-white shadow-inner"
+                    className="group mt-4 block w-full overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-shadow hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
                     onClick={openSchematicViewer}
                     aria-label="Open interactive dual fuel kit schematic"
                   >
@@ -1443,9 +1444,9 @@ Message: ${message}`;
                       alt="Dual fuel kit schematic"
                       className="aspect-[2.30/1] w-full object-contain p-3 transition-transform duration-500 group-hover:scale-[1.03]"
                     />
-                    <span className="flex items-center justify-center gap-2 border-t border-border/50 bg-muted/30 py-2.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground transition-colors group-hover:bg-signal/10 group-hover:text-signal">
+                    <span className="flex items-center justify-center gap-2 bg-emerald-700 py-3.5 text-sm font-extrabold uppercase tracking-[0.08em] text-white transition-colors group-hover:bg-emerald-800">
                       Click to explore components
-                      <ArrowRight className="size-3 transition-transform duration-300 group-hover:translate-x-0.5" />
+                      <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
                     </span>
                   </button>
                 </div>

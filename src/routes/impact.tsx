@@ -1,8 +1,8 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { Activity, Building2, Clock3, Fuel, IndianRupee, Leaf, MapPin, Pause, Power } from "lucide-react";
-import logoImage from "@/assets/aircompressor/logo.png";
+import { SiteHeader } from "@/components/SiteHeader";
 import indiaMapImage from "@/assets/Marine Propulsion/image.png";
 
 export const Route = createFileRoute("/impact")({ component: ImpactPage });
@@ -52,38 +52,23 @@ function ImpactPage() {
 
   return (
     <main className="min-h-screen overflow-x-clip bg-panel text-white">
-      <header className="sticky top-0 z-30 border-b border-white/10 bg-panel/95 backdrop-blur-xl">
-        <div className="mx-auto flex min-h-[68px] max-w-[1600px] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
-          <Link to="/" aria-label="OM Solutions home" className="flex min-w-0 shrink items-center gap-2.5 text-white">
-            <img src={logoImage} alt="OM Solutions" className="size-10 shrink-0 object-contain sm:size-11" />
-            <span className="truncate text-sm font-extrabold uppercase leading-none tracking-[0.06em] sm:text-base sm:tracking-[0.08em]">OM Solutions</span>
-          </Link>
-          <nav className="hidden h-full items-center gap-8 text-[15px] font-semibold md:flex">
-            <Link to="/" className="text-white/85 transition-colors hover:text-signal">Home</Link>
-            <span className="flex h-full items-center border-b-2 border-signal px-1 py-5 text-signal">Impact</span>
-            <Link to="/" hash="gallery" className="text-white/85 transition-colors hover:text-signal">Installations</Link>
-            <Link to="/" hash="team" className="text-white/85 transition-colors hover:text-signal">About</Link>
-          </nav>
-          <div className="flex shrink-0 items-center gap-3 text-xs sm:gap-4">
-            <span className="flex items-center gap-2 whitespace-nowrap font-bold tracking-wide text-signal">
-              <i className="size-2.5 rounded-full bg-signal shadow-[0_0_12px_var(--color-signal)]" />
-              LIVE NETWORK
-            </span>
-            <span className="hidden h-5 border-l border-white/25 sm:block" />
-            <span className="hidden font-medium text-white/75 sm:block">Updated just now</span>
-            <Link to="/" className="font-semibold text-white/85 md:hidden">Home</Link>
-          </div>
-        </div>
-      </header>
+      <SiteHeader active="Impact" />
 
-      <div className="mx-auto max-w-[1600px] space-y-5 px-4 pb-10 pt-8 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1600px] space-y-5 px-4 pb-10 pt-[110px] sm:px-6 lg:px-8">
         {/* Hero */}
         <section className="grid min-w-0 animate-in fade-in slide-in-from-bottom-2 items-end gap-5 duration-500 motion-reduce:animate-none lg:grid-cols-[1fr_auto]">
           <div className="min-w-0">
-            <span className="inline-flex items-center gap-2 rounded-full border border-signal/35 bg-signal/10 px-3.5 py-1.5 text-xs font-bold tracking-wide text-signal">
-              <Activity className="size-4" />
-              ALL INSTALLATIONS · CUMULATIVE
-            </span>
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="inline-flex items-center gap-2 rounded-full border border-signal/35 bg-signal/10 px-3.5 py-1.5 text-xs font-bold tracking-wide text-signal">
+                <Activity className="size-4" />
+                ALL INSTALLATIONS · CUMULATIVE
+              </span>
+              <span className="inline-flex items-center gap-2 text-xs font-bold tracking-wide text-signal">
+                <i className="size-2.5 rounded-full bg-signal shadow-[0_0_12px_var(--color-signal)]" />
+                LIVE NETWORK
+                <span className="font-medium tracking-normal text-white/75">· Updated just now</span>
+              </span>
+            </div>
             <h1 className="mt-4 text-[clamp(30px,6vw,52px)] font-extrabold leading-tight tracking-tight">
               Our Impact. <span className="bg-gradient-to-r from-white to-signal bg-clip-text text-transparent">Across Every Engine.</span>
             </h1>

@@ -1952,7 +1952,7 @@ Message: ${message}`;
                     <span className="bg-gradient-to-r from-foreground via-foreground to-signal bg-clip-text text-transparent">field.</span>
                   </h2>
                 </div>
-                <p className="max-w-sm text-base font-semibold leading-relaxed text-foreground font-sans">Installations from the field. Click any image to view the full gallery.</p>
+                <p className="max-w-sm text-sm leading-relaxed text-muted-foreground font-sans">Installations from the field. Click any image to view the full gallery.</p>
               </div>
             </ScrollReveal>
 
@@ -1978,35 +1978,35 @@ Message: ${message}`;
                       <div className="relative aspect-[4/3] shrink-0 overflow-hidden bg-muted">
                         <img src={site.images[0]} alt={site.alt} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
                         <div className="absolute inset-0 bg-gradient-to-t from-panel/50 via-transparent to-transparent" />
-                        <span className="absolute bottom-3 left-3 rounded-full border border-white/15 bg-panel/90 px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-white backdrop-blur-sm">
+                        <span className="absolute bottom-3 left-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">
                           {site.images.length} {site.images.length === 1 ? "photo" : "photos"}
                         </span>
                       </div>
 
                       <div className="flex flex-1 flex-col p-5">
-                        <h3 className="text-xl font-extrabold leading-snug text-foreground">{site.title}</h3>
+                        <h3 className="text-xl font-bold leading-snug text-foreground">{site.title}</h3>
 
-                        <dl className="mt-4 divide-y divide-border border-y border-border font-sans text-sm">
+                        <dl className="mt-4 divide-y divide-border border-y border-border font-sans text-base leading-relaxed">
                           {[["Genset", site.genset], ["Fuel", site.fuel], ["Load", site.load], ["Hours", site.hours]].map(([label, value]) => (
                             <div key={label} className="flex items-baseline justify-between gap-4 py-2">
-                              <dt className="font-mono text-xs font-bold uppercase tracking-[0.1em] text-foreground">{label}</dt>
-                              <dd className="text-right text-[15px] font-bold text-foreground">{value}</dd>
+                              <dt className="font-bold text-foreground">{label}</dt>
+                              <dd className="text-right font-medium text-foreground">{value}</dd>
                             </div>
                           ))}
                         </dl>
 
-                        <div className="mt-4 space-y-3 rounded-xl border border-signal/20 bg-primary-soft/60 p-4 font-sans">
+                        <div className="mt-4 space-y-3 rounded-xl border border-signal/25 bg-signal/8 p-4 font-sans text-base leading-relaxed">
                           <div>
-                            <p className="font-mono text-xs font-bold uppercase tracking-[0.1em] text-signal brightness-75">Estimated cost saving</p>
-                            <p className="mt-1 text-[15px] font-bold text-foreground">{site.costSaving}</p>
+                            <p className="font-bold text-signal">Estimated cost saving</p>
+                            <p className="mt-0.5 font-medium text-foreground">{site.costSaving}</p>
                           </div>
                           <div>
-                            <p className="font-mono text-xs font-bold uppercase tracking-[0.1em] text-signal brightness-75">Estimated CO₂ saving potential</p>
-                            <p className="mt-1 text-[15px] font-bold text-foreground">{site.co2Saving}</p>
+                            <p className="font-bold text-signal">Estimated CO₂ saving potential</p>
+                            <p className="mt-0.5 font-medium text-foreground">{site.co2Saving}</p>
                           </div>
                         </div>
 
-                        <span className="mt-auto inline-flex items-center gap-1.5 pt-4 font-mono text-xs font-bold uppercase tracking-[0.1em] text-foreground transition-colors group-hover:text-signal">
+                        <span className="mt-auto inline-flex items-center gap-1.5 pt-4 font-sans text-sm font-bold text-foreground transition-colors group-hover:text-signal">
                           View gallery <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                         </span>
                       </div>

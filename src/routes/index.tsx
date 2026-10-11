@@ -1585,7 +1585,7 @@ Message: ${message}`;
                       <SectionLabel index="OM / 05" accent>Technology</SectionLabel>
                       <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Dual Fuel Kit vs RECD</h2>
                     </div>
-                    <p className="max-w-xl text-base leading-relaxed text-[#9fc4b0] font-sans">Two different approaches to particulate reduction.</p>
+                    <p className="max-w-xl text-base leading-relaxed text-[#cfe6da] font-sans">Two different approaches to particulate reduction.</p>
                   </div>
 
                   <div className="tech-surface mt-9 rounded-2xl">
@@ -1594,11 +1594,11 @@ Message: ${message}`;
                         const active = technologyView === view;
                         const isDualFuel = view === "dualFuel";
                         return (
-                          <button key={view} id={`${view}-tab`} type="button" role="tab" aria-selected={active} aria-controls="technology-panel" onClick={() => setTechnologyView(view)} className={`flex items-center gap-3 rounded-xl px-4 py-3 text-left transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${active ? "bg-panel text-background shadow-sm" : "text-muted-foreground hover:bg-background hover:text-primary"}`}>
-                            <span className={`grid size-8 shrink-0 place-items-center rounded-lg ${active ? "bg-signal text-panel" : isDualFuel ? "bg-signal/15 text-signal" : "bg-danger/10 text-danger"}`}>{isDualFuel ? <Fuel className="size-4" /> : <ShieldCheck className="size-4" />}</span>
+                          <button key={view} id={`${view}-tab`} type="button" role="tab" aria-selected={active} aria-controls="technology-panel" onClick={() => setTechnologyView(view)} className={`flex items-center gap-3 rounded-xl px-4 py-3 text-left transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${active ? "bg-panel text-background shadow-sm" : "text-foreground/75 hover:bg-background hover:text-foreground"}`}>
+                            <span className={`grid size-9 shrink-0 place-items-center rounded-lg ${active ? "bg-signal text-panel" : isDualFuel ? "bg-signal/15 text-signal" : "bg-danger/10 text-danger"}`}>{isDualFuel ? <Fuel className="size-4" /> : <ShieldCheck className="size-4" />}</span>
                             <span>
                               <span className="block text-sm font-bold sm:text-base">{isDualFuel ? "Dual Fuel" : "RECD"}</span>
-                              <span className={`mt-0.5 block font-mono text-[9px] uppercase tracking-[0.1em] ${active ? "text-background/55" : "text-muted-foreground"}`}>{isDualFuel ? "During combustion" : "After generation"}</span>
+                              <span className={`mt-0.5 block font-mono text-[9px] font-semibold uppercase tracking-[0.1em] ${active ? "text-background/80" : "text-foreground/65"}`}>{isDualFuel ? "During combustion" : "After generation"}</span>
                             </span>
                           </button>
                         );
@@ -1609,21 +1609,21 @@ Message: ${message}`;
                       {technologyView === "dualFuel" ? (
                         <div key="dual-fuel" className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
                           <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-muted/40 p-6" onClick={() => openImage(systemImage, "OM Solutions dual-fuel kit schematic")} aria-label="Open Dual Fuel schematic">
-                            <span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-signal">Air intake system</span>
-                            <img src={systemImage} alt="Dual Fuel system schematic" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" />
+                            <span className="absolute left-5 top-5 font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-signal">Air intake system</span>
+                            <img src={systemImage} alt="Dual Fuel system schematic" loading="lazy" className="relative mt-5 max-h-64 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" />
                           </button>
                           <div className="p-5 sm:p-7">
                             <div className="flex items-start justify-between gap-4">
                               <div>
-                                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-signal">Dual Fuel</p>
-                                <h3 className="mt-2 text-2xl font-bold">Reduce In Situ.</h3>
+                                <p className="font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-signal">Dual Fuel</p>
+                                <h3 className="mt-2 text-2xl font-extrabold">Reduce In Situ.</h3>
                               </div>
-                              <span className="hidden rounded-full border border-signal/25 bg-signal/10 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-signal sm:block">Engine air flow</span>
+                              <span className="hidden rounded-full border border-signal/30 bg-signal/10 px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.1em] text-signal sm:block">Engine air flow</span>
                             </div>
-                            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground font-sans">Controlled introduction of alternate fuel into the engine air flow to reduce diesel consumption and particulate generation during combustion.</p>
+                            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-foreground/80 font-sans">Controlled introduction of alternate fuel into the engine air flow to reduce diesel consumption and particulate generation during combustion.</p>
                             <div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">
                               {["Reduces particulate generation during combustion", "Uses controlled fuel injection with sensors, valves and actuators", "Can reduce diesel consumption under suitable operating conditions", "Existing diesel operation can be retained"].map((point) => (
-                                <div key={point} className="flex gap-2.5 text-sm leading-relaxed font-sans sm:text-base">
+                                <div key={point} className="flex gap-2.5 text-sm font-medium leading-relaxed text-foreground font-sans sm:text-base">
                                   <span className="mt-1 grid size-5 shrink-0 place-items-center rounded-full bg-signal/15 text-signal"><Check className="size-3 stroke-[3]" /></span>
                                   {point}
                                 </div>
@@ -1634,16 +1634,16 @@ Message: ${message}`;
                       ) : (
                         <div key={`${recdType}-recd`} className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
                           <div className="relative flex min-h-52 items-center justify-center overflow-hidden bg-muted/40 p-6">
-                            <span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-signal">Exhaust system</span>
-                            <img src={recdImage} alt="RECD exhaust emission control device diagram" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain opacity-85" />
+                            <span className="absolute left-5 top-5 font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-signal">Exhaust system</span>
+                            <img src={recdImage} alt="RECD exhaust emission control device diagram" loading="lazy" className="relative mt-5 max-h-64 w-full object-contain" />
                           </div>
                           <div className="p-5 sm:p-7">
-                            <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-danger">RECD</p>
-                            <h3 className="mt-2 text-2xl font-bold">RECD <span className="text-muted-foreground">(Retrofit Emission Control Device)</span></h3>
-                            <p className="mt-3 text-sm leading-relaxed text-muted-foreground font-sans">Retrofit Emission Control Device added to the diesel engine exhaust to capture particulates.</p>
+                            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-danger">RECD</p>
+                            <h3 className="mt-2 text-2xl font-extrabold">RECD <span className="font-bold text-foreground/60">(Retrofit Emission Control Device)</span></h3>
+                            <p className="mt-3 text-sm leading-relaxed text-foreground/80 font-sans">Retrofit Emission Control Device added to the diesel engine exhaust to capture particulates.</p>
                             <div role="tablist" aria-label="RECD type" className="mt-4 flex gap-2 overflow-x-auto pb-1">
                               {(Object.keys(recdTypes) as RecdType[]).map((type) => (
-                                <button key={type} type="button" role="tab" aria-selected={recdType === type} onClick={() => setRecdType(type)} className={`shrink-0 rounded-full border px-3 py-2 font-mono text-[10px] uppercase tracking-[0.08em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${recdType === type ? "border-danger bg-danger text-white" : "border-border bg-secondary text-muted-foreground hover:border-danger/40"}`}>
+                                <button key={type} type="button" role="tab" aria-selected={recdType === type} onClick={() => setRecdType(type)} className={`shrink-0 rounded-full border px-3 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.08em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${recdType === type ? "border-danger bg-danger text-white" : "border-border bg-secondary text-foreground/75 hover:border-danger/40 hover:text-foreground"}`}>
                                   {recdTypes[type].label}
                                 </button>
                               ))}
@@ -1652,7 +1652,7 @@ Message: ${message}`;
                               <h4 className="text-sm font-bold">{recdTypes[recdType].heading}</h4>
                               <div className="mt-3 grid gap-x-5 gap-y-2 sm:grid-cols-2">
                                 {recdTypes[recdType].points.map((point) => (
-                                  <p key={point} className="flex gap-2.5 text-sm leading-relaxed text-foreground font-sans sm:text-base">
+                                  <p key={point} className="flex gap-2.5 text-sm font-medium leading-relaxed text-foreground font-sans sm:text-base">
                                     <span className="mt-1.5 size-1 shrink-0 rounded-full bg-danger" />
                                     {point}
                                   </p>

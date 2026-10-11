@@ -1465,32 +1465,32 @@ Message: ${message}`;
           />
           <div className="hero-grid-overlay absolute inset-0 z-[1]" aria-hidden="true" />
           <div className="hero-scan-lines absolute inset-0 z-[1]" aria-hidden="true" />
-          <div className="absolute inset-0 z-[2] bg-gradient-to-r from-panel/92 via-panel/62 to-panel/25" />
+          <div className="absolute inset-0 z-[2] bg-gradient-to-r from-panel/95 via-panel/75 to-panel/30" />
           <div className="absolute inset-0 z-[2] bg-gradient-to-t from-panel/80 via-transparent to-panel/30" />
           <div className="absolute inset-x-0 top-0 z-[3] h-px bg-gradient-to-r from-transparent via-signal/35 to-transparent" aria-hidden="true" />
           <div className="relative z-10 mx-auto flex min-h-[560px] w-full max-w-[1440px] flex-col justify-end px-5 pb-16 pt-24 lg:min-h-[620px] lg:px-10">
-            <p className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-signal sm:text-[11px]">
-              <span className="h-4 w-px bg-signal/70" aria-hidden="true" />
+            <p className="inline-flex w-fit items-center gap-2.5 rounded-full border border-signal/40 bg-signal/10 px-4 py-1.5 font-mono text-xs font-bold uppercase tracking-[0.16em] text-signal backdrop-blur-sm">
+              <span className="size-2 rounded-full bg-signal" aria-hidden="true" />
               OM Solutions · Technology
             </p>
-            <h2 className="mt-5 max-w-2xl text-4xl font-light leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <h2 className="mt-6 max-w-2xl text-4xl font-bold leading-[1.08] tracking-tight text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.35)] sm:text-5xl lg:text-6xl">
               Focused on
               <br />
               Alternate Fuels for
               <br />
-              <span className="font-semibold text-signal">I.C. Engines</span>
+              <span className="font-extrabold text-signal">I.C. Engines</span>
             </h2>
-            <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/75 font-sans">
+            <p className="mt-6 max-w-xl border-l-4 border-signal/70 pl-4 text-base font-medium leading-relaxed text-white/90 font-sans sm:text-lg">
               To make engine operation cleaner and more cost-effective, we need to make the shift to intelligent dual-fuel systems.
             </p>
             <a
               href="/technology"
-              className="group mt-9 inline-flex w-fit items-center gap-3 rounded-sm bg-signal px-7 py-3.5 text-[11px] font-extrabold uppercase tracking-[0.12em] text-panel shadow-[0_8px_32px_color-mix(in_oklab,var(--color-signal)_35%,transparent)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white"
+              className="group mt-8 inline-flex min-h-[52px] w-fit items-center gap-3 rounded-xl bg-signal px-8 py-3.5 text-sm font-extrabold uppercase tracking-[0.08em] text-panel shadow-[0_8px_32px_color-mix(in_oklab,var(--color-signal)_35%,transparent)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white"
             >
               Explore Technology
               <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
             </a>
-            <div className="mt-10 hidden items-center gap-2.5 font-mono text-[10px] uppercase tracking-[0.16em] text-white/40 lg:flex">
+            <div className="mt-10 hidden items-center gap-2.5 font-mono text-xs font-bold uppercase tracking-[0.16em] text-white/70 lg:flex">
               <span className="text-signal">02</span>
               <span className="h-px w-8 bg-white/20" aria-hidden="true" />
               Technology

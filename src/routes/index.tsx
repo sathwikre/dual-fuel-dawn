@@ -1904,32 +1904,44 @@ Message: ${message}`;
                 <div className="relative mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
                   <div className="flex flex-wrap items-end justify-between gap-6">
                     <div>
-                     
-                      <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">Dual fuel technology architecture</h2>
+                      <h2 className="text-4xl font-extrabold tracking-tight lg:text-5xl">Dual fuel technology architecture</h2>
                     </div>
-                    <p className="max-w-md text-sm leading-relaxed text-muted-foreground font-sans">Explore supported alternate-fuel pathways across engine applications.</p>
+                    <p className="max-w-md text-sm font-medium leading-relaxed text-foreground/80 font-sans">Explore supported alternate-fuel pathways across engine applications.</p>
                   </div>
 
                   <div className="mt-10 overflow-hidden rounded-2xl border border-border/60 bg-background shadow-sm">
                     <div className="grid gap-px bg-border/60 sm:grid-cols-2 xl:grid-cols-4">
-                      {applicationCards.map(({ title, description, image }, index) => (
-                        <article key={title} className="group relative min-h-[370px] overflow-hidden bg-background p-5 transition-colors hover:bg-muted/40 sm:min-h-[390px] sm:p-6">
-                          <div className="mb-5 flex items-center justify-between">
-                            <span className="font-mono text-xs font-semibold text-muted-foreground/70">{String(index + 1).padStart(2, "0")}</span>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => openImage(image, title)}
-                            aria-label={`View ${title} image`}
-                            className="group/image relative block h-48 w-full cursor-zoom-in overflow-hidden rounded-xl border border-border/60 bg-white p-3 shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal sm:h-52"
-                          >
-                            <img src={image} alt={title} className="size-full object-contain transition-transform duration-300 group-hover/image:scale-105" loading="lazy" />
-                            <span className="absolute bottom-2 right-2 rounded-full bg-panel/85 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white opacity-0 transition-opacity group-hover/image:opacity-100">View image</span>
-                          </button>
-                          <h3 className="mt-5 text-lg font-extrabold leading-tight text-foreground sm:text-xl">{title}</h3>
-                          <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted-foreground">{description}</p>
-                        </article>
-                      ))}
+                      {applicationCards.map(({ title, description, image }, index) => {
+                        const supportedFuels: readonly string[] = fuelArchitecture.find((row) => row.application === title)?.supported ?? [];
+                        return (
+                          <article key={title} className="group relative flex flex-col overflow-hidden bg-background p-5 transition-colors hover:bg-muted/40 sm:p-6">
+                            <button
+                              type="button"
+                              onClick={() => openImage(image, title)}
+                              aria-label={`View ${title} image`}
+                              className="group/image relative block h-48 w-full cursor-zoom-in overflow-hidden rounded-xl border border-border/60 bg-white p-3 shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal sm:h-52"
+                            >
+                              <span className="absolute left-2 top-2 z-10 grid size-8 place-items-center rounded-lg bg-panel font-mono text-xs font-bold text-signal">{String(index + 1).padStart(2, "0")}</span>
+                              <img src={image} alt={title} className="size-full object-contain transition-transform duration-300 group-hover/image:scale-105" loading="lazy" />
+                              <span className="absolute bottom-2 right-2 rounded-full bg-panel/85 px-2.5 py-1 font-mono text-[9px] font-bold uppercase tracking-[0.12em] text-white">View image</span>
+                            </button>
+                            <h3 className="mt-5 text-lg font-extrabold leading-tight text-foreground sm:text-xl">{title}</h3>
+                            <p className="mt-2 max-w-lg text-sm font-medium leading-relaxed text-foreground/80">{description}</p>
+                            {supportedFuels.length > 0 && (
+                              <div className="mt-auto pt-4">
+                                <p className="border-t border-border/70 pt-4 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-foreground/60">Supported fuels</p>
+                                <div className="mt-2 flex flex-wrap gap-1.5">
+                                  {supportedFuels.map((fuel) => (
+                                    <span key={fuel} className="rounded-full border border-signal/40 bg-signal/10 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.06em] text-foreground">
+                                      {fuel}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </article>
+                        );
+                      })}
                     </div>
                   </div>
 

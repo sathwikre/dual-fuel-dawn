@@ -1068,7 +1068,7 @@ Message: ${message}`;
 
   return (
     <div className={`min-h-screen overflow-x-hidden bg-background text-foreground ${technologyOnly ? "technology-standalone" : ""}`}>
-      {technologyOnly && <style>{`.technology-standalone>header,.technology-standalone>footer,.technology-standalone> :not(main){display:none}.technology-standalone main> :not(.technology-route-panel){display:none}`}</style>}
+      {technologyOnly && <style>{`.technology-standalone>header,.technology-standalone>footer,.technology-standalone> :not(main):not(.standalone-overlay){display:none}.technology-standalone main> :not(.technology-route-panel){display:none}`}</style>}
       <header
         style={{ transition: "height .35s ease, background .35s ease, backdrop-filter .35s ease" }}
         className={[
@@ -2246,12 +2246,12 @@ Message: ${message}`;
         </div>
       </footer>
 
-      {selectedImage ? <div className="fixed inset-0 z-[60] flex items-center justify-center bg-panel/90 p-5 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label={selectedImage.alt} onClick={() => setSelectedImage(null)}><div className="relative max-h-[90vh] max-w-5xl overflow-hidden rounded-[10px] border border-background/15 bg-background" onClick={(event) => event.stopPropagation()}><Button type="button" variant="outline" size="icon" className="absolute right-3 top-3 z-10 rounded-[6px] border-border bg-background/85" aria-label="Close image viewer" onClick={() => setSelectedImage(null)}><X /></Button><img src={selectedImage.src} alt={selectedImage.alt} className="max-h-[86vh] max-w-full object-contain" /></div></div> : null}
+      {selectedImage ? <div className="standalone-overlay fixed inset-0 z-[60] flex items-center justify-center bg-panel/90 p-5 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label={selectedImage.alt} onClick={() => setSelectedImage(null)}><div className="relative max-h-[90vh] max-w-5xl overflow-hidden rounded-[10px] border border-background/15 bg-background" onClick={(event) => event.stopPropagation()}><Button type="button" variant="outline" size="icon" className="absolute right-3 top-3 z-10 rounded-[6px] border-border bg-background/85" aria-label="Close image viewer" onClick={() => setSelectedImage(null)}><X /></Button><img src={selectedImage.src} alt={selectedImage.alt} className="max-h-[86vh] max-w-full object-contain" /></div></div> : null}
 
       {/* Interactive Schematic Viewer */}
       {schematicViewerOpen && (
         <div
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-[#0a0f0d]/95 p-4 backdrop-blur-sm"
+          className="standalone-overlay fixed inset-0 z-[60] flex items-center justify-center bg-[#0a0f0d]/95 p-4 backdrop-blur-sm"
           onClick={() => setSchematicViewerOpen(false)}
           role="dialog"
           aria-modal="true"
@@ -2505,7 +2505,7 @@ Message: ${message}`;
 
       {appGallery && (
         <div
-          className="fixed inset-0 z-[65] flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm"
+          className="standalone-overlay fixed inset-0 z-[65] flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm"
           onClick={() => setAppGallery(null)}
           role="dialog"
           aria-modal="true"

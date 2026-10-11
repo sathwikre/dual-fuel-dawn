@@ -20,46 +20,261 @@ const demo = {
   fuel: [{ name: "Gaseous Fuel", value: 70 }, { name: "Diesel", value: 30 }],
   timeline: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"].map((month, i) => ({ month, value: [1, 3, 5, 7, 10, 13, 17, 21, 25, 28, 30, 31.6][i] })),
 };
-const panel = "rounded-xl border border-border/60 bg-panel-soft shadow-[0_10px_30px_rgba(0,0,0,.2)]";
+
+const siteStatus = [
+  { icon: Building2, value: "20", label: "INSTALLATIONS" },
+  { icon: Power, value: "12", label: "RUNNING NOW" },
+  { icon: Pause, value: "8", label: "STANDBY / OFFLINE" },
+];
+
+const networkStats = [
+  { icon: Building2, value: "20", label: "sites (total)" },
+  { icon: Power, value: "12", label: "running now" },
+  { icon: Pause, value: "8", label: "standby / offline" },
+  { icon: Clock3, value: "1.26M", label: "operating hours" },
+];
+
+const savings = [
+  { icon: Fuel, label: "DIESEL AVOIDED (CUMULATIVE)", value: "58K Litres" },
+  { icon: Leaf, label: "CO₂ REDUCED (CUMULATIVE)", value: "31.6 Tonnes" },
+  { icon: IndianRupee, label: "MONEY SAVED (CUMULATIVE)", value: "50 Lakh ₹" },
+];
+
+const periods = ["All Sites", "Today", "This Month", "This Year", "All Time"];
+
+const panel = "rounded-2xl border border-white/10 bg-panel-soft shadow-[0_10px_30px_rgba(0,0,0,.2)]";
+const axisTick = { fill: "#d5e0d8", fontSize: 12 };
+const tooltipStyle = { background: "var(--color-panel)", border: "1px solid #ffffff22", borderRadius: 8, color: "#fff" };
 
 function ImpactPage() {
   const [period, setPeriod] = useState("All Sites");
-  return <main className="min-h-screen overflow-x-clip bg-panel text-white">
-    <header className="sticky top-0 z-30 border-b border-border/60 bg-panel/95 backdrop-blur-xl">
-      <div className="mx-auto flex min-h-[62px] max-w-[1600px] items-center justify-between gap-2 px-3 sm:px-5 lg:px-8">
-        <Link to="/" aria-label="OM Solutions home" className="flex min-w-0 shrink items-center gap-2 text-white"><img src={logoImage} alt="OM Solutions" className="size-9 shrink-0 object-contain sm:size-11"/><span className="truncate text-xs font-extrabold uppercase leading-none tracking-[0.06em] sm:text-[16px] sm:tracking-[0.08em]">OM Solutions</span></Link>
-        <nav className="hidden h-full items-center gap-8 text-sm md:flex"><Link to="/" className="text-white/75 transition-colors duration-200 hover:text-signal">Home</Link><span className="flex h-full items-center border-b-2 border-signal px-1 font-semibold text-signal">Impact</span><Link to="/#gallery" className="text-white/75 transition-colors duration-200 hover:text-signal">Installations</Link><Link to="/#team" className="text-white/75 transition-colors duration-200 hover:text-signal">About</Link></nav>
-        <div className="flex shrink-0 items-center gap-2 text-[9px] sm:gap-4 sm:text-[10px]"><span className="flex items-center gap-1.5 whitespace-nowrap font-bold tracking-wide text-signal"><i className="size-2 rounded-full bg-signal shadow-[0_0_12px_var(--color-signal)] sm:size-2.5"/>LIVE NETWORK</span><span className="hidden h-5 border-l border-white/25 sm:block"/><span className="hidden text-white/65 sm:block">Updated just now</span><Link to="/" className="text-white/60 md:hidden">Home</Link></div>
+  const maxEmission = Math.max(...demo.emissions.map((entry) => entry.value));
+
+  return (
+    <main className="min-h-screen overflow-x-clip bg-panel text-white">
+      <header className="sticky top-0 z-30 border-b border-white/10 bg-panel/95 backdrop-blur-xl">
+        <div className="mx-auto flex min-h-[68px] max-w-[1600px] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+          <Link to="/" aria-label="OM Solutions home" className="flex min-w-0 shrink items-center gap-2.5 text-white">
+            <img src={logoImage} alt="OM Solutions" className="size-10 shrink-0 object-contain sm:size-11" />
+            <span className="truncate text-sm font-extrabold uppercase leading-none tracking-[0.06em] sm:text-base sm:tracking-[0.08em]">OM Solutions</span>
+          </Link>
+          <nav className="hidden h-full items-center gap-8 text-[15px] font-semibold md:flex">
+            <Link to="/" className="text-white/85 transition-colors hover:text-signal">Home</Link>
+            <span className="flex h-full items-center border-b-2 border-signal px-1 py-5 text-signal">Impact</span>
+            <Link to="/" hash="gallery" className="text-white/85 transition-colors hover:text-signal">Installations</Link>
+            <Link to="/" hash="team" className="text-white/85 transition-colors hover:text-signal">About</Link>
+          </nav>
+          <div className="flex shrink-0 items-center gap-3 text-xs sm:gap-4">
+            <span className="flex items-center gap-2 whitespace-nowrap font-bold tracking-wide text-signal">
+              <i className="size-2.5 rounded-full bg-signal shadow-[0_0_12px_var(--color-signal)]" />
+              LIVE NETWORK
+            </span>
+            <span className="hidden h-5 border-l border-white/25 sm:block" />
+            <span className="hidden font-medium text-white/75 sm:block">Updated just now</span>
+            <Link to="/" className="font-semibold text-white/85 md:hidden">Home</Link>
+          </div>
+        </div>
+      </header>
+
+      <div className="mx-auto max-w-[1600px] space-y-5 px-4 pb-10 pt-8 sm:px-6 lg:px-8">
+        {/* Hero */}
+        <section className="grid min-w-0 animate-in fade-in slide-in-from-bottom-2 items-end gap-5 duration-500 motion-reduce:animate-none lg:grid-cols-[1fr_auto]">
+          <div className="min-w-0">
+            <span className="inline-flex items-center gap-2 rounded-full border border-signal/35 bg-signal/10 px-3.5 py-1.5 text-xs font-bold tracking-wide text-signal">
+              <Activity className="size-4" />
+              ALL INSTALLATIONS · CUMULATIVE
+            </span>
+            <h1 className="mt-4 text-[clamp(30px,6vw,52px)] font-extrabold leading-tight tracking-tight">
+              Our Impact. <span className="bg-gradient-to-r from-white to-signal bg-clip-text text-transparent">Across Every Engine.</span>
+            </h1>
+            <p className="mt-2 max-w-2xl text-base font-medium leading-relaxed text-white/80">Accumulated impact from OM Solutions dual-fuel systems across all installations.</p>
+          </div>
+          <div className="grid grid-cols-3 divide-x divide-white/10 rounded-2xl border border-white/10 bg-panel-soft py-4">
+            {siteStatus.map(({ icon: Icon, value, label }) => (
+              <div key={label} className="min-w-[96px] px-3 text-center sm:px-6">
+                <Icon className="mx-auto mb-1.5 size-5 text-signal" />
+                <strong className="block text-2xl font-extrabold sm:text-3xl">{value}</strong>
+                <span className="mt-1 block text-[11px] font-bold leading-tight tracking-wide text-white/75">{label}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Headline metrics */}
+        <section aria-label="Cumulative impact metrics" className="grid animate-in fade-in slide-in-from-bottom-2 grid-cols-1 gap-3 duration-700 motion-reduce:animate-none min-[420px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
+          {demo.metrics.map(({ label, value, unit, icon: Icon, color }) => (
+            <article key={label} className={`${panel} flex min-w-0 flex-col gap-4 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-signal/45`}>
+              <div className="flex items-center gap-3">
+                <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-white/[.06]">
+                  <Icon className="size-6" style={{ color }} />
+                </span>
+                <div className="min-w-0">
+                  <h2 className="text-xs font-bold leading-snug tracking-wide text-white">{label}</h2>
+                  <span className="block text-[11px] font-medium tracking-wide text-white/65">ACCUMULATED TOTAL</span>
+                </div>
+              </div>
+              <p className="whitespace-nowrap text-3xl font-extrabold leading-none sm:text-[34px]">
+                {value} <span className="text-base font-bold text-white/80">{unit}</span>
+              </p>
+            </article>
+          ))}
+        </section>
+
+        {/* Charts */}
+        <section className="grid min-w-0 animate-in fade-in slide-in-from-bottom-2 gap-5 duration-1000 motion-reduce:animate-none md:grid-cols-2 xl:grid-cols-[1.2fr_.85fr_1.05fr]">
+          <article className={`${panel} p-5`}>
+            <Heading icon={Leaf} title="EMISSIONS IMPACT" subtitle="Verified emissions reductions across all installations" />
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              {demo.emissions.map((item) => (
+                <div key={item.name} className="rounded-xl border border-white/10 bg-white/[.03] p-4">
+                  <div className="mb-3 flex items-center justify-between gap-3">
+                    <span className="text-xs font-bold tracking-wide text-white/85">{item.name}</span>
+                    <strong className="text-xl text-white">{item.value} t</strong>
+                  </div>
+                  <div className="h-2.5 overflow-hidden rounded-full bg-white/10">
+                    <div className="h-full rounded-full bg-signal transition-all duration-700" style={{ width: `${(item.value / maxEmission) * 100}%` }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-5 h-[210px] w-full" role="img" aria-label="Bar graph comparing CO₂ reduced and PM or soot reduced in tonnes">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={demo.emissions} margin={{ top: 8, right: 8, left: -10, bottom: 0 }}>
+                  <CartesianGrid stroke="#ffffff14" vertical={false} />
+                  <XAxis dataKey="name" tick={axisTick} axisLine={{ stroke: "#4a5a4e" }} tickLine={false} />
+                  <YAxis domain={[0, "auto"]} tick={axisTick} tickFormatter={(value: number) => `${value} t`} axisLine={false} tickLine={false} />
+                  <Tooltip contentStyle={tooltipStyle} itemStyle={{ color: "#fff" }} formatter={(value: number) => [`${value} t reduced`, "Verified reduction"]} />
+                  <Bar dataKey="value" name="Reduction" fill="var(--color-signal)" radius={[6, 6, 0, 0]} maxBarSize={60} animationDuration={900} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </article>
+
+          <article className={`${panel} p-5`}>
+            <Heading icon={Fuel} title="FUEL TRANSITION" subtitle="Average fuel split across all installations" />
+            <div className="relative mx-auto mt-2 h-[210px] max-w-[260px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie data={demo.fuel} dataKey="value" innerRadius="64%" outerRadius="90%" paddingAngle={2} stroke="none" animationDuration={1000}>
+                    {demo.fuel.map((entry, i) => <Cell key={entry.name} fill={i === 0 ? "var(--color-signal)" : "#30483b"} />)}
+                  </Pie>
+                </PieChart>
+              </ResponsiveContainer>
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-semibold text-white/80">Up to</span>
+                <b className="text-4xl text-signal">70%</b>
+                <span className="text-xs font-semibold text-white/80">gaseous fuel usage</span>
+              </div>
+            </div>
+            <div className="mt-3 space-y-2.5 text-sm">
+              <p className="flex items-center justify-between gap-3 rounded-lg bg-white/[.03] px-3 py-2">
+                <span className="flex items-center gap-2.5 font-semibold"><i className="size-3 shrink-0 rounded-full bg-signal" />Gaseous Fuel (CNG / LPG / PNG)</span>
+                <b className="text-lg">70%</b>
+              </p>
+              <p className="flex items-center justify-between gap-3 rounded-lg bg-white/[.03] px-3 py-2">
+                <span className="flex items-center gap-2.5 font-semibold text-white/85"><i className="size-3 shrink-0 rounded-full bg-[#53645a]" />Diesel</span>
+                <b className="text-lg">30%</b>
+              </p>
+              <p className="pt-1 text-xs font-medium leading-relaxed text-white/70">Dual-fuel operation with up to 70% gaseous fuel use, depending on application and engine type.</p>
+            </div>
+          </article>
+
+          <article className={`${panel} min-w-0 p-5 md:col-span-2 xl:col-span-1`}>
+            <Heading icon={MapPin} title="NETWORK AT A GLANCE" subtitle="Installation network across India" />
+            <div className="mt-4 grid grid-cols-[minmax(0,1fr)_minmax(0,.9fr)] items-stretch gap-3">
+              <div className="flex min-h-[230px] min-w-0 items-center justify-center overflow-hidden rounded-xl bg-white p-2">
+                <img src={indiaMapImage} alt="Map outline of India" className="block h-full max-h-[260px] w-full object-contain" />
+              </div>
+              <div className="flex flex-col justify-center gap-4 rounded-xl border border-white/10 bg-white/[.03] p-4">
+                {networkStats.map(({ icon: Icon, value, label }) => (
+                  <p key={label} className="flex items-center gap-3">
+                    <Icon className="size-5 shrink-0 text-signal" />
+                    <span className="min-w-0">
+                      <b className="block text-xl leading-6">{value}</b>
+                      <small className="text-xs font-medium text-white/75">{label}</small>
+                    </span>
+                  </p>
+                ))}
+              </div>
+            </div>
+          </article>
+        </section>
+
+        {/* Timeline */}
+        <section className={`${panel} animate-in fade-in slide-in-from-bottom-2 p-5 duration-1000 motion-reduce:animate-none`}>
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <Heading icon={Activity} title="IMPACT OVER TIME (CUMULATIVE)" subtitle="Total impact from all installations" />
+            <div className="flex flex-wrap items-center gap-1.5">
+              {periods.map((option) => (
+                <button
+                  key={option}
+                  type="button"
+                  onClick={() => setPeriod(option)}
+                  aria-pressed={period === option}
+                  className={`rounded-lg px-3.5 py-2 text-xs font-semibold transition-colors ${period === option ? "bg-signal text-panel" : "bg-white/[.06] text-white/85 hover:bg-white/12"}`}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+            <span className="flex items-center gap-2 text-xs font-semibold text-white/75">
+              Select Metric <span className="rounded-lg border border-white/20 px-3 py-2 text-white">CO₂ Saved (t)</span>
+            </span>
+          </div>
+          <div className="mt-4 h-[230px] w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={demo.timeline} margin={{ top: 8, right: 24, left: -10, bottom: 0 }}>
+                <defs>
+                  <linearGradient id="impactFill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="var(--color-signal)" stopOpacity={0.3} />
+                    <stop offset="100%" stopColor="var(--color-signal)" stopOpacity={0.02} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid stroke="#ffffff14" vertical={false} />
+                <XAxis dataKey="month" tick={axisTick} axisLine={{ stroke: "#4a5a4e" }} tickLine={false} />
+                <YAxis domain={[0, 40]} ticks={[0, 10, 20, 30, 40]} tick={axisTick} axisLine={false} tickLine={false} />
+                <Tooltip contentStyle={tooltipStyle} formatter={(v: number) => [`${v.toLocaleString()} t`, `CO₂ saved · ${period}`]} />
+                <Area type="monotone" dataKey="value" stroke="var(--color-signal)" strokeWidth={3} fill="url(#impactFill)" animationDuration={1100} />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        </section>
+
+        {/* Savings summary */}
+        <section className={`${panel} grid animate-in fade-in slide-in-from-bottom-2 gap-3 p-5 duration-1000 motion-reduce:animate-none lg:grid-cols-[.9fr_1fr_1fr_1fr] lg:items-center`}>
+          <Heading icon={Leaf} title="WHAT YOUR ENGINE HAS SAVED" subtitle="Real impact. Reduced CO₂ and PM. Lower fuel cost." />
+          {savings.map(({ icon: Icon, label, value }) => (
+            <article key={label} className="flex items-center gap-4 rounded-xl border border-signal/20 bg-signal/[.08] px-5 py-4 transition-transform duration-300 hover:-translate-y-0.5">
+              <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-signal/15">
+                <Icon className="size-6 text-signal" />
+              </span>
+              <div>
+                <p className="text-xs font-bold tracking-wide text-white/80">{label}</p>
+                <b className="mt-0.5 block text-2xl">{value}</b>
+              </div>
+            </article>
+          ))}
+        </section>
+
+        <footer className="flex flex-wrap justify-between gap-3 border-t border-white/10 px-1 pt-4 text-xs font-medium leading-relaxed text-white/65">
+          <p className="max-w-4xl">Note: Live values will be based on connected telemetry. Historical values may be estimated from validated operating and fuel data. Figures shown are cumulative totals across all installations.</p>
+          <span className="shrink-0">Illustrative dashboard values</span>
+        </footer>
       </div>
-    </header>
-
-    <div className="mx-auto max-w-[1600px] space-y-3 px-4 pb-8 pt-5 sm:px-6 lg:px-8">
-      <section className="grid min-w-0 animate-in fade-in slide-in-from-bottom-2 duration-500 motion-reduce:animate-none items-center gap-3 lg:grid-cols-[1fr_auto_auto] lg:gap-4">
-        <div className="min-w-0"><h1 className="text-[clamp(27px,6vw,46px)] font-extrabold leading-tight tracking-tight">Our Impact. <span className="bg-gradient-to-r from-white to-signal bg-clip-text text-transparent">Across Every Engine.</span></h1><p className="mt-1 text-xs leading-relaxed text-white/65 sm:text-sm">Accumulated impact from OM Solutions dual-fuel systems across all installations.</p></div>
-        <div className="flex min-w-0 items-center gap-2 rounded-xl border border-signal/30 bg-gradient-to-r from-panel-soft to-[#15513b] px-3 py-3 sm:gap-3 sm:px-5"><Activity className="size-5 shrink-0 text-signal"/><span className="text-[9px] font-bold tracking-wide sm:text-[11px]">ALL INSTALLATIONS · CUMULATIVE</span></div>
-        <div className="grid grid-cols-3 divide-x divide-border/60 rounded-xl border border-border/60 bg-panel-soft px-2 py-3 sm:px-4">{[[Building2,"20","INSTALLATIONS"],[Power,"12","RUNNING NOW"],[Pause,"8","STANDBY / OFFLINE"]].map(([Icon,value,label])=><div key={String(label)} className="min-w-[75px] px-2 text-center sm:px-4"><Icon className="mx-auto mb-1 size-4 text-signal"/><strong className="text-xl sm:text-2xl">{String(value)}</strong><span className="block whitespace-nowrap text-[7px] tracking-wide text-white/55 sm:text-[8px]">{String(label)}</span></div>)}</div>
-      </section>
-
-      <section aria-label="Cumulative impact metrics" className="grid animate-in fade-in slide-in-from-bottom-2 duration-700 motion-reduce:animate-none grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-5">{demo.metrics.map(({label,value,unit,icon:Icon,color})=><article key={label} className={`${panel} flex min-h-[95px] min-w-0 items-center gap-2 px-2.5 py-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-signal/45 hover:shadow-[0_12px_32px_color-mix(in_oklab,var(--color-signal)_12%,transparent)] sm:gap-3 sm:px-3`}><Icon className="size-7 shrink-0 sm:size-8" style={{color}}/><div className="min-w-0 flex-1"><span className="block text-[7px] leading-tight tracking-wider text-white/45">ACCUMULATED TOTAL</span><h2 className="mt-0.5 whitespace-normal break-words text-[9px] font-bold leading-tight tracking-wide text-white/85">{label}</h2><p className="mt-1 whitespace-nowrap text-xl font-bold leading-none sm:text-[23px]">{value} <span className="text-sm">{unit}</span></p></div></article>)}</section>
-
-      <section className="grid min-w-0 animate-in fade-in slide-in-from-bottom-2 duration-1000 motion-reduce:animate-none gap-3 md:grid-cols-2 xl:grid-cols-[1.2fr_.85fr_1.05fr]">
-        <article className={`${panel} p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-signal/35`}><Heading icon={Leaf} title="EMISSIONS IMPACT" subtitle="Verified emissions reductions across all installations"/><div className="mt-4 grid gap-4 sm:grid-cols-2">{demo.emissions.map((item)=>{const maxValue=Math.max(...demo.emissions.map((entry)=>entry.value));return <div key={item.name} className="rounded-lg border border-white/10 bg-white/[.025] p-3"><div className="mb-2 flex items-center justify-between gap-3"><span className="text-xs font-semibold text-white/75">{item.name}</span><strong className="text-lg text-white">{item.value} t</strong></div><div className="h-2 overflow-hidden rounded-full bg-white/10"><div className="h-full rounded-full bg-signal transition-all duration-700" style={{width:`${(item.value/maxValue)*100}%`}}/></div></div>})}</div><div className="mt-4 h-[190px] w-full" role="img" aria-label="Bar graph comparing CO₂ reduced and PM or soot reduced in tonnes"><ResponsiveContainer width="100%" height="100%"><BarChart data={demo.emissions} margin={{top:8,right:8,left:-18,bottom:0}}><CartesianGrid stroke="#ffffff12" vertical={false}/><XAxis dataKey="name" tick={{fill:"#b8c5ba",fontSize:9}} axisLine={{stroke:"#4a5a4e"}} tickLine={false}/><YAxis domain={[0,"auto"]} tick={{fill:"#b8c5ba",fontSize:9}} tickFormatter={(value:number)=>`${value} t`} axisLine={false} tickLine={false}/><Tooltip contentStyle={{background:"var(--color-panel)",border:"1px solid #ffffff22",borderRadius:8,color:"#fff"}} itemStyle={{color:"#fff"}} formatter={(value:number)=>[`${value} t reduced`,"Verified reduction"]}/><Bar dataKey="value" name="Reduction" fill="var(--color-signal)" radius={[5,5,0,0]} maxBarSize={54} animationDuration={900}/></BarChart></ResponsiveContainer></div></article>
-
-        <article className={`${panel} p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-signal/35`}><Heading icon={Fuel} title="FUEL TRANSITION" subtitle="Average fuel split across all installations"/><div className="grid items-center gap-1 sm:grid-cols-[1fr_1fr]"><div className="relative h-[190px]"><ResponsiveContainer width="100%" height="100%"><PieChart><Pie data={demo.fuel} dataKey="value" innerRadius="62%" outerRadius="88%" paddingAngle={2} stroke="none" animationDuration={1000}>{demo.fuel.map((x,i)=><Cell key={x.name} fill={i===0?"var(--color-signal)":"#30483b"}/>)}</Pie></PieChart></ResponsiveContainer><div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center"><span className="text-[10px]">Up to</span><b className="text-3xl text-signal">70%</b><span className="text-[10px]">gaseous fuel usage</span></div></div><div className="space-y-3 text-[10px]"><p className="flex items-center justify-between gap-1"><span className="flex items-center gap-2"><i className="size-2.5 rounded-full bg-signal"/>Gaseous Fuel<br/>(CNG / LPG / PNG)</span><b className="text-lg">70%</b></p><p className="flex items-center justify-between"><span className="flex items-center gap-2 text-white/70"><i className="size-2.5 rounded-full bg-[#53645a]"/>Diesel</span><b className="text-lg">30%</b></p><p className="rounded-lg border border-white/10 bg-white/[.025] p-2 leading-4 text-white/55">Dual-fuel operation with up to 70% gaseous fuel use, depending on application and engine type.</p></div></div></article>
-
-        <article className={`${panel} min-w-0 p-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-signal/35 sm:p-4`}><Heading icon={MapPin} title="NETWORK AT A GLANCE" subtitle="Installation network across India"/><div className="grid min-h-[202px] grid-cols-[minmax(0,1fr)_minmax(0,.9fr)] items-center gap-2 sm:h-[202px]"><div className="flex h-full min-h-[170px] min-w-0 items-center justify-center overflow-hidden rounded-lg bg-white p-1"><IndiaMap/></div><div className="space-y-2 rounded-lg border border-white/10 bg-white/[.025] p-2 sm:space-y-3 sm:p-3">{[[Building2,"20","sites (total)"],[Power,"12","running now"],[Pause,"8","standby / offline"],[Clock3,"1.26M","operating hours"]].map(([Icon,v,l])=><p key={String(l)} className="flex items-center gap-1.5 sm:gap-2"><Icon className="size-3.5 shrink-0 text-signal sm:size-4"/><span className="min-w-0"><b className="block text-base leading-5 sm:text-lg">{String(v)}</b><small className="text-[8px] text-white/55 sm:text-[9px]">{String(l)}</small></span></p>)}</div></div></article>
-      </section>
-
-      <section className={`${panel} animate-in fade-in slide-in-from-bottom-2 duration-1000 motion-reduce:animate-none p-4`}><div className="flex flex-wrap items-center justify-between gap-3"><Heading icon={Activity} title="IMPACT OVER TIME (CUMULATIVE)" subtitle="Total impact from all installations"/><div className="flex flex-wrap items-center gap-1">{["All Sites","Today","This Month","This Year","All Time"].map(f=><button key={f} onClick={()=>setPeriod(f)} className={`rounded-md px-3 py-2 text-[9px] transition-colors duration-200 ${period===f?"bg-signal font-semibold text-panel":"bg-white/[.035] text-white/65 hover:bg-white/10"}`}>{f}</button>)}</div><label className="text-[9px] text-white/50">Select Metric <span className="ml-2 rounded-md border border-white/15 px-2 py-2 text-white">CO₂ Saved (t)</span></label></div><div className="h-[175px] w-full"><ResponsiveContainer width="100%" height="100%"><AreaChart data={demo.timeline} margin={{top:8,right:24,left:-18,bottom:0}}><defs><linearGradient id="impactFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="var(--color-signal)" stopOpacity={.3}/><stop offset="100%" stopColor="var(--color-signal)" stopOpacity={.02}/></linearGradient></defs><CartesianGrid stroke="#ffffff12" vertical={false}/><XAxis dataKey="month" tick={{fill:"#b8c5ba",fontSize:9}} axisLine={{stroke:"#4a5a4e"}} tickLine={false}/><YAxis domain={[0,40]} ticks={[0,10,20,30,40]} tick={{fill:"#b8c5ba",fontSize:9}} axisLine={false} tickLine={false}/><Tooltip contentStyle={{background:"var(--color-panel)",border:"1px solid #ffffff22",borderRadius:8}} formatter={(v:number)=>[`${v.toLocaleString()} t`,`CO₂ saved · ${period}`]}/><Area type="monotone" dataKey="value" stroke="var(--color-signal)" strokeWidth={2.5} fill="url(#impactFill)" animationDuration={1100}/></AreaChart></ResponsiveContainer></div></section>
-
-      <section className={`${panel} animate-in fade-in slide-in-from-bottom-2 duration-1000 motion-reduce:animate-none grid gap-2 p-3 lg:grid-cols-[.9fr_1fr_1fr_1fr] lg:items-center`}><div className="px-2"><Heading icon={Leaf} title="WHAT YOUR ENGINE HAS SAVED" subtitle="Real impact. Reduced CO₂ and PM. Lower fuel cost."/></div>{[{icon:Fuel,label:"DIESEL AVOIDED (CUMULATIVE)",value:"58K Litres",color:"#193d2b"},{icon:Leaf,label:"CO₂ REDUCED (CUMULATIVE)",value:"31.6 Tonnes",color:"#173a35"},{icon:IndianRupee,label:"MONEY SAVED (CUMULATIVE)",value:"50 Lakh ₹",color:"#3d3a20"}].map(({icon:Icon,label,value,color})=><article key={label} className="flex items-center gap-3 rounded-lg px-4 py-3 transition-transform duration-300 hover:-translate-y-0.5" style={{background:color}}><Icon className="size-7 shrink-0 text-signal"/><div><p className="text-[8px] font-bold tracking-wide text-white/65">{label}</p><b className="text-lg">{value}</b></div></article>)}</section>
-      <footer className="flex flex-wrap justify-between gap-2 px-1 text-[9px] leading-4 text-white/45"><p>Note: Live values will be based on connected telemetry. Historical values may be estimated from validated operating and fuel data. Figures shown are cumulative totals across all installations.</p><span className="shrink-0">Illustrative dashboard values</span></footer>
-    </div>
-  </main>;
+    </main>
+  );
 }
 
-function Heading({icon:Icon,title,subtitle}:{icon:typeof Leaf;title:string;subtitle:string}) { return <div className="mb-2 flex items-start gap-2"><Icon className="mt-0.5 size-5 shrink-0 text-signal"/><div><h2 className="text-[12px] font-extrabold tracking-wide">{title}</h2><p className="mt-0.5 text-[10px] leading-4 text-muted-foreground">{subtitle}</p></div></div>; }
-
-function IndiaMap() { return <img src={indiaMapImage} alt="Map outline of India" className="block h-full w-full object-contain"/>; }
-
-
+function Heading({ icon: Icon, title, subtitle }: { icon: typeof Leaf; title: string; subtitle: string }) {
+  return (
+    <div className="flex items-start gap-3">
+      <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-signal/15">
+        <Icon className="size-5 text-signal" />
+      </span>
+      <div>
+        <h2 className="text-sm font-extrabold tracking-wide">{title}</h2>
+        <p className="mt-0.5 text-xs font-medium leading-relaxed text-white/70">{subtitle}</p>
+      </div>
+    </div>
+  );
+}

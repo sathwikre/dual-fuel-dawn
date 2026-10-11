@@ -1674,7 +1674,7 @@ Message: ${message}`;
                       <SectionLabel index="OM / 06" accent>Fuel Systems</SectionLabel>
                       <h2 className="mt-5 text-4xl font-extrabold tracking-tight lg:text-5xl">LPG & PNG Dual Fuel Kits</h2>
                     </div>
-                    <p className="max-w-xl text-base leading-relaxed text-muted-foreground font-sans">Dual-fuel solutions for different gas types and applications.</p>
+                    <p className="max-w-xl text-base leading-relaxed text-foreground/80 font-sans">Dual-fuel solutions for different gas types and applications.</p>
                   </div>
 
                   <div className="tech-surface mt-9 rounded-2xl">
@@ -1683,11 +1683,11 @@ Message: ${message}`;
                         const active = fuelKitView === view;
                         const isPng = view === "png";
                         return (
-                          <button key={view} id={`${view}-tab`} type="button" role="tab" aria-selected={active} aria-controls="fuel-kit-panel" onClick={() => setFuelKitView(view)} className={`flex items-center gap-3 rounded-xl px-4 py-3 text-left transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${active ? "bg-panel text-background shadow-sm" : "text-muted-foreground hover:bg-background hover:text-primary"}`}>
+                          <button key={view} id={`${view}-tab`} type="button" role="tab" aria-selected={active} aria-controls="fuel-kit-panel" onClick={() => setFuelKitView(view)} className={`flex items-center gap-3 rounded-xl px-4 py-3 text-left transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal ${active ? "bg-panel text-background shadow-sm" : "text-foreground/75 hover:bg-background hover:text-foreground"}`}>
                             <span className={`grid size-8 shrink-0 place-items-center rounded-lg ${active ? "bg-signal text-panel" : isPng ? "bg-blue-500/10 text-blue-500" : "bg-orange-500/10 text-orange-500"}`}><Zap className="size-4" /></span>
                             <span>
                               <span className="block text-sm font-bold sm:text-base">{isPng ? "PNG Kit" : "LPG Kit"}</span>
-                              <span className={`mt-0.5 block font-mono text-[9px] uppercase tracking-[0.1em] ${active ? "text-background/55" : "text-muted-foreground"}`}>{isPng ? "PNG System" : "LPG System"}</span>
+                              <span className={`mt-0.5 block font-mono text-[9px] font-semibold uppercase tracking-[0.1em] ${active ? "text-background/80" : "text-foreground/65"}`}>{isPng ? "PNG System" : "LPG System"}</span>
                             </span>
                           </button>
                         );
@@ -1698,21 +1698,21 @@ Message: ${message}`;
                       {fuelKitView === "png" ? (
                         <div key="png" className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
                           <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-muted/40 p-6" onClick={() => openImage(pngKitImage, "OM Solutions PNG dual-fuel kit")} aria-label="Open PNG kit image">
-                            <span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-blue-400">PNG System</span>
-                            <img src={pngKitImage} alt="PNG dual-fuel kit" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" />
+                            <span className="absolute left-5 top-5 font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-blue-600">PNG System</span>
+                            <img src={pngKitImage} alt="PNG dual-fuel kit" loading="lazy" className="relative mt-5 max-h-64 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" />
                           </button>
                           <div className="p-5 sm:p-7">
                             <div className="flex items-start justify-between gap-4">
                               <div>
-                                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-blue-500">PNG Dual Fuel</p>
-                                <h3 className="mt-2 text-2xl font-bold">Natural Gas Solution.</h3>
+                                <p className="font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-blue-600">PNG Dual Fuel</p>
+                                <h3 className="mt-2 text-2xl font-extrabold">Natural Gas Solution.</h3>
                               </div>
-                              <span className="hidden rounded-full bg-blue-100 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-blue-600 sm:block">Piped Natural Gas</span>
+                              <span className="hidden rounded-full bg-blue-100 px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.1em] text-blue-700 sm:block">Piped Natural Gas</span>
                             </div>
-                            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground font-sans">PNG dual-fuel systems utilize piped natural gas for continuous, reliable operation with consistent fuel supply and lower operating costs for grid-connected facilities.</p>
+                            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-foreground/80 font-sans">PNG dual-fuel systems utilize piped natural gas for continuous, reliable operation with consistent fuel supply and lower operating costs for grid-connected facilities.</p>
                             <div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">
                               {["Continuous fuel supply via pipeline infrastructure", "Lower fuel cost compared to diesel and LPG", "Clean-burning with minimal environmental impact", "Ideal for facilities with PNG availability", "With PNG, diesel replacement is higher than LPG"].map((point) => (
-                                <div key={point} className="flex gap-2.5 text-sm leading-relaxed font-sans sm:text-base">
+                                <div key={point} className="flex gap-2.5 text-sm font-medium leading-relaxed text-foreground font-sans sm:text-base">
                                   <span className="mt-1 grid size-5 shrink-0 place-items-center rounded-full bg-blue-500/10 text-blue-500"><Check className="size-3 stroke-[3]" /></span>
                                   {point}
                                 </div>
@@ -1723,21 +1723,21 @@ Message: ${message}`;
                       ) : (
                         <div key="lpg" className="grid h-full animate-in fade-in slide-in-from-bottom-1 duration-300 lg:grid-cols-[0.78fr_1.22fr]">
                           <button type="button" className="relative flex min-h-52 items-center justify-center overflow-hidden bg-muted/40 p-6" onClick={() => openImage(lpgKitImage, "OM Solutions LPG dual-fuel kit")} aria-label="Open LPG kit image">
-                            <span className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.16em] text-orange-400">LPG System</span>
-                            <img src={lpgKitImage} alt="LPG dual-fuel kit" loading="lazy" className="relative mt-5 max-h-52 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" />
+                            <span className="absolute left-5 top-5 font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-orange-600">LPG System</span>
+                            <img src={lpgKitImage} alt="LPG dual-fuel kit" loading="lazy" className="relative mt-5 max-h-64 w-full object-contain transition-transform duration-300 hover:scale-[1.02]" />
                           </button>
                           <div className="p-5 sm:p-7">
                             <div className="flex items-start justify-between gap-4">
                               <div>
-                                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-orange-500">LPG Dual Fuel</p>
-                                <h3 className="mt-2 text-2xl font-bold">LPG-Powered Efficiency.</h3>
+                                <p className="font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-orange-600">LPG Dual Fuel</p>
+                                <h3 className="mt-2 text-2xl font-extrabold">LPG-Powered Efficiency.</h3>
                               </div>
-                              <span className="hidden rounded-full bg-orange-100 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-orange-600 sm:block">Liquefied Petroleum Gas</span>
+                              <span className="hidden rounded-full bg-orange-100 px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.1em] text-orange-700 sm:block">Liquefied Petroleum Gas</span>
                             </div>
-                            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground font-sans">LPG dual-fuel systems enable diesel engines to operate with LPG as the alternate fuel, offering cost savings and reduced emissions for stationary and mobile applications.</p>
+                            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-foreground/80 font-sans">LPG dual-fuel systems enable diesel engines to operate with LPG as the alternate fuel, offering cost savings and reduced emissions for stationary and mobile applications.</p>
                             <div className="mt-5 grid gap-x-5 gap-y-3 border-t border-border pt-4 sm:grid-cols-2">
                               {["Cost-effective fuel alternative with high availability", "Suitable for generator sets and industrial applications", "Easy integration with existing diesel engines"].map((point) => (
-                                <div key={point} className="flex gap-2.5 text-sm leading-relaxed font-sans sm:text-base">
+                                <div key={point} className="flex gap-2.5 text-sm font-medium leading-relaxed text-foreground font-sans sm:text-base">
                                   <span className="mt-1 grid size-5 shrink-0 place-items-center rounded-full bg-orange-500/10 text-orange-500"><Check className="size-3 stroke-[3]" /></span>
                                   {point}
                                 </div>

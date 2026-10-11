@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, FileText } from "lucide-react";
 import fallbackImage from "@/assets/img-103.jpg";
 import logoImage from "@/assets/aircompressor/logo.png";
 import andhraPradeshImage from "@/assets/team/image.png";
@@ -273,23 +273,26 @@ function RegulationsPage() {
         </svg>
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_50%_0%,rgba(182,255,114,.12),transparent_68%)]" />
         <div className="mx-auto max-w-[900px] animate-[regulations-hero-in_.7s_ease-out_both]">
-          <h1 className="text-[25px] font-extrabold leading-[1.08] sm:text-4xl lg:text-5xl">
+          <span className="inline-flex items-center rounded-full border border-[#b6ff72]/40 bg-[#b6ff72]/10 px-4 py-1.5 text-sm font-bold text-[#b6ff72]">
+            {STATE_REGULATIONS.length} states &amp; union territories
+          </span>
+          <h1 className="mt-5 text-[28px] font-extrabold leading-[1.12] sm:text-4xl lg:text-5xl">
             State wise Particulate Matter Emission reduction guidelines for older Diesel Generator sets
           </h1>
         </div>
       </section>
 
-      <section aria-label="State emission regulations" className="relative z-10 -mt-11 bg-[#eef6fb] px-3 pb-10 sm:px-6 lg:px-8 lg:pb-16">
-        <div className="mx-auto grid max-w-[468px] grid-cols-3 gap-2 max-[430px]:grid-cols-2 sm:gap-5 md:max-w-7xl">
+      <section aria-label="State emission regulations" className="relative z-10 -mt-11 bg-[#eef6fb] px-4 pb-12 sm:px-6 lg:px-8 lg:pb-16">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 min-[520px]:grid-cols-2 sm:gap-5 lg:grid-cols-3">
           {STATE_REGULATIONS.map((region) => (
             <article
               key={region.id}
-              className="group flex min-w-0 flex-col overflow-hidden rounded-[10px] border border-slate-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md motion-reduce:transition-none sm:rounded-2xl"
+              className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-emerald-300 hover:shadow-lg motion-reduce:transition-none"
             >
-              <div className="relative mx-[6px] mt-[6px] h-[88px] overflow-hidden rounded-[7px] bg-slate-200 sm:h-[160px] xl:h-[200px]">
+              <div className="relative h-[170px] overflow-hidden bg-slate-200 sm:h-[190px] xl:h-[210px]">
                 <img
                   src={region.image}
-                  alt={`${region.landmark}, ${region.state}`}
+                  alt={region.state}
                   loading="lazy"
                   data-regulation-image
                   onError={(event) => {
@@ -297,14 +300,15 @@ function RegulationsPage() {
                     event.currentTarget.dataset["fallbackApplied"] = "true";
                     event.currentTarget.src = fallbackImage;
                   }}
-                  className="size-full rounded-[7px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                 />
-              </div>
-              <div className="flex min-h-[112px] flex-1 flex-col p-2 sm:min-h-[242px] sm:p-5 lg:p-6">
-                <h2 className="break-words text-[13px] font-extrabold uppercase leading-tight text-slate-900 sm:text-lg sm:tracking-[.04em]">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0b2a1e]/85 via-[#0b2a1e]/10 to-transparent" />
+                <h2 className="absolute bottom-4 left-5 right-5 break-words text-xl font-extrabold uppercase leading-tight tracking-[.04em] text-white drop-shadow sm:text-[22px]">
                   {region.state}
                 </h2>
-                <p className="mt-1.5 flex-1 text-[9px] leading-[1.2] text-slate-700 sm:mt-4 sm:text-sm sm:leading-6 sm:text-slate-600">
+              </div>
+              <div className="flex flex-1 flex-col p-5 lg:p-6">
+                <p className="flex-1 text-base font-medium leading-relaxed text-slate-800">
                   {region.description}
                 </p>
                 <a
@@ -312,9 +316,11 @@ function RegulationsPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Explore ${region.state} guidelines (PDF)`}
-                  className="mt-2 inline-flex min-h-6 w-full items-center justify-center rounded-full bg-[#09b978] px-1.5 py-1 text-[9px] font-bold text-[#063b2a] transition-colors hover:bg-emerald-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 sm:mt-5 sm:min-h-12 sm:rounded-xl sm:px-4 sm:py-3 sm:text-sm sm:text-white"
+                  className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-emerald-700 px-4 py-3 text-[15px] font-bold text-white transition-colors hover:bg-emerald-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
                 >
+                  <FileText className="size-5" />
                   Explore Guidelines
+                  <span className="rounded bg-white/20 px-1.5 py-0.5 text-[11px] font-bold">PDF</span>
                 </a>
               </div>
             </article>
@@ -325,7 +331,7 @@ function RegulationsPage() {
           <div className="rounded-[28px] border border-emerald-200 bg-gradient-to-r from-[#0b2a1e] via-[#123d2d] to-[#0f3e32] p-[1px] shadow-[0_20px_50px_rgba(11,42,30,0.18)]">
             <div className="flex flex-col items-center justify-between gap-4 rounded-[27px] bg-[#0b2a1e]/95 px-5 py-6 text-center sm:flex-row sm:px-7 sm:py-6 sm:text-left">
               <div className="max-w-xl">
-                <p className="mb-2 text-[10px] font-extrabold uppercase tracking-[0.18em] text-emerald-300/90">
+                <p className="mb-2 text-xs font-extrabold uppercase tracking-[0.16em] text-emerald-300">
                   Discover the solution
                 </p>
                 <h3 className="text-xl font-black text-white sm:text-2xl">
@@ -335,7 +341,7 @@ function RegulationsPage() {
 
               <a
                 href="/technology"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#b6ff72] px-5 py-3 text-xs font-extrabold uppercase tracking-[0.14em] text-[#0d1f16] shadow-[0_12px_24px_rgba(182,255,114,0.28)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#c8ff8f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b6ff72]"
+                className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#b6ff72] px-6 py-3.5 text-sm font-extrabold uppercase tracking-[0.1em] text-[#0d1f16] shadow-[0_12px_24px_rgba(182,255,114,0.28)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#c8ff8f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b6ff72]"
               >
                 Explore Technology
                 <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -345,7 +351,7 @@ function RegulationsPage() {
         </div>
       </section>
 
-      <footer className="bg-[#07170f] px-[6vw] py-5 text-center font-mono text-[10px] uppercase tracking-[.12em] text-white/40">
+      <footer className="bg-[#07170f] px-[6vw] py-6 text-center font-mono text-xs uppercase tracking-[.12em] text-white/70">
         © OM Solutions · Cleaner power for a changing India
       </footer>
       <style>{`@keyframes regulations-hero-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}} @media(prefers-reduced-motion:reduce){.animate-\[regulations-hero-in_\.7s_ease-out_both\]{animation:none}}`}</style>

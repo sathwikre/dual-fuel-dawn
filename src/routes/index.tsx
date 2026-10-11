@@ -1517,16 +1517,16 @@ Message: ${message}`;
                 <span className="text-[15px] font-extrabold uppercase tracking-[0.08em] text-white">OM Solutions</span>
               </a>
 
-              <nav className="hidden items-center gap-5 xl:flex">
+              <nav className="hidden items-center gap-6 xl:flex">
               {[["Comparison", "dr-compare"], ["Dual Fuel vs RECD", "dr-tech"], ["Fuel Kits", "dr-fuel-kits"], ["Benefits", "dr-benefits"], ["Considerations", "dr-considerations"], ["Architecture", "dr-solutions"]].map(([label, id]) => (
-                  <a key={id} href={`#${id}`} className="whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.11em] text-white/75 transition-colors hover:text-signal">{label}</a>
+                  <a key={id} href={`#${id}`} className="whitespace-nowrap text-[13px] font-bold uppercase tracking-[0.08em] text-white/90 transition-colors hover:text-signal">{label}</a>
                 ))}
               </nav>
 
               <button
                 type="button"
                 onClick={() => technologyOnly ? (window.location.href = "/") : setTechDrawerOpen(false)}
-                className="flex items-center gap-2.5 rounded-sm border border-white/25 px-4 py-3 text-[10px] font-extrabold uppercase tracking-[0.1em] text-white transition-all hover:border-signal/50 hover:bg-white/10 hover:text-signal"
+                className="flex items-center gap-2.5 rounded-sm border border-white/25 px-4 py-3 text-[13px] font-extrabold uppercase tracking-[0.08em] text-white transition-all hover:border-signal/50 hover:bg-white/10 hover:text-signal"
                 aria-label="Close technology panel"
               >
                 Close <X className="size-3.5" />

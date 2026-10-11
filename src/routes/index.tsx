@@ -1539,34 +1539,42 @@ Message: ${message}`;
                 <div className="section-dot-grid absolute inset-0" aria-hidden="true" />
                 <div className="relative mx-auto max-w-[1440px] px-5 py-20 lg:px-10 lg:py-28">
                   <SectionLabel index="OM / 09" accent>Technology comparison</SectionLabel>
-                  <div className="mt-5 flex flex-wrap items-end justify-between gap-6">
-                    <h2 className="max-w-4xl text-4xl font-extrabold tracking-tight lg:text-5xl">Comparison of technology options to comply SPCB notification for PM reduction</h2>
-                    <p className="max-w-sm text-sm leading-relaxed text-muted-foreground"></p>
-                  </div>
+                  <h2 className="mt-5 max-w-4xl text-4xl font-extrabold tracking-tight lg:text-5xl">Comparison of technology options to comply SPCB notification for PM reduction</h2>
                   <div className="tech-surface mt-12 overflow-x-auto rounded-2xl">
-                    <table className="w-full min-w-[980px] border-collapse text-left text-sm">
+                    <table className="w-full min-w-[980px] border-collapse text-left font-sans text-base leading-relaxed">
                       <thead>
                         <tr className="bg-panel text-background">
-                          <th className="w-[18%] px-5 py-4 font-mono text-[10px] uppercase tracking-[0.12em] text-background/65">Category</th>
-                          <th className="px-5 py-4 font-semibold">New Gas Genset CPCB-IV+</th>
-                          <th className="px-5 py-4 font-semibold">New Diesel Genset CPCB-IV+</th>
-                          <th className="px-5 py-4 font-semibold">Retrofit Emission Control Device</th>
-                          <th className="bg-signal px-5 py-4 font-semibold text-panel">Dual Fuel Kit</th>
+                          <th scope="col" className="sticky left-0 z-10 w-[18%] bg-panel px-5 py-5 font-mono text-[11px] uppercase tracking-[0.12em] text-background/75">Category</th>
+                          {["New Gas Genset CPCB-IV+", "New Diesel Genset CPCB-IV+", "Retrofit Emission Control Device"].map((option) => (
+                            <th key={option} scope="col" className="w-[20%] px-5 py-5 align-bottom text-base font-bold">{option}</th>
+                          ))}
+                          <th scope="col" className="w-[22%] bg-signal px-5 py-5 align-bottom text-panel">
+                            <span className="mb-1.5 inline-block rounded-full bg-panel px-2.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-[0.12em] text-signal">Recommended</span>
+                            <span className="block text-base font-extrabold">Dual Fuel Kit</span>
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
-                        {comparisonRows.map((row) => (
-                          <tr key={row[0]} className="border-t border-border bg-background">
-                            <th className="px-5 py-5 font-semibold">{row[0]}</th>
-                            <td className="px-5 py-5 text-muted-foreground">{row[1]}</td>
-                            <td className="px-5 py-5 text-muted-foreground">{row[2]}</td>
-                            <td className="px-5 py-5 text-muted-foreground">{row[3]}</td>
-                            <td className="bg-signal/10 px-5 py-5 font-semibold text-foreground">{row[4]}</td>
+                        {comparisonRows.map((row, rowIndex) => (
+                          <tr key={row[0]} className={`border-t border-border ${rowIndex % 2 ? "bg-[color-mix(in_oklab,var(--color-muted)_40%,var(--color-background))]" : "bg-background"}`}>
+                            <th scope="row" className={`sticky left-0 z-10 px-5 py-5 align-top font-bold text-foreground ${rowIndex % 2 ? "bg-[color-mix(in_oklab,var(--color-muted)_40%,var(--color-background))]" : "bg-background"}`}>{row[0]}</th>
+                            {row.slice(1, 4).map((cell, cellIndex) => (
+                              <td key={cellIndex} className="px-5 py-5 align-top font-medium text-foreground/80">
+                                {cell.split(" · ").map((line) => <span key={line} className="block">{line}</span>)}
+                              </td>
+                            ))}
+                            <td className="border-x-2 border-signal/40 bg-signal/10 px-5 py-5 align-top font-bold text-foreground">
+                              <span className="flex gap-2">
+                                <Check className="mt-1 size-4 shrink-0 text-signal" strokeWidth={3} />
+                                <span>{(row[4] ?? "").split(" · ").map((line) => <span key={line} className="block">{line}</span>)}</span>
+                              </span>
+                            </td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
                   </div>
+                  <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground lg:hidden">Scroll sideways to compare all options →</p>
                 </div>
               </section>
 

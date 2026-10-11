@@ -2040,30 +2040,28 @@ Message: ${message}`;
                 Applications other than{" "}
                 <span className="text-signal">gensets.</span>
               </h2>
-              <p className="max-w-md text-sm leading-relaxed text-background/70">Click any application to view all installation images.</p>
+              <p className="max-w-md text-sm leading-relaxed text-background/80 font-sans">Click any application to view all installation images.</p>
             </div>
-            <div className="mt-12 grid gap-5 md:grid-cols-3">
+            <div className="mt-12 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
               {([
                 { title: "Borewell", desc: "Dual fuel kits for Borewell Application.", images: [ borewellImg3,borewellImg1, borewellImg2, borewellImg5, borewellImg4, borewellImg6, borewellImg7], icon: Gauge },
                 { title: "Air Compressor", desc: "Dual fuel kits for Air Compressor Application.", images: [aircomp7,aircomp1, aircomp2, aircomp3, aircomp4, aircomp5, aircomp6], icon: Cog },
                 { title: "Marine Propulsion", desc: "Dual Fuel kits for Marine Inboard Engine ( Propulsion ) application.", images: [marine1, marine2], icon: Fuel },
               ] as { title: string; desc: string; images: string[]; icon: typeof Gauge }[]).map((app) => (
-                <article key={app.title} className="app-card-dark app-card-dark-hover group cursor-pointer rounded-2xl" onClick={() => setAppGallery({ title: app.title, images: app.images, index: 0 })}>
-                  <div className="relative overflow-hidden aspect-square shrink-0">
-                    <img src={app.images[0]} alt={app.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-panel/70 via-panel/10 to-transparent" />
-                    <span className="absolute left-3 top-3 grid size-8 place-items-center rounded-lg border border-white/15 bg-panel/70 text-signal backdrop-blur-sm">
+                <article key={app.title} className="app-card-dark app-card-dark-hover group cursor-pointer flex flex-col rounded-2xl" onClick={() => setAppGallery({ title: app.title, images: app.images, index: 0 })}>
+                  <div className="relative aspect-[4/3] shrink-0 overflow-hidden bg-white/5">
+                    <img src={app.images[0]} alt={app.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-panel/60 via-transparent to-transparent" />
+                    <span className="absolute left-3 top-3 grid size-9 place-items-center rounded-lg border border-white/15 bg-panel/80 text-signal backdrop-blur-sm">
                       <app.icon className="size-4" strokeWidth={1.75} />
                     </span>
-                    <span className="absolute bottom-3 right-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">{app.images.length} photos</span>
+                    <span className="absolute bottom-3 left-3 rounded-full border border-white/15 bg-panel/80 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-white backdrop-blur-sm">{app.images.length} photos</span>
                   </div>
-                  <div className="flex items-end justify-between gap-4 p-5">
-                    <div>
-                      <h3 className="text-xl font-bold text-background">{app.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-background/70">{app.desc}</p>
-                    </div>
-                    <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-signal/15 text-signal">
-                      <ArrowDownRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+                  <div className="flex flex-1 flex-col p-5">
+                    <h3 className="text-xl font-bold leading-snug text-background">{app.title}</h3>
+                    <p className="mt-2 font-sans text-base leading-relaxed text-background/85">{app.desc}</p>
+                    <span className="mt-auto inline-flex items-center gap-1.5 border-t border-white/15 pt-4 font-sans text-sm font-bold text-background transition-colors group-hover:text-signal">
+                      View gallery <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </span>
                   </div>
                 </article>
